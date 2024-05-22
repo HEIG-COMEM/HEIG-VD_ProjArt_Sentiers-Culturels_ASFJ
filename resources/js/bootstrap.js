@@ -1,4 +1,4 @@
-import { setDefaultHeaders, setBaseUrl } from './composables/fetchApi.js';
+import { setDefaultHeaders, setBaseUrl } from './Composables/fetchApi.js';
 
 export const csrfToken =
   document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') ?? '';
