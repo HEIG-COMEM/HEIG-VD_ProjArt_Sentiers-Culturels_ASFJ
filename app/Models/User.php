@@ -46,4 +46,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function routes()
+    {
+        return $this->hasMany(Route::class);
+    }
+
+    public function rates()
+    {
+        return $this->hasMany(Rate::class);
+    }
+
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class);
+    }
+
+    public function routesHistory()
+    {
+        return $this->hasMany(RouteHistory::class);
+    }
 }
