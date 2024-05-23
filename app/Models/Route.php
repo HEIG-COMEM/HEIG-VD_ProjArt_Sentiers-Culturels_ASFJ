@@ -10,7 +10,7 @@ class Route extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'time', 'length', 'difficulty_id', 'start_lat', 'start_lng', 'end_lat', 'end_lng'
+        'name', 'description', 'duration', 'length', 'difficulty_id', 'start_lat', 'start_long', 'end_lat', 'end_long'
     ];
 
     public function tags()

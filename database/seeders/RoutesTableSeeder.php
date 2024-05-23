@@ -27,13 +27,13 @@ class RoutesTableSeeder extends Seeder
             $route = new Route();
             $route->name = 'Route ' . $i;
             $route->description = 'Description de la route ' . $i;
-            $route->time = rand(1, 120);
+            $route->duration = rand(1, 120);
             $route->length = rand(1, 10);
 
             $route->start_lat = rand(0, 100);
-            $route->start_lng = rand(0, 100);
+            $route->start_long = rand(0, 100);
             $route->end_lat = rand(0, 100);
-            $route->end_lng = rand(0, 100);
+            $route->end_long = rand(0, 100);
 
             $route->difficulty()->associate($difficulty->random());
             $route->save();

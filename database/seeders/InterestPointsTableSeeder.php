@@ -17,20 +17,20 @@ class InterestPointsTableSeeder extends Seeder
             [
                 'name' => 'HEIG-VD (St-Roch)',
                 'description' => 'Praça da Liberdade is a square in São Paulo, Brazil. It is located in the city centre, in the district of Sé. The square is served by the São Paulo Metro.',
-                'latitude' => 46.781334,
-                'longitude' => 6.647398
+                'lat' => 46.781334,
+                'long' => 6.647398
             ],
             [
                 'name' => 'Gare de Yverdon-les-Bains',
                 'description' => 'Praça da Liberdade is a square in São Paulo, Brazil. It is located in the city centre, in the district of Sé. The square is served by the São Paulo Metro.',
-                'latitude' => 46.781685,
-                'longitude' => 6.640715
+                'lat' => 46.781685,
+                'long' => 6.640715
             ],
             [
                 'name' => 'Kebab Istanbul',
                 'description' => 'Praça da Liberdade is a square in São Paulo, Brazil. It is located in the city centre, in the district of Sé. The square is served by the São Paulo Metro.',
-                'latitude' => 46.779725,
-                'longitude' => 6.638220
+                'lat' => 46.779725,
+                'long' => 6.638220
             ],
         ];
 

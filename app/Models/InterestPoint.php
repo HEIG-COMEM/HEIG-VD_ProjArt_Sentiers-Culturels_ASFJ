@@ -11,7 +11,7 @@ class InterestPoint extends Model
 
     protected $table = 'interest_points';
 
-    protected $fillable = ['name', 'description', 'latitude', 'longitude'];
+    protected $fillable = ['name', 'description', 'lat', 'long'];
 
     public function pictures()
     {

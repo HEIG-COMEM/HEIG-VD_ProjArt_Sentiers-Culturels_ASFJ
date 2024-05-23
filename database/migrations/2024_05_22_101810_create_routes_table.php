@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('time');
+            $table->integer('duration');
             $table->integer('length');
 
             $table->string('start_lat');
-            $table->string('start_lng');
+            $table->string('start_long');
             $table->string('end_lat');
-            $table->string('end_lng');
+            $table->string('end_long');
 
             $table->foreignId('difficulty_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
