@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 
+import MapPane from "@/Components/MapPane.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const props = defineProps({
@@ -16,6 +17,7 @@ const counter = ref(props.counter);
         <p>{{ counter }}</p>
         <PrimaryButton @click="counter++">Increment</PrimaryButton>
     </div>
+    <MapPane />
 </template>
 
 <style scoped></style>
