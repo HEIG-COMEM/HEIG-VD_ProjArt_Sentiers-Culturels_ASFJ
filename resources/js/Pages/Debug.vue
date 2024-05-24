@@ -2,6 +2,7 @@
 import { ref } from "vue";
 
 import MapPane from "@/Components/MapPane.vue";
+import MapDeckGL from "@/Components/MapDeckGL.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const props = defineProps({
@@ -17,7 +18,8 @@ const counter = ref(props.counter);
         <p>{{ counter }}</p>
         <PrimaryButton @click="counter++">Increment</PrimaryButton>
     </div>
-    <MapPane />
+    <!-- <MapPane /> -->
+    <MapDeckGL />
 </template>
 
 <style scoped></style>
