@@ -26,6 +26,7 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@iconsans/vue": "^1.0.3",
         "@takuma-ru/vue-swipe-modal": "^5.0.4",
         "@vitejs/plugin-vue": "^5.0.4",
         "@vueuse/core": "^10.9.0",
