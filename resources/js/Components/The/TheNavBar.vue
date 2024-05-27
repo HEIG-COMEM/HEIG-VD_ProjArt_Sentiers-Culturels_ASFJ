@@ -19,8 +19,8 @@ const routes = {
         route: route("map"),
         icon: Map,
     },
-    favourite: {
-        route: route("favourite"),
+    favorite: {
+        route: route("favorite"),
         icon: Star,
     },
     collection: {
