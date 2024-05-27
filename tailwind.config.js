@@ -24,7 +24,7 @@ export default {
         themes: [{
             mytheme: {
                 "primary": "#4C8C2B",
-                "primary-content": "#020705",
+                "primary-content": "#fdfdfa",
                 "secondary": "#154B19",
                 "secondary-content": "#fdfdfa",
                 "accent": "#00D300",

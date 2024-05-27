@@ -1,15 +1,16 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { defineProps, ref, watch } from "vue";
+
+import MobileAppLayout from "@/Layouts/AppLayout.vue";
+import BaseInputError from "@/Components/Base/BaseInputError.vue";
+import BasePrimaryButton from "@/Components/Base/BasePrimaryButton.vue";
+import { Link, useForm } from "@inertiajs/vue3";
+import { Eye, EyeSlash } from "@iconsans/vue/linear";
 
 defineProps({
     canResetPassword: {
         type: Boolean,
+        default: true,
     },
     status: {
         type: String,
@@ -17,78 +18,106 @@ defineProps({
 });
 
 const form = useForm({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     remember: false,
 });
 
 const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+    console.log(form);
+    form.post(route("login"), {
+        onFinish: () => form.reset("password"),
     });
 };
+
+const showPassword = ref(false);
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Log in" />
-
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
-        </div>
-
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="current-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600">Remember me</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    <MobileAppLayout>
+        <template v-slot:main>
+            <div
+                class="flex flex-col justify-center h-screen items-center gap-6"
+            >
+                <div
+                    v-if="status"
+                    class="mb-4 font-medium text-sm text-green-600"
                 >
-                    Forgot your password?
-                </Link>
+                    {{ status }}
+                </div>
+                <form
+                    @submit.prevent="submit"
+                    class="flex flex-col justify-center items-center gap-4"
+                >
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text">Adresse e-mail</span>
+                        </div>
+                        <input
+                            type="email"
+                            placeholder="Adresse e-mail"
+                            v-model="form.email"
+                            class="input input-bordered w-full max-w-xs"
+                            name="email"
+                            required
+                        />
+                        <BaseInputError :message="form.errors.email" />
+                    </label>
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text">Mot de passe</span>
+                        </div>
+                        <div
+                            class="input input-bordered flex items-center gap-2 pl-0"
+                        >
+                            <input
+                                :type="showPassword ? 'text' : 'password'"
+                                class="grow border-none shadow-none"
+                                placeholder="password"
+                                v-model="form.password"
+                                name="password"
+                                required
+                            />
+                            <component
+                                :is="showPassword ? EyeSlash : Eye"
+                                @click="showPassword = !showPassword"
+                            />
+                        </div>
+                        <BaseInputError :message="form.errors.password" />
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </PrimaryButton>
+                        <div class="label">
+                            <span class="label-text-alt"></span>
+                            <Link
+                                v-if="canResetPassword"
+                                :href="route('password.request')"
+                                class="link label-text-alt"
+                            >
+                                Mot de passe oublié ?
+                            </Link>
+                        </div>
+                    </label>
+                    <BasePrimaryButton
+                        type="submit"
+                        class="btn btn-wide btn-primary"
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing"
+                    >
+                        Se connecter
+                    </BasePrimaryButton>
+                </form>
+                <Link
+                    class="link link-primary text-xs text-center"
+                    href="/register"
+                    >Pas encore inscrit ?<br />Crée un compte</Link
+                >
             </div>
-        </form>
-    </GuestLayout>
+        </template>
+    </MobileAppLayout>
 </template>
+
+<style scoped>
+input[name="password"]:focus {
+    /* remove ring and ring shadow */
+    box-shadow: none;
+}
+</style>

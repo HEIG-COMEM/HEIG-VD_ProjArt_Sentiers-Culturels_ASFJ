@@ -3,7 +3,7 @@ import { defineProps, ref, watch } from "vue";
 
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
-import BaseTextInput from "@/Components/Base/BaseTextInput.vue";
+import BaseTextInput from "@/Components/Base/BaseInput.vue";
 import BaseButton from "@/Components/Base/BaseButton.vue";
 import BaseBadge from "@/Components/Base/BaseBadge.vue";
 import AppMapLibre from "@/Components/App/AppMapLibre.vue";
@@ -22,8 +22,13 @@ const props = defineProps({
     <MobileAppLayout>
         <template v-slot:main>
             <BaseSearchBar placeholder="Search for interest points" />
-            <AppMapLibre :interestPoints="interestPoints.data" />
-            <BaseBottomSheets />
+            <div class="mt-20">
+                <div class="card w-96 bg-base-100 shadow-xl min-h-56">
+                    <div class="card-body">
+                        <AppMapLibre :interestPoints="interestPoints.data" />
+                    </div>
+                </div>
+            </div>
         </template>
     </MobileAppLayout>
 </template>
