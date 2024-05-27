@@ -19,5 +19,5 @@ Route::get('/favourite', function () {
 })->name('favourite');
 
 Route::get('/collection', function () {
-    // TODO: Implement profile page
+    return Inertia::render('Collection');
 })->name('collection');
