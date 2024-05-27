@@ -1,10 +1,11 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { defineProps, ref, watch } from "vue";
+
+import MobileAppLayout from "@/Layouts/AppLayout.vue";
+import BaseInputError from "@/Components/Base/BaseInputError.vue";
+import BasePrimaryButton from "@/Components/Base/BasePrimaryButton.vue";
+import { Link, useForm } from "@inertiajs/vue3";
+import { Eye, EyeSlash } from "@iconsans/vue/linear";
 
 const form = useForm({
     firstname: "",
@@ -19,112 +20,133 @@ const submit = () => {
         onFinish: () => form.reset("password", "password_confirmation"),
     });
 };
+
+const showPassword = ref(false);
+const showPasswordRep = ref(false);
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Register" />
-
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="firstname" value="Firstname" />
-
-                <TextInput
-                    id="firstname"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.firstname"
-                    required
-                    autofocus
-                    autocomplete="firstname"
-                />
-
-                <InputError class="mt-2" :message="form.errors.firstname" />
-            </div>
-
-            <div>
-                <InputLabel for="lastname" value="Lastname" />
-
-                <TextInput
-                    id="lastname"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.lastname"
-                    required
-                    autofocus
-                    autocomplete="lastname"
-                />
-
-                <InputError class="mt-2" :message="form.errors.lastname" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
-
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError
-                    class="mt-2"
-                    :message="form.errors.password_confirmation"
-                />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link
-                    :href="route('login')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    <MobileAppLayout>
+        <template v-slot:main>
+            <div
+                class="flex flex-col justify-center h-screen items-center gap-6"
+            >
+                <form
+                    @submit.prevent="submit"
+                    class="flex flex-col justify-center items-center gap-4"
                 >
-                    Already registered?
-                </Link>
-
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Register
-                </PrimaryButton>
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text">Prénom</span>
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Prénom"
+                            v-model="form.firstname"
+                            class="input input-bordered w-full max-w-xs"
+                            name="firstname"
+                            required
+                        />
+                        <BaseInputError :message="form.errors.firstname" />
+                    </label>
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text">Nom</span>
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Nom"
+                            v-model="form.lastname"
+                            class="input input-bordered w-full max-w-xs"
+                            name="lastname"
+                            required
+                        />
+                        <BaseInputError :message="form.errors.lastname" />
+                    </label>
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text">Adresse e-mail</span>
+                        </div>
+                        <input
+                            type="email"
+                            placeholder="Adresse e-mail"
+                            v-model="form.email"
+                            class="input input-bordered w-full max-w-xs"
+                            name="email"
+                            required
+                        />
+                        <BaseInputError :message="form.errors.email" />
+                    </label>
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text">Mot de passe</span>
+                        </div>
+                        <div
+                            class="input input-bordered flex items-center gap-2 pl-0"
+                        >
+                            <input
+                                :type="showPassword ? 'text' : 'password'"
+                                class="grow border-none shadow-none"
+                                placeholder="Mot de passe"
+                                v-model="form.password"
+                                name="password"
+                                required
+                            />
+                            <component
+                                :is="showPassword ? EyeSlash : Eye"
+                                @click="showPassword = !showPassword"
+                            />
+                        </div>
+                        <BaseInputError :message="form.errors.password" />
+                    </label>
+                    <label class="form-control w-full max-w-xs">
+                        <div class="label">
+                            <span class="label-text"
+                                >Confirmer le mot de passe</span
+                            >
+                        </div>
+                        <div
+                            class="input input-bordered flex items-center gap-2 pl-0"
+                        >
+                            <input
+                                :type="showPasswordRep ? 'text' : 'password'"
+                                class="grow border-none shadow-none"
+                                placeholder="Mot de passe"
+                                v-model="form.password_confirmation"
+                                name="password_confirmation"
+                                required
+                            />
+                            <component
+                                :is="showPasswordRep ? EyeSlash : Eye"
+                                @click="showPasswordRep = !showPasswordRep"
+                            />
+                        </div>
+                        <BaseInputError :message="form.errors.password" />
+                    </label>
+                    <BasePrimaryButton
+                        type="submit"
+                        class="btn btn-wide btn-primary"
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing"
+                    >
+                        Se connecter
+                    </BasePrimaryButton>
+                </form>
+                <div class="text-xs text-center">
+                    <span>Déjà un compte ? </span>
+                    <Link class="link link-primary" href="/login"
+                        >Créer un compte</Link
+                    >
+                </div>
             </div>
-        </form>
-    </GuestLayout>
+        </template>
+    </MobileAppLayout>
 </template>
+
+<style scoped>
+input[name="password"]:focus,
+input[name="password_confirmation"]:focus {
+    /* remove ring and ring shadow */
+    box-shadow: none;
+}
+</style>

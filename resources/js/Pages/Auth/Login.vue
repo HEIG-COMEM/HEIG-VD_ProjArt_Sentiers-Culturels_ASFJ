@@ -73,7 +73,7 @@ const showPassword = ref(false);
                             <input
                                 :type="showPassword ? 'text' : 'password'"
                                 class="grow border-none shadow-none"
-                                placeholder="password"
+                                placeholder="Mot de passe"
                                 v-model="form.password"
                                 name="password"
                                 required
@@ -105,11 +105,12 @@ const showPassword = ref(false);
                         Se connecter
                     </BasePrimaryButton>
                 </form>
-                <Link
-                    class="link link-primary text-xs text-center"
-                    href="/register"
-                    >Pas encore inscrit ?<br />Crée un compte</Link
-                >
+                <div class="text-xs text-center">
+                    <span>Pas encore inscrit ? </span>
+                    <Link class="link link-primary" href="/register"
+                        >Créer un compte</Link
+                    >
+                </div>
             </div>
         </template>
     </MobileAppLayout>
