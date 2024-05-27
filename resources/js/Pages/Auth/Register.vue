@@ -4,6 +4,7 @@ import { defineProps, ref, watch } from "vue";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 import BaseInputError from "@/Components/Base/BaseInputError.vue";
 import BasePrimaryButton from "@/Components/Base/BasePrimaryButton.vue";
+import BaseLink from "@/Components/Base/BaseLink.vue";
 import { Link, useForm } from "@inertiajs/vue3";
 import { Eye, EyeSlash } from "@iconsans/vue/linear";
 
@@ -125,7 +126,7 @@ const showPasswordRep = ref(false);
                     </label>
                     <BasePrimaryButton
                         type="submit"
-                        class="btn btn-wide btn-primary"
+                        class="btn-wide"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                     >
@@ -134,9 +135,7 @@ const showPasswordRep = ref(false);
                 </form>
                 <div class="text-xs text-center">
                     <span>Déjà un compte ? </span>
-                    <Link class="link link-primary" href="/login"
-                        >Créer un compte</Link
-                    >
+                    <BaseLink href="/login">Se connecter</BaseLink>
                 </div>
             </div>
         </template>

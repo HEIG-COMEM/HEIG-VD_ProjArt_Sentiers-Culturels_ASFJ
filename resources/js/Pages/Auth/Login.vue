@@ -4,6 +4,7 @@ import { defineProps, ref, watch } from "vue";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 import BaseInputError from "@/Components/Base/BaseInputError.vue";
 import BasePrimaryButton from "@/Components/Base/BasePrimaryButton.vue";
+import BaseLink from "@/Components/Base/BaseLink.vue";
 import { Link, useForm } from "@inertiajs/vue3";
 import { Eye, EyeSlash } from "@iconsans/vue/linear";
 
@@ -87,18 +88,18 @@ const showPassword = ref(false);
 
                         <div class="label">
                             <span class="label-text-alt"></span>
-                            <Link
+                            <BaseLink
                                 v-if="canResetPassword"
                                 :href="route('password.request')"
                                 class="link label-text-alt"
                             >
                                 Mot de passe oublié ?
-                            </Link>
+                            </BaseLink>
                         </div>
                     </label>
                     <BasePrimaryButton
                         type="submit"
-                        class="btn btn-wide btn-primary"
+                        class="btn-wide"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                     >
@@ -107,9 +108,7 @@ const showPassword = ref(false);
                 </form>
                 <div class="text-xs text-center">
                     <span>Pas encore inscrit ? </span>
-                    <Link class="link link-primary" href="/register"
-                        >Créer un compte</Link
-                    >
+                    <BaseLink href="/register">Créer un compte</BaseLink>
                 </div>
             </div>
         </template>
