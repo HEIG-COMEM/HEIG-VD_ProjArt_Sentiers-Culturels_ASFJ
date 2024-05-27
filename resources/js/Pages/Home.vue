@@ -1,4 +1,5 @@
 <script setup>
+import { Head } from "@inertiajs/vue3";
 import { defineProps, ref, watch } from "vue";
 
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
@@ -15,6 +16,7 @@ const props = defineProps({
 </script>
 
 <template>
+    <Head title="Accueil" />
     <MobileAppLayout>
         <template v-slot:main>
             <BaseSearchBar placeholder="Search for interest points" />
