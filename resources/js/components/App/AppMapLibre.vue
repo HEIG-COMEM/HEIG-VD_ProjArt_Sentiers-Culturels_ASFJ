@@ -18,40 +18,15 @@ const props = defineProps({
 });
 
 const mapInstance = ref(null);
-const model = defineModel();
-
 const interestPoints = ref(props.interestPoints);
 const interestPointsMarkers = ref([]);
-
-watch(
-    () => model.value.zoom,
-    (zoom) => {
-        if (mapInstance.value) {
-            mapInstance.value.setZoom(zoom);
-            mapInstance.value.setCenter([model.value.lng, model.value.lat]);
-        }
-    },
-);
-
-const updateLocation = () => {
-    model.value = getLocation();
-};
-
-const getLocation = () => {
-    return {
-        ...mapInstance.value.getCenter(),
-        bearing: mapInstance.value.getBearing(),
-        pitch: mapInstance.value.getPitch(),
-        zoom: mapInstance.value.getZoom(),
-    };
-};
 
 onMounted(() => {
     const map = new mapboxgl.Map({
         container: "mapContainer",
         style: "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.lightbasemap.vt/style.json", // Replace with your preferred map style
-        center: [model.value.lng, model.value.lat],
-        zoom: model.value.zoom,
+        center: [6.633597, 46.519962],
+        zoom: 9,
     });
 
     const geolocateControl = new mapboxgl.GeolocateControl({
@@ -71,7 +46,9 @@ onMounted(() => {
     map.addControl(navigationControl);
 
     map.on("load", function () {
-        geolocateControl.trigger();
+        setTimeout(() => {
+            geolocateControl.trigger();
+        }, 200);
     });
 
     map.on("load", () => {
