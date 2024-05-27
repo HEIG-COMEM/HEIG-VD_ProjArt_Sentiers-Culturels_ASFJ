@@ -38,7 +38,9 @@ class RoutesTableSeeder extends Seeder
             $route->difficulty()->associate($difficulty->random());
             $route->save();
 
-            $route->interestPoints()->attach($tourPoints);
+            foreach ($tourPoints as $key => $tourPoint) {
+                $route->interestPoints()->attach($tourPoint, ['order' => ($key + 1)]);
+            }
         }
     }
 }
