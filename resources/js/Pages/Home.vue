@@ -3,11 +3,7 @@ import { defineProps, ref, watch } from "vue";
 
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
-import BaseTextInput from "@/Components/Base/BaseInput.vue";
-import BaseButton from "@/Components/Base/BaseButton.vue";
-import BaseBadge from "@/Components/Base/BaseBadge.vue";
 import AppMapLibre from "@/Components/App/AppMapLibre.vue";
-import BaseBottomSheets from "@/Components/Base/BaseBottomSheets.vue";
 import BaseSearchBar from "@/Components/Base/BaseSearchBar.vue";
 
 const props = defineProps({
