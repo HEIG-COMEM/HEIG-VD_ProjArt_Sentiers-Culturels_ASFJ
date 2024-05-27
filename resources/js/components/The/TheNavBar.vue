@@ -2,42 +2,49 @@
 import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
+import { Home1, Star, Map, Discover, Category6 } from "@iconsans/vue/linear";
+
 const currentRoute = ref(window.location.href);
 
 const routes = {
-    home: route("home"),
-    map: route("map"),
-    profile: route("profile"),
+    home: {
+        route: route("home"),
+        icon: Home1,
+    },
+    discovery: {
+        route: route("discovery"),
+        icon: Discover,
+    },
+    map: {
+        route: route("map"),
+        icon: Map,
+    },
+    favourite: {
+        route: route("favourite"),
+        icon: Star,
+    },
+    collection: {
+        route: route("collection"),
+        icon: Category6,
+    },
 };
 
-const active = (route) => currentRoute.value === route;
+const active = (route) => {
+    console.log(currentRoute.value === route.route);
+    return currentRoute.value === route;
+};
 </script>
 
 <template>
     <div class="btm-nav btm-nav-md" id="btm-nav">
         <template v-for="route in routes">
             <Link
-                :href="route"
+                :href="route.route"
                 :class="{
-                    active: active(route),
+                    active: active(route.route),
                 }"
             >
-                <button>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                        />
-                    </svg>
-                </button>
+                <component :is="route.icon" class="h-7 w-7"></component>
             </Link>
         </template>
     </div>
