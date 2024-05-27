@@ -25,11 +25,15 @@ Copy the example file and edit it to your needs
 
 ## Run development environment
 
-Run
+Create link to storage directory `php artisan storage:link`
+
+Create a database in your mysql DB with the same name as defined in the `.env` file
+
+Then run
 
 `php artisan migrate:fresh --seed`
 
-To create database and populate it
+To create tables and populate them
 
 Then in two separate terminals:
 
