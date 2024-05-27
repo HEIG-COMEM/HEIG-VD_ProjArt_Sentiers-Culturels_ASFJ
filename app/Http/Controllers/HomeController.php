@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function home()
     {
         $IP = InterestPoint::all();
-        return Inertia::render('HomeMobile', [
+        return Inertia::render('Home', [
             'interestPoints' => InterestPointResource::collection($IP),
         ]);
     }
