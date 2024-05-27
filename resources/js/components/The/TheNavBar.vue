@@ -1,0 +1,57 @@
+<script setup>
+import { Link } from "@inertiajs/vue3";
+import { ref } from "vue";
+
+import { Home1, Star, Map, Discover, Category6 } from "@iconsans/vue/linear";
+
+const currentRoute = ref(window.location.href);
+
+const routes = {
+    home: {
+        route: route("home"),
+        icon: Home1,
+    },
+    discovery: {
+        route: route("discovery"),
+        icon: Discover,
+    },
+    map: {
+        route: route("map"),
+        icon: Map,
+    },
+    favourite: {
+        route: route("favourite"),
+        icon: Star,
+    },
+    collection: {
+        route: route("collection"),
+        icon: Category6,
+    },
+};
+
+const active = (route) => {
+    console.log(currentRoute.value === route.route);
+    return currentRoute.value === route;
+};
+</script>
+
+<template>
+    <div class="btm-nav btm-nav-md" id="btm-nav">
+        <template v-for="route in routes">
+            <Link
+                :href="route.route"
+                :class="{
+                    active: active(route.route),
+                }"
+            >
+                <component :is="route.icon" class="h-7 w-7"></component>
+            </Link>
+        </template>
+    </div>
+</template>
+
+<style scoped>
+.btm-nav {
+    z-index: 1000;
+}
+</style>
