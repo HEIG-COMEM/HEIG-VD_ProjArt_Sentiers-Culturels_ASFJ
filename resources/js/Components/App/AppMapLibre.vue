@@ -42,8 +42,8 @@ onMounted(() => {
 
     const navigationControl = new mapboxgl.NavigationControl();
 
-    map.addControl(geolocateControl);
-    map.addControl(navigationControl);
+    map.addControl(geolocateControl, "bottom-right");
+    map.addControl(navigationControl, "bottom-right");
 
     map.on("load", function () {
         setTimeout(() => {
