@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MapController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -10,9 +11,7 @@ Route::get('/discovery', function () {
     // TODO: Implement discovery page
 })->name('discovery');
 
-Route::get('/map', function () {
-    // TODO: Implement map page
-})->name('map');
+Route::get('/map', [MapController::class, 'index'])->name('map');
 
 Route::get('/favorite', function () {
     return Inertia::render('Favorite');
