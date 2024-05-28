@@ -148,7 +148,7 @@ class RouteRenardSeeder extends Seeder
         // create route
         $route = Route::create([
             'name' => 'Renard',
-            'description' => 'Description de Renard',
+            'description' => 'Lors de cette marche de 8 km (environ 3h), vous partirez des hauts de la ville et suivrez les pas de renards marqués au sol, qui vous mèneront jusqu’au lac. Tout au long de votre balade, vous serez amenés à emprunter des passerelles, des escaliers et des chemins forestiers.',
             'duration' => 120,
             'length' => 5000,
             'start_lat' => $interestPoints->first()->lat,
