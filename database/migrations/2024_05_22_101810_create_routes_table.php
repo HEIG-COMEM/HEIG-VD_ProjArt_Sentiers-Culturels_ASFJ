@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->integer('duration');
             $table->integer('length');
 
@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('start_long');
             $table->string('end_lat');
             $table->string('end_long');
+
+            $table->json('path')->nullable();
 
             $table->foreignId('difficulty_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
