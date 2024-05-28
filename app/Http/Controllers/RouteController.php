@@ -15,6 +15,9 @@ class RouteController extends Controller
         }
 
         $route = Route::where('uuid', $uuid)->firstOrFail();
+
+        $route->makeHidden('path');
+
         $route->load('pictures');
         $route->load('tags');
         $route->load('seasons');
