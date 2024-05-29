@@ -18,8 +18,8 @@ Route::get('/favorite', function () {
     return Inertia::render('Favorite');
 })->name('favorite');
 
-Route::get('/collection', function () {
-    return Inertia::render('Collection');
-})->name('collection');
+Route::get('/profile', function () {
+    return Inertia::render('Profile/Index');
+})->name('profile');
 
 Route::get('/route/{uuid}', [RouteController::class, 'show'])->name('route.show');
