@@ -18,7 +18,7 @@ class Route extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function season()
+    public function seasons()
     {
         return $this->belongsToMany(Season::class);
     }

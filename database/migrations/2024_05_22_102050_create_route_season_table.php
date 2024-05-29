@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('season_route', function (Blueprint $table) {
+        Schema::create('route_season', function (Blueprint $table) {
             $table->id();
             $table->foreignId('season_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
             $table->foreignId('route_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
