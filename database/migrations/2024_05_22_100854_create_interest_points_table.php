@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('interest_points', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('name');
             $table->string('description');
             $table->decimal('lat', 8, 6);

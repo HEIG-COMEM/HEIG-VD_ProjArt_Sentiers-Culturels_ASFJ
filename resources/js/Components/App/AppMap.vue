@@ -2,11 +2,7 @@
 import { onMounted, onUnmounted, reactive, ref, watch } from "vue";
 import "maplibre-gl/dist/maplibre-gl.css";
 import mapboxgl from "maplibre-gl";
-import { defineProps, defineModel } from "vue";
-import { MapboxOverlay } from "@deck.gl/mapbox";
-import { ScatterplotLayer } from "@deck.gl/layers";
-import { useGeolocation } from "@vueuse/core";
-import { Location } from "@iconsans/vue/linear";
+import { defineProps } from "vue";
 
 const INTEREST_POINT_COLOR = [255, 0, 255];
 const INTEREST_POINT_SIZE = 10;
@@ -25,7 +21,6 @@ const props = defineProps({
 const mapInstance = ref(null);
 const interestPoints = reactive(props.interestPoints.data);
 const routes = reactive(props.routes.data);
-const interestPointsMarkers = reactive([]);
 
 const SWITZERLAND_BOUNDS = [
     [5.955911, 45.818028], // Southwest coordinates
@@ -95,6 +90,7 @@ onMounted(() => {
                     type: "Feature",
                     properties: {
                         id: interestPoint.id,
+                        uuid: interestPoint.uuid,
                         name: interestPoint.name,
                     },
                     geometry: {
@@ -173,13 +169,18 @@ onMounted(() => {
         //     .getSource("interestPoints")
         //     .getClusterExpansionZoom(clusterId);
         // get the zoom level for the cluster to break apart
-        const zoom = map
-            .getSource("interestPoints")
-            .getClusterExpansionZoom(clusterId);
+        const currentZoom = map.getZoom();
+        const zoom = currentZoom + 2;
+
         map.easeTo({
             center: features[0].geometry.coordinates,
-            zoom: 10,
+            zoom,
         });
+    });
+
+    map.on("click", "interestPoints", (e) => {
+        if (e.features[0].properties.uuid === undefined) return;
+        window.location.href = `/interest-point/${e.features[0].properties.uuid}`;
     });
 
     mapInstance.value = map;
