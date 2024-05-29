@@ -27,8 +27,6 @@ const props = defineProps({
         required: false,
     },
 });
-
-console.log(props.isActive);
 </script>
 
 <template>
