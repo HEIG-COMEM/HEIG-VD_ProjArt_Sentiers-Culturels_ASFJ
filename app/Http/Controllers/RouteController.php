@@ -27,7 +27,7 @@ class RouteController extends Controller
 
         $route->interestPoints->load('pictures');
 
-        return Inertia::render('Route', [
+        return Inertia::render('Route/Show', [
             'route' => $route
         ]);
     }
