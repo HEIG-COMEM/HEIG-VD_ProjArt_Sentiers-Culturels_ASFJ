@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Route;
+use App\Models\RouteHistory;
 
 class RouteController extends Controller
 {
@@ -24,6 +25,13 @@ class RouteController extends Controller
         $route->load('difficulty');
         $route->load('interestPoints');
         $route->load('rates');
+
+        if (auth()->check()) {
+            $routeHistory = RouteHistory::where('user_id', auth()->id())
+                ->where('route_id', $route->id)
+                ->get();
+            $route->isDone = $routeHistory->count() > 0;
+        }
 
         $route->interestPoints->load('pictures');
 

@@ -11,6 +11,7 @@ import {
     Activity,
     MenuHamburger3,
     Tag,
+    Tick2,
 } from "@iconsans/vue/linear";
 import { Star as StarFull } from "@iconsans/vue/bold";
 
@@ -152,7 +153,7 @@ console.log(route.value);
                         <ArrowDown class="h-7 w-7" />
                     </button>
                     <Link href="#" class="btn btn-primary w-full">
-                        Commencer la randonnée
+                        Commencer le sentier
                     </Link>
                 </div>
             </div>
@@ -166,11 +167,20 @@ console.log(route.value);
                     <div
                         class="flex flex-col justify-center items-center h-full gap-8 p-16"
                     >
-                        <img
-                            :src="bgImgPath"
-                            :alt="route.pictures.at(0).title"
-                            class="w-36 h-36 rounded-md"
-                        />
+                        <div class="w-36 h-36 relative">
+                            <Tick2
+                                class="h-7 w-7 bg-base-100 rounded-full absolute -top-2 -right-2"
+                                :class="{
+                                    'text-primary': route.isDone,
+                                    'text-base-200': !route.isDone,
+                                }"
+                            />
+                            <img
+                                :src="bgImgPath"
+                                :alt="route.pictures.at(0).title"
+                                class="w-full h-full rounded-md"
+                            />
+                        </div>
                         <div class="flex flex-col items-center">
                             <h1
                                 class="text-2xl font-bold text-base-100 text-center"
