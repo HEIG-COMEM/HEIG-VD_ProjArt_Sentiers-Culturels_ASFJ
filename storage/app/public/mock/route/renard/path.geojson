@@ -1,0 +1,1834 @@
+{
+    "type": "FeatureCollection",
+    "bbox": [6.639363, 46.50501, 6.664814, 46.540203],
+    "features": [
+        {
+            "bbox": [6.639363, 46.50501, 6.664814, 46.540203],
+            "type": "Feature",
+            "properties": {
+                "segments": [
+                    {
+                        "distance": 157.3,
+                        "duration": 113.3,
+                        "steps": [
+                            {
+                                "distance": 54.8,
+                                "duration": 39.4,
+                                "type": 11,
+                                "instruction": "Head southeast",
+                                "name": "-",
+                                "way_points": [0, 7]
+                            },
+                            {
+                                "distance": 82.2,
+                                "duration": 59.2,
+                                "type": 1,
+                                "instruction": "Turn right onto Quai d'Ouchy",
+                                "name": "Quai d'Ouchy",
+                                "way_points": [7, 11]
+                            },
+                            {
+                                "distance": 20.3,
+                                "duration": 14.6,
+                                "type": 0,
+                                "instruction": "Turn left onto Chemin de la Vuachère",
+                                "name": "Chemin de la Vuachère",
+                                "way_points": [11, 12]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Chemin de la Vuachère, on the right",
+                                "name": "-",
+                                "way_points": [12, 12]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 191.1,
+                        "duration": 137.6,
+                        "steps": [
+                            {
+                                "distance": 26.3,
+                                "duration": 18.9,
+                                "type": 11,
+                                "instruction": "Head northwest on Chemin de la Vuachère",
+                                "name": "Chemin de la Vuachère",
+                                "way_points": [12, 15]
+                            },
+                            {
+                                "distance": 164.8,
+                                "duration": 118.7,
+                                "type": 1,
+                                "instruction": "Turn right onto Chemin de la Vuachère",
+                                "name": "Chemin de la Vuachère",
+                                "way_points": [15, 21]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Chemin de la Vuachère, on the right",
+                                "name": "-",
+                                "way_points": [21, 21]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 322.3,
+                        "duration": 232.1,
+                        "steps": [
+                            {
+                                "distance": 23.9,
+                                "duration": 17.2,
+                                "type": 11,
+                                "instruction": "Head northwest on Chemin de la Vuachère",
+                                "name": "Chemin de la Vuachère",
+                                "way_points": [21, 23]
+                            },
+                            {
+                                "distance": 18.6,
+                                "duration": 13.4,
+                                "type": 5,
+                                "instruction": "Turn slight right onto Chemin de la Vuachère",
+                                "name": "Chemin de la Vuachère",
+                                "way_points": [23, 24]
+                            },
+                            {
+                                "distance": 51.3,
+                                "duration": 36.9,
+                                "type": 0,
+                                "instruction": "Turn left onto Avenue du Denantou, 138",
+                                "name": "Avenue du Denantou, 138",
+                                "way_points": [24, 25]
+                            },
+                            {
+                                "distance": 228.6,
+                                "duration": 164.6,
+                                "type": 1,
+                                "instruction": "Turn right onto Avenue du Denantou",
+                                "name": "Avenue du Denantou",
+                                "way_points": [25, 33]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Avenue du Denantou, on the right",
+                                "name": "-",
+                                "way_points": [33, 33]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 905.2,
+                        "duration": 651.8,
+                        "steps": [
+                            {
+                                "distance": 6,
+                                "duration": 4.4,
+                                "type": 11,
+                                "instruction": "Head northwest on Chemin de la Vuachère",
+                                "name": "Chemin de la Vuachère",
+                                "way_points": [33, 34]
+                            },
+                            {
+                                "distance": 166.9,
+                                "duration": 120.1,
+                                "type": 3,
+                                "instruction": "Turn sharp right onto Chemin du Pont-du-Diable",
+                                "name": "Chemin du Pont-du-Diable",
+                                "way_points": [34, 39]
+                            },
+                            {
+                                "distance": 193.7,
+                                "duration": 139.5,
+                                "type": 6,
+                                "instruction": "Continue straight onto Chemin du Pont-du-Diable",
+                                "name": "Chemin du Pont-du-Diable",
+                                "way_points": [39, 40]
+                            },
+                            {
+                                "distance": 211.8,
+                                "duration": 152.5,
+                                "type": 12,
+                                "instruction": "Keep left onto Chemin de Chamblandes",
+                                "name": "Chemin de Chamblandes",
+                                "way_points": [40, 48]
+                            },
+                            {
+                                "distance": 295.9,
+                                "duration": 213.1,
+                                "type": 6,
+                                "instruction": "Continue straight onto Chemin de Pierraz-Portay",
+                                "name": "Chemin de Pierraz-Portay",
+                                "way_points": [48, 58]
+                            },
+                            {
+                                "distance": 31,
+                                "duration": 22.3,
+                                "type": 0,
+                                "instruction": "Turn left onto Chemin du Trabandan",
+                                "name": "Chemin du Trabandan",
+                                "way_points": [58, 60]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Chemin du Trabandan, on the right",
+                                "name": "-",
+                                "way_points": [60, 60]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 247.8,
+                        "duration": 178.4,
+                        "steps": [
+                            {
+                                "distance": 5.9,
+                                "duration": 4.3,
+                                "type": 11,
+                                "instruction": "Head southeast on Chemin du Trabandan",
+                                "name": "Chemin du Trabandan",
+                                "way_points": [60, 61]
+                            },
+                            {
+                                "distance": 185.5,
+                                "duration": 133.6,
+                                "type": 0,
+                                "instruction": "Turn left onto Chemin du Trabandan",
+                                "name": "Chemin du Trabandan",
+                                "way_points": [61, 70]
+                            },
+                            {
+                                "distance": 56.3,
+                                "duration": 40.6,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [70, 72]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at your destination, on the left",
+                                "name": "-",
+                                "way_points": [72, 72]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 310.8,
+                        "duration": 223.8,
+                        "steps": [
+                            {
+                                "distance": 60.9,
+                                "duration": 43.8,
+                                "type": 11,
+                                "instruction": "Head northeast",
+                                "name": "-",
+                                "way_points": [72, 78]
+                            },
+                            {
+                                "distance": 1.6,
+                                "duration": 1.2,
+                                "type": 0,
+                                "instruction": "Turn left onto Chemin de Bonne-Espérance",
+                                "name": "Chemin de Bonne-Espérance",
+                                "way_points": [78, 79]
+                            },
+                            {
+                                "distance": 87.8,
+                                "duration": 63.2,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [79, 82]
+                            },
+                            {
+                                "distance": 8.1,
+                                "duration": 5.8,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [82, 83]
+                            },
+                            {
+                                "distance": 85.2,
+                                "duration": 61.3,
+                                "type": 0,
+                                "instruction": "Turn left onto Chemin de Bonne-Espérance",
+                                "name": "Chemin de Bonne-Espérance",
+                                "way_points": [83, 88]
+                            },
+                            {
+                                "distance": 67.3,
+                                "duration": 48.4,
+                                "type": 13,
+                                "instruction": "Keep right onto Chemin de la Vuachère",
+                                "name": "Chemin de la Vuachère",
+                                "way_points": [88, 93]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Chemin de la Vuachère, on the left",
+                                "name": "-",
+                                "way_points": [93, 93]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 404.3,
+                        "duration": 291.1,
+                        "steps": [
+                            {
+                                "distance": 172,
+                                "duration": 123.8,
+                                "type": 11,
+                                "instruction": "Head east on Chemin de la Vuachère",
+                                "name": "Chemin de la Vuachère",
+                                "way_points": [93, 103]
+                            },
+                            {
+                                "distance": 35,
+                                "duration": 25.2,
+                                "type": 5,
+                                "instruction": "Turn slight right",
+                                "name": "-",
+                                "way_points": [103, 106]
+                            },
+                            {
+                                "distance": 12.2,
+                                "duration": 8.8,
+                                "type": 1,
+                                "instruction": "Turn right onto Avenue du Léman",
+                                "name": "Avenue du Léman",
+                                "way_points": [106, 108]
+                            },
+                            {
+                                "distance": 36.1,
+                                "duration": 26,
+                                "type": 4,
+                                "instruction": "Turn slight left onto Avenue du Léman",
+                                "name": "Avenue du Léman",
+                                "way_points": [108, 109]
+                            },
+                            {
+                                "distance": 13.8,
+                                "duration": 9.9,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [109, 111]
+                            },
+                            {
+                                "distance": 73.7,
+                                "duration": 53.1,
+                                "type": 13,
+                                "instruction": "Keep right",
+                                "name": "-",
+                                "way_points": [111, 118]
+                            },
+                            {
+                                "distance": 54.6,
+                                "duration": 39.3,
+                                "type": 0,
+                                "instruction": "Turn left onto Chemin du Liaudoz",
+                                "name": "Chemin du Liaudoz",
+                                "way_points": [118, 121]
+                            },
+                            {
+                                "distance": 6.8,
+                                "duration": 4.9,
+                                "type": 1,
+                                "instruction": "Turn right onto Chemin du Liaudoz",
+                                "name": "Chemin du Liaudoz",
+                                "way_points": [121, 122]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Chemin du Liaudoz, on the left",
+                                "name": "-",
+                                "way_points": [122, 122]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 547.6,
+                        "duration": 394.3,
+                        "steps": [
+                            {
+                                "distance": 6.8,
+                                "duration": 4.9,
+                                "type": 11,
+                                "instruction": "Head west on Chemin du Liaudoz",
+                                "name": "Chemin du Liaudoz",
+                                "way_points": [122, 123]
+                            },
+                            {
+                                "distance": 26,
+                                "duration": 18.7,
+                                "type": 4,
+                                "instruction": "Turn slight left onto Chemin des Platanes",
+                                "name": "Chemin des Platanes",
+                                "way_points": [123, 125]
+                            },
+                            {
+                                "distance": 62.2,
+                                "duration": 44.8,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [125, 129]
+                            },
+                            {
+                                "distance": 327.7,
+                                "duration": 235.9,
+                                "type": 1,
+                                "instruction": "Turn right onto Chemin du Levant",
+                                "name": "Chemin du Levant",
+                                "way_points": [129, 139]
+                            },
+                            {
+                                "distance": 125,
+                                "duration": 90,
+                                "type": 5,
+                                "instruction": "Turn slight right onto Chemin de la Vuachère",
+                                "name": "Chemin de la Vuachère",
+                                "way_points": [139, 143]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Chemin de la Vuachère, on the left",
+                                "name": "-",
+                                "way_points": [143, 143]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 195.5,
+                        "duration": 140.8,
+                        "steps": [
+                            {
+                                "distance": 116.1,
+                                "duration": 83.6,
+                                "type": 11,
+                                "instruction": "Head southwest on Chemin de la Vuachère",
+                                "name": "Chemin de la Vuachère",
+                                "way_points": [143, 146]
+                            },
+                            {
+                                "distance": 31.5,
+                                "duration": 22.6,
+                                "type": 3,
+                                "instruction": "Turn sharp right onto Chemin du Levant",
+                                "name": "Chemin du Levant",
+                                "way_points": [146, 148]
+                            },
+                            {
+                                "distance": 47.9,
+                                "duration": 34.5,
+                                "type": 6,
+                                "instruction": "Continue straight onto Chemin du Levant",
+                                "name": "Chemin du Levant",
+                                "way_points": [148, 151]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Chemin du Levant, on the right",
+                                "name": "-",
+                                "way_points": [151, 151]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 567,
+                        "duration": 408.2,
+                        "steps": [
+                            {
+                                "distance": 258.2,
+                                "duration": 185.9,
+                                "type": 11,
+                                "instruction": "Head northwest on Chemin du Levant",
+                                "name": "Chemin du Levant",
+                                "way_points": [151, 161]
+                            },
+                            {
+                                "distance": 13.6,
+                                "duration": 9.8,
+                                "type": 3,
+                                "instruction": "Turn sharp right onto Chemin de Gottettaz",
+                                "name": "Chemin de Gottettaz",
+                                "way_points": [161, 162]
+                            },
+                            {
+                                "distance": 295.2,
+                                "duration": 212.6,
+                                "type": 6,
+                                "instruction": "Continue straight onto Chemin de Gottettaz",
+                                "name": "Chemin de Gottettaz",
+                                "way_points": [162, 181]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Chemin de Gottettaz, on the right",
+                                "name": "-",
+                                "way_points": [181, 181]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 94.3,
+                        "duration": 67.9,
+                        "steps": [
+                            {
+                                "distance": 14.8,
+                                "duration": 10.6,
+                                "type": 11,
+                                "instruction": "Head northeast",
+                                "name": "-",
+                                "way_points": [181, 182]
+                            },
+                            {
+                                "distance": 78.2,
+                                "duration": 56.3,
+                                "type": 6,
+                                "instruction": "Continue straight onto Avenue de Béthusy",
+                                "name": "Avenue de Béthusy",
+                                "way_points": [182, 186]
+                            },
+                            {
+                                "distance": 1.3,
+                                "duration": 0.9,
+                                "type": 6,
+                                "instruction": "Continue straight onto Avenue de Béthusy",
+                                "name": "Avenue de Béthusy",
+                                "way_points": [186, 187]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Avenue de Béthusy, on the left",
+                                "name": "-",
+                                "way_points": [187, 187]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 69.1,
+                        "duration": 49.8,
+                        "steps": [
+                            {
+                                "distance": 1.3,
+                                "duration": 0.9,
+                                "type": 11,
+                                "instruction": "Head southwest on Avenue de Béthusy",
+                                "name": "Avenue de Béthusy",
+                                "way_points": [187, 188]
+                            },
+                            {
+                                "distance": 67.8,
+                                "duration": 48.8,
+                                "type": 3,
+                                "instruction": "Turn sharp right onto Promenade de la Gottettaz",
+                                "name": "Promenade de la Gottettaz",
+                                "way_points": [188, 195]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Promenade de la Gottettaz, on the right",
+                                "name": "-",
+                                "way_points": [195, 195]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 36.1,
+                        "duration": 26,
+                        "steps": [
+                            {
+                                "distance": 22.6,
+                                "duration": 16.3,
+                                "type": 11,
+                                "instruction": "Head east",
+                                "name": "-",
+                                "way_points": [195, 197]
+                            },
+                            {
+                                "distance": 12.9,
+                                "duration": 9.3,
+                                "type": 4,
+                                "instruction": "Turn slight left",
+                                "name": "-",
+                                "way_points": [197, 199]
+                            },
+                            {
+                                "distance": 0.6,
+                                "duration": 0.4,
+                                "type": 0,
+                                "instruction": "Turn left onto Chemin de La Vuachère",
+                                "name": "Chemin de La Vuachère",
+                                "way_points": [199, 200]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at Chemin de La Vuachère, on the right",
+                                "name": "-",
+                                "way_points": [200, 200]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 434.4,
+                        "duration": 312.8,
+                        "steps": [
+                            {
+                                "distance": 0.6,
+                                "duration": 0.4,
+                                "type": 11,
+                                "instruction": "Head southeast on Chemin de La Vuachère",
+                                "name": "Chemin de La Vuachère",
+                                "way_points": [200, 201]
+                            },
+                            {
+                                "distance": 79.2,
+                                "duration": 57,
+                                "type": 0,
+                                "instruction": "Turn left onto Chemin de La Vuachère",
+                                "name": "Chemin de La Vuachère",
+                                "way_points": [201, 206]
+                            },
+                            {
+                                "distance": 64.5,
+                                "duration": 46.5,
+                                "type": 2,
+                                "instruction": "Turn sharp left",
+                                "name": "-",
+                                "way_points": [206, 209]
+                            },
+                            {
+                                "distance": 32.5,
+                                "duration": 23.4,
+                                "type": 1,
+                                "instruction": "Turn right onto Chemin de Beau-Val",
+                                "name": "Chemin de Beau-Val",
+                                "way_points": [209, 212]
+                            },
+                            {
+                                "distance": 54.2,
+                                "duration": 39,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [212, 215]
+                            },
+                            {
+                                "distance": 41.2,
+                                "duration": 29.7,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [215, 219]
+                            },
+                            {
+                                "distance": 6.6,
+                                "duration": 4.8,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [219, 220]
+                            },
+                            {
+                                "distance": 149.5,
+                                "duration": 107.7,
+                                "type": 1,
+                                "instruction": "Turn right onto Avenue de Béthusy",
+                                "name": "Avenue de Béthusy",
+                                "way_points": [220, 229]
+                            },
+                            {
+                                "distance": 6,
+                                "duration": 4.4,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [229, 230]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at your destination, on the left",
+                                "name": "-",
+                                "way_points": [230, 230]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 508.5,
+                        "duration": 366.1,
+                        "steps": [
+                            {
+                                "distance": 3,
+                                "duration": 2.1,
+                                "type": 11,
+                                "instruction": "Head northeast",
+                                "name": "-",
+                                "way_points": [230, 231]
+                            },
+                            {
+                                "distance": 70.7,
+                                "duration": 50.9,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [231, 233]
+                            },
+                            {
+                                "distance": 18.7,
+                                "duration": 13.4,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [233, 235]
+                            },
+                            {
+                                "distance": 10.1,
+                                "duration": 7.3,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [235, 239]
+                            },
+                            {
+                                "distance": 3.3,
+                                "duration": 2.4,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [239, 240]
+                            },
+                            {
+                                "distance": 3.6,
+                                "duration": 2.6,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [240, 241]
+                            },
+                            {
+                                "distance": 52.4,
+                                "duration": 37.7,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [241, 244]
+                            },
+                            {
+                                "distance": 61.6,
+                                "duration": 44.4,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [244, 247]
+                            },
+                            {
+                                "distance": 11,
+                                "duration": 7.9,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [247, 251]
+                            },
+                            {
+                                "distance": 108.1,
+                                "duration": 77.8,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [251, 256]
+                            },
+                            {
+                                "distance": 17.4,
+                                "duration": 12.5,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [256, 259]
+                            },
+                            {
+                                "distance": 72.2,
+                                "duration": 52,
+                                "type": 13,
+                                "instruction": "Keep right",
+                                "name": "-",
+                                "way_points": [259, 264]
+                            },
+                            {
+                                "distance": 76.7,
+                                "duration": 55.2,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [264, 271]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at your destination, on the right",
+                                "name": "-",
+                                "way_points": [271, 271]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 222.6,
+                        "duration": 160.3,
+                        "steps": [
+                            {
+                                "distance": 222.6,
+                                "duration": 160.3,
+                                "type": 11,
+                                "instruction": "Head north",
+                                "name": "-",
+                                "way_points": [271, 282]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at your destination, on the right",
+                                "name": "-",
+                                "way_points": [282, 282]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 1072,
+                        "duration": 771.8,
+                        "steps": [
+                            {
+                                "distance": 113.2,
+                                "duration": 81.5,
+                                "type": 11,
+                                "instruction": "Head northwest",
+                                "name": "-",
+                                "way_points": [282, 290]
+                            },
+                            {
+                                "distance": 173.4,
+                                "duration": 124.8,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [290, 300]
+                            },
+                            {
+                                "distance": 36.6,
+                                "duration": 26.3,
+                                "type": 3,
+                                "instruction": "Turn sharp right onto Avenue du Temple",
+                                "name": "Avenue du Temple",
+                                "way_points": [300, 302]
+                            },
+                            {
+                                "distance": 4.5,
+                                "duration": 3.3,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [302, 303]
+                            },
+                            {
+                                "distance": 53.2,
+                                "duration": 38.3,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [303, 304]
+                            },
+                            {
+                                "distance": 21.5,
+                                "duration": 15.5,
+                                "type": 13,
+                                "instruction": "Keep right",
+                                "name": "-",
+                                "way_points": [304, 305]
+                            },
+                            {
+                                "distance": 3.2,
+                                "duration": 2.3,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [305, 306]
+                            },
+                            {
+                                "distance": 84,
+                                "duration": 60.5,
+                                "type": 13,
+                                "instruction": "Keep right",
+                                "name": "-",
+                                "way_points": [306, 310]
+                            },
+                            {
+                                "distance": 3.1,
+                                "duration": 2.2,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [310, 311]
+                            },
+                            {
+                                "distance": 53.5,
+                                "duration": 38.5,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [311, 314]
+                            },
+                            {
+                                "distance": 37.9,
+                                "duration": 27.3,
+                                "type": 5,
+                                "instruction": "Turn slight right",
+                                "name": "-",
+                                "way_points": [314, 317]
+                            },
+                            {
+                                "distance": 38.9,
+                                "duration": 28,
+                                "type": 3,
+                                "instruction": "Turn sharp right onto Chemin de Champ-Rond",
+                                "name": "Chemin de Champ-Rond",
+                                "way_points": [317, 319]
+                            },
+                            {
+                                "distance": 48.6,
+                                "duration": 35,
+                                "type": 4,
+                                "instruction": "Turn slight left onto Route d'Oron",
+                                "name": "Route d'Oron",
+                                "way_points": [319, 324]
+                            },
+                            {
+                                "distance": 59.1,
+                                "duration": 42.6,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [324, 327]
+                            },
+                            {
+                                "distance": 167.6,
+                                "duration": 120.7,
+                                "type": 12,
+                                "instruction": "Keep left",
+                                "name": "-",
+                                "way_points": [327, 333]
+                            },
+                            {
+                                "distance": 114.2,
+                                "duration": 82.2,
+                                "type": 12,
+                                "instruction": "Keep left",
+                                "name": "-",
+                                "way_points": [333, 339]
+                            },
+                            {
+                                "distance": 7.9,
+                                "duration": 5.7,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [339, 340]
+                            },
+                            {
+                                "distance": 38.3,
+                                "duration": 27.5,
+                                "type": 1,
+                                "instruction": "Turn right onto Route d'Oron, 141",
+                                "name": "Route d'Oron, 141",
+                                "way_points": [340, 342]
+                            },
+                            {
+                                "distance": 13.5,
+                                "duration": 9.7,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [342, 344]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at your destination, on the left",
+                                "name": "-",
+                                "way_points": [344, 344]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 467.3,
+                        "duration": 336.4,
+                        "steps": [
+                            {
+                                "distance": 3.1,
+                                "duration": 2.2,
+                                "type": 11,
+                                "instruction": "Head southwest",
+                                "name": "-",
+                                "way_points": [344, 345]
+                            },
+                            {
+                                "distance": 197.6,
+                                "duration": 142.3,
+                                "type": 2,
+                                "instruction": "Turn sharp left",
+                                "name": "-",
+                                "way_points": [345, 352]
+                            },
+                            {
+                                "distance": 34.8,
+                                "duration": 25,
+                                "type": 12,
+                                "instruction": "Keep left",
+                                "name": "-",
+                                "way_points": [352, 357]
+                            },
+                            {
+                                "distance": 24.4,
+                                "duration": 17.6,
+                                "type": 2,
+                                "instruction": "Turn sharp left onto Chemin de la Grangette",
+                                "name": "Chemin de la Grangette",
+                                "way_points": [357, 358]
+                            },
+                            {
+                                "distance": 138.3,
+                                "duration": 99.6,
+                                "type": 12,
+                                "instruction": "Keep left",
+                                "name": "-",
+                                "way_points": [358, 373]
+                            },
+                            {
+                                "distance": 49,
+                                "duration": 35.3,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [373, 377]
+                            },
+                            {
+                                "distance": 10.8,
+                                "duration": 7.8,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [377, 379]
+                            },
+                            {
+                                "distance": 9.3,
+                                "duration": 6.7,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [379, 380]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at your destination, on the left",
+                                "name": "-",
+                                "way_points": [380, 380]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 780.4,
+                        "duration": 561.9,
+                        "steps": [
+                            {
+                                "distance": 9.3,
+                                "duration": 6.7,
+                                "type": 11,
+                                "instruction": "Head north",
+                                "name": "-",
+                                "way_points": [380, 381]
+                            },
+                            {
+                                "distance": 10.8,
+                                "duration": 7.8,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [381, 383]
+                            },
+                            {
+                                "distance": 49,
+                                "duration": 35.3,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [383, 387]
+                            },
+                            {
+                                "distance": 138.3,
+                                "duration": 99.6,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [387, 402]
+                            },
+                            {
+                                "distance": 29.1,
+                                "duration": 20.9,
+                                "type": 5,
+                                "instruction": "Turn slight right onto Chemin de la Grangette",
+                                "name": "Chemin de la Grangette",
+                                "way_points": [402, 404]
+                            },
+                            {
+                                "distance": 310.4,
+                                "duration": 223.5,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [404, 421]
+                            },
+                            {
+                                "distance": 3.6,
+                                "duration": 2.6,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [421, 422]
+                            },
+                            {
+                                "distance": 13.8,
+                                "duration": 9.9,
+                                "type": 0,
+                                "instruction": "Turn left onto Chemin de la Grangette",
+                                "name": "Chemin de la Grangette",
+                                "way_points": [422, 424]
+                            },
+                            {
+                                "distance": 136.3,
+                                "duration": 98.1,
+                                "type": 1,
+                                "instruction": "Turn right",
+                                "name": "-",
+                                "way_points": [424, 428]
+                            },
+                            {
+                                "distance": 39.4,
+                                "duration": 28.4,
+                                "type": 2,
+                                "instruction": "Turn sharp left",
+                                "name": "-",
+                                "way_points": [428, 429]
+                            },
+                            {
+                                "distance": 26.9,
+                                "duration": 19.4,
+                                "type": 3,
+                                "instruction": "Turn sharp right",
+                                "name": "-",
+                                "way_points": [429, 431]
+                            },
+                            {
+                                "distance": 10.3,
+                                "duration": 7.4,
+                                "type": 3,
+                                "instruction": "Turn sharp right",
+                                "name": "-",
+                                "way_points": [431, 432]
+                            },
+                            {
+                                "distance": 3.3,
+                                "duration": 2.4,
+                                "type": 4,
+                                "instruction": "Turn slight left",
+                                "name": "-",
+                                "way_points": [432, 433]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at your destination, on the left",
+                                "name": "-",
+                                "way_points": [433, 433]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 134,
+                        "duration": 96.5,
+                        "steps": [
+                            {
+                                "distance": 3.3,
+                                "duration": 2.4,
+                                "type": 11,
+                                "instruction": "Head southwest",
+                                "name": "-",
+                                "way_points": [433, 434]
+                            },
+                            {
+                                "distance": 10.3,
+                                "duration": 7.4,
+                                "type": 5,
+                                "instruction": "Turn slight right",
+                                "name": "-",
+                                "way_points": [434, 435]
+                            },
+                            {
+                                "distance": 26.9,
+                                "duration": 19.4,
+                                "type": 2,
+                                "instruction": "Turn sharp left",
+                                "name": "-",
+                                "way_points": [435, 437]
+                            },
+                            {
+                                "distance": 93.5,
+                                "duration": 67.3,
+                                "type": 2,
+                                "instruction": "Turn sharp left",
+                                "name": "-",
+                                "way_points": [437, 441]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at your destination, on the left",
+                                "name": "-",
+                                "way_points": [441, 441]
+                            }
+                        ]
+                    },
+                    {
+                        "distance": 702.6,
+                        "duration": 505.9,
+                        "steps": [
+                            {
+                                "distance": 87.8,
+                                "duration": 63.2,
+                                "type": 11,
+                                "instruction": "Head southeast",
+                                "name": "-",
+                                "way_points": [441, 448]
+                            },
+                            {
+                                "distance": 74.3,
+                                "duration": 53.5,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [448, 454]
+                            },
+                            {
+                                "distance": 80.1,
+                                "duration": 57.7,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [454, 458]
+                            },
+                            {
+                                "distance": 166,
+                                "duration": 119.5,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [458, 465]
+                            },
+                            {
+                                "distance": 217.1,
+                                "duration": 156.3,
+                                "type": 0,
+                                "instruction": "Turn left onto Chemin de Praz-Séchaud",
+                                "name": "Chemin de Praz-Séchaud",
+                                "way_points": [465, 478]
+                            },
+                            {
+                                "distance": 77.4,
+                                "duration": 55.7,
+                                "type": 0,
+                                "instruction": "Turn left",
+                                "name": "-",
+                                "way_points": [478, 482]
+                            },
+                            {
+                                "distance": 0,
+                                "duration": 0,
+                                "type": 10,
+                                "instruction": "Arrive at your destination, straight ahead",
+                                "name": "-",
+                                "way_points": [482, 482]
+                            }
+                        ]
+                    }
+                ],
+                "summary": {
+                    "distance": 8370.2,
+                    "duration": 6026.799999999999
+                },
+                "way_points": [
+                    0, 12, 21, 33, 60, 72, 93, 122, 143, 151, 181, 187, 195,
+                    200, 230, 271, 282, 344, 380, 433, 441, 482
+                ]
+            },
+            "geometry": {
+                "coordinates": [
+                    [6.641398, 46.505083],
+                    [6.641429, 46.505041],
+                    [6.641509, 46.50501],
+                    [6.64156, 46.505012],
+                    [6.641643, 46.505043],
+                    [6.641666, 46.505085],
+                    [6.641674, 46.505233],
+                    [6.641652, 46.505321],
+                    [6.641872, 46.505423],
+                    [6.641959, 46.505495],
+                    [6.64208, 46.505644],
+                    [6.642236, 46.505916],
+                    [6.642013, 46.506016],
+                    [6.641858, 46.506086],
+                    [6.641801, 46.506034],
+                    [6.641745, 46.506014],
+                    [6.641517, 46.506208],
+                    [6.641121, 46.506328],
+                    [6.640817, 46.506569],
+                    [6.640407, 46.506776],
+                    [6.640207, 46.506824],
+                    [6.640086, 46.506906],
+                    [6.640046, 46.506933],
+                    [6.640105, 46.507103],
+                    [6.640291, 46.50721],
+                    [6.639859, 46.507562],
+                    [6.64, 46.507714],
+                    [6.640033, 46.508057],
+                    [6.639972, 46.50822],
+                    [6.639715, 46.508362],
+                    [6.639491, 46.508595],
+                    [6.639433, 46.509179],
+                    [6.639473, 46.509304],
+                    [6.639393, 46.509418],
+                    [6.639363, 46.50946],
+                    [6.639583, 46.50938],
+                    [6.64011, 46.509161],
+                    [6.640083, 46.508951],
+                    [6.640202, 46.508847],
+                    [6.641004, 46.50874],
+                    [6.643491, 46.508416],
+                    [6.643598, 46.508464],
+                    [6.643617, 46.508516],
+                    [6.643706, 46.508819],
+                    [6.643859, 46.509283],
+                    [6.643818, 46.509756],
+                    [6.643851, 46.509853],
+                    [6.643964, 46.510016],
+                    [6.644094, 46.510222],
+                    [6.644292, 46.510638],
+                    [6.644416, 46.510943],
+                    [6.644404, 46.51134],
+                    [6.644447, 46.511394],
+                    [6.644539, 46.511646],
+                    [6.644693, 46.51191],
+                    [6.644829, 46.512333],
+                    [6.64491, 46.51252],
+                    [6.644958, 46.512557],
+                    [6.645256, 46.51265],
+                    [6.645233, 46.512875],
+                    [6.645185, 46.512916],
+                    [6.645233, 46.512875],
+                    [6.645366, 46.512901],
+                    [6.645956, 46.512938],
+                    [6.646381, 46.51298],
+                    [6.646565, 46.512999],
+                    [6.647043, 46.513043],
+                    [6.647455, 46.513071],
+                    [6.647532, 46.513076],
+                    [6.647592, 46.513053],
+                    [6.647601, 46.51303],
+                    [6.647835, 46.513057],
+                    [6.648295, 46.513189],
+                    [6.648342, 46.513203],
+                    [6.648404, 46.513206],
+                    [6.648417, 46.513223],
+                    [6.648747, 46.513257],
+                    [6.648736, 46.51332],
+                    [6.64896, 46.513345],
+                    [6.648953, 46.513359],
+                    [6.649479, 46.513411],
+                    [6.649525, 46.513416],
+                    [6.650088, 46.513473],
+                    [6.650103, 46.513401],
+                    [6.650191, 46.513374],
+                    [6.650807, 46.513436],
+                    [6.650958, 46.513451],
+                    [6.650974, 46.513511],
+                    [6.650963, 46.513616],
+                    [6.650975, 46.51367],
+                    [6.651034, 46.513696],
+                    [6.651344, 46.513707],
+                    [6.651649, 46.51377],
+                    [6.65174, 46.513761],
+                    [6.651763, 46.513758],
+                    [6.651947, 46.513664],
+                    [6.652416, 46.51349],
+                    [6.652695, 46.513483],
+                    [6.653024, 46.513448],
+                    [6.653467, 46.513547],
+                    [6.653492, 46.513585],
+                    [6.653489, 46.51362],
+                    [6.653451, 46.51367],
+                    [6.653305, 46.513754],
+                    [6.653269, 46.513944],
+                    [6.653255, 46.513942],
+                    [6.653225, 46.514053],
+                    [6.653272, 46.514052],
+                    [6.653363, 46.514096],
+                    [6.653468, 46.514413],
+                    [6.653385, 46.514422],
+                    [6.653403, 46.514488],
+                    [6.65342, 46.51455],
+                    [6.653549, 46.514536],
+                    [6.653963, 46.514412],
+                    [6.654029, 46.514406],
+                    [6.654093, 46.514423],
+                    [6.654152, 46.514458],
+                    [6.654225, 46.514445],
+                    [6.654287, 46.514691],
+                    [6.65429, 46.514785],
+                    [6.654291, 46.514933],
+                    [6.654375, 46.514923],
+                    [6.654291, 46.514933],
+                    [6.65408, 46.514923],
+                    [6.653952, 46.514916],
+                    [6.653887, 46.515034],
+                    [6.653773, 46.515075],
+                    [6.653589, 46.515087],
+                    [6.653282, 46.515037],
+                    [6.653259, 46.515093],
+                    [6.652988, 46.51585],
+                    [6.652956, 46.515933],
+                    [6.652838, 46.516061],
+                    [6.652525, 46.516318],
+                    [6.652396, 46.516541],
+                    [6.652286, 46.516794],
+                    [6.652226, 46.517122],
+                    [6.652269, 46.517769],
+                    [6.652287, 46.517821],
+                    [6.652343, 46.517891],
+                    [6.652755, 46.518108],
+                    [6.652933, 46.518231],
+                    [6.653364, 46.51865],
+                    [6.652933, 46.518231],
+                    [6.652755, 46.518108],
+                    [6.652343, 46.517891],
+                    [6.652273, 46.518001],
+                    [6.652288, 46.518163],
+                    [6.652288, 46.518241],
+                    [6.652195, 46.518437],
+                    [6.652089, 46.518536],
+                    [6.651958, 46.51866],
+                    [6.65171, 46.518901],
+                    [6.651618, 46.519063],
+                    [6.651464, 46.519741],
+                    [6.65144, 46.519777],
+                    [6.651321, 46.519862],
+                    [6.651133, 46.519951],
+                    [6.650913, 46.520017],
+                    [6.650707, 46.520028],
+                    [6.65015, 46.520001],
+                    [6.650273, 46.52009],
+                    [6.65034, 46.520138],
+                    [6.650491, 46.520304],
+                    [6.650532, 46.520443],
+                    [6.650494, 46.520588],
+                    [6.65038, 46.520722],
+                    [6.650154, 46.520915],
+                    [6.650073, 46.520945],
+                    [6.649988, 46.520979],
+                    [6.649849, 46.521098],
+                    [6.649815, 46.521223],
+                    [6.649939, 46.521594],
+                    [6.649943, 46.52182],
+                    [6.649919, 46.521872],
+                    [6.649901, 46.521916],
+                    [6.649934, 46.522037],
+                    [6.649928, 46.522165],
+                    [6.650004, 46.522364],
+                    [6.650011, 46.522431],
+                    [6.650042, 46.522478],
+                    [6.650192, 46.522542],
+                    [6.650527, 46.522649],
+                    [6.650793, 46.522761],
+                    [6.650997, 46.522867],
+                    [6.651052, 46.522912],
+                    [6.65106, 46.522919],
+                    [6.651052, 46.522912],
+                    [6.651074, 46.522994],
+                    [6.65106, 46.523057],
+                    [6.650927, 46.523185],
+                    [6.650889, 46.523256],
+                    [6.65089, 46.523347],
+                    [6.650941, 46.523427],
+                    [6.650945, 46.523478],
+                    [6.651179, 46.523454],
+                    [6.651233, 46.52347],
+                    [6.651279, 46.523549],
+                    [6.65132, 46.52356],
+                    [6.651316, 46.523564],
+                    [6.65132, 46.52356],
+                    [6.651428, 46.523566],
+                    [6.651609, 46.523601],
+                    [6.651864, 46.523632],
+                    [6.652039, 46.523568],
+                    [6.652095, 46.523378],
+                    [6.652148, 46.523491],
+                    [6.652116, 46.52365],
+                    [6.652138, 46.52395],
+                    [6.652229, 46.523934],
+                    [6.652389, 46.524046],
+                    [6.652392, 46.524117],
+                    [6.651957, 46.524344],
+                    [6.651957, 46.524389],
+                    [6.651957, 46.524455],
+                    [6.651762, 46.524535],
+                    [6.651872, 46.524677],
+                    [6.651852, 46.524685],
+                    [6.651877, 46.524718],
+                    [6.6518, 46.524745],
+                    [6.651825, 46.52477],
+                    [6.651747, 46.52483],
+                    [6.651592, 46.525043],
+                    [6.65148, 46.525294],
+                    [6.651443, 46.525377],
+                    [6.651334, 46.525647],
+                    [6.651177, 46.52578],
+                    [6.651024, 46.525863],
+                    [6.650989, 46.525919],
+                    [6.65104, 46.52596],
+                    [6.651066, 46.525981],
+                    [6.65086, 46.52609],
+                    [6.651269, 46.52645],
+                    [6.651125, 46.526523],
+                    [6.651166, 46.526558],
+                    [6.651144, 46.526569],
+                    [6.651083, 46.5266],
+                    [6.651064, 46.52661],
+                    [6.65106, 46.526612],
+                    [6.651075, 46.526639],
+                    [6.65104, 46.526661],
+                    [6.651197, 46.526817],
+                    [6.651329, 46.526925],
+                    [6.651461, 46.527032],
+                    [6.651393, 46.52708],
+                    [6.651073, 46.527294],
+                    [6.650892, 46.527424],
+                    [6.650917, 46.527444],
+                    [6.650944, 46.527463],
+                    [6.650967, 46.527481],
+                    [6.65099, 46.527495],
+                    [6.650853, 46.527592],
+                    [6.650806, 46.527646],
+                    [6.650614, 46.527768],
+                    [6.650269, 46.527966],
+                    [6.649892, 46.528085],
+                    [6.649905, 46.528107],
+                    [6.649889, 46.528148],
+                    [6.649803, 46.528215],
+                    [6.649755, 46.528324],
+                    [6.649824, 46.528538],
+                    [6.649893, 46.528641],
+                    [6.649979, 46.528701],
+                    [6.650043, 46.528811],
+                    [6.649933, 46.52883],
+                    [6.649898, 46.528798],
+                    [6.649836, 46.528778],
+                    [6.64977, 46.528815],
+                    [6.649727, 46.528855],
+                    [6.649778, 46.529207],
+                    [6.649761, 46.529267],
+                    [6.649749, 46.529311],
+                    [6.649589, 46.52931],
+                    [6.64961, 46.52959],
+                    [6.6497, 46.529782],
+                    [6.649885, 46.52991],
+                    [6.65, 46.530108],
+                    [6.64999, 46.530247],
+                    [6.649884, 46.530478],
+                    [6.649873, 46.53073],
+                    [6.649662, 46.530972],
+                    [6.649632, 46.531022],
+                    [6.649564, 46.531134],
+                    [6.649544, 46.531262],
+                    [6.649486, 46.53127],
+                    [6.649487, 46.531291],
+                    [6.649287, 46.53133],
+                    [6.649124, 46.531383],
+                    [6.648738, 46.531448],
+                    [6.64851, 46.531464],
+                    [6.648528, 46.531655],
+                    [6.648536, 46.531739],
+                    [6.648559, 46.532061],
+                    [6.648521, 46.532231],
+                    [6.648375, 46.532489],
+                    [6.648328, 46.532536],
+                    [6.648062, 46.532751],
+                    [6.647997, 46.532781],
+                    [6.647973, 46.532812],
+                    [6.647907, 46.532882],
+                    [6.648099, 46.532885],
+                    [6.648384, 46.532901],
+                    [6.648371, 46.532941],
+                    [6.649052, 46.53304],
+                    [6.649328, 46.533072],
+                    [6.649323, 46.5331],
+                    [6.649341, 46.533129],
+                    [6.649526, 46.533262],
+                    [6.649671, 46.533367],
+                    [6.650076, 46.533647],
+                    [6.650109, 46.53363],
+                    [6.650241, 46.533716],
+                    [6.650192, 46.533756],
+                    [6.650556, 46.533928],
+                    [6.650614, 46.53394],
+                    [6.650801, 46.534028],
+                    [6.650859, 46.534166],
+                    [6.650893, 46.534152],
+                    [6.651287, 46.534328],
+                    [6.651301, 46.534363],
+                    [6.651436, 46.534475],
+                    [6.65149, 46.534562],
+                    [6.651503, 46.534587],
+                    [6.651566, 46.534714],
+                    [6.652056, 46.534622],
+                    [6.652193, 46.534607],
+                    [6.652319, 46.534604],
+                    [6.65241, 46.534597],
+                    [6.652883, 46.53463],
+                    [6.653417, 46.534737],
+                    [6.653871, 46.534833],
+                    [6.654076, 46.534851],
+                    [6.654445, 46.534932],
+                    [6.654677, 46.535002],
+                    [6.654926, 46.535056],
+                    [6.655031, 46.535077],
+                    [6.655264, 46.535126],
+                    [6.65577, 46.53523],
+                    [6.655866, 46.53524],
+                    [6.655864, 46.535311],
+                    [6.656138, 46.535325],
+                    [6.656359, 46.535294],
+                    [6.656459, 46.535356],
+                    [6.656479, 46.535366],
+                    [6.656459, 46.535356],
+                    [6.656646, 46.535318],
+                    [6.656864, 46.535248],
+                    [6.657096, 46.535141],
+                    [6.657676, 46.534782],
+                    [6.657779, 46.534718],
+                    [6.657857, 46.534772],
+                    [6.658477, 46.534383],
+                    [6.658645, 46.534362],
+                    [6.658685, 46.534355],
+                    [6.658699, 46.534353],
+                    [6.658737, 46.534347],
+                    [6.658918, 46.534308],
+                    [6.658844, 46.534521],
+                    [6.658802, 46.534561],
+                    [6.658628, 46.535125],
+                    [6.658563, 46.535332],
+                    [6.658556, 46.535355],
+                    [6.658552, 46.535374],
+                    [6.658543, 46.535406],
+                    [6.65854, 46.53545],
+                    [6.658625, 46.535468],
+                    [6.658628, 46.535504],
+                    [6.658633, 46.535559],
+                    [6.658634, 46.535575],
+                    [6.658706, 46.535585],
+                    [6.658706, 46.535595],
+                    [6.658706, 46.535625],
+                    [6.658706, 46.535652],
+                    [6.658778, 46.535651],
+                    [6.65878, 46.535596],
+                    [6.659137, 46.535601],
+                    [6.659137, 46.53569],
+                    [6.659175, 46.535692],
+                    [6.659278, 46.535693],
+                    [6.659286, 46.53561],
+                    [6.659278, 46.535693],
+                    [6.659175, 46.535692],
+                    [6.659137, 46.53569],
+                    [6.659137, 46.535601],
+                    [6.65878, 46.535596],
+                    [6.658778, 46.535651],
+                    [6.658706, 46.535652],
+                    [6.658706, 46.535625],
+                    [6.658706, 46.535595],
+                    [6.658706, 46.535585],
+                    [6.658634, 46.535575],
+                    [6.658633, 46.535559],
+                    [6.658628, 46.535504],
+                    [6.658625, 46.535468],
+                    [6.65854, 46.53545],
+                    [6.658543, 46.535406],
+                    [6.658552, 46.535374],
+                    [6.658556, 46.535355],
+                    [6.658563, 46.535332],
+                    [6.658628, 46.535125],
+                    [6.658802, 46.534561],
+                    [6.658844, 46.534521],
+                    [6.658918, 46.534308],
+                    [6.658933, 46.534267],
+                    [6.659026, 46.534273],
+                    [6.659385, 46.534345],
+                    [6.659493, 46.534363],
+                    [6.660146, 46.53448],
+                    [6.660287, 46.534492],
+                    [6.66052, 46.534466],
+                    [6.660591, 46.534472],
+                    [6.660626, 46.534495],
+                    [6.660694, 46.534761],
+                    [6.660731, 46.534899],
+                    [6.660887, 46.535481],
+                    [6.66089, 46.53556],
+                    [6.660851, 46.535661],
+                    [6.660772, 46.535742],
+                    [6.660672, 46.535804],
+                    [6.660562, 46.535842],
+                    [6.66038, 46.535856],
+                    [6.66038, 46.535889],
+                    [6.660259, 46.535888],
+                    [6.660199, 46.535887],
+                    [6.660183, 46.536266],
+                    [6.660181, 46.536315],
+                    [6.660179, 46.536561],
+                    [6.660175, 46.537113],
+                    [6.659727, 46.536938],
+                    [6.659735, 46.537],
+                    [6.659526, 46.537107],
+                    [6.659658, 46.537125],
+                    [6.659697, 46.537138],
+                    [6.659658, 46.537125],
+                    [6.659526, 46.537107],
+                    [6.659735, 46.537],
+                    [6.659727, 46.536938],
+                    [6.660175, 46.537113],
+                    [6.660316, 46.537206],
+                    [6.660548, 46.537302],
+                    [6.660768, 46.53737],
+                    [6.660808, 46.537306],
+                    [6.660925, 46.53723],
+                    [6.660967, 46.537246],
+                    [6.661187, 46.536995],
+                    [6.661238, 46.536977],
+                    [6.661521, 46.536927],
+                    [6.66157, 46.536903],
+                    [6.661664, 46.536915],
+                    [6.66177, 46.536908],
+                    [6.661853, 46.536909],
+                    [6.662252, 46.53684],
+                    [6.662322, 46.536822],
+                    [6.662482, 46.53674],
+                    [6.662621, 46.536937],
+                    [6.662642, 46.536963],
+                    [6.662951, 46.537349],
+                    [6.662984, 46.537369],
+                    [6.662907, 46.537662],
+                    [6.66291, 46.537832],
+                    [6.66301, 46.537848],
+                    [6.663301, 46.537852],
+                    [6.663295, 46.537934],
+                    [6.664185, 46.537963],
+                    [6.664272, 46.537966],
+                    [6.664266, 46.537987],
+                    [6.664201, 46.538207],
+                    [6.664187, 46.538261],
+                    [6.664141, 46.538534],
+                    [6.664165, 46.538732],
+                    [6.664186, 46.538832],
+                    [6.664237, 46.53893],
+                    [6.664302, 46.539002],
+                    [6.664455, 46.539095],
+                    [6.664522, 46.539136],
+                    [6.664699, 46.539282],
+                    [6.664713, 46.539312],
+                    [6.664814, 46.539771],
+                    [6.664644, 46.539791],
+                    [6.664173, 46.540157],
+                    [6.664092, 46.540195],
+                    [6.664063, 46.540203]
+                ],
+                "type": "LineString"
+            }
+        }
+    ],
+    "metadata": {
+        "attribution": "openrouteservice.org | OpenStreetMap contributors",
+        "service": "routing",
+        "timestamp": 1716829517050,
+        "query": {
+            "coordinates": [
+                [6.6415143, 46.5051237],
+                [6.6419971, 46.5059987],
+                [6.6400819, 46.5069033],
+                [6.6392935, 46.5093843],
+                [6.6451995, 46.5129244],
+                [6.6482945, 46.5131903],
+                [6.6517374, 46.5137486],
+                [6.6543675, 46.5148926],
+                [6.6533638, 46.5186499],
+                [6.6521118, 46.5185476],
+                [6.6500415, 46.5224776],
+                [6.6510842, 46.5229053],
+                [6.6509449, 46.5234779],
+                [6.6513151, 46.5235635],
+                [6.6510362, 46.5259626],
+                [6.6497583, 46.5292667],
+                [6.6492498, 46.5309118],
+                [6.6564703, 46.5353735],
+                [6.6594368, 46.535617],
+                [6.6596988, 46.5371353],
+                [6.6607676, 46.5373704],
+                [6.6640623, 46.5402019]
+            ],
+            "profile": "foot-walking",
+            "format": "geojson"
+        },
+        "engine": {
+            "version": "8.0.1",
+            "build_date": "2024-05-14T10:47:52Z",
+            "graph_date": "2024-05-15T09:27:03Z"
+        }
+    }
+}
