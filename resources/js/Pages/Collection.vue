@@ -19,6 +19,7 @@ import AppCard from "@/Components/App/AppCardBadge.vue";
                     <Setting class="h-6 w-6" />
                 </div>
                 <div class="flex flex-col gap-4 mt-8">
+                    <!-- TODO : edit href path -->
                     <AppCard
                         title="Tes exploits"
                         :link="{
@@ -42,6 +43,7 @@ import AppCard from "@/Components/App/AppCardBadge.vue";
                             <AppBadge badge="Sentiers parcourus" />
                         </div>
                     </AppCard>
+                    <!-- TODO : edit href path -->
                     <AppCard
                         title="Historique"
                         :link="{
