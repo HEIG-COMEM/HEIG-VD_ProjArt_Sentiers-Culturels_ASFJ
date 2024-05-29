@@ -18,6 +18,7 @@ import { Star as StarFull } from "@iconsans/vue/bold";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 import AppStarRating from "@/Components/App/AppStarRating.vue";
 import AppWeatherForecastCard from "@/Components/App/AppWeatherForecastCard.vue";
+import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
 
 const props = defineProps({
     route: {
@@ -62,6 +63,7 @@ const interestPoints = reactive(route.value.interest_points);
 
 const isFavorite = ref(false); // TODO: Bind with user favorites
 const showWeather = ref(false);
+const toggleMenuFirstActive = ref(true);
 
 const back = () => {
     if (window.history.length > 1) {
@@ -80,17 +82,6 @@ const download = () => {
     // TODO: Implement download
     console.error("Download not implemented yet");
 };
-
-const scrollToNext = (event) => {
-    event.preventDefault();
-    document.querySelector(".scroll-container").scrollBy({
-        top: window.innerHeight,
-        behavior: "smooth",
-    });
-};
-
-// TODO: Remove
-console.log(route.value);
 </script>
 
 <template>
@@ -115,7 +106,7 @@ console.log(route.value);
                             <ArrowLeft class="w-7 h-7" />
                         </button>
                     </div>
-                    <div class="flex flex-col gap-2">
+                    <div class="flex flex-row gap-2">
                         <button
                             class="btn btn-circle btn-outline btn-primary bg-base-100 border-none"
                             @click="toggleFav()"
@@ -146,12 +137,6 @@ console.log(route.value);
             <!-- BOTTOM BTNS -->
             <div class="absolute z-[1] p-6 bottom-16 left-0 w-full">
                 <div class="flex flex-col items-center gap-2">
-                    <button
-                        class="btn btn-circle btn-outline btn-primary bg-base-100 border-none"
-                        @click="scrollToNext($event)"
-                    >
-                        <ArrowDown class="h-7 w-7" />
-                    </button>
                     <Link href="#" class="btn btn-primary w-full">
                         Commencer le sentier
                     </Link>
@@ -160,149 +145,246 @@ console.log(route.value);
             <div
                 class="background-image w-full h-full bg-primary flex flex-col justify-center"
             >
-                <div
-                    class="scroll-container backdrop-blur-md w-full h-full overflow-scroll"
-                >
-                    <!-- ROUTE -->
+                <div class="backdrop-blur-md w-full h-full relative">
+                    <!-- TOGGLE MENU -->
                     <div
-                        class="flex flex-col justify-center items-center h-full gap-8 p-16"
+                        class="absolute flex flex-row justify-center w-full z-[1] p-6 top-24 sm:top-32 left-0"
                     >
-                        <div class="w-36 h-36 relative">
-                            <Tick2
-                                class="h-7 w-7 bg-base-100 rounded-full absolute -top-2 -right-2"
+                        <div
+                            class="flex flex-col gap-1 w-40 cursor-pointer text-center"
+                            :class="{
+                                'text-base-100': toggleMenuFirstActive,
+                                'text-base-200': !toggleMenuFirstActive,
+                            }"
+                            @click="toggleMenuFirstActive = true"
+                        >
+                            <p class="pl-6 pr-4 font-medium">Informations</p>
+                            <span
+                                class="w-full h-1 rounded-l-full"
                                 :class="{
-                                    'text-primary': route.isDone,
-                                    'text-base-200': !route.isDone,
+                                    'bg-base-100': toggleMenuFirstActive,
+                                    'bg-base-200': !toggleMenuFirstActive,
                                 }"
-                            />
-                            <img
-                                :src="bgImgPath"
-                                :alt="route.pictures.at(0).title"
-                                class="w-full h-full rounded-md"
-                            />
+                            ></span>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <h1
-                                class="text-2xl font-bold text-base-100 text-center"
-                            >
-                                {{ route.name }}
-                            </h1>
-                            <p
-                                class="text-sm font-semibold mt-2 px-4 text-center text-base-100 max-h-32 overflow-scroll"
-                            >
-                                {{ route.description }}
+                        <div
+                            class="flex flex-col gap-1 w-40 cursor-pointer text-center"
+                            :class="{
+                                'text-base-100': !toggleMenuFirstActive,
+                                'text-base-200': toggleMenuFirstActive,
+                            }"
+                            @click="toggleMenuFirstActive = false"
+                        >
+                            <p class="pl-4 pr-6 font-medium">
+                                Points d’intérêts
                             </p>
+                            <span
+                                class="w-full h-1 rounded-r-full"
+                                :class="{
+                                    'bg-base-100': !toggleMenuFirstActive,
+                                    'bg-base-200': toggleMenuFirstActive,
+                                }"
+                            ></span>
                         </div>
                     </div>
-
-                    <!-- GENERAL INFO -->
-                    <div
-                        class="flex flex-col justify-center items-center h-full gap-8 p-16"
-                    >
-                        <div class="flex flex-col items-center gap-10">
-                            <h1 class="text-2xl font-bold text-base-100">
-                                Informations générales
-                            </h1>
-                            <div class="flex flex-col w-full gap-4">
-                                <div class="flex flex-row items-center gap-4">
-                                    <Clock3 class="h-7 w-7 text-base-100" />
-                                    <p
-                                        class="text-base-100 text-base font-semibold"
-                                    >
-                                        {{ duration }}
-                                    </p>
-                                </div>
-                                <div class="flex flex-row items-center gap-4">
-                                    <Activity class="h-7 w-7 text-base-100" />
-                                    <p
-                                        class="text-base-100 text-base font-semibold"
-                                    >
-                                        {{ distance }}
-                                    </p>
-                                </div>
-                                <div class="flex flex-row items-center gap-4">
-                                    <MenuHamburger3
-                                        class="h-7 w-7 text-base-100 -rotate-90 self-start"
-                                    />
-                                    <p
-                                        class="text-base-100 text-base font-semibold"
-                                    >
-                                        Difficulté {{ route.difficulty.name }}
-                                    </p>
-                                </div>
-                                <div class="flex flex-row items-center gap-4">
-                                    <Tag
-                                        class="h-7 w-7 text-base-100 self-start"
-                                    />
+                    <div class="flex flex-col w-full h-[80%]">
+                        <div class="w-full h-full mt-52">
+                            <template v-if="toggleMenuFirstActive">
+                                <div
+                                    class="scroll-container w-full h-96 overflow-scroll"
+                                >
+                                    <!-- ROUTE -->
                                     <div
-                                        class="text-base-100 text-base font-semibold flex flex-col gap-2 max-h-24 overflow-scroll flex-grow"
+                                        class="flex flex-col justify-center items-center h-full gap-8 p-16"
+                                    >
+                                        <div class="w-36 h-36 relative">
+                                            <Tick2
+                                                class="h-7 w-7 bg-base-100 rounded-full absolute -top-2 -right-2"
+                                                :class="{
+                                                    'text-primary':
+                                                        route.isDone,
+                                                    'text-base-200':
+                                                        !route.isDone,
+                                                }"
+                                            />
+                                            <img
+                                                :src="bgImgPath"
+                                                :alt="
+                                                    route.pictures.at(0).title
+                                                "
+                                                class="w-full h-full rounded-md"
+                                            />
+                                        </div>
+                                        <div class="flex flex-col items-center">
+                                            <h1
+                                                class="text-2xl font-bold text-base-100 text-center"
+                                            >
+                                                {{ route.name }}
+                                            </h1>
+                                            <p
+                                                class="text-sm font-semibold mt-2 px-4 text-center text-base-100 max-h-32 overflow-scroll"
+                                            >
+                                                {{ route.description }}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- GENERAL INFO -->
+                                    <div
+                                        class="flex flex-col justify-center items-center h-full gap-8 p-16"
                                     >
                                         <div
-                                            v-for="tag in route.tags"
-                                            class="badge badge-primary"
+                                            class="flex flex-col items-center gap-10"
                                         >
-                                            {{ tag.name }}
+                                            <h1
+                                                class="text-2xl font-bold text-base-100"
+                                            >
+                                                Informations générales
+                                            </h1>
+                                            <div
+                                                class="flex flex-col w-full gap-4"
+                                            >
+                                                <div
+                                                    class="flex flex-row items-center gap-4"
+                                                >
+                                                    <Clock3
+                                                        class="h-7 w-7 text-base-100"
+                                                    />
+                                                    <p
+                                                        class="text-base-100 text-base font-semibold"
+                                                    >
+                                                        {{ duration }}
+                                                    </p>
+                                                </div>
+                                                <div
+                                                    class="flex flex-row items-center gap-4"
+                                                >
+                                                    <Activity
+                                                        class="h-7 w-7 text-base-100"
+                                                    />
+                                                    <p
+                                                        class="text-base-100 text-base font-semibold"
+                                                    >
+                                                        {{ distance }}
+                                                    </p>
+                                                </div>
+                                                <div
+                                                    class="flex flex-row items-center gap-4"
+                                                >
+                                                    <MenuHamburger3
+                                                        class="h-7 w-7 text-base-100 -rotate-90 self-start"
+                                                    />
+                                                    <p
+                                                        class="text-base-100 text-base font-semibold"
+                                                    >
+                                                        Difficulté
+                                                        {{
+                                                            route.difficulty
+                                                                .name
+                                                        }}
+                                                    </p>
+                                                </div>
+                                                <div
+                                                    class="flex flex-row items-center gap-4"
+                                                >
+                                                    <Tag
+                                                        class="h-7 w-7 text-base-100 self-start"
+                                                    />
+                                                    <div
+                                                        class="text-base-100 text-base font-semibold flex flex-col gap-2 max-h-24 overflow-scroll flex-grow"
+                                                    >
+                                                        <div
+                                                            v-for="tag in route.tags"
+                                                            class="badge badge-primary"
+                                                        >
+                                                            {{ tag.name }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- RATING -->
+                                    <div
+                                        class="flex flex-col justify-center items-center h-full gap-8 p-16"
+                                    >
+                                        <div
+                                            class="flex flex-col items-center gap-10"
+                                        >
+                                            <h1
+                                                class="text-2xl font-bold text-base-100"
+                                            >
+                                                Note du sentier
+                                            </h1>
+                                            <div
+                                                class="flex flex-col items-center gap-2"
+                                            >
+                                                <p class="text-base-100">
+                                                    <span class="text-6xl">{{
+                                                        roundedRate
+                                                    }}</span
+                                                    ><span>/5</span>
+                                                </p>
+                                                <AppStarRating
+                                                    :rating="+roundedRate"
+                                                />
+                                                <p
+                                                    class="text-base-100 text-sm"
+                                                >
+                                                    ({{ route.rates.length }}
+                                                    avis)
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </template>
+                            <!-- INTEREST POINTS -->
+
+                            <template v-else>
+                                <div
+                                    class="flex flex-col items-center p-6 gap-4"
+                                >
+                                    <p class="text-2xl font-bold text-base-100">
+                                        {{ interestPoints.length }} Points
+                                        d’intérêts
+                                    </p>
+                                    <div
+                                        class="bg-base-300 w-full flex flex-col gap-2 items-center rounded-xl p-6 bg-opacity-40 h-96 overflow-scroll"
+                                    >
+                                        <AppHorizontalCard
+                                            v-for="(
+                                                interestPoint, index
+                                            ) in interestPoints"
+                                            class="w-full"
+                                            :key="index"
+                                            :title="interestPoint.name"
+                                            :description="
+                                                interestPoint.description
+                                            "
+                                            :href="
+                                                '/interest-point/' +
+                                                interestPoint.uuid
+                                            "
+                                            :imgPath="
+                                                getImgPath(
+                                                    interestPoint.pictures.at(0)
+                                                        .path,
+                                                )
+                                            "
+                                        />
+                                    </div>
+                                </div>
+                                <template
+                                    v-for="(
+                                        interestPoint, index
+                                    ) in interestPoints"
+                                >
+                                </template>
+                            </template>
                         </div>
                     </div>
-
-                    <!-- RATING -->
-                    <div
-                        class="flex flex-col justify-center items-center h-full gap-8 p-16"
-                    >
-                        <div class="flex flex-col items-center gap-10">
-                            <h1 class="text-2xl font-bold text-base-100">
-                                Note du sentier
-                            </h1>
-                            <div class="flex flex-col items-center gap-2">
-                                <p class="text-base-100">
-                                    <span class="text-6xl">{{
-                                        roundedRate
-                                    }}</span
-                                    ><span>/5</span>
-                                </p>
-                                <AppStarRating :rating="+roundedRate" />
-                                <p class="text-base-100 text-sm">
-                                    ({{ route.rates.length }} avis)
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- INTEREST POINTS -->
-                    <template v-for="(interestPoint, index) in interestPoints">
-                        <div
-                            class="flex flex-col justify-center items-center h-full gap-8 p-16"
-                        >
-                            <p class="text-base-100">
-                                {{ index + 1 }} / {{ interestPoints.length }}
-                            </p>
-                            <img
-                                :src="
-                                    getImgPath(
-                                        interestPoint.pictures.at(0).path,
-                                    )
-                                "
-                                :alt="interestPoint.pictures.at(0).title"
-                                class="w-36 h-36 rounded-md"
-                            />
-                            <div class="flex flex-col items-center">
-                                <h1
-                                    class="text-2xl font-bold text-base-100 text-center"
-                                >
-                                    {{ interestPoint.name }}
-                                </h1>
-                                <p
-                                    class="text-sm font-semibold mt-2 px-4 text-center text-base-100 max-h-32 overflow-scroll"
-                                >
-                                    {{ interestPoint.description }}
-                                </p>
-                            </div>
-                        </div>
-                    </template>
                 </div>
             </div>
         </template>
