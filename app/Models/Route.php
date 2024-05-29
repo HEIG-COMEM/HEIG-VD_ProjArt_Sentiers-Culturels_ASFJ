@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Route extends Model
 {
@@ -12,6 +13,14 @@ class Route extends Model
     protected $fillable = [
         'name', 'description', 'duration', 'length', 'difficulty_id', 'start_lat', 'start_long', 'end_lat', 'end_long'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->uuid = Str::uuid();
+        });
+    }
 
     public function tags()
     {

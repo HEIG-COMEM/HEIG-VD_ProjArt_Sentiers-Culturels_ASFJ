@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique()->default(DB::raw('(UUID())'));
+            $table->uuid('uuid')->unique();
             $table->string('name');
             $table->text('description');
             $table->integer('duration');
