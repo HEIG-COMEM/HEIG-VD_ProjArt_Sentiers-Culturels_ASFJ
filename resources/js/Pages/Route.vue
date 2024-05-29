@@ -16,7 +16,7 @@ import { Star as StarFull } from "@iconsans/vue/bold";
 
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 import AppStarRating from "@/Components/App/AppStarRating.vue";
-import AppWeatherCard from "@/Components/App/AppWeatherCard.vue";
+import AppWeatherForecastCard from "@/Components/App/AppWeatherForecastCard.vue";
 
 const props = defineProps({
     route: {
@@ -70,6 +70,16 @@ const back = () => {
     window.history.back();
 };
 
+const toggleFav = () => {
+    isFavorite.value = !isFavorite.value;
+    // TODO: Add/Remove from user favorites
+};
+
+const download = () => {
+    // TODO: Implement download
+    console.error("Download not implemented yet");
+};
+
 const scrollToNext = (event) => {
     event.preventDefault();
     document.querySelector(".scroll-container").scrollBy({
@@ -87,15 +97,11 @@ console.log(route.value);
     <MobileAppLayout>
         <template v-slot:main>
             <!-- WEATHER -->
-            <div
-                v-if="showWeather"
-                class="absolute z-[9999] p-6 top-0 right-0 w-full h-full"
-            >
-                <AppWeatherCard
-                    :lat="+route.start_lat"
-                    :long="+route.start_long"
-                />
-            </div>
+            <AppWeatherForecastCard
+                :lat="+route.start_lat"
+                :long="+route.start_long"
+                v-model="showWeather"
+            />
 
             <!-- TOP BTNS -->
             <div class="absolute z-[1] p-6 top-0 left-0 w-full">
@@ -111,7 +117,7 @@ console.log(route.value);
                     <div class="flex flex-col gap-2">
                         <button
                             class="btn btn-circle btn-outline btn-primary bg-base-100 border-none"
-                            @click="back()"
+                            @click="toggleFav()"
                         >
                             <component
                                 :is="isFavorite ? StarFull : Star"
@@ -120,7 +126,7 @@ console.log(route.value);
                         </button>
                         <button
                             class="btn btn-circle btn-outline btn-primary bg-base-100 border-none"
-                            @click="back()"
+                            @click="download()"
                         >
                             <Download class="w-7 h-7" />
                         </button>
