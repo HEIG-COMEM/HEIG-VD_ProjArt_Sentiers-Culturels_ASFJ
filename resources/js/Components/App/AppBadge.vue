@@ -12,11 +12,11 @@ defineProps({
     },
     count: {
         type: Number,
-        required: true,
+        required: false,
     },
     total: {
         type: Number,
-        reuiqred: true,
+        reuiqred: false,
     },
 });
 </script>
