@@ -30,7 +30,6 @@ const routes = {
 };
 
 const active = (route) => {
-    console.log(currentRoute.value === route.route);
     return currentRoute.value === route;
 };
 </script>
