@@ -1,11 +1,8 @@
 <script setup>
-import { onMounted, onUnmounted, reactive, ref, watch } from "vue";
+import { onMounted, onUnmounted, reactive, ref } from "vue";
 import "maplibre-gl/dist/maplibre-gl.css";
 import mapboxgl from "maplibre-gl";
 import { defineProps } from "vue";
-
-const INTEREST_POINT_COLOR = [255, 0, 255];
-const INTEREST_POINT_SIZE = 10;
 
 const props = defineProps({
     interestPoints: {
@@ -14,7 +11,13 @@ const props = defineProps({
     },
     routes: {
         type: Object,
-        required: true,
+        required: false,
+        default: null,
+    },
+    isBackoffice: {
+        type: Boolean,
+        required: false,
+        default: false,
     },
 });
 
@@ -58,29 +61,39 @@ onMounted(() => {
     });
 
     map.on("load", () => {
-        routes.forEach((route) => {
-            const path = JSON.parse(route.path);
-            const ID = `route-${route.id}`;
+        if (routes) {
+            routes.forEach((route) => {
+                const path = JSON.parse(route.path);
+                const ID = `route-${route.id}`;
+                const uuid = route.uuid;
 
-            map.addSource(ID, {
-                type: "geojson",
-                data: path,
-            });
+                map.addSource(ID, {
+                    type: "geojson",
+                    data: path,
+                });
 
-            map.addLayer({
-                id: ID,
-                type: "line",
-                source: ID,
-                layout: {
-                    "line-join": "round",
-                    "line-cap": "round",
-                },
-                paint: {
-                    "line-color": "#ff0000",
-                    "line-width": 8,
-                },
+                map.addLayer({
+                    id: ID,
+                    type: "line",
+                    source: ID,
+                    layout: {
+                        "line-join": "round",
+                        "line-cap": "round",
+                    },
+                    paint: {
+                        "line-color": "#154B19",
+                        "line-width": 6,
+                    },
+                });
+
+                map.on("click", ID, (e) => {
+                    const url = props.isBackoffice
+                        ? `/backoffice/routes/${uuid}`
+                        : null;
+                    if (url) window.location.href = url;
+                });
             });
-        });
+        }
 
         map.addSource("interestPoints", {
             type: "geojson",
@@ -118,25 +131,25 @@ onMounted(() => {
                 "circle-color": [
                     "step",
                     ["get", "point_count"],
-                    "#B8BBBE",
+                    "#c4eec7",
                     100,
-                    "#B8BBBE",
+                    "#c4eec7",
                     750,
-                    "#B8BBBE",
+                    "#c4eec7",
                 ],
                 "circle-radius": [
                     "step",
                     ["get", "point_count"],
-                    20,
-                    100,
                     30,
-                    750,
+                    100,
                     40,
+                    750,
+                    50,
                 ],
             },
         });
 
-        const svgImage = new Image(62, 62);
+        const svgImage = new Image(84, 84);
         svgImage.onload = () => {
             map.addImage("locationPin", svgImage);
         };
@@ -180,7 +193,10 @@ onMounted(() => {
 
     map.on("click", "interestPoints", (e) => {
         if (e.features[0].properties.uuid === undefined) return;
-        window.location.href = `/interest-point/${e.features[0].properties.uuid}`;
+        const url = props.isBackoffice
+            ? `/backoffice/interest-points/${e.features[0].properties.uuid}`
+            : `/interest-point/${e.features[0].properties.uuid}`;
+        window.location.href = url;
     });
 
     mapInstance.value = map;
