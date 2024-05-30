@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\InterestPointController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,3 +24,10 @@ Route::get('/collection', function () {
 })->name('collection');
 
 Route::get('/route/{uuid}', [RouteController::class, 'show'])->name('route.show');
+
+Route::get('/api/interest-point/{uuid}', [InterestPointController::class, 'show']);
+Route::get('/interest-point/{uuid}', function ($uuid) {
+    return Inertia::render('InterestPoint/Show', [
+        'uuid' => $uuid
+    ]);
+});

@@ -10,7 +10,7 @@ const props = defineProps({
         type: String,
         required: false,
     },
-    isActive: {
+    isDone: {
         type: Boolean,
         default: false,
     },
@@ -36,8 +36,8 @@ const props = defineProps({
                 <Tick2
                     class="h-5 w-5"
                     :class="{
-                        'text-primary': isActive,
-                        'text-base-200': !isActive,
+                        'text-primary': isDone,
+                        'text-base-200': !isDone,
                     }"
                 />
             </span>
