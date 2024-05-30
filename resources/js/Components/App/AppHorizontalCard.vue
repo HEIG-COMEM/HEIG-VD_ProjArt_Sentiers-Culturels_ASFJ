@@ -18,15 +18,17 @@ const props = defineProps({
         type: String,
         required: true,
     },
-    tag: {
-        type: String,
-        required: true,
+    tags: {
+        type: Array,
+        required: false,
     },
     href: {
         type: String,
         required: false,
     },
 });
+
+const trimTags = props.tags.slice(0, 4);
 </script>
 
 <template>
@@ -41,18 +43,24 @@ const props = defineProps({
                     }"
                 />
             </span>
-            <img
-                class="block mx-auto w-24 rounded-2xl aspect-square"
-                :src="imgPath"
-                :alt="imgAlt"
-            />
+            <div class="mx-auto w-24">
+                <img
+                    class="object-cover rounded-2xl"
+                    :src="imgPath"
+                    :alt="imgAlt"
+                />
+            </div>
         </div>
         <div class="flex flex-row items-center justify-between w-full">
             <div class="space-y-0.5">
                 <p class="text-base text-black font-semibold">
                     {{ title }}
                 </p>
-                <p class="text-sm text-black font-medium">{{ tag }}</p>
+                <div v-if="tags.length" class="flex flex-row flex-wrap gap-2">
+                    <div v-for="tag in trimTags" class="badge badge-primary">
+                        {{ tag }}
+                    </div>
+                </div>
             </div>
             <Link v-if="href" :href><ArrowRight2 class="h-6 w-6" /></Link>
         </div>

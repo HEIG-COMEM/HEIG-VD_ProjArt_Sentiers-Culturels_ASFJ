@@ -37,5 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RoutesHistoryTableSeeder::class);
         $this->call(RouteSeasonSeeder::class);
         $this->call(RouteTagSeed::class);
+        $this->call(RouteUserSeeder::class);
     }
 }
