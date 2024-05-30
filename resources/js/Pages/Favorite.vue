@@ -7,7 +7,18 @@ import AppNoData from "@/Components/App/AppNoData.vue";
 
 import { reactive } from "vue";
 
-const favorites = reactive([]);
+const props = defineProps({
+    routes: {
+        type: Object,
+        required: false,
+    },
+});
+
+const favorites = reactive(props.routes);
+
+const tagsName = (tags) => {
+    return tags.map((tag) => tag.name);
+};
 </script>
 
 <template>
@@ -21,7 +32,7 @@ const favorites = reactive([]);
                     v-if="favorites.length"
                     v-for="favorite in favorites"
                     title="Parcours sentier"
-                    tag="Lorem"
+                    :tags="tagsName(favorite.tags)"
                     href="/"
                     img-path="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
                     img-alt="lorem"

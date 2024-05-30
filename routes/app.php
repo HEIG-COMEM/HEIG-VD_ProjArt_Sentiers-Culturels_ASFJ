@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\RouteController;
@@ -14,9 +15,7 @@ Route::get('/discovery', function () {
 
 Route::get('/map', [MapController::class, 'index'])->name('map');
 
-Route::get('/favorite', function () {
-    return Inertia::render('Favorite');
-})->name('favorite');
+Route::get('/favorite', [FavoriteController::class, 'index'])->name('favorite');
 
 Route::get('/collection', function () {
     return Inertia::render('Collection');

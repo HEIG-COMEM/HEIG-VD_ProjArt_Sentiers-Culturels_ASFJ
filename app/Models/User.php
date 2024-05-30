@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function routes()
     {
-        return $this->hasMany(Route::class);
+        return $this->belongsToMany(Route::class);
     }
 
     public function rates()
