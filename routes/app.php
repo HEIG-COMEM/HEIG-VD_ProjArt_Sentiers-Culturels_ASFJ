@@ -23,3 +23,7 @@ Route::get('/profile', function () {
 })->name('profile');
 
 Route::get('/route/{uuid}', [RouteController::class, 'show'])->name('route.show');
+
+Route::get('/collection', function () {
+    return Inertia::render('Profile/Collection/Index');
+});

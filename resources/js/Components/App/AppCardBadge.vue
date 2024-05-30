@@ -36,7 +36,7 @@ const props = defineProps({
                 class="flex flex-row justify-between items-baseline"
             >
                 <h2 class="card-title">{{ title }}</h2>
-                <BaseLink href="{{ link.href }}" class="text-sm">{{
+                <BaseLink :href="link.href" class="text-sm">{{
                     link.text
                 }}</BaseLink>
             </div>

@@ -21,9 +21,9 @@ import AppCard from "@/Components/App/AppCardBadge.vue";
                 <div class="flex flex-col gap-4 mt-8">
                     <!-- TODO : edit href path -->
                     <AppCard
-                        title="Tes exploits"
+                        title="Ta collection"
                         :link="{
-                            href: '/lorem',
+                            href: '/collection',
                             text: 'voir la collection',
                         }"
                     >
