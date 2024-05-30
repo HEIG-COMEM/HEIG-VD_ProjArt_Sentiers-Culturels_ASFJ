@@ -6,6 +6,7 @@ import { Head } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
 import AppHorizontalCard from "./AppHorizontalCard.vue";
+import { data } from "autoprefixer";
 
 const props = defineProps({
     uuid: {
@@ -30,6 +31,8 @@ onMounted(() => {
             isLoading.value = false;
         });
 });
+
+const tagsName = (tags) => tags.map((tag) => tag.name).slice(0, 4);
 
 const getImgSrc = (path) => {
     return `${url.origin}/storage/pictures/${path}`;
@@ -87,7 +90,7 @@ const back = () => {
                             <AppHorizontalCard
                                 v-for="sentier in interestPoint.value.routes"
                                 :title="sentier.name"
-                                tag="Sentier"
+                                :tags="tagsName(sentier.tags)"
                                 :imgPath="
                                     getImgSrc(sentier.pictures.at(0).path)
                                 "
