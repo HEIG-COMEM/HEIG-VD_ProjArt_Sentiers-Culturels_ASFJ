@@ -1,6 +1,7 @@
 <script setup>
 import { Tick2, ArrowRight2 } from "@iconsans/vue/linear";
 import { Link } from "@inertiajs/vue3";
+
 const props = defineProps({
     imgPath: {
         type: String,
@@ -21,6 +22,7 @@ const props = defineProps({
     tags: {
         type: Array,
         required: false,
+        default: () => [],
     },
     href: {
         type: String,
@@ -32,39 +34,47 @@ const trimTags = props.tags.slice(0, 4);
 </script>
 
 <template>
-    <div class="p-4 flex flex-row bg-base-100 rounded-3xl shadow-lg">
-        <div v-if="imgPath" class="indicator mr-4">
-            <span class="indicator-item badge border-none h-6 w-6 p-0">
-                <Tick2
-                    class="h-5 w-5"
-                    :class="{
-                        'text-primary': isDone,
-                        'text-base-200': !isDone,
-                    }"
-                />
-            </span>
-            <div class="mx-auto w-24">
-                <img
-                    class="object-cover rounded-2xl"
-                    :src="imgPath"
-                    :alt="imgAlt"
-                />
-            </div>
-        </div>
-        <div class="flex flex-row items-center justify-between w-full">
-            <div class="space-y-0.5">
-                <p class="text-base text-black font-semibold">
-                    {{ title }}
-                </p>
-                <div v-if="tags.length" class="flex flex-row flex-wrap gap-2">
-                    <div v-for="tag in trimTags" class="badge badge-primary">
-                        {{ tag }}
-                    </div>
+    <Link :href>
+        <div class="p-2 flex flex-row bg-base-100 rounded-3xl shadow-lg">
+            <div v-if="imgPath" class="indicator mr-4">
+                <span class="indicator-item badge border-none h-6 w-6 p-0">
+                    <Tick2
+                        class="h-5 w-5"
+                        :class="{
+                            'text-primary': isDone,
+                            'text-base-200': !isDone,
+                        }"
+                    />
+                </span>
+                <div class="w-24">
+                    <img
+                        class="object-cover rounded-2xl aspect-square"
+                        :src="imgPath"
+                        :alt="imgAlt"
+                    />
                 </div>
             </div>
-            <Link v-if="href" :href><ArrowRight2 class="h-6 w-6" /></Link>
+            <div class="flex flex-row items-center justify-between w-full">
+                <div class="space-y-0.5">
+                    <p class="text-base text-black font-semibold">
+                        {{ title }}
+                    </p>
+                    <div
+                        v-if="tags.length"
+                        class="flex flex-row flex-wrap gap-2"
+                    >
+                        <div
+                            v-for="tag in trimTags"
+                            class="badge badge-primary"
+                        >
+                            {{ tag }}
+                        </div>
+                    </div>
+                </div>
+                <ArrowRight2 v-if="href" class="h-6 w-6" />
+            </div>
         </div>
-    </div>
+    </Link>
 </template>
 
 <style scoped>

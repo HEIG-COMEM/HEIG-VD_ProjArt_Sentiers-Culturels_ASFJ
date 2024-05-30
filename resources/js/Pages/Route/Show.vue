@@ -376,12 +376,6 @@ const download = () => {
                                         />
                                     </div>
                                 </div>
-                                <template
-                                    v-for="(
-                                        interestPoint, index
-                                    ) in interestPoints"
-                                >
-                                </template>
                             </template>
                         </div>
                     </div>
