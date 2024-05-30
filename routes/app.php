@@ -30,3 +30,8 @@ Route::get('/interest-point/{uuid}', function ($uuid) {
         'uuid' => $uuid
     ]);
 });
+
+// BACKOFFICE
+Route::group(['prefix' => 'backoffice', 'middleware' => 'admin'], function () {
+    require __DIR__ . '/backoffice.php';
+});
