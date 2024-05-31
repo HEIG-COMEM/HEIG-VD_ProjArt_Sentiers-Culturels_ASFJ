@@ -81,6 +81,8 @@ Route::group(['prefix' => 'profile'], function () {
             return Inertia::render('Profile/Collection/Castle');
         })->name('profile.collection.castle');
     });
+});
+
 Route::get('/api/interest-point/{uuid}', [InterestPointController::class, 'show']);
 Route::get('/interest-point/{uuid}', function ($uuid) {
     return Inertia::render('InterestPoint/Show', [
