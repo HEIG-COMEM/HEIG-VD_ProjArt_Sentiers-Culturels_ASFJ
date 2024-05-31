@@ -44,7 +44,9 @@ const className = {
 
 <template>
     <Link :href="route">
-        <a class="btn" :class="className[color]">{{ content }}</a>
+        <button class="btn" v-bind="$attrs" :class="className[color]">
+            {{ content }}
+        </button>
     </Link>
 </template>
 
