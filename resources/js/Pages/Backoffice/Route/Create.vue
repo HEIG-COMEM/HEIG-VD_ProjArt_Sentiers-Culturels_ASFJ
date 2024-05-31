@@ -12,6 +12,7 @@ import { PlusCircle, Trash } from "@iconsans/vue/linear";
 
 import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
 import BaseSearchBar from "@/Components/Base/BaseSearchBar.vue";
+import AppMapDirectionReactive from "@/Components/App/AppMapDirectionReactive.vue";
 
 const props = defineProps({
     tags: {
@@ -356,7 +357,12 @@ const back = () => {
                         </div>
                     </div>
                 </form>
-                <div v-show="!showForm">MAP</div>
+                <div v-show="!showForm" class="h-full">
+                    <AppMapDirectionReactive
+                        v-model="interestpointsAdded"
+                        class="rounded-xl"
+                    />
+                </div>
 
                 <!-- INTEREST POINT PICKER -->
                 <dialog id="showInterestpointsPicker" class="modal">
