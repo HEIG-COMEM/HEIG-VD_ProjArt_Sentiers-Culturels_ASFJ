@@ -2,30 +2,22 @@
 import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
-import { Home1, Star, Map, Discover, User4 } from "@iconsans/vue/linear";
+import { Home1, Notes, Map } from "@iconsans/vue/linear";
 
 const currentRoute = ref(window.location.href);
 
 const routes = {
     home: {
-        route: route("home"),
+        route: route("backoffice"),
         icon: Home1,
     },
-    discovery: {
-        route: route("discovery"),
-        icon: Discover,
+    listing: {
+        route: route("collection"), // TODO: Change to backoffice.collection
+        icon: Notes,
     },
     map: {
-        route: route("map"),
+        route: route("backoffice.map"),
         icon: Map,
-    },
-    favorite: {
-        route: route("favorite"),
-        icon: Star,
-    },
-    collection: {
-        route: route("profile"),
-        icon: User4,
     },
 };
 

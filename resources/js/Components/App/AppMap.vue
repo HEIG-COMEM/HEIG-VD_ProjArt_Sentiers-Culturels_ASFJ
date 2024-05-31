@@ -1,15 +1,8 @@
 <script setup>
-import { onMounted, onUnmounted, reactive, ref, watch } from "vue";
+import { onMounted, onUnmounted, reactive, ref } from "vue";
 import "maplibre-gl/dist/maplibre-gl.css";
 import mapboxgl from "maplibre-gl";
-import { defineProps, defineModel } from "vue";
-import { MapboxOverlay } from "@deck.gl/mapbox";
-import { ScatterplotLayer } from "@deck.gl/layers";
-import { useGeolocation } from "@vueuse/core";
-import { Location } from "@iconsans/vue/linear";
-
-const INTEREST_POINT_COLOR = [255, 0, 255];
-const INTEREST_POINT_SIZE = 10;
+import { defineProps } from "vue";
 
 const props = defineProps({
     interestPoints: {
@@ -18,14 +11,19 @@ const props = defineProps({
     },
     routes: {
         type: Object,
-        required: true,
+        required: false,
+        default: null,
+    },
+    isBackoffice: {
+        type: Boolean,
+        required: false,
+        default: false,
     },
 });
 
 const mapInstance = ref(null);
 const interestPoints = reactive(props.interestPoints.data);
 const routes = reactive(props.routes.data);
-const interestPointsMarkers = reactive([]);
 
 const SWITZERLAND_BOUNDS = [
     [5.955911, 45.818028], // Southwest coordinates
@@ -63,29 +61,39 @@ onMounted(() => {
     });
 
     map.on("load", () => {
-        routes.forEach((route) => {
-            const path = JSON.parse(route.path);
-            const ID = `route-${route.id}`;
+        if (routes) {
+            routes.forEach((route) => {
+                const path = JSON.parse(route.path);
+                const ID = `route-${route.id}`;
+                const uuid = route.uuid;
 
-            map.addSource(ID, {
-                type: "geojson",
-                data: path,
-            });
+                map.addSource(ID, {
+                    type: "geojson",
+                    data: path,
+                });
 
-            map.addLayer({
-                id: ID,
-                type: "line",
-                source: ID,
-                layout: {
-                    "line-join": "round",
-                    "line-cap": "round",
-                },
-                paint: {
-                    "line-color": "#ff0000",
-                    "line-width": 8,
-                },
+                map.addLayer({
+                    id: ID,
+                    type: "line",
+                    source: ID,
+                    layout: {
+                        "line-join": "round",
+                        "line-cap": "round",
+                    },
+                    paint: {
+                        "line-color": "#154B19",
+                        "line-width": 6,
+                    },
+                });
+
+                map.on("click", ID, (e) => {
+                    const url = props.isBackoffice
+                        ? `/backoffice/routes/${uuid}`
+                        : null;
+                    if (url) window.location.href = url;
+                });
             });
-        });
+        }
 
         map.addSource("interestPoints", {
             type: "geojson",
@@ -95,6 +103,7 @@ onMounted(() => {
                     type: "Feature",
                     properties: {
                         id: interestPoint.id,
+                        uuid: interestPoint.uuid,
                         name: interestPoint.name,
                     },
                     geometry: {
@@ -122,32 +131,32 @@ onMounted(() => {
                 "circle-color": [
                     "step",
                     ["get", "point_count"],
-                    "#32abcd",
+                    "#c4eec7",
                     100,
-                    "#84ca35",
+                    "#c4eec7",
                     750,
-                    "#ca3584",
+                    "#c4eec7",
                 ],
                 "circle-radius": [
                     "step",
                     ["get", "point_count"],
-                    20,
-                    100,
                     30,
-                    750,
+                    100,
                     40,
+                    750,
+                    50,
                 ],
             },
         });
 
-        const svgImage = new Image(48, 48);
+        const svgImage = new Image(84, 84);
         svgImage.onload = () => {
             map.addImage("locationPin", svgImage);
         };
         const svgStringToImageSrc = (svgString) =>
             `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgString)}`;
 
-        const LOCATION_SVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.49 18.79a3.001 3.001 0 0 1-5 0c-4-5.87-3.69-8.71-3.69-8.71a6.18 6.18 0 1 1 12.36 0s.37 2.84-3.67 8.71Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 12.07a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path></svg>`;
+        const LOCATION_SVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="#62b537" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.49 18.79a3.001 3.001 0 0 1-5 0c-4-5.87-3.69-8.71-3.69-8.71a6.18 6.18 0 1 1 12.36 0s.37 2.84-3.67 8.71Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 12.07a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path></svg>`;
 
         svgImage.src = svgStringToImageSrc(LOCATION_SVG);
 
@@ -173,13 +182,21 @@ onMounted(() => {
         //     .getSource("interestPoints")
         //     .getClusterExpansionZoom(clusterId);
         // get the zoom level for the cluster to break apart
-        const zoom = map
-            .getSource("interestPoints")
-            .getClusterExpansionZoom(clusterId);
+        const currentZoom = map.getZoom();
+        const zoom = currentZoom + 2;
+
         map.easeTo({
             center: features[0].geometry.coordinates,
-            zoom: 10,
+            zoom,
         });
+    });
+
+    map.on("click", "interestPoints", (e) => {
+        if (e.features[0].properties.uuid === undefined) return;
+        const url = props.isBackoffice
+            ? `/backoffice/interest-points/${e.features[0].properties.uuid}`
+            : `/interest-point/${e.features[0].properties.uuid}`;
+        window.location.href = url;
     });
 
     mapInstance.value = map;

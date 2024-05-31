@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('interest_points', function (Blueprint $table) {
+        Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique();
+            $table->morphs('tokenable');
             $table->string('name');
-            $table->string('description');
-            $table->decimal('lat', 8, 6);
-            $table->decimal('long', 9, 6);
+            $table->string('token', 64)->unique();
+            $table->text('abilities')->nullable();
+            $table->timestamp('last_used_at')->nullable();
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('interest_points');
+        Schema::dropIfExists('personal_access_tokens');
     }
 };

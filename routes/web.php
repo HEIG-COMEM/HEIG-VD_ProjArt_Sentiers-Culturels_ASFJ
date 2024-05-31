@@ -21,8 +21,6 @@ Route::get('/debug', function () {
     ]);
 })->name('debug');
 
-Route::resource('interestpoint', InterestPointController::class);
-
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

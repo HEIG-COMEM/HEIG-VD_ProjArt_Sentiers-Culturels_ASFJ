@@ -28,12 +28,10 @@
     },
     "dependencies": {
         "@iconsans/vue": "^1.0.3",
+        "@maplibre/maplibre-gl-directions": "^0.7.0",
         "@takuma-ru/vue-swipe-modal": "^5.0.4",
         "@vitejs/plugin-vue": "^5.0.4",
         "@vueuse/core": "^10.9.0",
-        "deck.gl": "^9.0.14",
-        "maplibre-gl": "^3.6.2",
-        "mitt": "^3.0.1",
-        "vue-maplibre-gl": "^3.1.3"
+        "maplibre-gl": "^4.3.2"
     }
 }

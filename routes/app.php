@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\InterestPointController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,9 +16,7 @@ Route::get('/discovery', function () {
 
 Route::get('/map', [MapController::class, 'index'])->name('map');
 
-Route::get('/favorite', function () {
-    return Inertia::render('Favorite');
-})->name('favorite');
+Route::get('/favorite', [FavoriteController::class, 'index'])->name('favorite');
 
 Route::get('/profile', function () {
     return Inertia::render('Profile/Index');
@@ -81,4 +81,14 @@ Route::group(['prefix' => 'profile'], function () {
             return Inertia::render('Profile/Collection/Castle');
         })->name('profile.collection.castle');
     });
+Route::get('/api/interest-point/{uuid}', [InterestPointController::class, 'show']);
+Route::get('/interest-point/{uuid}', function ($uuid) {
+    return Inertia::render('InterestPoint/Show', [
+        'uuid' => $uuid
+    ]);
+});
+
+// BACKOFFICE
+Route::group(['prefix' => 'backoffice', 'middleware' => 'admin'], function () {
+    require __DIR__ . '/backoffice.php';
 });
