@@ -36,7 +36,7 @@ const handleFileUpload = (event, key) => {
 
 const submit = () => {
     console.log(form);
-    form.post(route("backoffice.routes.store"), {
+    form.post(route("backoffice.interest-points.store"), {
         // onFinish: () => form.reset(),
     });
 };
@@ -47,7 +47,7 @@ const submit = () => {
     <BackofficeLayout>
         <template v-slot:main>
             <div class="flex flex-col gap-8 p-6 h-full w-full max-w-sm">
-                <h1 class="text-2xl">Créer une route</h1>
+                <h1 class="text-2xl">Créer un point d'intérêt</h1>
                 <form
                     @submit.prevent="submit"
                     class="flex flex-col gap-6 justify-center"

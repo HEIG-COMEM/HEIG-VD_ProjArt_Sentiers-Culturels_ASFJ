@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, defineModel } from "vue";
 
 const props = defineProps({
     placeholder: {
@@ -8,11 +8,18 @@ const props = defineProps({
         default: "Search",
     },
 });
+
+const model = defineModel();
 </script>
 
 <template>
     <label class="input input-bordered flex items-center gap-2">
-        <input type="text" class="grow" :placeholder="placeholder" />
+        <input
+            type="text"
+            class="grow ring-transparent"
+            :placeholder="placeholder"
+            v-model="model"
+        />
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -51,5 +58,6 @@ label:focus {
 /* remove blue border on input while user focus */
 input:focus-visible {
     outline-width: 0;
+    box-shadow: none;
 }
 </style>

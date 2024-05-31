@@ -11,7 +11,7 @@ class Route extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'duration', 'length', 'difficulty_id', 'start_lat', 'start_long', 'end_lat', 'end_long'
+        'name', 'description', 'duration', 'length', 'path', 'difficulty_id', 'start_lat', 'start_long', 'end_lat', 'end_long'
     ];
 
     protected static function boot()
