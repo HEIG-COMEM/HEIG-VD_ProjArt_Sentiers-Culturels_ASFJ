@@ -15,6 +15,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    displayIsDone: {
+        type: Boolean,
+        default: true,
+    },
     title: {
         type: String,
         required: true,
@@ -34,10 +38,13 @@ const trimTags = props.tags.slice(0, 4);
 </script>
 
 <template>
-    <Link :href>
+    <component :is="href ? Link : 'div'" :href="href || ''">
         <div class="p-2 flex flex-row bg-base-100 rounded-3xl shadow-lg">
             <div v-if="imgPath" class="indicator mr-4">
-                <span class="indicator-item badge border-none h-6 w-6 p-0">
+                <span
+                    v-if="displayIsDone"
+                    class="indicator-item badge border-none h-6 w-6 p-0"
+                >
                     <Tick2
                         class="h-5 w-5"
                         :class="{
@@ -71,10 +78,10 @@ const trimTags = props.tags.slice(0, 4);
                         </div>
                     </div>
                 </div>
-                <ArrowRight2 v-if="href" class="h-6 w-6" />
+                <ArrowRight2 v-if="href" class="h-6 w-6 min-w-[30px]" />
             </div>
         </div>
-    </Link>
+    </component>
 </template>
 
 <style scoped>

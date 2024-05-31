@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\InterestPointRequest;
+use App\Http\Requests\RouteRequest;
 use App\Http\Resources\RouteResource;
 use App\Http\Resources\TagResource;
 use App\Models\InterestPoint;
+use App\Http\Resources\InterestPointResource;
+use App\Http\Resources\DifficultyResource;
+use App\Models\Difficulty;
 use App\Models\Picture;
 use App\Models\Route;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
 class RouteAdminController extends Controller
@@ -37,17 +41,76 @@ class RouteAdminController extends Controller
      */
     public function create()
     {
+        $inerestpoints = InterestPoint::all();
+        $inerestpoints->load('pictures');
+
         return Inertia::render('Backoffice/Route/Create', [
             'tags' => TagResource::collection(Tag::all()),
+            'difficulties' => DifficultyResource::collection(Difficulty::all()),
+            'interestpoints' => InterestPointResource::collection($inerestpoints),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RouteRequest $request)
     {
-        dd($request->all());
+        $route = new Route();
+        $route->name = $request->title;
+        $route->description = $request->description;
+
+        $interestPoints = InterestPoint::find($request->interestpoints);
+
+        $route->start_lat = $interestPoints->first()->lat;
+        $route->start_long = $interestPoints->first()->long;
+        $route->end_lat = $interestPoints->last()->lat;
+        $route->end_long = $interestPoints->last()->long;
+
+        $difficulty = Difficulty::find($request->difficulty_id);
+        $route->difficulty()->associate($difficulty);
+
+        $tag = Tag::find($request->tag_id);
+
+        $data = [
+            'coordinates' => $interestPoints->map(function ($interestPoint) {
+                return [$interestPoint->long, $interestPoint->lat];
+            })->toArray()
+        ];
+        $path = Http::withHeaders([
+            'Authorization' => env('OPENROUTESERVICE_API_KEY')
+        ])->post('https://api.openrouteservice.org/v2/directions/foot-walking/geojson', $data);
+
+        $resp = $path->json();
+        $route->path = json_encode($resp);
+
+        if (!$route->path) {
+            return response()->json(['error' => 'Unable to create path'], 500);
+        }
+
+        $route->duration = $path->json()['features'][0]['properties']['summary']['duration'];
+        $route->length = $path->json()['features'][0]['properties']['summary']['distance'];
+
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('storage/pictures'), $imageName);
+
+        $picture = new Picture();
+        $picture->title = $request->title;
+        $picture->description = $request->description;
+        $picture->path = $imageName;
+        $picture->save();
+
+        $route->save();
+
+        $route->pictures()->attach($picture->id);
+        $route->tags()->attach($tag->id);
+
+        $order = 1;
+        foreach ($interestPoints as $interestPoint) {
+            $route->interestPoints()->attach($interestPoint->id, ['order' => $order++]);
+        }
+
+        return redirect()->route('backoffice.routes.show', $route->uuid);
     }
 
     /**
@@ -75,6 +138,8 @@ class RouteAdminController extends Controller
     public function edit(string $uuid)
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
+        $inerestpoints = InterestPoint::all();
+        $inerestpoints->load('pictures');
 
         $route->load('pictures');
         $route->load('tags');
@@ -85,6 +150,9 @@ class RouteAdminController extends Controller
 
         return Inertia::render('Backoffice/Route/Edit', [
             'route' => RouteResource::make($route),
+            'tags' => TagResource::collection(Tag::all()),
+            'difficulties' => DifficultyResource::collection(Difficulty::all()),
+            'interestpoints' => InterestPointResource::collection($inerestpoints),
         ]);
     }
 
