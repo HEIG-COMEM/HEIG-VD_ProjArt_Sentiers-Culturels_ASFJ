@@ -81,15 +81,18 @@ const getImgSrc = (path) => {
 };
 
 const submit = () => {
-    console.log("submit");
-    // if (form.interestpoints.length < 2) {
-    //     form.errors.interestpoints =
-    //         "Veuillez ajouter au moins deux points d'intérêt";
-    //     return;
-    // }
+    if (form.interestpoints.length < 2) {
+        form.errors.interestpoints =
+            "Veuillez ajouter au moins deux points d'intérêt";
+        return;
+    }
     form.post(route("backoffice.routes.store"), {
         // onFinish: () => form.reset(),
     });
+};
+
+const back = () => {
+    window.history.back();
 };
 </script>
 
@@ -192,7 +195,6 @@ const submit = () => {
                                 v-model="form.title"
                                 class="input input-bordered w-full"
                                 name="title"
-                                required
                             />
                             <BaseInputError :message="form.errors.title" />
                         </label>
@@ -203,7 +205,6 @@ const submit = () => {
                             <select
                                 class="select select-bordered w-full"
                                 v-model="form.tag_id"
-                                required
                             >
                                 <option disabled selected></option>
                                 <option
@@ -224,7 +225,6 @@ const submit = () => {
                             <select
                                 class="select select-bordered w-full"
                                 v-model="form.difficulty_id"
-                                required
                             >
                                 <option disabled selected></option>
                                 <option
@@ -247,7 +247,6 @@ const submit = () => {
                             <textarea
                                 class="textarea textarea-bordered"
                                 placeholder="Déscription"
-                                required
                                 v-model="form.description"
                             ></textarea>
                             <BaseInputError
@@ -264,7 +263,6 @@ const submit = () => {
                                 type="file"
                                 class="file-input file-input-primary file-input-bordered w-full"
                                 name="image"
-                                required
                                 accept="image/*"
                                 v-on:change="handleFileUpload($event, 'image')"
                             />
@@ -340,14 +338,14 @@ const submit = () => {
                             <BaseSecondaryButton
                                 :type="step > 1 ? 'button' : 'button'"
                                 class="w-1/2"
-                                @click="step > 1 ? step-- : null"
+                                @click="step > 1 ? step-- : back()"
                                 :class="{ 'opacity-25': form.processing }"
                                 :disabled="form.processing"
                             >
                                 {{ step === 1 ? "Annuler" : "Précédent" }}
                             </BaseSecondaryButton>
                             <BasePrimaryButton
-                                :type="step === maxStep ? 'submit' : 'button'"
+                                type="button"
                                 @click="step < maxStep ? step++ : submit()"
                                 class="w-1/2"
                                 :class="{ 'opacity-25': form.processing }"

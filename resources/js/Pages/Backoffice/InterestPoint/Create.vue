@@ -35,10 +35,13 @@ const handleFileUpload = (event, key) => {
 };
 
 const submit = () => {
-    console.log(form);
     form.post(route("backoffice.interest-points.store"), {
         // onFinish: () => form.reset(),
     });
+};
+
+const back = () => {
+    window.history.back();
 };
 </script>
 
@@ -103,7 +106,6 @@ const submit = () => {
                                 v-model="form.title"
                                 class="input input-bordered w-full"
                                 name="title"
-                                required
                             />
                             <BaseInputError :message="form.errors.title" />
                         </label>
@@ -114,7 +116,6 @@ const submit = () => {
                             <select
                                 class="select select-bordered w-full"
                                 v-model="form.tag_id"
-                                required
                             >
                                 <option disabled selected></option>
                                 <option
@@ -135,7 +136,6 @@ const submit = () => {
                             <textarea
                                 class="textarea textarea-bordered"
                                 placeholder="Déscription"
-                                required
                                 v-model="form.description"
                             ></textarea>
                             <BaseInputError
@@ -163,7 +163,6 @@ const submit = () => {
                                 type="file"
                                 class="file-input file-input-primary file-input-bordered w-full"
                                 name="image"
-                                required
                                 accept="image/*"
                                 v-on:change="handleFileUpload($event, 'image')"
                             />
@@ -191,22 +190,20 @@ const submit = () => {
                     <div
                         class="absolute bottom-0 w-full p-6 left-0 bg-base-100 flex flex-col items-center"
                     >
-                        <!-- class="fixed bottom-0 w-full p-6 left-0 bg-base-100 flex flex-col items-center" -->
-                        <!-- class="w-full bg-base-100 flex flex-col items-center" -->
                         <div
                             class="flex flex-row w-full h-full mb-16 gap-4 justify-center max-w-sm"
                         >
                             <BaseSecondaryButton
                                 :type="step === 1 ? 'button' : 'reset'"
                                 class="w-1/2"
-                                @click="step !== 1 ? step-- : null"
+                                @click="step !== 1 ? step-- : back()"
                                 :class="{ 'opacity-25': form.processing }"
                                 :disabled="form.processing"
                             >
                                 {{ step === 1 ? "Annuler" : "Précédent" }}
                             </BaseSecondaryButton>
                             <BasePrimaryButton
-                                :type="step === maxStep ? 'submit' : 'button'"
+                                type="button"
                                 @click="step === maxStep ? submit() : step++"
                                 class="w-1/2"
                                 :class="{ 'opacity-25': form.processing }"

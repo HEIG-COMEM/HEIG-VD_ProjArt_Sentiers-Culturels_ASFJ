@@ -27,17 +27,19 @@ import BaseButton from "@/Components/Base/BaseButton.vue";
                         class="flex flex-col content-center items-center w-full gap-4 mt-8"
                     >
                         <BaseButton
-                            :href="route('backoffice.routes.create')"
-                            color="primary"
-                            class="w-full"
-                            content="Créer un parcours"
-                        />
-                        <span class="self-center text-small">ou</span>
-                        <BaseButton
                             :href="route('backoffice.interest-points.create')"
                             color="primary"
                             class="w-full"
                             content="Créer un point d'intérêt"
+                        />
+                        <span class="self-center text-small text-gray-500"
+                            >ou</span
+                        >
+                        <BaseButton
+                            :href="route('backoffice.routes.create')"
+                            color="primary"
+                            class="w-full"
+                            content="Créer un parcours"
                         />
                     </div>
                 </div>
