@@ -2,11 +2,14 @@
 import { Head } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
-import { ArrowLeft, UserCircle2, Setting } from "@iconsans/vue/linear";
+import {
+    ArrowLeft,
+    UserCircle2,
+    Setting,
+    ArrowRight2,
+} from "@iconsans/vue/linear";
 
 import { Link } from "@inertiajs/vue3";
-
-import AppBadgeHorizontalCard from "@/Components/App/AppBadgeHorizontalCard.vue";
 
 const back = () => {
     if (window.history.length > 1) {
@@ -18,7 +21,7 @@ const back = () => {
 </script>
 
 <template>
-    <Head title="Régions" />
+    <Head title="Téléchargements" />
     <MobileAppLayout>
         <template v-slot:main>
             <div class="h-full w-full p-6 flex flex-col gap-2">
@@ -40,41 +43,19 @@ const back = () => {
                         </Link>
                     </div>
                 </div>
-                <h1 class="text-2xl font-medium">Régions</h1>
-                <!-- TODO : edit href path, img-path, img-alt -->
-                <AppBadgeHorizontalCard
-                    badge="Lavaux"
-                    :count="2"
-                    :total="2"
-                    :href="route('profile.collection.region.lavaux')"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Nord Vaudois"
-                    :count="3"
-                    :total="14"
-                    href="#"
-                />
-                <AppBadgeHorizontalCard
-                    badge="La Côte"
-                    :count="1"
-                    :total="8"
-                    href="#"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Riviera"
-                    :count="2"
-                    :total="2"
-                    href="#"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Gros-de-Vaud"
-                    :count="2"
-                    :total="4"
-                    href="#"
-                />
+                <h1 class="text-2xl font-medium">Téléchargements</h1>
+                <div
+                    class="flex flex-col gap-5 rounded-t-2xl p-6 pb-20 w-full top-[30vh] shadow-top bg-purple-200"
+                >
+                    <div></div>
+                </div>
             </div>
         </template>
     </MobileAppLayout>
 </template>
 
-<style scoped></style>
+<style scoped>
+.indicator-item {
+    transform: translate(20%, -20%);
+}
+</style>

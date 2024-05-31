@@ -2,9 +2,12 @@
 import { Head } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
-import { ArrowLeft, UserCircle2, Setting } from "@iconsans/vue/linear";
-
-import AppBadgeHorizontalCard from "@/Components/App/AppBadgeHorizontalCard.vue";
+import {
+    ArrowLeft,
+    UserCircle2,
+    Setting,
+    ArrowRight2,
+} from "@iconsans/vue/linear";
 
 import { Link } from "@inertiajs/vue3";
 
@@ -18,7 +21,7 @@ const back = () => {
 </script>
 
 <template>
-    <Head title="Villes" />
+    <Head title="Comment ça marche ?" />
     <MobileAppLayout>
         <template v-slot:main>
             <div class="h-full w-full p-6 flex flex-col gap-2">
@@ -32,7 +35,7 @@ const back = () => {
                         </button>
                     </div>
                     <div class="flex flex-row gap-4 justify-end">
-                        <Link :href="route('profile.details')">
+                        <Link :href="route('profile.account')">
                             <UserCircle2 class="h-7 w-7" />
                         </Link>
                         <Link :href="route('profile.settings')">
@@ -40,35 +43,19 @@ const back = () => {
                         </Link>
                     </div>
                 </div>
-                <h1 class="text-2xl font-medium">Villes</h1>
-                <!-- TODO : edit href path, img-path, img-alt -->
-                <AppBadgeHorizontalCard
-                    badge="Genève"
-                    :count="2"
-                    :total="2"
-                    href="#"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Nyon"
-                    :count="3"
-                    :total="14"
-                    href="#"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Lausanne"
-                    :count="1"
-                    :total="8"
-                    href="#"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Yverdon-les-Bains"
-                    :count="2"
-                    :total="2"
-                    href="#"
-                />
+                <h1 class="text-2xl font-medium">Comment ça marche ?</h1>
+                <div
+                    class="flex flex-col gap-5 rounded-t-2xl p-6 pb-20 w-full top-[30vh] shadow-top bg-purple-200"
+                >
+                    <div>hey</div>
+                </div>
             </div>
         </template>
     </MobileAppLayout>
 </template>
 
-<style scoped></style>
+<style scoped>
+.indicator-item {
+    transform: translate(20%, -20%);
+}
+</style>

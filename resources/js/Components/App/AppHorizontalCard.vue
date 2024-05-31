@@ -30,33 +30,35 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="p-4 flex flex-row bg-base-100 rounded-3xl shadow-lg">
-        <div v-if="imgPath" class="indicator mr-4">
-            <span class="indicator-item badge border-none h-6 w-6 p-0">
-                <Tick2
-                    class="h-5 w-5"
-                    :class="{
-                        'text-primary': isActive,
-                        'text-base-200': !isActive,
-                    }"
+    <Link :href>
+        <div class="p-4 flex flex-row bg-base-100 rounded-3xl shadow-lg">
+            <div v-if="imgPath" class="indicator mr-4">
+                <span class="indicator-item badge border-none h-6 w-6 p-0">
+                    <Tick2
+                        class="h-5 w-5"
+                        :class="{
+                            'text-primary': isActive,
+                            'text-base-200': !isActive,
+                        }"
+                    />
+                </span>
+                <img
+                    class="block mx-auto w-24 rounded-2xl aspect-square"
+                    :src="imgPath"
+                    :alt="imgAlt"
                 />
-            </span>
-            <img
-                class="block mx-auto w-24 rounded-2xl aspect-square"
-                :src="imgPath"
-                :alt="imgAlt"
-            />
-        </div>
-        <div class="flex flex-row items-center justify-between w-full">
-            <div class="space-y-0.5">
-                <p class="text-base text-black font-semibold">
-                    {{ title }}
-                </p>
-                <p class="text-sm text-black font-medium">{{ tag }}</p>
             </div>
-            <Link v-if="href" :href><ArrowRight2 class="h-6 w-6" /></Link>
+            <div class="flex flex-row items-center justify-between w-full">
+                <div class="space-y-0.5">
+                    <p class="text-base text-black font-semibold">
+                        {{ title }}
+                    </p>
+                    <p class="text-sm text-black font-medium">{{ tag }}</p>
+                </div>
+                <ArrowRight2 v-if="href" class="h-6 w-6" />
+            </div>
         </div>
-    </div>
+    </Link>
 </template>
 
 <style scoped>

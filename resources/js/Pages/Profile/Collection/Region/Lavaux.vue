@@ -6,7 +6,9 @@ import { ArrowLeft, UserCircle2, Setting } from "@iconsans/vue/linear";
 
 import { Link } from "@inertiajs/vue3";
 
-import AppBadgeHorizontalCard from "@/Components/App/AppBadgeHorizontalCard.vue";
+import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
+
+import { reactive } from "vue";
 
 const back = () => {
     if (window.history.length > 1) {
@@ -15,10 +17,12 @@ const back = () => {
     }
     window.history.back();
 };
+
+const routesLavaux = reactive([]);
 </script>
 
 <template>
-    <Head title="Régions" />
+    <Head title="Lavaux" />
     <MobileAppLayout>
         <template v-slot:main>
             <div class="h-full w-full p-6 flex flex-col gap-2">
@@ -40,41 +44,25 @@ const back = () => {
                         </Link>
                     </div>
                 </div>
-                <h1 class="text-2xl font-medium">Régions</h1>
+                <h1 class="text-2xl font-medium">Lavaux</h1>
                 <!-- TODO : edit href path, img-path, img-alt -->
-                <AppBadgeHorizontalCard
-                    badge="Lavaux"
-                    :count="2"
-                    :total="2"
-                    :href="route('profile.collection.region.lavaux')"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Nord Vaudois"
-                    :count="3"
-                    :total="14"
+                <!-- v-if="routesLavaux.length" -->
+                <!-- v-for="route in routesLavaux" -->
+                <AppHorizontalCard
+                    title="Parcours sentier"
+                    tag="Lorem"
                     href="#"
-                />
-                <AppBadgeHorizontalCard
-                    badge="La Côte"
-                    :count="1"
-                    :total="8"
-                    href="#"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Riviera"
-                    :count="2"
-                    :total="2"
-                    href="#"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Gros-de-Vaud"
-                    :count="2"
-                    :total="4"
-                    href="#"
+                    img-path="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
+                    img-alt="lorem"
+                    :is-active="true"
                 />
             </div>
         </template>
     </MobileAppLayout>
 </template>
 
-<style scoped></style>
+<style scoped>
+.indicator-item {
+    transform: translate(20%, -20%);
+}
+</style>
