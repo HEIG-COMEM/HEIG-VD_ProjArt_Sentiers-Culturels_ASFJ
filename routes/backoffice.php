@@ -43,4 +43,7 @@ Route::resource('routes', RouteAdminController::class)->names([
     'destroy' => 'backoffice.routes.destroy',
 ]);
 
+Route::get('admin-collection', function () {
+    return;
+})->name('backoffice.collection');
 Route::get('admin-map', [MapAdminController::class, 'index'])->name('backoffice.map');

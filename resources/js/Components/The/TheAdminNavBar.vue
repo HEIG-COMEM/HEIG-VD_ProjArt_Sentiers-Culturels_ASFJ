@@ -12,7 +12,7 @@ const routes = {
         icon: Home1,
     },
     listing: {
-        route: route("collection"), // TODO: Change to backoffice.collection
+        route: route("backoffice.collection"),
         icon: Notes,
     },
     map: {
