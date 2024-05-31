@@ -36,7 +36,7 @@ const handleFileUpload = (event, key) => {
 
 const submit = () => {
     console.log(form);
-    form.post(route("backoffice.routes.store"), {
+    form.post(route("backoffice.interest-points.store"), {
         // onFinish: () => form.reset(),
     });
 };

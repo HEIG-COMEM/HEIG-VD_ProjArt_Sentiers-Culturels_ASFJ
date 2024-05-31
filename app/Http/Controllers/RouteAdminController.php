@@ -45,36 +45,9 @@ class RouteAdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(InterestPointRequest $request)
+    public function store(Request $request)
     {
-        // dd($request->all());
-        $interestPoint = new InterestPoint();
-
-        $interestPoint->name = $request->title;
-        $interestPoint->description = $request->description;
-        $interestPoint->long = $request->location[0];
-        $interestPoint->lat = $request->location[1];
-
-        // TODO: Implement tags in DB
-        // $tag = Tag::find($request->tag_id);
-        // $interestPoint->tags()->associate($tag);
-
-        // TODO: Optional badge
-        // $interestPoint->badge = $request->file('badge')->store('/public/badges');
-
-        $imageName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('storage/pictures'), $imageName);
-
-        $picture = new Picture();
-        $picture->title = $request->title;
-        $picture->description = $request->description;
-        $picture->path = $imageName;
-        $picture->save();
-
-        $interestPoint->save();
-        $interestPoint->pictures()->attach($picture->id);
-
-        return redirect()->route('backoffice.interest-points.show', $interestPoint->uuid);
+        dd($request->all());
     }
 
     /**
