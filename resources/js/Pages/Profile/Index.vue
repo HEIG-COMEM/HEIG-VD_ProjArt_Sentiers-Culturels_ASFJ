@@ -45,14 +45,6 @@ import { Link } from "@inertiajs/vue3";
                             />
                         </div>
                     </AppBadgeCard>
-                    <AppBadgeCard
-                        title="Historique"
-                        :link="{
-                            href: route('profile.history'),
-                            text: 'voir l\'historique',
-                        }"
-                    >
-                    </AppBadgeCard>
                     <AppBadgeCard title="Exploits">
                         <div
                             class="flex flex-row justify-left gap-4 mt-2 flex-wrap"
@@ -60,6 +52,14 @@ import { Link } from "@inertiajs/vue3";
                             <AppBadge badge="Distance" />
                             <AppBadge badge="Sentiers parcourus" />
                         </div>
+                    </AppBadgeCard>
+                    <AppBadgeCard
+                        title="Historique"
+                        :link="{
+                            href: route('profile.history'),
+                            text: 'voir l\'historique',
+                        }"
+                    >
                     </AppBadgeCard>
                 </div>
             </div>

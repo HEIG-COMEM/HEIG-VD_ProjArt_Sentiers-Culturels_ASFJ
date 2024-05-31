@@ -48,7 +48,7 @@ const back = () => {
                 <!-- TODO : Div should take full width <-> -->
                 <!-- TODO : Add instruction for normal user or admin user display -->
                 <div
-                    class="flex flex-col gap-5 rounded-t-2xl p-6 pb-20 w-full top-[30vh] shadow-top bg-purple-200"
+                    class="flex flex-col gap-5 rounded-t-2xl p-6 pb-20 w-full top-[30vh] shadow-top bg-purple-200 mt-4"
                 >
                     <Link :href="route('settings.tutorial')">
                         <div
