@@ -6,7 +6,8 @@ import { Head } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
 import AppHorizontalCard from "./AppHorizontalCard.vue";
-import { data } from "autoprefixer";
+import AppError from "./AppError.vue";
+import BaseLink from "../Base/BaseLink.vue";
 
 const props = defineProps({
     uuid: {
@@ -28,6 +29,10 @@ onMounted(() => {
         .then((response) => response.json())
         .then((data) => {
             interestPoint.value = data.data;
+            isLoading.value = false;
+        })
+        .catch((err) => {
+            error.value = err;
             isLoading.value = false;
         });
 });
@@ -60,8 +65,17 @@ const back = () => {
                     </div>
                 </div>
             </div>
-            <div v-if="isLoading" class="w-full h-32 skeleton"></div>
             <!-- TODO: Improve Design -->
+            <div v-if="isLoading" class="w-full h-32 skeleton"></div>
+            <div v-else-if="error" class="w-full h-full">
+                <AppError title="Oups !">
+                    <template v-slot:content>
+                        Une erreur est survenue.<br />
+                        Retour à l'
+                        <BaseLink :href="route('home')">accueil</BaseLink>.
+                    </template>
+                </AppError>
+            </div>
             <div v-else class="z-0 w-full">
                 <div class="h-[40vh] w-full fixed -z-10 top-0">
                     <img
