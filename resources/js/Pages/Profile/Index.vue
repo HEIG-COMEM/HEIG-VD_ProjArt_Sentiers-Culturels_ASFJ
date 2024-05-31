@@ -4,26 +4,31 @@ import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
 import { UserCircle2, Setting } from "@iconsans/vue/linear";
 
-import BaseLink from "@/Components/Base/BaseLink.vue";
 import AppBadge from "@/Components/App/AppBadge.vue";
-import AppCard from "@/Components/App/AppCardBadge.vue";
+import AppBadgeCard from "@/Components/App/AppBadgeCard.vue";
+import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
-    <Head title="Collection" />
+    <Head title="Profil" />
     <MobileAppLayout>
         <template v-slot:main>
-            <div class="flex flex-col p-6 w-full h-full">
+            <div class="flex flex-col p-6 w-full h-full overflow-scroll">
                 <div class="flex flex-row gap-4 justify-end">
-                    <UserCircle2 class="h-6 w-6" />
-                    <Setting class="h-6 w-6" />
+                    <Link :href="route('profile.account')">
+                        <UserCircle2 class="h-7 w-7" />
+                    </Link>
+                    <Link :href="route('profile.settings')">
+                        <Setting class="h-7 w-7" />
+                    </Link>
                 </div>
-                <div class="flex flex-col gap-4 mt-8">
+                <div class="flex flex-col gap-4 mt-2">
+                    <h1 class="text-2xl font-medium">Profil</h1>
                     <!-- TODO : edit href path -->
-                    <AppCard
-                        title="Tes exploits"
+                    <AppBadgeCard
+                        title="Collection"
                         :link="{
-                            href: '/lorem',
+                            href: route('profile.collection'),
                             text: 'voir la collection',
                         }"
                     >
@@ -33,25 +38,29 @@ import AppCard from "@/Components/App/AppCardBadge.vue";
                             <AppBadge badge="Régions" :count="2" :total="5" />
                             <AppBadge badge="Villes" :count="2" :total="5" />
                             <AppBadge badge="Châteaux" :count="2" :total="5" />
+                            <AppBadge
+                                badge="Architecture"
+                                :count="1"
+                                :total="2"
+                            />
                         </div>
-                    </AppCard>
-                    <AppCard title="Tes exploits">
+                    </AppBadgeCard>
+                    <AppBadgeCard
+                        title="Historique"
+                        :link="{
+                            href: route('profile.history'),
+                            text: 'voir l\'historique',
+                        }"
+                    >
+                    </AppBadgeCard>
+                    <AppBadgeCard title="Exploits">
                         <div
                             class="flex flex-row justify-left gap-4 mt-2 flex-wrap"
                         >
                             <AppBadge badge="Distance" />
                             <AppBadge badge="Sentiers parcourus" />
                         </div>
-                    </AppCard>
-                    <!-- TODO : edit href path -->
-                    <AppCard
-                        title="Historique"
-                        :link="{
-                            href: '/lorem',
-                            text: 'voir l\'historique',
-                        }"
-                    >
-                    </AppCard>
+                    </AppBadgeCard>
                 </div>
             </div>
         </template>

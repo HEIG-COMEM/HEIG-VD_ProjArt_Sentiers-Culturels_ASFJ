@@ -2,30 +2,18 @@
 import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
-import { Home1, Star, Map, Discover, User4 } from "@iconsans/vue/linear";
+import { ArrowLeft, UserCircle2, Setting } from "@iconsans/vue/linear";
 
 const currentRoute = ref(window.location.href);
 
 const routes = {
-    home: {
-        route: route("home"),
-        icon: Home1,
+    details: {
+        route: route("Details"),
+        icon: UserCircle2,
     },
-    discovery: {
-        route: route("discovery"),
-        icon: Discover,
-    },
-    map: {
-        route: route("map"),
-        icon: Map,
-    },
-    favorite: {
-        route: route("favorite"),
-        icon: Star,
-    },
-    collection: {
-        route: route("profile"),
-        icon: User4,
+    settings: {
+        route: route("Settings"),
+        icon: Setting,
     },
 };
 
@@ -35,7 +23,10 @@ const active = (route) => {
 </script>
 
 <template>
-    <div class="btm-nav btm-nav-md shadow-top-sm" id="btm-nav">
+    <div class="btm-nav btm-nav-md" id="btm-nav">
+        <template>
+            <ArrowLeft class="h-7 w-7" />
+        </template>
         <template v-for="route in routes">
             <Link
                 :href="route.route"
