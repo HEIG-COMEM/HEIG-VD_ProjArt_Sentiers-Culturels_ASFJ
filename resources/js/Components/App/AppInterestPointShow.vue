@@ -73,7 +73,7 @@ const back = () => {
                     />
                 </div>
                 <div
-                    class="mt-[35vh] sm:mt-[65vh] pb-20 rounded-t-xl bg-base-100 p-6 flex flex-col gap-8"
+                    class="mt-[35vh] sm:mt-[65vh] pb-20 rounded-t-xl bg-base-100 p-6 flex flex-col gap-8 shadow-top min-h-[calc(100%-8rem)]"
                 >
                     <div>
                         <h1 class="text-2xl font-semibold mb-4">

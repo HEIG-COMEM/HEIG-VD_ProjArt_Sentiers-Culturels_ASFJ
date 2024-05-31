@@ -27,7 +27,7 @@ const active = (route) => {
 </script>
 
 <template>
-    <div class="btm-nav btm-nav-md" id="btm-nav">
+    <div class="btm-nav btm-nav-md shadow-top-sm" id="btm-nav">
         <template v-for="route in routes">
             <Link
                 :href="route.route"

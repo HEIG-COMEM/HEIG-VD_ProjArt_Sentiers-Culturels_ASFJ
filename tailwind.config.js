@@ -15,6 +15,10 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            boxShadow: {
+                'top': '0px -15px 20px 0px rgba(0, 0, 0, 0.5);',
+                'top-sm': '0px -10px 15px 0px rgba(0, 0, 0, 0.2);',
+            }
         },
     },
 
