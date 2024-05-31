@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\InterestPointResource;
+use App\Http\Resources\TagResource;
+use App\Models\Tag;
 use App\Models\InterestPoint;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -32,7 +34,9 @@ class InterestPointAdminController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Backoffice/InterestPoint/Create');
+        return Inertia::render('Backoffice/InterestPoint/Create', [
+            'tags' => TagResource::collection(Tag::all()),
+        ]);
     }
 
     /**
