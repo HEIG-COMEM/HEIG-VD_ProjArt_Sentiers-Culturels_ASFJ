@@ -18,13 +18,11 @@ const props = defineProps({
 
 console.log(props);
 const histories = reactive(props.histories.data);
-console.log(histories); // TODO: remove this line
-const currentDate = null;
 
 // Create a computed of the histories that group by date not taking into account the time
 const groupedHistories = computed(() => {
     return histories.reduce((acc, history) => {
-        const date = new Date(history.created_at).toDateString();
+        const date = new Date(history.start_timestamp).toDateString();
         if (!acc[date]) {
             acc[date] = [];
         }
@@ -40,6 +38,15 @@ const tagsName = (tags) => tags.map((tag) => tag.name).slice(0, 4);
 const url = new URL(window.location.href);
 const getImgSrc = (path) => {
     return `${url.origin}/storage/pictures/${path}`;
+};
+
+const formattedDate = (date) => {
+    return new Date(date).toLocaleDateString("fr-FR", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
 };
 
 const back = () => {
@@ -71,42 +78,29 @@ const back = () => {
                     </div>
                 </div>
                 <h1 class="text-2xl font-medium">Historique</h1>
-                <!-- TODO : edit href path, img-path, img-alt -->
-                <!-- v-if="routesHistory.length" -->
-                <!-- v-for="route in routesHistory" -->
-                <div class="flex flex-col gap-6">
-                    <template v-for="history in histories" :key="route.id">
-                        <h2 class="text-xl font-medium">{{ history }}</h2>
-                        <AppHorizontalCard
-                            :imgPath="
-                                getImgSrc(history.route.pictures.at(0).path)
-                            "
-                            :imgAlt="history.route.name"
-                            :is-done="true"
-                            :title="history.route.name"
-                            :tags="tagsName(history.route.tags)"
-                            :href="route('route.show', history.route.uuid)"
-                        />
-                    </template>
-
-                    <AppDatedRouteCard
-                        date="Lundi - 27 mai 2024"
-                        title="Parcours sentier"
-                        tag="Lorem"
-                        href="#"
-                        img-path="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                        img-alt="lorem"
-                        :is-active="true"
-                    />
-                    <AppDatedRouteCard
-                        date=""
-                        title="Parcours sentier"
-                        tag="Lorem"
-                        href="#"
-                        img-path="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                        img-alt="lorem"
-                        :is-active="true"
-                    />
+                <div class="flex flex-col gap-8">
+                    <div
+                        v-for="history in groupedHistories"
+                        :key="route.id"
+                        class="flex flex-col gap-1"
+                    >
+                        {{ formattedDate(history.at(0).start_timestamp) }}
+                        <p class="text-sm text-base-300"></p>
+                        <div class="flex flex-col gap-2">
+                            <AppHorizontalCard
+                                v-for="h in history"
+                                :key="h.id"
+                                :title="h.route.name"
+                                :tags="tagsName(h.route.tags)"
+                                :img-path="
+                                    getImgSrc(h.route.pictures.at(0).path)
+                                "
+                                :img-alt="h.route.name"
+                                :href="route('route.show', h.route.uuid)"
+                                :is-done="true"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </template>
