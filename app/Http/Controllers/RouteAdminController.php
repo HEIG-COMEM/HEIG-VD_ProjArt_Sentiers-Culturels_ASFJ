@@ -33,7 +33,7 @@ class RouteAdminController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Backoffice/Route/Index');
+        return redirect()->route('backoffice.collection');
     }
 
     /**

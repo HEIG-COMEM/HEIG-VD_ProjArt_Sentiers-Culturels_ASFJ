@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CollectionAdminController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\InterestPointAdminController;
@@ -43,7 +44,5 @@ Route::resource('routes', RouteAdminController::class)->names([
     'destroy' => 'backoffice.routes.destroy',
 ]);
 
-Route::get('admin-collection', function () {
-    return;
-})->name('backoffice.collection');
+Route::get('admin-collection', [CollectionAdminController::class, 'index'])->name('backoffice.collection');
 Route::get('admin-map', [MapAdminController::class, 'index'])->name('backoffice.map');
