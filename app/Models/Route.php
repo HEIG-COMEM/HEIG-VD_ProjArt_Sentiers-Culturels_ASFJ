@@ -61,4 +61,9 @@ class Route extends Model
     {
         return $this->hasMany(RouteHistory::class);
     }
+
+    public function badge()
+    {
+        return $this->hasOne(Badge::class);
+    }
 }

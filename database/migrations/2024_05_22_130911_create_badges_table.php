@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('badges', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('name');
             $table->string('icon_path');
-            $table->string('description');
+            $table->string('description')->nullable();
+            $table->foreignId('route_id')->nullable()->constrained('routes')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('interest_point_id')->nullable()->constrained('interest_points')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('parent_id')->nullable()->constrained('badges')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
