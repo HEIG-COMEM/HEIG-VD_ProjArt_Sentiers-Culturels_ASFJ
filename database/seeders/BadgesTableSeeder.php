@@ -16,16 +16,12 @@ class BadgesTableSeeder extends Seeder
         $PARENT_BADGES = [
             [
                 'name' => 'Régions',
-                'icon_path' => 'region.png'
             ], [
                 'name' => 'Villes',
-                'icon_path' => 'villes.png'
             ], [
                 'name' => 'Chateaux',
-                'icon_path' => 'chateaux.png'
             ], [
                 'name' => 'Architecture',
-                'icon_path' => 'architecture.png'
             ],
         ];
 
@@ -38,19 +34,21 @@ class BadgesTableSeeder extends Seeder
         $REGIONS_BADGES = [
             [
                 'name' => 'Lavaux',
-                'icon_path' => 'lavaux.png',
-                'parent_id' => $PARENT_BADGES_INSTANCES[0]->id
+                'description' => 'Le Lavaux est une région viticole de Suisse située sur la rive nord du lac Léman, entre Lausanne et Vevey.',
+                'parent_id' => $PARENT_BADGES_INSTANCES[0]->id,
+                'interest_point_id' => 1,
             ], [
                 'name' => 'Nord Vaudois',
-                'icon_path' => 'nord-vaudois.png',
-                'parent_id' => $PARENT_BADGES_INSTANCES[0]->id
+                'description' => 'Le Nord Vaudois est une région du canton de Vaud en Suisse.',
+                'parent_id' => $PARENT_BADGES_INSTANCES[0]->id,
+                'route_id' => 1,
             ], [
                 'name' => 'La Côte',
-                'icon_path' => 'la-cote.png',
+                'description' => 'La Côte est une région viticole de Suisse située sur la rive nord du lac Léman, entre Lausanne et Nyon.',
                 'parent_id' => $PARENT_BADGES_INSTANCES[0]->id
             ], [
                 'name' => 'Riviera',
-                'icon_path' => 'riviera.png',
+                'description' => 'La Riviera est une région du canton de Vaud en Suisse.',
                 'parent_id' => $PARENT_BADGES_INSTANCES[0]->id
             ],
         ];

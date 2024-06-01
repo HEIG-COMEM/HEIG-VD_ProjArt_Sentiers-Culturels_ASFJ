@@ -1,12 +1,21 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
 import { UserCircle2, Setting } from "@iconsans/vue/linear";
 
 import AppBadge from "@/Components/App/AppBadge.vue";
 import AppBadgeCard from "@/Components/App/AppBadgeCard.vue";
-import { Link } from "@inertiajs/vue3";
+import { reactive } from "vue";
+
+const props = defineProps({
+    collection: {
+        type: Object,
+        required: true,
+    },
+});
+
+const collectionBadges = reactive(props.collection.data);
 </script>
 
 <template>
@@ -35,13 +44,15 @@ import { Link } from "@inertiajs/vue3";
                         <div
                             class="flex flex-row justify-left gap-4 mt-2 flex-wrap"
                         >
-                            <AppBadge badge="Régions" :count="2" :total="5" />
-                            <AppBadge badge="Villes" :count="2" :total="5" />
-                            <AppBadge badge="Châteaux" :count="2" :total="5" />
                             <AppBadge
-                                badge="Architecture"
-                                :count="1"
-                                :total="2"
+                                v-for="badge in collectionBadges"
+                                :key="badge.id"
+                                :badge="badge.name"
+                                :count="badge.owned_children_count"
+                                :total="badge.children_count"
+                                :href="
+                                    route('profile.collection.show', badge.uuid)
+                                "
                             />
                         </div>
                     </AppBadgeCard>

@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps } from "vue";
+import { Link } from "@inertiajs/vue3";
 
 defineProps({
     icon: {
@@ -18,11 +19,19 @@ defineProps({
         type: Number,
         reuiqred: false,
     },
+    href: {
+        type: String,
+        required: false,
+    },
 });
 </script>
 
 <template>
-    <div class="flex flex-col items-center">
+    <component
+        :is="href ? Link : 'div'"
+        :href
+        class="flex flex-col items-center"
+    >
         <div
             class="border border-neutral-200 w-20 h-20 bg-neutral-100 shadow-md rounded-md flex items-center justify-center mb-2"
         >
@@ -31,10 +40,10 @@ defineProps({
         <div class="max-w-20">
             <p class="truncate overflow-hidden">{{ badge }}</p>
         </div>
-        <div v-if="count && total" class="text-sm text-base-300">
+        <div v-if="total" class="text-sm text-base-300">
             {{ count }} / {{ total }}
         </div>
-    </div>
+    </component>
 </template>
 
 <style scoped></style>

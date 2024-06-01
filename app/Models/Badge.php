@@ -12,7 +12,7 @@ class Badge extends Model
 
     protected $fillable = [
         'name',
-        'icon_path',
+        'icon_path', // has a default value
         'description', // Nullable
         'parent_id', // Nullable
         'route_id', // Nullable

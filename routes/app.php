@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\InterestPointController;
+use App\Http\Controllers\ProfileCollectionController;
+use App\Http\Controllers\ProfilePageController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -25,10 +27,8 @@ Route::get('/profile', function () {
 Route::get('/route/{uuid}', [RouteController::class, 'show'])->name('route.show');
 
 /* ---------- Profile Section Route ---------- */
-Route::group(['prefix' => 'profile'], function () {
-    Route::get('/', function () {
-        return Inertia::render('Profile/Index');
-    })->name('profile');
+Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
+    Route::get('/', [ProfilePageController::class, 'index'])->name('profile');
 
     Route::get('/account', function () {
         return Inertia::render('Profile/Account');
@@ -51,35 +51,8 @@ Route::group(['prefix' => 'profile'], function () {
 
     /* ---------- Collection Section Route ---------- */
     Route::group(['prefix' => 'collection'], function () {
-        Route::get('/', function () {
-            return Inertia::render('Profile/Collection/Index');
-        })->name('profile.collection');
-
-        /* ---------- Region Section Route ---------- */
-        Route::group(['prefix' => 'region'], function () {
-            Route::get('/', function () {
-                return Inertia::render('Profile/Collection/Region/Index');
-            })->name('profile.collection.region');
-
-            Route::get('/lavaux', function () {
-                return Inertia::render('Profile/Collection/Region/Lavaux');
-            })->name('profile.collection.region.lavaux');
-        });
-
-        /* ---------- City Section Route ---------- */
-        Route::group(['prefix' => 'city'], function () {
-            Route::get('/', function () {
-                return Inertia::render('Profile/Collection/City/Index');
-            })->name('profile.collection.city');
-        });
-
-        Route::get('/architecture', function () {
-            return Inertia::render('Profile/Collection/Architecture');
-        })->name('profile.collection.architecture');
-
-        Route::get('/castle', function () {
-            return Inertia::render('Profile/Collection/Castle');
-        })->name('profile.collection.castle');
+        Route::get('/', [ProfileCollectionController::class, 'index'])->name('profile.collection');
+        Route::get('/{uuid}', [ProfileCollectionController::class, 'show'])->name('profile.collection.show');
     });
 });
 
