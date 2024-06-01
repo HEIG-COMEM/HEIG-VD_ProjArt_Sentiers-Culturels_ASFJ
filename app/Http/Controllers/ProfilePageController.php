@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\BadgeResource;
+use App\Http\Resources\RouteHistoryResource;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Badge;
+use App\Models\RouteHistory;
 use Illuminate\Support\Facades\Auth;
 
 class ProfilePageController extends Controller
@@ -29,6 +31,21 @@ class ProfilePageController extends Controller
         }
         return Inertia::render('Profile/Index', [
             'collection' => BadgeResource::collection($badges),
+        ]);
+    }
+
+    public function history()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $userHistory = RouteHistory::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        $userHistory->load('route');
+        $userHistory->load(['route.pictures', 'route.tags']);
+
+        return Inertia::render('Profile/History', [
+            'histories' => RouteHistoryResource::collection($userHistory),
         ]);
     }
 }
