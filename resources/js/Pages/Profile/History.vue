@@ -9,10 +9,6 @@ import AppDatedRouteCard from "@/Components/App/AppDatedRouteCard.vue";
 import { reactive } from "vue";
 
 const back = () => {
-    if (window.history.length > 1) {
-        window.history.go(-1);
-        return;
-    }
     window.history.back();
 };
 

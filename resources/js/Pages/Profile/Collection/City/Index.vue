@@ -9,10 +9,6 @@ import AppBadgeHorizontalCard from "@/Components/App/AppBadgeHorizontalCard.vue"
 import { Link } from "@inertiajs/vue3";
 
 const back = () => {
-    if (window.history.length > 1) {
-        window.history.go(-1);
-        return;
-    }
     window.history.back();
 };
 </script>
