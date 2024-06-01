@@ -18,9 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SeasonsTableSeeder::class);
         $this->call(TagsTableSeeder::class);
 
-        $this->call(BadgesTableSeeder::class);
-        $this->call(BadgeUserTableSeeder::class);
-
         $this->call(InterestPointsTableSeeder::class);
         $this->call(RoutesTableSeeder::class);
 
@@ -38,5 +35,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RouteSeasonSeeder::class);
         $this->call(RouteTagSeed::class);
         $this->call(RouteUserSeeder::class);
+
+        $this->call(BadgesTableSeeder::class);
+        $this->call(BadgeUserTableSeeder::class);
     }
 }

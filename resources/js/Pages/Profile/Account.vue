@@ -7,10 +7,6 @@ import { ArrowLeft, UserCircle2, Setting, Pencil } from "@iconsans/vue/linear";
 import { Link } from "@inertiajs/vue3";
 
 const back = () => {
-    if (window.history.length > 1) {
-        window.history.go(-1);
-        return;
-    }
     window.history.back();
 };
 </script>

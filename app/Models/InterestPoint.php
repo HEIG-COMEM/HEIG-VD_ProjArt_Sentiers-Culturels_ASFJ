@@ -31,4 +31,9 @@ class InterestPoint extends Model
     {
         return $this->belongsToMany(Route::class);
     }
+
+    public function badge()
+    {
+        return $this->hasOne(Badge::class);
+    }
 }

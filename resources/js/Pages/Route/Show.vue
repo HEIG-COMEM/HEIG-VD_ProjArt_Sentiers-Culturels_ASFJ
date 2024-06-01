@@ -66,10 +66,6 @@ const showWeather = ref(false);
 const toggleMenuFirstActive = ref(true);
 
 const back = () => {
-    if (window.history.length > 1) {
-        window.history.go(-1);
-        return;
-    }
     window.history.back();
 };
 

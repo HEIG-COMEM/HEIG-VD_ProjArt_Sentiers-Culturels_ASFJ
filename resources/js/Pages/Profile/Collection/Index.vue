@@ -7,12 +7,19 @@ import { ArrowLeft, UserCircle2, Setting } from "@iconsans/vue/linear";
 import { Link } from "@inertiajs/vue3";
 
 import AppBadgeHorizontalCard from "@/Components/App/AppBadgeHorizontalCard.vue";
+import { reactive } from "vue";
+import BaseLink from "@/Components/Base/BaseLink.vue";
+
+const props = defineProps({
+    badges: {
+        type: Object,
+        required: true,
+    },
+});
+
+const badges = reactive(props.badges.data);
 
 const back = () => {
-    if (window.history.length > 1) {
-        window.history.go(-1);
-        return;
-    }
     window.history.back();
 };
 </script>
@@ -41,30 +48,24 @@ const back = () => {
                     </div>
                 </div>
                 <h1 class="text-2xl font-medium">Collection</h1>
-                <!-- TODO : edit href path and badge icon ?-->
+                <div class="w-full text-sm breadcrumbs">
+                    <ul>
+                        <li>
+                            <BaseLink :href="route('profile')">
+                                Profile</BaseLink
+                            >
+                        </li>
+                        <li>Collection</li>
+                    </ul>
+                </div>
                 <AppBadgeHorizontalCard
-                    badge="Régions"
-                    :count="2"
-                    :total="5"
-                    :href="route('profile.collection.region')"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Villes"
-                    :count="2"
-                    :total="5"
-                    :href="route('profile.collection.city')"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Châteaux"
-                    :count="2"
-                    :total="5"
-                    :href="route('profile.collection.castle')"
-                />
-                <AppBadgeHorizontalCard
-                    badge="Architecture"
-                    :count="1"
-                    :total="2"
-                    :href="route('profile.collection.architecture')"
+                    v-for="badge in badges"
+                    :key="badge.id"
+                    :badge="badge.name"
+                    :count="badge.owned_children_count"
+                    :total="badge.children_count"
+                    :icon="badge.icon_path"
+                    :href="route('profile.collection.show', badge.uuid)"
                 />
             </div>
         </template>

@@ -1,5 +1,5 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
 import { ArrowLeft, UserCircle2, Setting } from "@iconsans/vue/linear";
@@ -9,10 +9,6 @@ import AppDatedRouteCard from "@/Components/App/AppDatedRouteCard.vue";
 import { reactive } from "vue";
 
 const back = () => {
-    if (window.history.length > 1) {
-        window.history.go(-1);
-        return;
-    }
     window.history.back();
 };
 
@@ -42,7 +38,7 @@ const routesHistory = reactive([]);
                         </Link>
                     </div>
                 </div>
-                <h1 class="text-2xl font-medium">History</h1>
+                <h1 class="text-2xl font-medium">Historique</h1>
                 <!-- TODO : edit href path, img-path, img-alt -->
                 <!-- v-if="routesHistory.length" -->
                 <!-- v-for="route in routesHistory" -->

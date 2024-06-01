@@ -13,41 +13,50 @@ class BadgesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $BADGES = [
+        $PARENT_BADGES = [
             [
-                'name' => 'Première Route',
-                'icon_path' => 'first_route.png',
-                'description' => 'Vous avez fait votre première randonnée !',
-            ],
-            [
-                'name' => '5 Routes',
-                'icon_path' => '5_routes.png',
-                'description' => 'Vous avez fait 5 randonnées !',
-            ],
-            [
-                'name' => '10 Routes',
-                'icon_path' => '10_routes.png',
-                'description' => 'Vous avez fait 10 randonnées !',
-            ],
-            [
-                'name' => '20 Routes',
-                'icon_path' => '20_routes.png',
-                'description' => 'Vous avez fait 20 randonnées !',
-            ],
-            [
-                'name' => '50 Routes',
-                'icon_path' => '50_routes.png',
-                'description' => 'Vous avez fait 50 randonnées !',
-            ],
-            [
-                'name' => '100 Routes',
-                'icon_path' => '100_routes.png',
-                'description' => 'Vous avez fait 100 randonnées !',
+                'name' => 'Régions',
+            ], [
+                'name' => 'Villes',
+            ], [
+                'name' => 'Chateaux',
+            ], [
+                'name' => 'Architecture',
             ],
         ];
 
-        foreach ($BADGES as $badge) {
-            Badge::create($badge);
+        $PARENT_BADGES_INSTANCES = [];
+
+        foreach ($PARENT_BADGES as $badge) {
+            $PARENT_BADGES_INSTANCES[] = Badge::create($badge);
+        }
+
+        $REGIONS_BADGES = [
+            [
+                'name' => 'Lavaux',
+                'description' => 'Le Lavaux est une région viticole de Suisse située sur la rive nord du lac Léman, entre Lausanne et Vevey.',
+                'parent_id' => $PARENT_BADGES_INSTANCES[0]->id,
+                'interest_point_id' => 1,
+            ], [
+                'name' => 'Nord Vaudois',
+                'description' => 'Le Nord Vaudois est une région du canton de Vaud en Suisse.',
+                'parent_id' => $PARENT_BADGES_INSTANCES[0]->id,
+                'route_id' => 1,
+            ], [
+                'name' => 'La Côte',
+                'description' => 'La Côte est une région viticole de Suisse située sur la rive nord du lac Léman, entre Lausanne et Nyon.',
+                'parent_id' => $PARENT_BADGES_INSTANCES[0]->id
+            ], [
+                'name' => 'Riviera',
+                'description' => 'La Riviera est une région du canton de Vaud en Suisse.',
+                'parent_id' => $PARENT_BADGES_INSTANCES[0]->id
+            ],
+        ];
+
+        $REGIONS_BADGES_INSTANCES = [];
+
+        foreach ($REGIONS_BADGES as $badge) {
+            $REGIONS_BADGES_INSTANCES[] = Badge::create($badge);
         }
     }
 }
