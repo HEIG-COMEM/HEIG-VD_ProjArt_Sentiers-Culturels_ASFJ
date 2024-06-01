@@ -32,7 +32,7 @@ const back = () => {
                         </button>
                     </div>
                     <div class="flex flex-row gap-4 justify-end">
-                        <Link :href="route('profile.details')">
+                        <Link :href="route('profile.account')">
                             <UserCircle2 class="h-7 w-7" />
                         </Link>
                         <Link :href="route('profile.settings')">

@@ -30,7 +30,7 @@ const back = () => {
                         </button>
                     </div>
                     <div class="flex flex-row gap-4 justify-end">
-                        <Link :href="route('profile.details')">
+                        <Link :href="route('profile.account')">
                             <UserCircle2 class="h-7 w-7" />
                         </Link>
                         <Link :href="route('profile.settings')">
@@ -60,7 +60,7 @@ const back = () => {
                     </div>
                     <!-- TODO : Div should take full width <-> -->
                     <div
-                        class="flex flex-col gap-5 rounded-t-2xl p-6 pb-20 w-full top-[30vh] shadow-top bg-purple-200"
+                        class="flex flex-col gap-5 rounded-t-2xl p-6 w-full top-[30vh] shadow-top bg-purple-200 mt-4"
                     >
                         <div
                             class="flex flex-col gap-1 border-b border-base-300"
