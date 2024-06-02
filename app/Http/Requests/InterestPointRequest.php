@@ -28,7 +28,7 @@ class InterestPointRequest extends FormRequest
             "location.*" => "required|numeric",
             "description" => "required|string",
             "image" => "required|image",
-            "badge" => "nullable|image",
+            "badge_uuid" => "nullable|uuid"
         ];
     }
 }

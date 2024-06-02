@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\InterestPointResource;
 use App\Http\Resources\TagResource;
 use App\Models\Tag;
+use App\Models\Badge;
 use App\Models\Picture;
 use App\Http\Requests\InterestPointRequest;
+use App\Http\Resources\BadgeResource;
 use App\Models\InterestPoint;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -36,8 +38,18 @@ class InterestPointAdminController extends Controller
      */
     public function create()
     {
+        $availableBadge = Badge::whereNull('interest_point_id')
+            ->whereNull('route_id')
+            ->get();
+
+        // remove if the badge has children
+        $availableBadge = $availableBadge->filter(function ($badge) {
+            return $badge->children->isEmpty();
+        });
+
         return Inertia::render('Backoffice/InterestPoint/Create', [
             'tags' => TagResource::collection(Tag::all()),
+            'badges' => BadgeResource::collection($availableBadge),
         ]);
     }
 
@@ -57,9 +69,6 @@ class InterestPointAdminController extends Controller
         // $tag = Tag::find($request->tag_id);
         // $interestPoint->tags()->associate($tag);
 
-        // TODO: Optional badge
-        // $interestPoint->badge = $request->file('badge')->store('/public/badges');
-
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('storage/pictures'), $imageName);
 
@@ -71,6 +80,13 @@ class InterestPointAdminController extends Controller
 
         $interestPoint->save();
         $interestPoint->pictures()->attach($picture->id);
+
+        // Optional badge
+        if ($request->badge_uuid) {
+            $badge = Badge::where('uuid', $request->badge_uuid)->firstOrFail();
+            $badge->interestPoint()->associate($interestPoint);
+            $badge->save();
+        }
 
         return redirect()->route('backoffice.interest-points.show', $interestPoint->uuid);
     }

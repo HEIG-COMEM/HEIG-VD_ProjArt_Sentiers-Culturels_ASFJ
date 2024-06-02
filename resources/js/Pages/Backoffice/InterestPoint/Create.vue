@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, watch } from "vue";
 import { Head, useForm } from "@inertiajs/vue3";
 
 import BackofficeLayout from "@/Layouts/BackofficeLayout.vue";
@@ -9,9 +9,14 @@ import BaseInputError from "@/Components/Base/BaseInputError.vue";
 import BaseSecondaryButton from "@/Components/Base/BaseSecondaryButton.vue";
 
 import AppMapOnePin from "@/Components/App/AppMapOnePin.vue";
+import AppBadgeHorizontalCard from "@/Components/App/AppBadgeHorizontalCard.vue";
 
 const props = defineProps({
     tags: {
+        type: Object,
+        required: true,
+    },
+    badges: {
         type: Object,
         required: true,
     },
@@ -19,22 +24,56 @@ const props = defineProps({
 
 const form = useForm({
     title: "",
-    tag_id: "Tag",
+    tag_id: "",
+    badge_uuid: "",
     location: [],
     description: "",
     image: "",
-    badge: "",
 });
 
 const tags = reactive(props.tags.data);
+const badges = reactive(props.badges.data);
 const step = ref(1);
-const maxStep = 3;
+const maxStep = 4;
 
 const handleFileUpload = (event, key) => {
     form[key] = event.target.files[0];
 };
 
 const submit = () => {
+    form.hasErrors = false;
+    form.errors = {};
+
+    if (!form.title) {
+        form.hasErrors = true;
+        form.errors.title = "Le titre est obligatoire";
+        return;
+    }
+
+    if (!form.tag_id) {
+        form.hasErrors = true;
+        form.errors.tag_id = "Le tag est obligatoire";
+        return;
+    }
+
+    if (!form.location) {
+        form.hasErrors = true;
+        form.errors.location = "La localisation est obligatoire";
+        return;
+    }
+
+    if (!form.description) {
+        form.hasErrors = true;
+        form.errors.description = "La description est obligatoire";
+        return;
+    }
+
+    if (!form.image) {
+        form.hasErrors = true;
+        form.errors.image = "L'image est obligatoire";
+        return;
+    }
+
     form.post(route("backoffice.interest-points.store"), {
         // onFinish: () => form.reset(),
     });
@@ -85,7 +124,17 @@ const back = () => {
                                     'text-primary': step >= 3,
                                 }"
                             >
-                                Images
+                                Image
+                            </li>
+                            <li
+                                class="step text-sm text-base-300"
+                                @click="step = 4"
+                                :class="{
+                                    'step-primary': step >= 4,
+                                    'text-primary': step >= 4,
+                                }"
+                            >
+                                Badge
                             </li>
                         </ul>
                     </div>
@@ -168,24 +217,42 @@ const back = () => {
                             />
                             <BaseInputError :message="form.errors.image" />
                         </label>
-                        <label class="form-control w-full">
+                    </div>
+                    <div v-show="step === 4" class="flex flex-col gap-4">
+                        <label class="form-control w-full" for="badge">
                             <div class="label">
                                 <span class="label-text"
-                                    >Badge
-                                    <span class="text-xs text-gray-500"
-                                        >(Facultatif)</span
-                                    ></span
+                                    >Choisir un badge :</span
                                 >
                             </div>
-                            <input
-                                type="file"
-                                class="file-input file-input-primary file-input-bordered w-full"
-                                name="image"
-                                accept="image/*"
-                                v-on:change="handleFileUpload($event, 'badge')"
-                            />
-                            <BaseInputError :message="form.errors.badge" />
                         </label>
+                        <div
+                            class="flex flex-col gap-2 w-full max-h-[80%] px-2 pb-20 overflow-x-scroll"
+                        >
+                            <template v-for="badge in badges" :key="badge.uuid">
+                                <div
+                                    class="flex flex-row items-center gap-2 w-full"
+                                >
+                                    <input
+                                        type="radio"
+                                        name="badge"
+                                        class="radio"
+                                        :value="badge.uuid"
+                                        v-model="form.badge_uuid"
+                                        :checked="
+                                            form.badge_uuid === badge.uuid
+                                        "
+                                    />
+                                    <AppBadgeHorizontalCard
+                                        :badge="badge.name"
+                                        :icon="badge.icon_path"
+                                        class="flex-grow"
+                                        @click="form.badge_uuid = badge.uuid"
+                                    />
+                                </div>
+                            </template>
+                        </div>
+                        <BaseInputError :message="form.errors.badge_uuid" />
                     </div>
                     <div
                         class="absolute bottom-0 w-full p-6 left-0 bg-base-100 flex flex-col items-center"
