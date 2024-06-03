@@ -76,7 +76,7 @@ const back = () => {
                     </template>
                 </AppError>
             </div>
-            <div v-else class="z-0 w-full">
+            <div v-else class="z-0 w-full h-full">
                 <div class="h-[40vh] w-full fixed -z-10 top-0">
                     <img
                         class="w-full h-full object-cover"
@@ -87,7 +87,7 @@ const back = () => {
                     />
                 </div>
                 <div
-                    class="mt-[35vh] sm:mt-[65vh] pb-20 rounded-t-xl bg-base-100 p-6 flex flex-col gap-8 shadow-top min-h-[calc(100%-8rem)]"
+                    class="mt-[30vh] h-[70vh] pb-20 rounded-t-xl bg-base-100 p-6 flex flex-col gap-8 shadow-top"
                 >
                     <div>
                         <h1 class="text-2xl font-semibold mb-4">
