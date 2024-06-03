@@ -60,7 +60,7 @@ const getImgSrc = (path) => {
                     />
                 </div>
                 <div
-                    class="mt-[30vh] h-[70vh] pb-20 rounded-t-xl bg-base-100 p-6 flex flex-col gap-8 shadow-top relative"
+                    class="mt-[30vh] min-h-[70vh] pb-20 rounded-t-xl bg-base-100 p-6 flex flex-col gap-8 shadow-top relative"
                 >
                     <div
                         v-if="interestpoint.badge"
@@ -99,7 +99,7 @@ const getImgSrc = (path) => {
                             onclick="confirm_delete.showModal()"
                         />
                     </div>
-                    <div>
+                    <div v-if="interestpoint.routes.length">
                         <h3 class="text-xl">Sentiers liés</h3>
                         <div
                             class="flex flex-col gap-2 max-h-[35vh] px-2 pb-8 overflow-x-scroll"
