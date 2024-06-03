@@ -50,30 +50,29 @@ const submit = () => {
     if (!form.title) {
         form.hasErrors = true;
         form.errors.title = "Le titre est obligatoire";
-        return;
     }
 
     if (!form.tag_id) {
         form.hasErrors = true;
         form.errors.tag_id = "Le tag est obligatoire";
-        return;
     }
 
     if (!form.location) {
         form.hasErrors = true;
         form.errors.location = "La localisation est obligatoire";
-        return;
     }
 
     if (!form.description) {
         form.hasErrors = true;
         form.errors.description = "La description est obligatoire";
-        return;
     }
 
     if (!form.image) {
         form.hasErrors = true;
         form.errors.image = "L'image est obligatoire";
+    }
+
+    if (form.hasErrors) {
         return;
     }
 
@@ -140,10 +139,9 @@ const back = () => {
                                 Badge
                             </li>
                         </ul>
-                    </div>
-                    <div v-if="form.hasErrors">
                         <BaseInputError
-                            message="Une erreur est survenue lors de la création de la route"
+                            v-if="form.hasErrors"
+                            message="Une ou plusieurs erreurs sont présentes dans le formulaire"
                             class="w-full"
                         />
                     </div>
