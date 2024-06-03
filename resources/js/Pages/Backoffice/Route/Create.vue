@@ -11,6 +11,7 @@ import BaseSecondaryButton from "@/Components/Base/BaseSecondaryButton.vue";
 import { PlusCircle, Trash } from "@iconsans/vue/linear";
 
 import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
+import AppBadgeHorizontalCard from "@/Components/App/AppBadgeHorizontalCard.vue";
 import BaseSearchBar from "@/Components/Base/BaseSearchBar.vue";
 import AppMapDirectionReactive from "@/Components/App/AppMapDirectionReactive.vue";
 
@@ -27,25 +28,30 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    badges: {
+        type: Object,
+        required: true,
+    },
 });
 
 const form = useForm({
     title: "",
-    tag_id: "Tag",
-    difficulty_id: "Difficulté",
+    tag_id: "",
+    difficulty_id: "",
     description: "",
     image: "",
-    badge: "",
+    badge_uuid: "",
     interestpoints: [],
 });
 
 const tags = reactive(props.tags.data);
 const difficulties = reactive(props.difficulties.data);
 const interestpoints = reactive(props.interestpoints.data);
+const badges = reactive(props.badges.data);
 const interestpointsAdded = reactive([]);
 const showForm = ref(true);
 const step = ref(1);
-const maxStep = 3;
+const maxStep = 4;
 
 const interestpointsSearch = ref("");
 const filteredInterestpoints = computed(() => {
@@ -72,9 +78,10 @@ const handleInterestpointClick = (interestpoint) => {
         interestpointsAdded.push(interestpoint);
     }
 };
-
+const imagePreview = ref(null);
 const handleFileUpload = (event, key) => {
     form[key] = event.target.files[0];
+    imagePreview.value = URL.createObjectURL(form[key]);
 };
 const url = new URL(window.location.href);
 const getImgSrc = (path) => {
@@ -82,11 +89,44 @@ const getImgSrc = (path) => {
 };
 
 const submit = () => {
+    form.hasErrors = false;
+    form.errors = {};
+
+    if (!form.title) {
+        form.errors.title = "Le titre est obligatoire";
+        form.hasErrors = true;
+    }
+
+    if (!form.tag_id) {
+        form.errors.tag_id = "Le tag est obligatoire";
+        form.hasErrors = true;
+    }
+
+    if (!form.difficulty_id) {
+        form.errors.difficulty_id = "La difficulté est obligatoire";
+        form.hasErrors = true;
+    }
+
+    if (!form.description) {
+        form.errors.description = "La description est obligatoire";
+        form.hasErrors = true;
+    }
+
+    if (!form.image) {
+        form.errors.image = "L'image est obligatoire";
+        form.hasErrors = true;
+    }
+
     if (form.interestpoints.length < 2) {
         form.errors.interestpoints =
             "Veuillez ajouter au moins deux points d'intérêt";
+        form.hasErrors = true;
+    }
+
+    if (form.hasErrors) {
         return;
     }
+
     form.post(route("backoffice.routes.store"), {
         // onFinish: () => form.reset(),
     });
@@ -165,7 +205,7 @@ const back = () => {
                                     'text-primary': step >= 2,
                                 }"
                             >
-                                Images
+                                Image
                             </li>
                             <li
                                 class="step text-sm text-base-300"
@@ -175,17 +215,29 @@ const back = () => {
                                     'text-primary': step >= 3,
                                 }"
                             >
+                                Badge
+                            </li>
+                            <li
+                                class="step text-sm text-base-300"
+                                @click="step = 4"
+                                :class="{
+                                    'step-primary': step >= 4,
+                                    'text-primary': step >= 4,
+                                }"
+                            >
                                 Points d'intérêt
                             </li>
                         </ul>
-                    </div>
-                    <div v-if="form.hasErrors">
                         <BaseInputError
-                            message="Une erreur est survenue lors de la création du sentier"
+                            v-if="form.hasErrors"
+                            message="Une ou plusieurs erreurs sont présentes dans le formulaire"
                             class="w-full"
                         />
                     </div>
-                    <div v-show="step === 1" class="flex flex-col gap-4">
+                    <div
+                        v-show="step === 1"
+                        class="flex flex-col gap-4 h-[55vh] pb-14 overflow-x-scroll"
+                    >
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text">Titre</span>
@@ -269,27 +321,61 @@ const back = () => {
                             />
                             <BaseInputError :message="form.errors.image" />
                         </label>
-                        <label class="form-control w-full">
-                            <div class="label">
-                                <span class="label-text"
-                                    >Badge
-                                    <span class="text-xs text-gray-500"
-                                        >(Facultatif)</span
-                                    ></span
-                                >
-                            </div>
-                            <input
-                                type="file"
-                                class="file-input file-input-primary file-input-bordered w-full"
-                                name="badge"
-                                accept="image/*"
-                                v-on:change="handleFileUpload($event, 'badge')"
+                        <div v-if="form.image">
+                            <p class="text-sm text-base-300">
+                                Prévisualisation de l'image :
+                            </p>
+                            <img
+                                :src="imagePreview"
+                                alt="Prévisualisation de l'image"
+                                class="rounded-xl w-full h-80 object-cover"
                             />
-                            <BaseInputError :message="form.errors.badge" />
-                        </label>
+                        </div>
                     </div>
                     <div
                         v-show="step === 3"
+                        class="flex flex-col gap-4 items-center w-full"
+                    >
+                        <label class="form-control w-full" for="badge">
+                            <div class="label">
+                                <span class="label-text"
+                                    >Choisir un badge :
+                                    <span class="text-xs text-gray-500">
+                                        (optionnel)
+                                    </span></span
+                                >
+                            </div>
+                        </label>
+                        <div
+                            class="flex flex-col gap-2 w-full max-h-[80%] px-2 pb-20 overflow-x-scroll"
+                        >
+                            <template v-for="badge in badges" :key="badge.uuid">
+                                <div
+                                    class="flex flex-row items-center gap-2 w-full"
+                                >
+                                    <input
+                                        type="radio"
+                                        name="badge"
+                                        class="radio"
+                                        :value="badge.uuid"
+                                        v-model="form.badge_uuid"
+                                        :checked="
+                                            form.badge_uuid === badge.uuid
+                                        "
+                                    />
+                                    <AppBadgeHorizontalCard
+                                        :badge="badge.name"
+                                        :icon="badge.icon_path"
+                                        class="flex-grow"
+                                        @click="form.badge_uuid = badge.uuid"
+                                    />
+                                </div>
+                            </template>
+                        </div>
+                        <BaseInputError :message="form.errors.badge_uuid" />
+                    </div>
+                    <div
+                        v-show="step === 4"
                         class="flex flex-col gap-4 items-center w-full"
                     >
                         <BaseInputError :message="form.errors.interestpoints" />

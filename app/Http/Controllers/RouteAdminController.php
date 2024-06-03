@@ -12,6 +12,8 @@ use App\Models\Difficulty;
 use App\Models\Picture;
 use App\Models\Route;
 use App\Models\Tag;
+use App\Models\Badge;
+use App\Http\Resources\BadgeResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
@@ -44,10 +46,20 @@ class RouteAdminController extends Controller
         $inerestpoints = InterestPoint::all();
         $inerestpoints->load('pictures');
 
+        $availableBadge = Badge::whereNull('interest_point_id')
+            ->whereNull('route_id')
+            ->get();
+
+        // remove if the badge has children
+        $availableBadge = $availableBadge->filter(function ($badge) {
+            return $badge->children->isEmpty();
+        });
+
         return Inertia::render('Backoffice/Route/Create', [
             'tags' => TagResource::collection(Tag::all()),
             'difficulties' => DifficultyResource::collection(Difficulty::all()),
             'interestpoints' => InterestPointResource::collection($inerestpoints),
+            'badges' => BadgeResource::collection($availableBadge),
         ]);
     }
 
@@ -104,6 +116,13 @@ class RouteAdminController extends Controller
 
         $route->pictures()->attach($picture->id);
         $route->tags()->attach($tag->id);
+
+        // Optional badge
+        if ($request->badge_uuid) {
+            $badge = Badge::where('uuid', $request->badge_uuid)->firstOrFail();
+            $badge->route()->associate($route);
+            $badge->save();
+        }
 
         $order = 1;
         foreach ($interestPoints as $interestPoint) {

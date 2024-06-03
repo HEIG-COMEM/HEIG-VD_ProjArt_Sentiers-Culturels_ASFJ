@@ -29,7 +29,7 @@ class RouteRequest extends FormRequest
             "interestpoints" => "required|array|min:2",
             "interestpoints.*" => "required|integer",
             "image" => "required|image",
-            "badge" => "nullable|image",
+            "badge_uuid" => "nullable|uuid",
         ];
     }
 }
