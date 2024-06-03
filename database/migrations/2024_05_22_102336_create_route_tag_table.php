@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('route_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('route_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
-            $table->foreignId('tag_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('route_id')->constrained()->onDelete('cascade');
+            $table->foreignId('tag_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

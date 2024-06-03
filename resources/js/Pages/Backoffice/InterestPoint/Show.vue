@@ -16,7 +16,6 @@ const props = defineProps({
 });
 
 const interestpoint = reactive(props.interestpoint.data);
-console.log(interestpoint);
 
 const form = useForm({
     uuid: interestpoint.uuid,
@@ -102,7 +101,9 @@ const getImgSrc = (path) => {
                     </div>
                     <div>
                         <h3 class="text-xl">Sentiers liés</h3>
-                        <div class="flex flex-col gap-2">
+                        <div
+                            class="flex flex-col gap-2 max-h-[35vh] px-2 pb-8 overflow-x-scroll"
+                        >
                             <AppHorizontalCard
                                 v-for="sentier in interestpoint.routes"
                                 :title="sentier.name"

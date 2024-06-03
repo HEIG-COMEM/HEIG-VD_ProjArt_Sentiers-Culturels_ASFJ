@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('routes_history', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('route_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
-            $table->foreignId('user_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('route_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             $table->timestamp('start_timestamp')->useCurrent();
             $table->timestamp('end_timestamp')->default(null)->nullable();
