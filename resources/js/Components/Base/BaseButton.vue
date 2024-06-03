@@ -25,7 +25,7 @@ const props = defineProps({
     },
     route: {
         type: String,
-        default: "#",
+        required: false,
     },
 });
 
@@ -43,11 +43,15 @@ const className = {
 </script>
 
 <template>
-    <Link :href="route">
-        <button class="btn" v-bind="$attrs" :class="className[color]">
-            {{ content }}
-        </button>
-    </Link>
+    <component
+        :is="route ? Link : 'button'"
+        v-bind="$attrs"
+        class="btn"
+        :class="className[color]"
+        :href="route"
+    >
+        {{ content }}
+    </component>
 </template>
 
 <style scoped></style>

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('route_season', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('season_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
-            $table->foreignId('route_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('season_id')->constrained()->onDelete('cascade');
+            $table->foreignId('route_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

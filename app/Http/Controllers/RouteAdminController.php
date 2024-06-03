@@ -147,7 +147,7 @@ class RouteAdminController extends Controller
         $route->interestPoints->load('pictures');
 
         return Inertia::render('Backoffice/Route/Show', [
-            'route' => RouteResource::make($route),
+            'routeDB' => RouteResource::make($route),
         ]);
     }
 
@@ -186,8 +186,11 @@ class RouteAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $uuid)
     {
-        Route::destroy($id);
+        $route = Route::where('uuid', $uuid)->firstOrFail();
+        $route->delete();
+
+        return redirect()->route('backoffice.collection');
     }
 }

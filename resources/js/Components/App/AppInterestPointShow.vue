@@ -77,6 +77,7 @@ const back = () => {
                 </AppError>
             </div>
             <div v-else class="z-0 w-full h-full">
+                <!-- TODO: DISPLAY BADGE -->
                 <div class="h-[40vh] w-full fixed -z-10 top-0">
                     <img
                         class="w-full h-full object-cover"
@@ -97,7 +98,7 @@ const back = () => {
                             {{ interestPoint.value.description }}
                         </p>
                     </div>
-                    <div>
+                    <div v-if="interestPoint.value.routes.length">
                         <h3 class="text-xl">Sentiers liés</h3>
                         <div class="flex flex-col gap-2">
                             <!-- TODO: Implement dynamic tags -->
