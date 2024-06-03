@@ -76,9 +76,7 @@ const submit = () => {
         return;
     }
 
-    form.post(route("backoffice.interest-points.store"), {
-        // onFinish: () => form.reset(),
-    });
+    form.post(route("backoffice.interest-points.store"));
 };
 
 const back = () => {

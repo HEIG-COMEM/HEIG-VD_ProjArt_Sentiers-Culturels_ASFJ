@@ -112,7 +112,7 @@ const getImgSrc = (path) => {
                                 :imgAlt="interestPoint.pictures.at(0).title"
                                 :href="
                                     route(
-                                        'backoffice.routes.show',
+                                        'backoffice.interest-points.show',
                                         interestPoint.uuid,
                                     )
                                 "

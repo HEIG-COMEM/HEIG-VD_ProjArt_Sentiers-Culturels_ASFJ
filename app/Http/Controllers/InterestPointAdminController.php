@@ -8,6 +8,7 @@ use App\Models\Tag;
 use App\Models\Badge;
 use App\Models\Picture;
 use App\Http\Requests\InterestPointRequest;
+use App\Http\Requests\InterestPointUpdateRequest;
 use App\Http\Resources\BadgeResource;
 use App\Models\InterestPoint;
 use Illuminate\Http\Request;
@@ -114,17 +115,67 @@ class InterestPointAdminController extends Controller
     {
         $ip = InterestPoint::where('uuid', $uuid)->firstOrFail();
         $ip->load('pictures');
+        // TODO: Implement tags in DB
+        // $ip->load('tags');
+        $ip->load('badge');
+        $availableBadge = Badge::whereNull('interest_point_id')
+            ->whereNull('route_id')
+            ->get();
+
+        // remove if the badge has children
+        $availableBadge = $availableBadge->filter(function ($badge) {
+            return $badge->children->isEmpty();
+        });
+
+        if ($ip->badge) {
+            $availableBadge->prepend($ip->badge);
+        }
+
         return Inertia::render('Backoffice/InterestPoint/Edit', [
             'interestpoint' => InterestPointResource::make($ip),
+            'tags' => TagResource::collection(Tag::all()),
+            'badges' => BadgeResource::collection($availableBadge),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(InterestPointUpdateRequest $request, string $uuid)
     {
-        //
+        $ip = InterestPoint::where('uuid', $uuid)->firstOrFail();
+
+        $ip->name = $request->title;
+        $ip->description = $request->description;
+        $ip->long = $request->location[0];
+        $ip->lat = $request->location[1];
+
+
+        if ($ip->badge) {
+            $ip->badge->interestPoint()->dissociate();
+            $ip->badge->save();
+        }
+        if ($request->badge_uuid !== null) {
+            $badge = Badge::where('uuid', $request->badge_uuid)->firstOrFail();
+            $badge->interestPoint()->associate($ip);
+            $badge->save();
+        }
+
+        if ($request->image !== null) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('storage/pictures'), $imageName);
+
+            $picture = new Picture();
+            $picture->title = $request->title;
+            $picture->description = $request->description;
+            $picture->path = $imageName;
+            $picture->save();
+
+            $ip->pictures()->detach();
+            $ip->pictures()->attach($picture->id);
+        }
+
+        $ip->save();
     }
 
     /**
