@@ -6,7 +6,7 @@ import BackofficeLayout from "@/Layouts/BackofficeLayout.vue";
 import BaseSearchBar from "@/Components/Base/BaseSearchBar.vue";
 import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
 
-import { ArrowDown2 } from "@iconsans/vue/linear";
+import { ArrowDown2, CrossCircle } from "@iconsans/vue/linear";
 
 const props = defineProps({
     interestpoints: {
@@ -150,52 +150,47 @@ const clearFilters = () => {
                             class="w-full"
                             v-model="routeSearch"
                         />
-                        <div
-                            class="flex flex-row gap-2 w-full overflow-y-scroll relative"
-                        >
+
+                        <div class="flex flex-row gap-2 w-full">
                             <div
-                                class="flex flex-row gap-2 w-full overflow-y-scroll relative"
+                                class="rounded-lg flex flex-row justify-between gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer flex-grow"
+                                onclick="difficulty_modal.showModal()"
+                                :class="{
+                                    'bg-primary': selectedDifficulty,
+                                    'text-primary-content': selectedDifficulty,
+                                }"
                             >
-                                <div
-                                    class="rounded-lg flex flex-row gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer"
-                                    onclick="difficulty_modal.showModal()"
-                                    :class="{
-                                        'bg-primary': selectedDifficulty,
-                                        'text-primary-content':
-                                            selectedDifficulty,
-                                    }"
-                                >
-                                    Difficulté
-                                    <span class="h-4 w-4"
-                                        ><ArrowDown2 class="h-full w-full"
-                                    /></span>
-                                </div>
-                                <div
-                                    class="rounded-lg flex flex-row gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer"
-                                    onclick="tags_modal.showModal()"
-                                    :class="{
-                                        'bg-primary': selectedTags.length,
-                                        'text-primary-content':
-                                            selectedTags.length,
-                                    }"
-                                >
-                                    Tags
-                                    {{
-                                        selectedTags.length
-                                            ? `(${selectedTags.length})`
-                                            : ""
-                                    }}
-                                    <span class="h-4 w-4"
-                                        ><ArrowDown2 class="h-full w-full"
-                                    /></span>
-                                </div>
-                                <div
-                                    v-show="hasFiltersApplied"
-                                    class="rounded-lg bg-base-200 p-2 text-xs cursor-pointer"
-                                    @click="clearFilters()"
-                                >
-                                    Supprimer les filtres
-                                </div>
+                                Difficulté
+                                <span class="h-4 w-4"
+                                    ><ArrowDown2 class="h-full w-full"
+                                /></span>
+                            </div>
+                            <div
+                                class="rounded-lg flex flex-row justify-between gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer flex-grow"
+                                onclick="tags_modal.showModal()"
+                                :class="{
+                                    'bg-primary': selectedTags.length,
+                                    'text-primary-content': selectedTags.length,
+                                }"
+                            >
+                                Tags
+                                {{
+                                    selectedTags.length
+                                        ? `(${selectedTags.length})`
+                                        : ""
+                                }}
+                                <span class="h-4 w-4"
+                                    ><ArrowDown2 class="h-full w-full"
+                                /></span>
+                            </div>
+                            <div
+                                v-show="hasFiltersApplied"
+                                class="rounded-lg bg-base-200 p-2 text-xs cursor-pointer"
+                                @click="clearFilters()"
+                            >
+                                <span class="h-4 w-4"
+                                    ><CrossCircle class="h-full w-full"
+                                /></span>
                             </div>
                         </div>
                     </div>
@@ -283,6 +278,14 @@ const clearFilters = () => {
                             }}</label>
                         </div>
                     </div>
+                    <form method="dialog" class="flex justify-end">
+                        <button
+                            class="btn btn-primary"
+                            @click="validateSelection"
+                        >
+                            Valider
+                        </button>
+                    </form>
                 </div>
                 <form method="dialog" class="modal-backdrop">
                     <button>close</button>
@@ -308,6 +311,14 @@ const clearFilters = () => {
                             <label :for="tag.id">{{ tag.name }}</label>
                         </div>
                     </div>
+                    <form method="dialog" class="flex justify-end">
+                        <button
+                            class="btn btn-primary"
+                            @click="validateSelection"
+                        >
+                            Valider
+                        </button>
+                    </form>
                 </div>
                 <form method="dialog" class="modal-backdrop">
                     <button>close</button>
