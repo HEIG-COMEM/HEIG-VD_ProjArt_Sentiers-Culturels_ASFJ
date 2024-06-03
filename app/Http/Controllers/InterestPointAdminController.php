@@ -176,6 +176,8 @@ class InterestPointAdminController extends Controller
         }
 
         $ip->save();
+
+        return redirect()->route('backoffice.interest-points.show', $ip->uuid);
     }
 
     /**

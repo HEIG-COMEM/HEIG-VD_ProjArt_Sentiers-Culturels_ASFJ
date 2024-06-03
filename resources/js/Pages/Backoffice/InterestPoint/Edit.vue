@@ -80,8 +80,8 @@ const submit = () => {
         return;
     }
 
-    //form._method = "PUT"; // BECAUSE PHP DOESN'T SUPPORT PUT TO UPLOAD FILES
-    // Inertia.post(route("interestpoints.update", interestpoint.id), form);
+    // Using a POST request to send the form data and fake a PUT request
+    // Due to PHP not supporting file uploads with PUT requests
     router.post(
         route("backoffice.interest-points.update", interestpoint.uuid),
         {
