@@ -36,8 +36,11 @@ const badges = reactive(props.badges.data);
 const step = ref(1);
 const maxStep = 4;
 
+const imagePreview = ref(null);
+
 const handleFileUpload = (event, key) => {
     form[key] = event.target.files[0];
+    imagePreview.value = URL.createObjectURL(form[key]);
 };
 
 const submit = () => {
@@ -204,7 +207,7 @@ const back = () => {
                         </label>
                     </div>
                     <div v-show="step === 3" class="flex flex-col gap-4">
-                        <label class="form-control w-full">
+                        <label class="form-control w-full mb-4">
                             <div class="label">
                                 <span class="label-text">Image</span>
                             </div>
@@ -217,6 +220,16 @@ const back = () => {
                             />
                             <BaseInputError :message="form.errors.image" />
                         </label>
+                        <div v-if="form.image">
+                            <p class="text-sm text-base-300">
+                                Prévisualisation de l'image :
+                            </p>
+                            <img
+                                :src="imagePreview"
+                                alt="Prévisualisation de l'image"
+                                class="rounded-xl w-full h-80 object-cover"
+                            />
+                        </div>
                     </div>
                     <div v-show="step === 4" class="flex flex-col gap-4">
                         <label class="form-control w-full" for="badge">
