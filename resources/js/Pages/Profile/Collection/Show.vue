@@ -97,15 +97,19 @@ const back = () => {
                     :badge="badge.name"
                     :count="badge.owned_children_count"
                     :total="badge.children_count"
-                    :icon="badge.icon_path"
                     :href="route('profile.collection.show', badge.uuid)"
+                    :icon="badge.is_owned ? badge.icon_path : 'default.svg'"
                 />
                 <template v-else>
                     <div class="w-full flex flex-col gap-4 items-center">
                         <div class="card w-full bg-base-100 shadow-xl">
                             <figure class="px-10 pt-10">
                                 <img
-                                    :src="`/storage/badges/${badge.icon_path}`"
+                                    :src="
+                                        badge.is_owned
+                                            ? `/storage/badges/${badge.icon_path}`
+                                            : '/storage/badges/default.svg'
+                                    "
                                     alt="Shoes"
                                     class="rounded-xl"
                                 />

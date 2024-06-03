@@ -26,6 +26,10 @@ class ProfileCollectionController extends Controller
                     return $user->badges->contains($child);
                 })->count();
             });
+
+            $badges->each(function ($badge) use ($user) {
+                $badge->is_owned = $user->badges->contains($badge);
+            });
         }
 
         return Inertia::render('Profile/Collection/Index', [
@@ -60,6 +64,13 @@ class ProfileCollectionController extends Controller
             if (Auth::check()) {
                 $user = Auth::user();
                 $badge->is_owned = $user->badges->contains($badge);
+            }
+        } else {
+            if (Auth::check()) {
+                $user = Auth::user();
+                $badge->children->each(function ($child) use ($user) {
+                    $child->is_owned = $user->badges->contains($child);
+                });
             }
         }
 

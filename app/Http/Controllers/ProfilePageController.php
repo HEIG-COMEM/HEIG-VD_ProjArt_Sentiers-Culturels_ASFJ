@@ -26,6 +26,10 @@ class ProfilePageController extends Controller
                     return $user->badges->contains($child);
                 })->count();
             });
+
+            $badges->each(function ($badge) use ($user) {
+                $badge->is_owned = $user->badges->contains($badge);
+            });
         }
         return Inertia::render('Profile/Index', [
             'collection' => BadgeResource::collection($badges),

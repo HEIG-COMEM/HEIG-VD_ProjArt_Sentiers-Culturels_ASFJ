@@ -2,10 +2,10 @@
 import { defineProps } from "vue";
 import { Link } from "@inertiajs/vue3";
 
-defineProps({
+const props = defineProps({
     icon: {
         type: String,
-        default: "default.png",
+        default: "default.svg",
     },
     badge: {
         type: String,

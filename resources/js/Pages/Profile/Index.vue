@@ -33,7 +33,6 @@ const collectionBadges = reactive(props.collection.data);
                 </div>
                 <div class="flex flex-col gap-4 mt-2">
                     <h1 class="text-2xl font-medium">Profil</h1>
-                    <!-- TODO : edit href path -->
                     <AppBadgeCard
                         title="Collection"
                         :link="{
@@ -50,6 +49,9 @@ const collectionBadges = reactive(props.collection.data);
                                 :badge="badge.name"
                                 :count="badge.owned_children_count"
                                 :total="badge.children_count"
+                                :icon="
+                                    badge.is_owned ? badge.icon : 'default.svg'
+                                "
                                 :href="
                                     route('profile.collection.show', badge.uuid)
                                 "
