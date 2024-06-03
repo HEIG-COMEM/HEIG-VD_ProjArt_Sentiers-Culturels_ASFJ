@@ -45,9 +45,7 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
         })->name('settings.tutorial');
     });
 
-    Route::get('/history', function () {
-        return Inertia::render('Profile/History');
-    })->name('profile.history');
+    Route::get('/history', [ProfilePageController::class, 'history'])->name('profile.history');
 
     /* ---------- Collection Section Route ---------- */
     Route::group(['prefix' => 'collection'], function () {

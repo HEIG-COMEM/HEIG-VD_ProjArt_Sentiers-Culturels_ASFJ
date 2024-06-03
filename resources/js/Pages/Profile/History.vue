@@ -5,14 +5,54 @@ import MobileAppLayout from "@/Layouts/AppLayout.vue";
 import { ArrowLeft, UserCircle2, Setting } from "@iconsans/vue/linear";
 
 import AppDatedRouteCard from "@/Components/App/AppDatedRouteCard.vue";
+import AppNoData from "@/Components/App/AppNoData.vue";
 
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
+import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
+
+const props = defineProps({
+    histories: {
+        type: Object,
+        required: true,
+    },
+});
+
+console.log(props);
+const histories = reactive(props.histories.data);
+
+// Create a computed of the histories that group by date not taking into account the time
+const groupedHistories = computed(() => {
+    return histories.reduce((acc, history) => {
+        const date = new Date(history.start_timestamp).toDateString();
+        if (!acc[date]) {
+            acc[date] = [];
+        }
+        acc[date].push(history);
+        return acc;
+    }, {});
+});
+
+console.log(groupedHistories.value); // TODO: remove this line
+
+const tagsName = (tags) => tags.map((tag) => tag.name).slice(0, 4);
+
+const url = new URL(window.location.href);
+const getImgSrc = (path) => {
+    return `${url.origin}/storage/pictures/${path}`;
+};
+
+const formattedDate = (date) => {
+    return new Date(date).toLocaleDateString("fr-FR", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+};
 
 const back = () => {
     window.history.back();
 };
-
-const routesHistory = reactive([]);
 </script>
 
 <template>
@@ -39,27 +79,38 @@ const routesHistory = reactive([]);
                     </div>
                 </div>
                 <h1 class="text-2xl font-medium">Historique</h1>
-                <!-- TODO : edit href path, img-path, img-alt -->
-                <!-- v-if="routesHistory.length" -->
-                <!-- v-for="route in routesHistory" -->
-                <div class="flex flex-col gap-6">
-                    <AppDatedRouteCard
-                        date="Lundi - 27 mai 2024"
-                        title="Parcours sentier"
-                        tag="Lorem"
-                        href="#"
-                        img-path="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                        img-alt="lorem"
-                        :is-active="true"
-                    />
-                    <AppDatedRouteCard
-                        date="Dimanche - 26 mai 2024"
-                        title="Parcours sentier"
-                        tag="Lorem"
-                        href="#"
-                        img-path="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                        img-alt="lorem"
-                        :is-active="true"
+                <div class="flex flex-col gap-8">
+                    <div
+                        v-if="histories.length"
+                        v-for="history in groupedHistories"
+                        :key="route.id"
+                        class="flex flex-col gap-1"
+                    >
+                        {{ formattedDate(history.at(0).start_timestamp) }}
+                        <p class="text-sm text-base-300"></p>
+                        <div class="flex flex-col gap-2">
+                            <AppHorizontalCard
+                                v-for="h in history"
+                                :key="h.id"
+                                :title="h.route.name"
+                                :tags="tagsName(h.route.tags)"
+                                :img-path="
+                                    getImgSrc(h.route.pictures.at(0).path)
+                                "
+                                :img-alt="h.route.name"
+                                :href="route('route.show', h.route.uuid)"
+                                :is-done="true"
+                            />
+                        </div>
+                    </div>
+                    <AppNoData
+                        v-else
+                        title="historique"
+                        text="pour explorer de nouveaux sentiers et retrouver l'historique de vos parcours dans cette section !"
+                        :call-to-action="{
+                            text: 'la carte',
+                            href: '/map',
+                        }"
                     />
                 </div>
             </div>
