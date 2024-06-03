@@ -5,6 +5,7 @@ import MobileAppLayout from "@/Layouts/AppLayout.vue";
 import { ArrowLeft, UserCircle2, Setting } from "@iconsans/vue/linear";
 
 import AppDatedRouteCard from "@/Components/App/AppDatedRouteCard.vue";
+import AppNoData from "@/Components/App/AppNoData.vue";
 
 import { reactive, computed } from "vue";
 import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
@@ -80,6 +81,7 @@ const back = () => {
                 <h1 class="text-2xl font-medium">Historique</h1>
                 <div class="flex flex-col gap-8">
                     <div
+                        v-if="histories.length"
                         v-for="history in groupedHistories"
                         :key="route.id"
                         class="flex flex-col gap-1"
@@ -101,6 +103,15 @@ const back = () => {
                             />
                         </div>
                     </div>
+                    <AppNoData
+                        v-else
+                        title="historique"
+                        text="pour explorer de nouveaux sentiers et retrouver l'historique de vos parcours dans cette section !"
+                        :call-to-action="{
+                            text: 'la carte',
+                            href: '/map',
+                        }"
+                    />
                 </div>
             </div>
         </template>

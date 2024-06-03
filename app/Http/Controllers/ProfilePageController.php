@@ -40,7 +40,7 @@ class ProfilePageController extends Controller
             return redirect()->route('login');
         }
 
-        $userHistory = RouteHistory::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        $userHistory = RouteHistory::where('user_id', Auth::id())->orderBy('start_timestamp', 'desc')->get();
         $userHistory->load('route');
         $userHistory->load(['route.pictures', 'route.tags']);
 
