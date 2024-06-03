@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('interest_point_route', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('order');
-            $table->foreignId('interest_point_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
-            $table->foreignId('route_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('interest_point_id')->constrained()->onDelete('cascade');
+            $table->foreignId('route_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

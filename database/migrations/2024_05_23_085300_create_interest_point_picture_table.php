@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('interest_point_picture', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('interest_point_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
-            $table->foreignId('picture_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('interest_point_id')->constrained()->onDelete('cascade');
+            $table->foreignId('picture_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

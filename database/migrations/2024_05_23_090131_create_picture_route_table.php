@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('picture_route', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('picture_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
-            $table->foreignId('route_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('picture_id')->constrained()->onDelete('cascade');
+            $table->foreignId('route_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

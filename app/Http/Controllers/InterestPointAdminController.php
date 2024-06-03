@@ -98,6 +98,10 @@ class InterestPointAdminController extends Controller
     {
         $ip = InterestPoint::where('uuid', $uuid)->firstOrFail();
         $ip->load('pictures');
+        $ip->load('routes');
+        $ip->load('badge');
+        $ip->routes->load('tags');
+        $ip->routes->load('pictures');
         return Inertia::render('Backoffice/InterestPoint/Show', [
             'interestpoint' => InterestPointResource::make($ip),
         ]);
@@ -126,8 +130,10 @@ class InterestPointAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $uuid)
     {
-        InterestPoint::destroy($id);
+        $ip = InterestPoint::where('uuid', $uuid)->firstOrFail();
+        $ip->delete();
+        return redirect()->route('backoffice.collection');
     }
 }
