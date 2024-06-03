@@ -30,7 +30,7 @@ class InterestPointAdminController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Backoffice/InterestPoint/Index');
+        return redirect()->route('backoffice.collection');
     }
 
     /**

@@ -7,13 +7,23 @@ const props = defineProps({
         required: false,
         default: "Search",
     },
+    isAbsolute: {
+        type: Boolean,
+        required: false,
+        default: true,
+    },
 });
 
 const model = defineModel();
 </script>
 
 <template>
-    <label class="input input-bordered flex items-center gap-2">
+    <label
+        class="input input-bordered flex items-center gap-2"
+        :class="{
+            isAbsolute: isAbsolute,
+        }"
+    >
         <input
             type="text"
             class="grow ring-transparent"
@@ -36,7 +46,7 @@ const model = defineModel();
 </template>
 
 <style scoped>
-label {
+.isAbsolute {
     position: absolute;
     top: 1rem;
     left: 1rem;

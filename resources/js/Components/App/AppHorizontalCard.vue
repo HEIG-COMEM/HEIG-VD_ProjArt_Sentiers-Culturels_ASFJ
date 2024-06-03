@@ -72,7 +72,7 @@ const trimTags = props.tags.slice(0, 4);
                     >
                         <div
                             v-for="tag in trimTags"
-                            class="badge badge-primary"
+                            class="badge badge-primary truncate"
                         >
                             {{ tag }}
                         </div>
