@@ -9,11 +9,11 @@ const props = defineProps({
     },
     text: {
         type: String,
-        required: true,
+        required: false,
     },
     callToAction: {
         type: Object,
-        required: true,
+        required: false,
         validate: (value) => {
             if (value.text && value.href) {
                 return true;
@@ -28,14 +28,18 @@ const props = defineProps({
     <div class="flex flex-col justify-center h-full">
         <div class="p-4 flex flex-col gap-2 items-center text-base-200">
             <AlertCircle class="h-12 w-12" />
-            <p>Votre {{ title }} est vide ?</p>
-            <p class="text-center">
-                Cliquez sur
-                <BaseLink :href="callToAction.href">{{
-                    callToAction.text
-                }}</BaseLink>
-                {{ text }}
-            </p>
+            <p>{{ title }}</p>
+            <template v-if="text">
+                <p class="text-center">
+                    <template v-if="callToAction">
+                        Cliquez sur
+                        <BaseLink :href="callToAction.href">{{
+                            callToAction.text
+                        }}</BaseLink>
+                    </template>
+                    {{ text }}
+                </p>
+            </template>
         </div>
     </div>
 </template>

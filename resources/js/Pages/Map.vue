@@ -9,6 +9,7 @@ import BaseSearchBar from "@/Components/Base/BaseSearchBar.vue";
 import AppMap from "@/Components/App/AppMap.vue";
 import AppWeatherForecastCard from "@/Components/App/AppWeatherForecastCard.vue";
 import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
+import AppNoData from "@/Components/App/AppNoData.vue";
 
 const props = defineProps({
     interestPoints: {
@@ -105,7 +106,7 @@ onMounted(() => {
                     /></span>
                 </div>
             </div>
-            <div v-show="search" class="mt-32">
+            <div v-show="search" class="mt-32 h-full min-w-full">
                 <div
                     class="flex flex-col gap-4 w-full max-h-[80vh] px-3 pb-12 overflow-x-scroll"
                 >
@@ -118,6 +119,10 @@ onMounted(() => {
                         :display-is-done="false"
                         :tags="getTagsName(item.tags)"
                         :href="`/interest-point/${item.uuid}`"
+                    />
+                    <AppNoData
+                        v-if="!searchResults.length"
+                        title="Aucun résultat"
                     />
                 </div>
             </div>

@@ -79,7 +79,6 @@ onMounted(() => {
         watch(
             () => props.interestPoints,
             (newValue) => {
-                console.log(newValue);
                 map.getSource("interestPoints").setData({
                     type: "FeatureCollection",
                     features: newValue.map((interestPoint) => ({
