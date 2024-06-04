@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DiscoveryController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\InterestPointController;
 use App\Http\Controllers\ProfileCollectionController;
@@ -12,9 +13,7 @@ use Inertia\Inertia;
 
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 
-Route::get('/discovery', function () {
-    // TODO: Implement discovery page
-})->name('discovery');
+Route::get('/discovery', [DiscoveryController::class, 'index'])->name('discovery');
 
 Route::get('/map', [MapController::class, 'index'])->name('map');
 
@@ -54,7 +53,13 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
     });
 });
 
-Route::get('/api/interest-point/{uuid}', [InterestPointController::class, 'show']);
+/* ---------- API Section Route ---------- */
+Route::group(['prefix' => 'api'], function () {
+    Route::get('/interest-point/{uuid}', [InterestPointController::class, 'show']);
+    Route::get('/routes/nearby', [DiscoveryController::class, 'getNearbyRoutes']);
+});
+
+
 Route::get('/interest-point/{uuid}', function ($uuid) {
     return Inertia::render('InterestPoint/Show', [
         'uuid' => $uuid
