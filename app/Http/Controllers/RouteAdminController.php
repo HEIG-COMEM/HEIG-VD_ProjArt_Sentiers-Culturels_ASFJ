@@ -86,7 +86,7 @@ class RouteAdminController extends Controller
         $difficulty = Difficulty::find($request->difficulty_id);
         $route->difficulty()->associate($difficulty);
 
-        $tag = Tag::find($request->tag_id);
+        $tags = Tag::find($request->tags);
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('storage/pictures'), $imageName);
@@ -100,7 +100,7 @@ class RouteAdminController extends Controller
         $route->save();
 
         $route->pictures()->attach($picture->id);
-        $route->tags()->attach($tag->id);
+        $route->tags()->attach($tags);
 
         // Optional badge
         if ($request->badge_uuid) {
