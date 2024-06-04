@@ -15,4 +15,9 @@ class Tag extends Model
     {
         return $this->belongsToMany(Route::class);
     }
+
+    public function interestPoints()
+    {
+        return $this->belongsToMany(InterestPoint::class);
+    }
 }

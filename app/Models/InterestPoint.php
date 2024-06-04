@@ -36,4 +36,9 @@ class InterestPoint extends Model
     {
         return $this->hasOne(Badge::class);
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

@@ -4,21 +4,21 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Route;
+use App\Models\InterestPoint;
 use App\Models\Tag;
 
-class RouteTagSeed extends Seeder
+class InterestPointTagSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $routes = Route::all();
+        $interestPoints = InterestPoint::all();
         $tags = Tag::all();
 
-        foreach ($routes as $route) {
-            $route->tags()->attach($tags->random(rand(1, 4))->pluck('id'));
+        foreach ($interestPoints as $interestPoint) {
+            $interestPoint->tags()->attach($tags->random(rand(1, 4))->pluck('id'));
         }
     }
 }

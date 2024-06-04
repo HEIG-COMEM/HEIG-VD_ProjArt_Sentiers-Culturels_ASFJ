@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, reactive, ref } from "vue";
+import { onMounted, onUnmounted, reactive, ref, watch } from "vue";
 import "maplibre-gl/dist/maplibre-gl.css";
 import mapboxgl from "maplibre-gl";
 import { defineProps } from "vue";
@@ -9,11 +9,6 @@ const props = defineProps({
         type: Object,
         required: true,
     },
-    routes: {
-        type: Object,
-        required: false,
-        default: null,
-    },
     isBackoffice: {
         type: Boolean,
         required: false,
@@ -22,8 +17,6 @@ const props = defineProps({
 });
 
 const mapInstance = ref(null);
-const interestPoints = reactive(props.interestPoints.data);
-const routes = reactive(props.routes.data);
 
 const SWITZERLAND_BOUNDS = [
     [5.955911, 45.818028], // Southwest coordinates
@@ -34,8 +27,8 @@ onMounted(() => {
     const map = new mapboxgl.Map({
         container: "mapContainer",
         style: "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.lightbasemap.vt/style.json", // Replace with your preferred map style
-        center: [6.633597, 46.519962],
-        zoom: 8,
+        center: [6.633597, 46.519962], // Coordinates of Lausanne
+        zoom: 10,
         minZoom: 8,
         maxBounds: SWITZERLAND_BOUNDS,
     });
@@ -56,50 +49,16 @@ onMounted(() => {
 
     map.on("load", function () {
         setTimeout(() => {
-            // geolocateControl.trigger();
+            geolocateControl.trigger();
         }, 200);
     });
 
     map.on("load", () => {
-        if (routes) {
-            routes.forEach((route) => {
-                const path = JSON.parse(route.path);
-                const ID = `route-${route.id}`;
-                const uuid = route.uuid;
-
-                map.addSource(ID, {
-                    type: "geojson",
-                    data: path,
-                });
-
-                map.addLayer({
-                    id: ID,
-                    type: "line",
-                    source: ID,
-                    layout: {
-                        "line-join": "round",
-                        "line-cap": "round",
-                    },
-                    paint: {
-                        "line-color": "#154B19",
-                        "line-width": 6,
-                    },
-                });
-
-                map.on("click", ID, (e) => {
-                    const url = props.isBackoffice
-                        ? `/backoffice/routes/${uuid}`
-                        : null;
-                    if (url) window.location.href = url;
-                });
-            });
-        }
-
         map.addSource("interestPoints", {
             type: "geojson",
             data: {
                 type: "FeatureCollection",
-                features: interestPoints.map((interestPoint) => ({
+                features: props.interestPoints.map((interestPoint) => ({
                     type: "Feature",
                     properties: {
                         id: interestPoint.id,
@@ -116,6 +75,31 @@ onMounted(() => {
             clusterMaxZoom: 14, // Max zoom to cluster points on
             clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
         });
+
+        watch(
+            () => props.interestPoints,
+            (newValue) => {
+                console.log(newValue);
+                map.getSource("interestPoints").setData({
+                    type: "FeatureCollection",
+                    features: newValue.map((interestPoint) => ({
+                        type: "Feature",
+                        properties: {
+                            id: interestPoint.id,
+                            uuid: interestPoint.uuid,
+                            name: interestPoint.name,
+                        },
+                        geometry: {
+                            type: "Point",
+                            coordinates: [
+                                interestPoint.long,
+                                interestPoint.lat,
+                            ],
+                        },
+                    })),
+                });
+            },
+        );
 
         map.addLayer({
             id: "clusters",
