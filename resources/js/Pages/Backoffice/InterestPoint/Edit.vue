@@ -250,7 +250,10 @@ const back = () => {
                         <label class="form-control w-full" for="badge">
                             <div class="label">
                                 <span class="label-text"
-                                    >Choisir un badge :</span
+                                    >Choisir un badge :
+                                    <span class="text-xs text-gray-500">
+                                        (optionnel)
+                                    </span></span
                                 >
                             </div>
                         </label>

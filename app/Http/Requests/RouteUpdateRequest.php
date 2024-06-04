@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RouteRequest extends FormRequest
+class RouteUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +29,7 @@ class RouteRequest extends FormRequest
             "description" => "required|string",
             "interestpoints" => "required|array|min:2",
             "interestpoints.*" => "required|integer",
-            "image" => "required|image",
+            "image" => "nullable|image",
             "badge_uuid" => "nullable|uuid",
         ];
     }

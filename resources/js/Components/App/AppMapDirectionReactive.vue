@@ -56,6 +56,14 @@ onMounted(() => {
 
         map.addControl(new LoadingIndicatorControl(directions));
 
+        if (model.value.length > 0) {
+            directions.setWaypoints(getCoords(model.value));
+            map.flyTo({
+                center: getCoords(model.value).at(0),
+                zoom: 12,
+            });
+        }
+
         watch(model.value, (newValue) => {
             directions.clear();
             directions.setWaypoints(getCoords(newValue));

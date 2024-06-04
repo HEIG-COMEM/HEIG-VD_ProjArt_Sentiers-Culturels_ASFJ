@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RouteRequest;
+use App\Http\Requests\RouteUpdateRequest;
 use App\Http\Resources\RouteResource;
 use App\Http\Resources\TagResource;
 use App\Models\InterestPoint;
@@ -85,7 +86,7 @@ class RouteAdminController extends Controller
         $difficulty = Difficulty::find($request->difficulty_id);
         $route->difficulty()->associate($difficulty);
 
-        $tag = Tag::find($request->tag_id);
+        $tags = Tag::find($request->tags);
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('storage/pictures'), $imageName);
@@ -99,7 +100,7 @@ class RouteAdminController extends Controller
         $route->save();
 
         $route->pictures()->attach($picture->id);
-        $route->tags()->attach($tag->id);
+        $route->tags()->attach($tags);
 
         // Optional badge
         if ($request->badge_uuid) {
@@ -132,6 +133,7 @@ class RouteAdminController extends Controller
         $route->load('tags');
         $route->load('seasons');
         $route->load('difficulty');
+        $route->load('badge');
         $route->load('interestPoints');
         $route->interestPoints->load('pictures');
 
@@ -156,9 +158,25 @@ class RouteAdminController extends Controller
         $route->load('interestPoints');
         $route->interestPoints->load('pictures');
 
+        $route->load('badge');
+
+        $availableBadge = Badge::whereNull('interest_point_id')
+            ->whereNull('route_id')
+            ->get();
+
+        // remove if the badge has children
+        $availableBadge = $availableBadge->filter(function ($badge) {
+            return $badge->children->isEmpty();
+        });
+
+        if ($route->badge) {
+            $availableBadge->prepend($route->badge);
+        }
+
         return Inertia::render('Backoffice/Route/Edit', [
             'route' => RouteResource::make($route),
             'tags' => TagResource::collection(Tag::all()),
+            'badges' => BadgeResource::collection($availableBadge),
             'difficulties' => DifficultyResource::collection(Difficulty::all()),
             'interestpoints' => InterestPointResource::collection($inerestpoints),
         ]);
@@ -167,9 +185,56 @@ class RouteAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RouteUpdateRequest $request, string $id)
     {
-        //
+        $route = Route::where('uuid', $id)->firstOrFail();
+        $route->name = $request->title;
+        $route->description = $request->description;
+        $route->difficulty_id = $request->difficulty_id;
+
+        // Picture
+        if ($request->image) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('storage/pictures'), $imageName);
+
+            $picture = new Picture();
+            $picture->title = $request->title;
+            $picture->description = $request->description;
+            $picture->path = $imageName;
+            $picture->save();
+
+            $route->pictures()->detach();
+            $route->pictures()->attach($picture->id);
+        }
+
+        // Badge
+        if ($request->badge_uuid) {
+            $badge = Badge::where('uuid', $request->badge_uuid)->firstOrFail();
+            $badge->route()->associate($route);
+            $badge->save();
+        } else {
+            if ($route->badge) {
+                $badge = Badge::where('id', $route->badge->id)->firstOrFail();
+                $badge->route_id = null;
+                $badge->save();
+            }
+        }
+
+        // Interest points
+        $route->interestPoints()->detach();
+        $order = 1;
+        foreach ($request->interestpoints as $interestPoint) {
+            $route->interestPoints()->attach($interestPoint, ['order' => $order++]);
+        }
+
+        // Tags
+        $route->tags()->detach();
+        $route->tags()->attach($request->tags);
+
+        $route->save();
+        $route->createRoutePath(); // Recalculate the route path
+
+        return redirect()->route('backoffice.routes.show', $route->uuid);
     }
 
     /**
