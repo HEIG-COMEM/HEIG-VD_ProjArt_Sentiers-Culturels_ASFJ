@@ -139,7 +139,7 @@ onUnmounted(() => {
                 <div class="flex flex-row justify-between">
                     <div>
                         <button
-                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none"
+                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
                             @click="back()"
                         >
                             <ArrowLeft class="w-7 h-7" />
@@ -147,7 +147,7 @@ onUnmounted(() => {
                     </div>
                     <div class="flex flex-row gap-2">
                         <button
-                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none"
+                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
                             @click="toggleFav()"
                         >
                             <component
@@ -156,13 +156,13 @@ onUnmounted(() => {
                             />
                         </button>
                         <button
-                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none"
+                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
                             @click="download()"
                         >
                             <Download class="w-7 h-7" />
                         </button>
                         <button
-                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none"
+                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
                             @click="showWeather = !showWeather"
                         >
                             <svg

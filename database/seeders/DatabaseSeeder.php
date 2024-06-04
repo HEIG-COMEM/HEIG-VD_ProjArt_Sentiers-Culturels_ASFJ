@@ -24,8 +24,11 @@ class DatabaseSeeder extends Seeder
         // CUSOTM ROUTES SEEDERS
         $this->call(RouteRenardSeeder::class);
         $this->call(RouteLausanneVilleNatureSeeder::class);
+        // END CUSTOM ROUTES SEEDERS
 
         $this->call(RatesTableSeeder::class);
+
+        $this->call(InterestPointTagSeeder::class);
 
         $this->call(PicturesTableSeeder::class);
         $this->call(InterestPointPictureTableSeeder::class);
