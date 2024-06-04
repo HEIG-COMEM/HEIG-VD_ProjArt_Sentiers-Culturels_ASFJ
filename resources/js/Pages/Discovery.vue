@@ -6,7 +6,6 @@ import MobileAppLayout from "@/Layouts/AppLayout.vue";
 import BaseSearchBar from "@/Components/Base/BaseSearchBar.vue";
 import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
 import AppSquareCard from "@/Components/App/AppSquareCard.vue";
-import AppNoData from "@/Components/App/AppNoData.vue";
 
 import { ArrowDown2, CrossCircle } from "@iconsans/vue/linear";
 import { latest } from "maplibre-gl";
@@ -237,16 +236,6 @@ onMounted(() => {
                                                 routeMostLiked.pictures.at(0)
                                                     .title
                                             "
-                                        />
-                                        <!-- TODO : edit href path -->
-                                        <AppNoData
-                                            v-else
-                                            title="liste des découvertes"
-                                            text="pour retrouver les points d'intérêt et sentiers dans vos alentours"
-                                            :call-to-action="{
-                                                text: 'le menu carte',
-                                                href: '/lorem',
-                                            }"
                                         />
                                     </div>
                                 </div>
