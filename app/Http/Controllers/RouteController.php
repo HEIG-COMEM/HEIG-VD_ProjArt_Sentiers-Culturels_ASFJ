@@ -31,6 +31,8 @@ class RouteController extends Controller
                 ->where('route_id', $route->id)
                 ->get();
             $route->isDone = $routeHistory->count() > 0;
+
+            $route->isFavorite = $route->users->contains(auth()->id());
         }
 
         $route->interestPoints->load('pictures');

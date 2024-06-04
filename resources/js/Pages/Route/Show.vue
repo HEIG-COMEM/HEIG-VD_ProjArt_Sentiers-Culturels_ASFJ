@@ -1,6 +1,14 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
-import { computed, defineProps, reactive, ref } from "vue";
+import {
+    computed,
+    defineProps,
+    onMounted,
+    onUnmounted,
+    reactive,
+    ref,
+    watch,
+} from "vue";
 import {
     ArrowLeft,
     ArrowDown,
@@ -59,7 +67,7 @@ const roundedRate = computed(() => (Math.round(rate.value * 2) / 2).toFixed(1));
 
 const interestPoints = reactive(route.value.interest_points);
 
-const isFavorite = ref(false); // TODO: Bind with user favorites
+const isFavorite = ref(route.value.isFavorite);
 const showWeather = ref(false);
 const toggleMenuFirstActive = ref(true);
 
@@ -70,12 +78,49 @@ const back = () => {
 const toggleFav = () => {
     isFavorite.value = !isFavorite.value;
     // TODO: Add/Remove from user favorites
+    console.error("Add/Remove from user favorites not implemented yet");
 };
 
 const download = () => {
     // TODO: Implement download
     console.error("Download not implemented yet");
 };
+
+const currentIndex = ref(1);
+const observer = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const index = Array.from(
+                    entry.target.parentNode.children,
+                ).indexOf(entry.target);
+
+                currentIndex.value = index + 1;
+            }
+        });
+    },
+    {
+        root: document.querySelector(".scroll-container"),
+        rootMargin: "0px",
+        threshold: 0.5,
+    },
+);
+
+onMounted(() => {
+    const children = document.querySelectorAll(".scroll-container > *");
+
+    children.forEach((child) => {
+        observer.observe(child);
+    });
+});
+
+onUnmounted(() => {
+    const children = document.querySelectorAll(".scroll-container > *");
+
+    children.forEach((child) => {
+        observer.unobserve(child);
+    });
+});
 </script>
 
 <template>
@@ -136,8 +181,36 @@ const download = () => {
                     </Link>
                 </div>
             </div>
+
+            <!-- SCROLL INFOS -->
             <div
-                class="background-image w-full h-full bg-primary flex flex-col justify-center"
+                v-if="toggleMenuFirstActive"
+                class="absolute z-[1] p-6 top-[50%] left-0 flex flex-col gap-2 items-center"
+            >
+                <span
+                    class="scroll-indicator"
+                    :class="{
+                        'scroll-indicator-active': currentIndex === 1,
+                    }"
+                >
+                </span>
+                <span
+                    class="scroll-indicator"
+                    :class="{
+                        'scroll-indicator-active': currentIndex === 2,
+                    }"
+                ></span>
+                <span
+                    class="scroll-indicator"
+                    :class="{
+                        'scroll-indicator-active': currentIndex === 3,
+                    }"
+                ></span>
+            </div>
+
+            <!-- CONTENT -->
+            <div
+                class="background-image w-full h-full bg-primary flex flex-col justify-center max-h-screen overflow-hidden"
             >
                 <div class="backdrop-blur-md w-full h-full relative">
                     <!-- TOGGLE MENU -->
@@ -181,11 +254,11 @@ const download = () => {
                             ></span>
                         </div>
                     </div>
-                    <div class="flex flex-col w-full h-[80%]">
-                        <div class="w-full h-full mt-52">
+                    <div class="flex flex-col w-full h-[80%] items-center">
+                        <div class="max-w-sm h-full mt-52">
                             <template v-if="toggleMenuFirstActive">
                                 <div
-                                    class="scroll-container w-full h-96 overflow-scroll"
+                                    class="scroll-container w-full h-[70%] overflow-scroll"
                                 >
                                     <!-- ROUTE -->
                                     <div
@@ -216,7 +289,7 @@ const download = () => {
                                                 {{ route.name }}
                                             </h1>
                                             <p
-                                                class="text-sm font-semibold mt-2 px-4 text-center text-base-100 max-h-32 overflow-scroll"
+                                                class="text-sm font-semibold mt-2 text-center text-base-100 max-h-32 overflow-scroll"
                                             >
                                                 {{ route.description }}
                                             </p>
@@ -334,8 +407,8 @@ const download = () => {
                                     </div>
                                 </div>
                             </template>
-                            <!-- INTEREST POINTS -->
 
+                            <!-- INTEREST POINTS -->
                             <template v-else>
                                 <div
                                     class="flex flex-col items-center p-6 gap-4"
@@ -395,5 +468,19 @@ const download = () => {
 
 .scroll-container > * {
     scroll-snap-align: center;
+}
+
+.scroll-indicator {
+    width: 0.3rem;
+    height: 0.3rem;
+    background-color: #b8bbbe;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.scroll-indicator-active {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #fdfdfa;
 }
 </style>
