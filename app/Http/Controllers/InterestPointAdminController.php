@@ -185,7 +185,7 @@ class InterestPointAdminController extends Controller
 
             foreach ($resp as $r) {
                 if (isset($r['error'])) {
-                    abort(500, $r['error']); // TODO: Check if this is the correct way to handle this
+                    return back()->withErrors(['error' => 'Error while creating the route']);
                 }
             }
         }
