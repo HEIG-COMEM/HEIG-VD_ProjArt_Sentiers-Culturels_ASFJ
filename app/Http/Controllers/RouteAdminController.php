@@ -79,29 +79,13 @@ class RouteAdminController extends Controller
         $route->end_lat = $interestPoints->last()->lat;
         $route->end_long = $interestPoints->last()->long;
 
+        $route->length = 0; // Will be calculated later when the route is created
+        $route->duration = 0; // Will be calculated later when the route is created
+
         $difficulty = Difficulty::find($request->difficulty_id);
         $route->difficulty()->associate($difficulty);
 
         $tag = Tag::find($request->tag_id);
-
-        $data = [
-            'coordinates' => $interestPoints->map(function ($interestPoint) {
-                return [$interestPoint->long, $interestPoint->lat];
-            })->toArray()
-        ];
-        $path = Http::withHeaders([
-            'Authorization' => env('OPENROUTESERVICE_API_KEY')
-        ])->post('https://api.openrouteservice.org/v2/directions/foot-walking/geojson', $data);
-
-        $resp = $path->json();
-        $route->path = json_encode($resp);
-
-        if (!$route->path) {
-            return response()->json(['error' => 'Unable to create path'], 500);
-        }
-
-        $route->duration = $path->json()['features'][0]['properties']['summary']['duration'];
-        $route->length = $path->json()['features'][0]['properties']['summary']['distance'];
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('storage/pictures'), $imageName);
@@ -127,6 +111,11 @@ class RouteAdminController extends Controller
         $order = 1;
         foreach ($interestPoints as $interestPoint) {
             $route->interestPoints()->attach($interestPoint->id, ['order' => $order++]);
+        }
+
+        $resp = $route->createRoutePath(); // Create the route path and calculate the length and duration
+        if (isset($resp['error'])) {
+            return back()->withErrors(['error' => 'Error while creating the route']);
         }
 
         return redirect()->route('backoffice.routes.show', $route->uuid);

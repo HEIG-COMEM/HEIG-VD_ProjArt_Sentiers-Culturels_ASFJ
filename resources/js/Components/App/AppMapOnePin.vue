@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, reactive, ref } from "vue";
+import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MapLibreGlDirections, {
     LoadingIndicatorControl,
@@ -18,18 +18,13 @@ const SWITZERLAND_BOUNDS = [
     [10.492294, 47.808464], // Northeast coordinates
 ];
 
-const getCoords = (route) => {
-    return route.interest_points.map((interestPoint) => [
-        interestPoint.long,
-        interestPoint.lat,
-    ]);
-};
+const hasLatLng = computed(() => model.value && model.value.length === 2);
 
 onMounted(() => {
     const map = new mapboxgl.Map({
         container: "mapContainer",
         style: "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.lightbasemap.vt/style.json", // Replace with your preferred map style
-        center: [6.633597, 46.519962],
+        center: hasLatLng.value ? [...model.value] : [6.633597, 46.519962],
         zoom: 12,
         minZoom: 8,
         maxBounds: SWITZERLAND_BOUNDS,
@@ -44,6 +39,9 @@ onMounted(() => {
         directions.interactive = true;
 
         map.addControl(new LoadingIndicatorControl(directions));
+
+        if (hasLatLng) directions.addWaypoint([...model.value]);
+
         map.on("click", (e) => {
             directions.clear();
             directions.addWaypoint(e.lngLat.toArray());
