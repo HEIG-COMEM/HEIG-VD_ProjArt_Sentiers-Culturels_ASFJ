@@ -133,6 +133,7 @@ class RouteAdminController extends Controller
         $route->load('tags');
         $route->load('seasons');
         $route->load('difficulty');
+        $route->load('badge');
         $route->load('interestPoints');
         $route->interestPoints->load('pictures');
 
