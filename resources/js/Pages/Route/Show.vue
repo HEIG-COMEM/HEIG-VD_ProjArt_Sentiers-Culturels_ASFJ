@@ -33,13 +33,11 @@ const getImgPath = (path) => `/storage/pictures/${path}`;
 const bgImgPath = computed(() => getImgPath(route.value.pictures.at(0).path));
 
 const duration = computed(() => {
-    return (
-        Math.floor(route.value.duration / 60) +
-        "h" +
-        (route.value.duration % 60 === 0
-            ? ""
-            : " " + (route.value.duration % 60) + "m")
-    );
+    return Math.floor(route.value.duration / 3600) +
+        " h " +
+        (route.value.duration % 3600) / 60
+        ? Math.floor((route.value.duration % 3600) / 60) + " min"
+        : "";
 });
 
 const distance = computed(() => {

@@ -177,6 +177,19 @@ class InterestPointAdminController extends Controller
 
         $ip->save();
 
+        if ($ip->routes->count() > 0) {
+            $resp = [];
+            foreach ($ip->routes as $route) {
+                $resp[] = $route->createRoutePath();
+            }
+
+            foreach ($resp as $r) {
+                if (isset($r['error'])) {
+                    abort(500, $r['error']); // TODO: Check if this is the correct way to handle this
+                }
+            }
+        }
+
         return redirect()->route('backoffice.interest-points.show', $ip->uuid);
     }
 

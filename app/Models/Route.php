@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class Route extends Model
 {
@@ -20,6 +21,49 @@ class Route extends Model
         self::creating(function ($model) {
             $model->uuid = Str::uuid();
         });
+    }
+
+    public function createRoutePath()
+    {
+        $interestPoints = $this->interestPoints;
+        if ($interestPoints->isEmpty()) {
+            return [
+                'error' => 'No interest points'
+            ];
+        }
+        $data = [
+            'coordinates' => $interestPoints->map(function ($interestPoint) {
+                return [$interestPoint->long, $interestPoint->lat];
+            })->toArray(),
+            'instructions_format' => 'html',
+            'language' => 'fr'
+        ];
+
+        $path = Http::withHeaders([
+            'Authorization' => env('OPENROUTESERVICE_API_KEY')
+        ])->post('https://api.openrouteservice.org/v2/directions/foot-walking/geojson', $data);
+
+        $resp = $path->json();
+        $this->path = json_encode($resp);
+
+        if (!$this->path) {
+            return [
+                'error' => 'Unable to create path'
+            ];
+        }
+
+        if (isset($path->json()['error'])) {
+            return [
+                'error' => $path->json()['error']['message']
+            ];
+        }
+
+        $this->duration = $path->json()['features'][0]['properties']['summary']['duration'];
+        $this->length = $path->json()['features'][0]['properties']['summary']['distance'];
+
+        $this->save();
+
+        return $resp;
     }
 
     public function tags()
