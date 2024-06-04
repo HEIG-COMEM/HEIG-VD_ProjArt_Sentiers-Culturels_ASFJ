@@ -23,6 +23,7 @@ const active = (route) => {
 </script>
 
 <template>
+    <!-- TODO : Header pour toutes les pages de la section Profil (Icone : Compte & Paramètres) -->
     <div class="btm-nav btm-nav-md" id="btm-nav">
         <template>
             <ArrowLeft class="h-7 w-7" />
