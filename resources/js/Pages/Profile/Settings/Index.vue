@@ -1,5 +1,5 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
 import {
@@ -10,6 +10,28 @@ import {
 } from "@iconsans/vue/linear";
 
 import { Link } from "@inertiajs/vue3";
+import BaseLink from "@/Components/Base/BaseLink.vue";
+import { reactive } from "vue";
+import BaseSecondaryButton from "@/Components/Base/BaseSecondaryButton.vue";
+
+const props = defineProps({
+    auth: {
+        type: Object,
+        required: true,
+    },
+});
+
+const user = reactive(props.auth.user);
+const logoutForm = useForm({});
+
+const logout = () => {
+    logoutForm.post(route("logout"), {
+        preserveScroll: true,
+        onSuccess: () => {
+            window.location.href = route("home");
+        },
+    });
+};
 
 const back = () => {
     window.history.back();
@@ -34,66 +56,80 @@ const back = () => {
                         <Link :href="route('profile.account')">
                             <UserCircle2 class="h-7 w-7" />
                         </Link>
-                        <Link :href="route('profile.settings')">
-                            <Setting class="h-7 w-7" />
-                        </Link>
                     </div>
                 </div>
                 <h1 class="text-2xl font-medium">Paramètres</h1>
-                <!-- TODO : edit href path -->
-                <!-- TODO : Div should take full width <-> -->
-                <!-- TODO : Add instruction for normal user or admin user display -->
                 <div
-                    class="flex flex-col gap-5 rounded-t-2xl p-6 pb-20 w-full top-[30vh] shadow-top bg-purple-200 mt-4"
+                    class="absolute bottom-0 left-0 flex flex-col w-full min-h-[85vh] rounded-xl shadow-top-sm"
                 >
-                    <Link :href="route('settings.tutorial')">
-                        <div
-                            class="flex flex-row border-b border-base-300 items-center justify-between p-1"
+                    <div class="px-6 pt-6 flex flex-col gap-5">
+                        <BaseLink
+                            :href="route('settings.tutorial')"
+                            class="decoration-transparent"
                         >
-                            <p>Comment ça marche ?</p>
-                            <span><ArrowRight2 class="w-4 h-4" /></span>
-                        </div>
-                    </Link>
-                    <Link href="">
-                        <div
-                            class="flex flex-row border-b border-base-300 items-center justify-between p-1"
+                            <div
+                                class="flex flex-row border-b border-base-300 items-center justify-between p-1"
+                            >
+                                <p>Comment ça marche ?</p>
+                                <span><ArrowRight2 class="w-4 h-4" /></span>
+                            </div>
+                        </BaseLink>
+                        <BaseLink
+                            :href="route('settings.downloads')"
+                            class="decoration-transparent"
                         >
-                            <p>Gestion des téléchargements</p>
-                            <span><ArrowRight2 class="w-4 h-4" /></span>
-                        </div>
-                    </Link>
-                    <Link href="">
-                        <div
-                            class="flex flex-row border-b border-base-300 items-center justify-between p-1"
+                            <div
+                                class="flex flex-row border-b border-base-300 items-center justify-between p-1"
+                            >
+                                <p>Gestion des téléchargements</p>
+                                <span><ArrowRight2 class="w-4 h-4" /></span>
+                            </div>
+                        </BaseLink>
+                        <BaseLink
+                            v-if="user.role_int"
+                            :href="route('backoffice')"
+                            class="decoration-transparent"
                         >
-                            <p>Accès back-office</p>
-                            <span><ArrowRight2 class="w-4 h-4" /></span>
-                        </div>
-                    </Link>
-                    <Link href="">
-                        <div
-                            class="flex flex-row border-b border-base-300 items-center justify-between p-1"
+                            <div
+                                class="flex flex-row border-b border-base-300 items-center justify-between p-1"
+                            >
+                                <p>Accès back-office</p>
+                                <span><ArrowRight2 class="w-4 h-4" /></span>
+                            </div>
+                        </BaseLink>
+                        <BaseLink
+                            href=""
+                            class="decoration-transparent text-base-300 cursor-not-allowed hover:text-base-300"
+                            aria-disabled="true"
                         >
-                            <p>Demande d’accès admin</p>
-                            <span><ArrowRight2 class="w-4 h-4" /></span>
-                        </div>
-                    </Link>
-                    <Link href="">
-                        <div
-                            class="flex flex-row border-b border-base-300 items-center justify-between p-1"
+                            <div
+                                class="flex flex-row border-b border-base-300 items-center justify-between p-1"
+                            >
+                                <p>Demande d’accès admin</p>
+                                <span><ArrowRight2 class="w-4 h-4" /></span>
+                            </div>
+                        </BaseLink>
+                        <BaseLink
+                            :href="route('settings.contact')"
+                            class="decoration-transparent"
                         >
-                            <p>Contact</p>
-                            <span><ArrowRight2 class="w-4 h-4" /></span>
+                            <div
+                                class="flex flex-row border-b border-base-300 items-center justify-between p-1"
+                            >
+                                <p>Contact</p>
+                                <span><ArrowRight2 class="w-4 h-4" /></span>
+                            </div>
+                        </BaseLink>
+                        <div>
+                            <BaseSecondaryButton class="mt-16" @click="logout()"
+                                >Se déconnecter</BaseSecondaryButton
+                            >
                         </div>
-                    </Link>
+                    </div>
                 </div>
             </div>
         </template>
     </MobileAppLayout>
 </template>
 
-<style scoped>
-.indicator-item {
-    transform: translate(20%, -20%);
-}
-</style>
+<style scoped></style>

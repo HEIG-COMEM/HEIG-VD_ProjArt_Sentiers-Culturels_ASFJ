@@ -10,6 +10,7 @@ import {
 } from "@iconsans/vue/linear";
 
 import { Link } from "@inertiajs/vue3";
+import AppNoData from "@/Components/App/AppNoData.vue";
 
 const back = () => {
     window.history.back();
@@ -40,11 +41,9 @@ const back = () => {
                     </div>
                 </div>
                 <h1 class="text-2xl font-medium">Téléchargements</h1>
-                <div
-                    class="flex flex-col gap-5 rounded-t-2xl p-6 pb-20 w-full top-[30vh] shadow-top bg-purple-200"
-                >
-                    <div></div>
-                </div>
+                <AppNoData
+                    title="Les téléchargements ne sont pas encore disponibles"
+                />
             </div>
         </template>
     </MobileAppLayout>

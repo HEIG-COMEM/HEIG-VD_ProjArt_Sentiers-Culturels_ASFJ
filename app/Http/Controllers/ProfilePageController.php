@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\ProfilePartialUpdate;
 use App\Http\Resources\BadgeResource;
 use App\Http\Resources\RouteHistoryResource;
 use Illuminate\Http\Request;
@@ -51,5 +52,16 @@ class ProfilePageController extends Controller
         return Inertia::render('Profile/History', [
             'histories' => RouteHistoryResource::collection($userHistory),
         ]);
+    }
+
+    public function update(ProfilePartialUpdate $request)
+    {
+        try {
+            $request->user()->update($request->all());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while updating your profile.');
+        }
+
+        return redirect()->route('profile.account');
     }
 }

@@ -30,7 +30,7 @@ const routes = {
 };
 
 const active = (route) => {
-    return currentRoute.value === route;
+    return currentRoute.value.includes(route.split("/")[3]);
 };
 </script>
 
