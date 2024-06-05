@@ -107,7 +107,6 @@ watch(tagsAdded, () => {
 });
 
 const handleTagClick = (tag) => {
-    console.log(tag);
     if (tagsAdded.includes(tag)) {
         tagsAdded.splice(tagsAdded.indexOf(tag), 1);
     } else {

@@ -23,7 +23,8 @@ class InterestPointRequest extends FormRequest
     {
         return [
             "title" => "required|string",
-            "tag_id" => "required|integer",
+            "tags" => "required|array|min:1",
+            "tags.*" => "required|integer",
             "location" => "required|array|max:2",
             "location.*" => "required|numeric",
             "description" => "required|string",

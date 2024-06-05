@@ -24,7 +24,6 @@ const url = new URL(window.location.href);
 
 onMounted(() => {
     const API_ENDPOINT = `${url.origin}/api/interest-point/${props.uuid}`;
-    console.log(API_ENDPOINT);
     fetch(API_ENDPOINT)
         .then((response) => response.json())
         .then((data) => {
@@ -91,6 +90,18 @@ const back = () => {
                     class="mt-[30vh] h-[70vh] pb-20 rounded-t-xl bg-base-100 p-6 flex flex-col gap-8 shadow-top"
                 >
                     <div>
+                        <span
+                            v-for="(tags, index) in interestPoint.value.tags"
+                            class="text-sm text-base-300"
+                            >{{ tags.name
+                            }}<template
+                                v-if="
+                                    index !==
+                                    interestPoint.value.tags.length - 1
+                                "
+                                >,
+                            </template>
+                        </span>
                         <h1 class="text-2xl font-semibold mb-4">
                             {{ interestPoint.value.name }}
                         </h1>
