@@ -14,11 +14,10 @@ const props = defineProps({
     },
 });
 
-const favorites = reactive(props.routes);
+const favorites = reactive(props.routes.data);
 
-const tagsName = (tags) => {
-    return tags.map((tag) => tag.name);
-};
+const tagsName = (tags) => tags.map((tag) => tag.name);
+const getImgPath = (path) => `/storage/pictures/${path}`;
 </script>
 
 <template>
@@ -27,24 +26,29 @@ const tagsName = (tags) => {
         <template v-slot:main>
             <div class="h-full w-full p-6 flex flex-col gap-2">
                 <h1 class="text-2xl font-medium">Favoris</h1>
-                <!-- TODO : edit href path, img-path, img-alt -->
-                <AppHorizontalCard
+                <div
                     v-if="favorites.length"
-                    v-for="favorite in favorites"
-                    title="Parcours sentier"
-                    :tags="tagsName(favorite.tags)"
-                    href="/"
-                    img-path="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                    img-alt="lorem"
-                    :is-active="true"
-                />
-                <!-- TODO : edit href path -->
+                    class="flex flex-col gap-4 w-full h-full overflow-y-auto px-2 pb-6"
+                >
+                    <AppHorizontalCard
+                        v-for="favorite in favorites"
+                        :title="favorite.name"
+                        :tags="tagsName(favorite.tags)"
+                        :href="route('route.show', favorite.uuid)"
+                        :img-path="getImgPath(favorite.pictures.at(0).path)"
+                        :img-alt="favorite.name"
+                        :is-done="favorite.isDone"
+                    />
+                </div>
                 <AppNoData
                     v-else
                     title="liste de favoris"
                     text="pour commencer à ajouter des
                             sentiers à votre collection !"
-                    :call-to-action="{ text: 'découvrir', href: '/lorem' }"
+                    :call-to-action="{
+                        text: 'découvrir',
+                        href: route('discovery'),
+                    }"
                 />
             </div>
         </template>

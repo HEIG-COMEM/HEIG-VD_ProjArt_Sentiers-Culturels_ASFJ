@@ -42,7 +42,6 @@ const props = defineProps({
 const route = ref(props.route);
 const auth = ref(props.auth);
 const isAuth = computed(() => auth.value.user !== null);
-console.log(isAuth.value);
 
 const getImgPath = (path) => `/storage/pictures/${path}`;
 const bgImgPath = computed(() => getImgPath(route.value.pictures.at(0).path));
@@ -470,6 +469,7 @@ onUnmounted(() => {
                                                         .path,
                                                 )
                                             "
+                                            :display-is-done="false"
                                         />
                                     </div>
                                 </div>

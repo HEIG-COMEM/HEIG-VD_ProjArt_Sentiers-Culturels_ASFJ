@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RouteResource;
 use App\Models\Route;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -19,11 +20,15 @@ class FavoriteController extends Controller
         $user->load('routes');
 
         $user->routes->load('tags');
-
+        $user->routes->load('pictures');
         $user->routes->makeHidden('path');
 
+        $user->routes->map(function ($route) use ($user) {
+            $route->isDone = $user->routesHistory->contains('id', $route->id);
+        });
+
         return Inertia::render('Favorite', [
-            'routes' => $user->routes,
+            'routes' => RouteResource::collection($user->routes)
         ]);
     }
 
@@ -32,7 +37,6 @@ class FavoriteController extends Controller
         if (auth()->guest()) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
-
 
         $user = User::find(auth()->id());
         $route = Route::where('uuid', $uuid)->first();
