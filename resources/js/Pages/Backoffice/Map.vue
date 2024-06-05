@@ -23,8 +23,7 @@ const props = defineProps({
     <BackofficeLayout>
         <template v-slot:main>
             <AppMap
-                :interestPoints="interestpoints"
-                :routes="routes"
+                :interestPoints="interestpoints.data"
                 :isBackoffice="true"
                 class="h-96 w-full"
             />
