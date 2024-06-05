@@ -33,6 +33,8 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
         return Inertia::render('Profile/Account');
     })->name('profile.account');
 
+    Route::put('/account', [ProfilePageController::class, 'update'])->name('profile.account.update');
+
     /* ---------- Settings Section Route ---------- */
     Route::group(['prefix' => 'settings'], function () {
         Route::get('/', function () {
@@ -42,6 +44,14 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
         Route::get('/tutorial', function () {
             return Inertia::render('Profile/Settings/Tutorial');
         })->name('settings.tutorial');
+
+        Route::get('/downloads', function () {
+            return Inertia::render('Profile/Settings/Downloads');
+        })->name('settings.downloads');
+
+        Route::get('/contact', function () {
+            return Inertia::render('Profile/Settings/Contact');
+        })->name('settings.contact');
     });
 
     Route::get('/history', [ProfilePageController::class, 'history'])->name('profile.history');

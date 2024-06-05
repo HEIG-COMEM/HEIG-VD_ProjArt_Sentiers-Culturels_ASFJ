@@ -28,7 +28,7 @@ const props = defineProps({
     <div class="flex flex-col justify-center h-full">
         <div class="p-4 flex flex-col gap-2 items-center text-base-200">
             <AlertCircle class="h-12 w-12" />
-            <p>{{ title }}</p>
+            <p class="text-center">{{ title }}</p>
             <template v-if="text">
                 <p class="text-center">
                     <template v-if="callToAction">
