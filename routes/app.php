@@ -57,6 +57,7 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'api'], function () {
     Route::get('/interest-point/{uuid}', [InterestPointController::class, 'show']);
     Route::get('/routes/nearby', [DiscoveryController::class, 'getNearbyRoutes']);
+    Route::get('/favorite/{uuid}', [FavoriteController::class, 'toggle']);
 });
 
 

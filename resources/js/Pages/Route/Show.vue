@@ -33,9 +33,16 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    auth: {
+        type: Object,
+        required: true,
+    },
 });
 
 const route = ref(props.route);
+const auth = ref(props.auth);
+const isAuth = computed(() => auth.value.user !== null);
+console.log(isAuth.value);
 
 const getImgPath = (path) => `/storage/pictures/${path}`;
 const bgImgPath = computed(() => getImgPath(route.value.pictures.at(0).path));
@@ -79,9 +86,15 @@ const back = () => {
 };
 
 const toggleFav = () => {
-    isFavorite.value = !isFavorite.value;
-    // TODO: Add/Remove from user favorites
-    console.error("Add/Remove from user favorites not implemented yet");
+    const API_ENDPOINT = `/api/favorite/${route.value.uuid}`;
+
+    fetch(API_ENDPOINT).then((response) => {
+        if (response.ok) {
+            isFavorite.value = !isFavorite.value;
+        } else {
+            console.error("Error while toggling favorite");
+        }
+    });
 };
 
 const download = () => {
@@ -150,6 +163,7 @@ onUnmounted(() => {
                     </div>
                     <div class="flex flex-row gap-2">
                         <button
+                            v-if="isAuth"
                             class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
                             @click="toggleFav()"
                         >
