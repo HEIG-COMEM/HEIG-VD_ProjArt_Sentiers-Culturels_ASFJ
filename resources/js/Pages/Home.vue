@@ -1,20 +1,25 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
-import { defineProps, ref, watch } from "vue";
+import { defineProps, reactive } from "vue";
 
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
+import BaseLink from "@/Components/Base/BaseLink.vue";
 import BaseSearchBar from "@/Components/Base/BaseSearchBar.vue";
 import AppMapSmall from "@/Components/App/AppMapSmall.vue";
+import AppSquareCard from "@/Components/App/AppSquareCard.vue";
+import AppNearbySquareCard from "@/Components/App/AppNearbySquareCard.vue";
 
 const props = defineProps({
-    top3: {
+    routesOrderedRating: {
         type: Object,
         required: true,
     },
 });
 
-const showFunctionalities = ref(true);
+const routesOrderedRating = reactive(props.routesOrderedRating.data);
+
+const getImgPath = (path) => `/storage/pictures/${path}`;
 </script>
 
 <template>
@@ -23,11 +28,11 @@ const showFunctionalities = ref(true);
         <template v-slot:main>
             <BaseSearchBar placeholder="Search for interest points" />
             <div
-                class="mt-20 pb-20 w-full px-4 flex flex-col items-center gap-20"
+                class="mt-20 pb-20 w-full px-4 flex flex-col items-center gap-16 overflow-x-scroll"
             >
                 <Link :href="route('map')" class="w-full">
                     <div class="card w-full bg-base-100 shadow-xl min-h-56">
-                        <div class="card-body">
+                        <div class="card-body p-0">
                             <AppMapSmall />
                         </div>
                     </div>
@@ -44,21 +49,48 @@ const showFunctionalities = ref(true);
                         variés et collectionne des badges uniques pour compléter
                         des familles.
                     </p>
-                </div>
-                <div class="collapse collapse-arrow shadow-xl bg-base-100">
-                    <input
-                        type="radio"
-                        name="my-accordion-2"
-                        :checked="showFunctionalities"
-                    />
-                    <div
-                        class="collapse-title text-xl font-medium text-primary"
-                        @click="showFunctionalities = !showFunctionalities"
-                    >
-                        Fonctionnalités
+                    <div class="flex flex-col items-center">
+                        <BaseLink
+                            :href="route('settings.tutorial')"
+                            class="text-base underline text-base-300 mt-2"
+                            >Comment ça marche ?</BaseLink
+                        >
                     </div>
-                    <div class="collapse-content">
-                        <p>hello</p>
+                </div>
+                <div
+                    class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 items-center"
+                >
+                    <div class="flex flex-col gap-10">
+                        <!-- TOP 3 -->
+                        <div class="flex flex-col gap-4">
+                            <h2 class="text-base text-xl font-semibold">
+                                Sentiers les plus aimés
+                            </h2>
+                            <div class="flex flex-row gap-4 items-center">
+                                <AppSquareCard
+                                    v-if="routesOrderedRating.length"
+                                    v-for="routeMostLiked in routesOrderedRating"
+                                    :title="routeMostLiked.name"
+                                    :href="`/route/${routeMostLiked.uuid}`"
+                                    :img-path="
+                                        getImgPath(
+                                            routeMostLiked.pictures.at(0).path,
+                                        )
+                                    "
+                                    :img-alt="
+                                        routeMostLiked.pictures.at(0).title
+                                    "
+                                />
+                            </div>
+                        </div>
+
+                        <!-- NEARBY -->
+                        <div class="flex flex-col gap-4">
+                            <h2 class="text-base text-xl font-semibold">
+                                Sentiers à proximité
+                            </h2>
+                            <AppNearbySquareCard />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -41,12 +41,18 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div id="mapContainer" class="map-container"></div>
+    <div id="mapContainer" class="map-container small-map-container"></div>
 </template>
 
 <style scoped>
 .map-container {
     flex: 1;
     height: 97vh;
+}
+</style>
+
+<style>
+.small-map-container {
+    border-radius: 1rem;
 }
 </style>

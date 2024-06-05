@@ -23,7 +23,7 @@ const props = defineProps({
 
 <template>
     <component :is="href ? Link : 'div'" :href="href || ''">
-        <div class="indicator w-24 rounded-2xl aspect-square bg-purple-200">
+        <div class="indicator w-24 rounded-2xl aspect-square">
             <div v-if="imgPath" class="indicator">
                 <img
                     class="rounded-2xl aspect-square relative"
