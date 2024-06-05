@@ -19,6 +19,10 @@ Copy the example file and edit it to your needs
 
 `cp .env.example .env`
 
+### Routing API
+
+Create an account on [Openroute Service](https://openrouteservice.org/), generate an API token and put it in the `.env` file
+
 ### Generate a key
 
 `php artisan key:generate`
@@ -47,7 +51,8 @@ Then in two separate terminals:
 3. clone the project from github `git clone https://github.com/HEIG-COMEM/HEIG-VD_ProjArt_Sentiers-Culturels.git`
 4. Install dependencies with `composer install` and `npm ci`.
 5. Create .env file from model `cp .env.example .env`.
-6. modify the `.env` file in the hosting root to update the connection parameters for the new database:
+6. Create an account on [Openroute Service](https://openrouteservice.org/), generate an API token and put it in the `.env` file
+7. modify the `.env` file in the hosting root to update the connection parameters for the new database:
 
 ```env
 DB_CONNECTION=mysql
@@ -58,19 +63,19 @@ DB_USERNAME= the MySQL user with rights to this database
 DB_PASSWORD= its password
 ```
 
-7. Create the application key
+8. Create the application key
 
     `php artisan key:generate`
 
-8. Perform migrations and database seeding
+9. Perform migrations and database seeding
 
     `php artisan migrate:fresh --seed`
 
-9. Create link to storage directory
+10. Create link to storage directory
 
     `php artisan storage:link`
 
-10. (Optional) Optimization
+11. (Optional) Optimization
     1. `composer install --optimize-autoloader --no-dev`
     2. `php artisan config:cache`
     3. `php artisan route:cache`
