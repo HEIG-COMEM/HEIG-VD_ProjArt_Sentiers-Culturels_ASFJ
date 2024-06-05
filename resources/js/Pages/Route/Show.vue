@@ -63,7 +63,10 @@ const rate = computed(() => {
     );
 });
 
-const roundedRate = computed(() => (Math.round(rate.value * 2) / 2).toFixed(1));
+const roundedRate = computed(() => {
+    const res = (Math.round(rate.value * 2) / 2).toFixed(1);
+    return isNaN(res) ? "-" : res;
+});
 
 const interestPoints = reactive(route.value.interest_points);
 
