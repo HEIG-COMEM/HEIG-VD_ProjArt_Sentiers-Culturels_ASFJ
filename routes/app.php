@@ -25,6 +25,8 @@ Route::get('/profile', function () {
 
 Route::get('/route/{uuid}', [RouteController::class, 'show'])->name('route.show');
 
+Route::get('/route/go/{uuid}', [RouteController::class, 'go'])->name('route.go');
+
 /* ---------- Profile Section Route ---------- */
 Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
     Route::get('/', [ProfilePageController::class, 'index'])->name('profile');

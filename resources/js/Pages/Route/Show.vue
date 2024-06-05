@@ -33,13 +33,18 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    resume: {
+        type: Boolean,
+        default: false,
+        required: false,
+    },
     auth: {
         type: Object,
         required: true,
     },
 });
 
-const route = ref(props.route);
+const route = ref(props.route.data);
 const auth = ref(props.auth);
 const isAuth = computed(() => auth.value.user !== null);
 
@@ -205,8 +210,11 @@ onUnmounted(() => {
             <!-- BOTTOM BTNS -->
             <div class="absolute z-[1] p-6 bottom-16 left-0 w-full">
                 <div class="flex flex-col items-center gap-2">
-                    <Link href="#" class="btn btn-primary w-full">
-                        Commencer le sentier
+                    <Link
+                        :href="`/route/go/${route.uuid}`"
+                        class="btn btn-primary w-full"
+                    >
+                        {{ resume ? "Reprendre" : "Commencer" }} le sentier
                     </Link>
                 </div>
             </div>
