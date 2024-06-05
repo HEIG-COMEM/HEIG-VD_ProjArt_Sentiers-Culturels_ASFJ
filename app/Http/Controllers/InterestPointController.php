@@ -31,6 +31,7 @@ class InterestPointController extends Controller
         $interestPoint = InterestPoint::where('uuid', $uuid)->firstOrFail();
         $interestPoint->load('pictures');
         $interestPoint->load('routes');
+        $interestPoint->load('tags');
         $interestPoint->routes->load('pictures');
         $interestPoint->routes->load('tags');
 

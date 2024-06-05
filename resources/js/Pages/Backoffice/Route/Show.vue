@@ -75,6 +75,14 @@ const getImgSrc = (path) => {
                         />
                     </div>
                     <div>
+                        <span
+                            v-for="(tags, index) in routeDB.tags"
+                            class="text-sm text-base-300"
+                            >{{ tags.name
+                            }}<template v-if="index !== routeDB.tags.length - 1"
+                                >,
+                            </template>
+                        </span>
                         <h1 class="text-2xl font-semibold mb-4">
                             {{ routeDB.name }}
                         </h1>

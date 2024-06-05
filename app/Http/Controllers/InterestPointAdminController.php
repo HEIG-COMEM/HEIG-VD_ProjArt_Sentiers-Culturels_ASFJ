@@ -66,9 +66,7 @@ class InterestPointAdminController extends Controller
         $interestPoint->long = $request->location[0];
         $interestPoint->lat = $request->location[1];
 
-        // TODO: Implement tags in DB
-        // $tag = Tag::find($request->tag_id);
-        // $interestPoint->tags()->associate($tag);
+        $tags = Tag::find($request->tags);
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('storage/pictures'), $imageName);
@@ -81,6 +79,7 @@ class InterestPointAdminController extends Controller
 
         $interestPoint->save();
         $interestPoint->pictures()->attach($picture->id);
+        $interestPoint->tags()->attach($tags);
 
         // Optional badge
         if ($request->badge_uuid) {
@@ -101,6 +100,7 @@ class InterestPointAdminController extends Controller
         $ip->load('pictures');
         $ip->load('routes');
         $ip->load('badge');
+        $ip->load('tags');
         $ip->routes->load('tags');
         $ip->routes->load('pictures');
         return Inertia::render('Backoffice/InterestPoint/Show', [
@@ -115,8 +115,7 @@ class InterestPointAdminController extends Controller
     {
         $ip = InterestPoint::where('uuid', $uuid)->firstOrFail();
         $ip->load('pictures');
-        // TODO: Implement tags in DB
-        // $ip->load('tags');
+        $ip->load('tags');
         $ip->load('badge');
         $availableBadge = Badge::whereNull('interest_point_id')
             ->whereNull('route_id')
@@ -150,6 +149,9 @@ class InterestPointAdminController extends Controller
         $ip->long = $request->location[0];
         $ip->lat = $request->location[1];
 
+        $tags = Tag::find($request->tags);
+        $ip->tags()->detach();
+        $ip->tags()->attach($tags);
 
         if ($ip->badge) {
             $ip->badge->interestPoint()->dissociate();

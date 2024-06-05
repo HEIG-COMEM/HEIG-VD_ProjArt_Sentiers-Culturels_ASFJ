@@ -1,12 +1,22 @@
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref, watch, computed } from "vue";
 import { Head, useForm } from "@inertiajs/vue3";
+
+import {
+    PlusCircle,
+    Trash,
+    Plus,
+    Cross,
+    ArrowUp2,
+    ArrowDown2,
+} from "@iconsans/vue/linear";
 
 import BackofficeLayout from "@/Layouts/BackofficeLayout.vue";
 
 import BasePrimaryButton from "@/Components/Base/BasePrimaryButton.vue";
 import BaseInputError from "@/Components/Base/BaseInputError.vue";
 import BaseSecondaryButton from "@/Components/Base/BaseSecondaryButton.vue";
+import BaseSearchBar from "@/Components/Base/BaseSearchBar.vue";
 
 import AppMapOnePin from "@/Components/App/AppMapOnePin.vue";
 import AppBadgeHorizontalCard from "@/Components/App/AppBadgeHorizontalCard.vue";
@@ -24,7 +34,7 @@ const props = defineProps({
 
 const form = useForm({
     title: "",
-    tag_id: "",
+    tags: "",
     badge_uuid: "",
     location: [],
     description: "",
@@ -33,11 +43,38 @@ const form = useForm({
 
 const tags = reactive(props.tags.data);
 const badges = reactive(props.badges.data);
+const tagsAdded = reactive([]);
 const step = ref(1);
 const maxStep = 4;
 
-const imagePreview = ref(null);
+const tagsSearch = ref("");
+const remainingTags = computed(() => {
+    return tags.filter(
+        (tag) => !tagsAdded.some((tagAdded) => tagAdded.id === tag.id),
+    );
+});
 
+const filteredTags = computed(() => {
+    return remainingTags.value.filter((tag) =>
+        tag.name.toLowerCase().includes(tagsSearch.value.toLowerCase()),
+    );
+});
+
+watch(tagsAdded, () => {
+    form.tags = tagsAdded.map((tag) => {
+        return tag.id;
+    });
+});
+
+const handleTagClick = (tag) => {
+    if (tagsAdded.includes(tag)) {
+        tagsAdded.splice(tagsAdded.indexOf(tag), 1);
+    } else {
+        tagsAdded.push(tag);
+    }
+};
+
+const imagePreview = ref(null);
 const handleFileUpload = (event, key) => {
     form[key] = event.target.files[0];
     imagePreview.value = URL.createObjectURL(form[key]);
@@ -52,9 +89,9 @@ const submit = () => {
         form.errors.title = "Le titre est obligatoire";
     }
 
-    if (!form.tag_id) {
+    if (!form.tags.length) {
+        form.errors.tags = "Au moins un tag est obligatoire";
         form.hasErrors = true;
-        form.errors.tag_id = "Le tag est obligatoire";
     }
 
     if (!form.location) {
@@ -158,24 +195,41 @@ const back = () => {
                             <BaseInputError :message="form.errors.title" />
                         </label>
                         <label class="form-control w-full">
-                            <div class="label">
-                                <span class="label-text">Tag</span>
-                            </div>
-                            <select
-                                class="select select-bordered w-full"
-                                v-model="form.tag_id"
+                            <div
+                                class="flex flex-row gap-2 text-primary items-center"
+                                onclick="showTagsPicker.showModal()"
                             >
-                                <option disabled selected></option>
-                                <option
-                                    v-for="tag in tags"
+                                <div class="label">
+                                    <span class="label-text"
+                                        >Tag
+                                        <span class="text-xs text-gray-500">
+                                            (au moins un)
+                                        </span></span
+                                    >
+                                </div>
+                                <span class="content-center h-6 w-6"
+                                    ><PlusCircle class="h-full w-full"
+                                /></span>
+                            </div>
+                            <div
+                                class="w-full flex flex-wrap gap-y-2 gap-x-4 px-2"
+                            >
+                                <template
+                                    v-for="tag in tagsAdded"
                                     :key="tag.id"
-                                    :value="tag.id"
                                 >
-                                    {{ tag.name }}
-                                </option>
-                            </select>
-
-                            <BaseInputError :message="form.errors.tag_id" />
+                                    <div class="badge badge-primary gap-2">
+                                        <span
+                                            class="h-6 w-6 cursor-pointer"
+                                            @click="handleTagClick(tag)"
+                                        >
+                                            <Cross class="h-full w-full" />
+                                        </span>
+                                        <span>{{ tag.name }}</span>
+                                    </div>
+                                </template>
+                            </div>
+                            <BaseInputError :message="form.errors.tags" />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
@@ -229,13 +283,19 @@ const back = () => {
                     </div>
                     <div v-show="step === 4" class="flex flex-col gap-4">
                         <label class="form-control w-full" for="badge">
-                            <div class="label">
+                            <div class="label flex flex-row justify-between">
                                 <span class="label-text"
                                     >Choisir un badge :
                                     <span class="text-xs text-gray-500">
                                         (optionnel)
                                     </span></span
                                 >
+                                <span
+                                    v-show="form.badge_uuid"
+                                    @click="form.badge_uuid = ''"
+                                    class="text-error"
+                                    ><Trash
+                                /></span>
                             </div>
                         </label>
                         <div
@@ -293,6 +353,52 @@ const back = () => {
                         </div>
                     </div>
                 </form>
+
+                <!-- TAGS PICKER -->
+                <dialog id="showTagsPicker" class="modal">
+                    <div class="modal-box">
+                        <h3 class="font-bold text-lg">
+                            Choisir un ou plusieurs tags
+                        </h3>
+                        <div
+                            class="py-4 px-1 flex flex-col gap-2 max-h-[60vh] overflow-x-scroll"
+                        >
+                            <div>
+                                <BaseSearchBar
+                                    placeholder="Rechercher un tag"
+                                    v-model="tagsSearch"
+                                />
+                            </div>
+                            <div class="w-full flex flex-wrap gap-4">
+                                <template
+                                    v-for="tag in filteredTags"
+                                    :key="tag.id"
+                                >
+                                    <div
+                                        class="badge badge-primary gap-2 cursor-pointer"
+                                        @click="handleTagClick(tag)"
+                                    >
+                                        <span class="h-6 w-6">
+                                            <Plus class="h-full w-full" />
+                                        </span>
+                                        <span>{{ tag.name }}</span>
+                                    </div>
+                                </template>
+                                <span
+                                    class="text-xs text-gray-500"
+                                    v-show="!filteredTags.length"
+                                >
+                                    Aucun tag disponnible
+                                </span>
+                            </div>
+                        </div>
+                        <div class="modal-action">
+                            <form method="dialog">
+                                <button class="btn btn-primary">Valider</button>
+                            </form>
+                        </div>
+                    </div>
+                </dialog>
             </div>
         </template>
     </BackofficeLayout>
