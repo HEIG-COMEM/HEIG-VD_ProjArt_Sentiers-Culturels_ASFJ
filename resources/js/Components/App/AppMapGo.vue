@@ -22,6 +22,10 @@ const currentInterestPoint = computed(() => {
 const route = reactive(props.route);
 const interestpoints = reactive(route.interest_points);
 
+const segments = computed(
+    () => JSON.parse(route.path).features.at(0).properties.segments,
+);
+
 const mapInstance = ref(null);
 
 const SWITZERLAND_BOUNDS = [
@@ -147,6 +151,19 @@ onMounted(() => {
 
 <template>
     <div id="mapContainer" class="h-full"></div>
+
+    <!-- Screen reader only -->
+    <div class="sr-only" aria-live="polite">
+        <div
+            v-for="(segment, index) in segments"
+            :key="segment.id"
+            :aria-details="`ségment numéro ${index + 1} du parcours`"
+        >
+            <p v-for="step in segment.steps">
+                {{ step.instruction }}
+            </p>
+        </div>
+    </div>
 </template>
 
 <style scoped></style>

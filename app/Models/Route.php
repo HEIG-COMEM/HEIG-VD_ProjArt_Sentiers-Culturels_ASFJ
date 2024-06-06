@@ -35,8 +35,8 @@ class Route extends Model
             'coordinates' => $interestPoints->map(function ($interestPoint) {
                 return [$interestPoint->long, $interestPoint->lat];
             })->toArray(),
-            'instructions_format' => 'html',
-            'language' => 'fr'
+            'instructions_format' => 'text',
+            'language' => 'fr-fr'
         ];
 
         $path = Http::withHeaders([
