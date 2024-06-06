@@ -150,6 +150,7 @@ onMounted(() => {
                         </svg>
                     </button>
                 </div>
+                <!-- TODO: Bind with user position value -->
                 <AppWeatherForecastCard
                     :lat="46.519962"
                     :long="6.633597"

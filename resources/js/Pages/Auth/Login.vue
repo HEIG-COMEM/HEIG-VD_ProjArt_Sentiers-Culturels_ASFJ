@@ -5,7 +5,7 @@ import MobileAppLayout from "@/Layouts/AppLayout.vue";
 import BaseInputError from "@/Components/Base/BaseInputError.vue";
 import BasePrimaryButton from "@/Components/Base/BasePrimaryButton.vue";
 import BaseLink from "@/Components/Base/BaseLink.vue";
-import { Link, useForm } from "@inertiajs/vue3";
+import { Link, useForm, Head } from "@inertiajs/vue3";
 import { Eye, EyeSlash } from "@iconsans/vue/linear";
 
 defineProps({
@@ -35,6 +35,7 @@ const showPassword = ref(false);
 </script>
 
 <template>
+    <Head title="Connection" />
     <MobileAppLayout>
         <template v-slot:main>
             <div

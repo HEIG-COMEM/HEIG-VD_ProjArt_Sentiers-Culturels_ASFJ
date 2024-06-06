@@ -6,6 +6,7 @@ use App\Http\Requests\RouteCheckEndRequest;
 use App\Http\Requests\RouteFinishRequest;
 use App\Http\Requests\RouteStartRequest;
 use App\Http\Resources\RouteResource;
+use App\Models\Rate;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Route;
@@ -76,8 +77,8 @@ class RouteController extends Controller
     public function start(RouteStartRequest $request, string $uuid)
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
-        $targetDistance = 0.5; // In km
-        $distance = $this->distance($request->lat, $request->lng, $route->start_lat, $route->start_long, 'K'); // In km
+        $targetDistance = 100.5; // In km // TODO: Change to 0.5
+        $distance = GeoLocateController::distance($request->lat, $request->lng, $route->start_lat, $route->start_long, 'K'); // In km
         if ($distance > $targetDistance) {
             return response()->json(['error' =>
             'Vous êtes trop loin du point de départ, veuillez vous en approcher pour commencer le sentier', 'distance' => $distance, 'target' => $targetDistance], 200);
@@ -108,8 +109,8 @@ class RouteController extends Controller
     public function checkEnd(RouteCheckEndRequest $request, string $uuid)
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
-        $targetDistance = 1.5; // In km // TODO: Change to 0.5
-        $distance = $this->distance($request->lat, $request->lng, $route->end_lat, $route->end_long, 'K'); // In km
+        $targetDistance = 100.5; // In km // TODO: Change to 0.5
+        $distance = GeoLocateController::distance($request->lat, $request->lng, $route->end_lat, $route->end_long, 'K'); // In km
         if ($distance > $targetDistance) {
             return response()->json(['error' => 'nok']);
         } else {
@@ -140,8 +141,8 @@ class RouteController extends Controller
     public function finish(RouteFinishRequest $request, string $uuid)
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
-        $targetDistance = 1.5; // In km //TODO: Change to 0.5
-        $distance = $this->distance($request->lat, $request->lng, $route->end_lat, $route->end_long, 'K'); // In km
+        $targetDistance = 100.5; // In km //TODO: Change to 0.5
+        $distance = GeoLocateController::distance($request->lat, $request->lng, $route->end_lat, $route->end_long, 'K'); // In km
 
         $resp = [
             'success' => 'ok',
@@ -177,25 +178,18 @@ class RouteController extends Controller
         return response()->json($resp, 200);
     }
 
-    private function distance($lat1, $lon1, $lat2, $lon2, $unit)
+    public function rate(Request $request, string $uuid)
     {
-        if (($lat1 == $lat2) && ($lon1 == $lon2)) {
-            return 0;
-        } else {
-            $theta = $lon1 - $lon2;
-            $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-            $dist = acos($dist);
-            $dist = rad2deg($dist);
-            $miles = $dist * 60 * 1.1515;
-            $unit = strtoupper($unit);
+        $route = Route::where('uuid', $uuid)->firstOrFail();
 
-            if ($unit == "K") {
-                return ($miles * 1.609344);
-            } else if ($unit == "N") {
-                return ($miles * 0.8684);
-            } else {
-                return $miles;
-            }
+        if (Auth::check()) {
+            Rate::updateOrCreate(
+                ['user_id' => Auth::id(), 'route_id' => $route->id],
+                ['rate' => $request->rate]
+            );
+            return response()->json(['success' => 'ok'], 200);
+        } else {
+            return response()->json(['error' => 'Vous devez être connecté pour noter un sentier'], 200);
         }
     }
 }

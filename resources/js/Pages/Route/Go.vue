@@ -7,8 +7,9 @@ import TheBottomSheets from "@/Components/The/TheBottomSheets.vue";
 import AppMapGo from "@/Components/App/AppMapGo.vue";
 import AppBadge from "@/Components/App/AppBadge.vue";
 import BasePrimaryButton from "@/Components/Base/BasePrimaryButton.vue";
-import { AlertCircle } from "@iconsans/vue/linear";
+import { AlertCircle, ArrowLeft } from "@iconsans/vue/linear";
 import AppStarRating from "@/Components/App/AppStarRating.vue";
+import AppWeatherForecastCard from "@/Components/App/AppWeatherForecastCard.vue";
 
 const props = defineProps({
     route: {
@@ -35,9 +36,10 @@ const currentInterestPoint = computed(() => {
     return interestpoints[currIndex.value];
 });
 
+const showWeather = ref(false);
+
 const isCloseToStart = ref(false);
 const isCloseToFinish = ref(false);
-const isSuccessfulFinish = ref(false);
 const finishResponse = reactive({});
 const rate = ref(0);
 
@@ -59,31 +61,12 @@ const distance = computed(() => {
         : route.length + " m";
 });
 
-watch(currentInterestPoint, (newValue) => {
-    console.log(newValue);
-});
-
-const hasNextIP = computed(() => {
-    return currIndex.value < interestpoints.length - 1;
-});
-const nextIP = () => {
-    if (currIndex.value < interestpoints.length - 1) {
-        currIndex.value++;
-    }
-};
-
-const hasPrevIP = computed(() => {
-    return currIndex.value > 0;
-});
-const prevIP = () => {
-    if (currIndex.value > 0) {
-        currIndex.value--;
-    }
-};
-
 const getImgPath = (path) => `/storage/pictures/${path}`;
 const getFirstTagsName = (tags, limit) =>
     tags.slice(0, limit).map((tag) => tag.name);
+const back = () => {
+    window.history.back();
+};
 
 // Check if the user is close to the start of the route to allow him to start it
 onMounted(() => {
@@ -148,7 +131,7 @@ onMounted(() => {
 
 // When the user clicks on the button to claim the badge
 const claimBadge = (uuid) => {
-    const API_ENDPOINT = `${window.location.origin}/api/badge/claim/${uuid}`;
+    const API_ENDPOINT = `${window.location.origin}/api/badge/claim/${uuid}?lat=${userCoords.lat}&lng=${userCoords.lng}`;
     fetch(API_ENDPOINT)
         .then((response) => response.json())
         .then((data) => {
@@ -172,7 +155,6 @@ const claimBadge = (uuid) => {
 };
 
 const finish = () => {
-    console.log("Finish");
     const API_ENDPOINT = `${window.location.origin}/api/route/go/${route.uuid}/finish?lat=${userCoords.lat}&lng=${userCoords.lng}`;
     console.log(API_ENDPOINT);
     fetch(API_ENDPOINT)
@@ -181,8 +163,6 @@ const finish = () => {
             finishResponse.data = data;
             if (data.error) {
                 throw new Error(data.error);
-            } else {
-                isSuccessfulFinish.value = true;
             }
         })
         .catch((error) => {
@@ -208,7 +188,28 @@ const interupt = () => {
 
 const setRating = () => {
     if (!rate.value) return;
-    // TODO: Post the rating to the API
+    const API_ENDPOINT = `${window.location.origin}/api/route/go/${route.uuid}/rate`;
+    fetch(API_ENDPOINT, {
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]')
+                .content,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rate: rate.value }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.error) {
+                throw new Error(data.error);
+            } else {
+                finish_modal.close();
+                window.location.href = "/map";
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 };
 </script>
 
@@ -220,10 +221,44 @@ const setRating = () => {
                 class="toast toast-top toast-center z-10"
                 id="toast-target"
             ></div>
-            <div class="h-[80vh] w-[100vw]">
-                <span @click="nextIP()">Next ({{ hasNextIP }})</span>
-                <span @click="prevIP()">Prev ({{ hasPrevIP }})</span>
-                <span>{{ isCloseToStart }}</span>
+            <!-- TOP BTNS -->
+            <div class="absolute z-[1] p-6 top-0 left-0 w-full">
+                <div>
+                    <button
+                        class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
+                        @click="back()"
+                    >
+                        <ArrowLeft class="w-7 h-7" />
+                    </button>
+                </div>
+            </div>
+            <button
+                class="absolute left-2 bottom-48 z-10 btn btn-circle btn-outline btn-primary bg-white"
+                @click="showWeather = !showWeather"
+            >
+                <svg
+                    class="w-7 h-7 text-primary"
+                    viewBox="0 0 27 22"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M16.4762 7.28375C17.2418 7.01701 18.0468 6.88136 18.8575 6.8825C19.675 6.8825 20.4613 7.01875 21.195 7.26875M7.395 10.5113C7.05317 10.4448 6.70574 10.4113 6.3575 10.4113C3.39875 10.4125 1 12.7825 1 15.7063C1 18.63 3.39875 21 6.3575 21H18.8575C22.8025 21 26 17.84 26 13.9412C26 10.8512 23.9925 8.225 21.195 7.26875M7.395 10.5113C7.10139 9.72696 6.9515 8.89619 6.9525 8.05875C6.9525 4.16 10.15 1 14.095 1C17.77 1 20.7962 3.7425 21.195 7.26875M7.395 10.5113C8.08662 10.6456 8.745 10.9149 9.3325 11.3038L7.395 10.5113Z"
+                    />
+                    <path
+                        d="M16.4762 7.28375C17.2418 7.01701 18.0468 6.88136 18.8575 6.8825C19.675 6.8825 20.4613 7.01875 21.195 7.26875M21.195 7.26875C23.9925 8.225 26 10.8512 26 13.9412C26 17.84 22.8025 21 18.8575 21H6.3575C3.39875 21 1 18.63 1 15.7063C1 12.7825 3.39875 10.4125 6.3575 10.4113C6.70574 10.4113 7.05317 10.4448 7.395 10.5113M21.195 7.26875C20.7963 3.7425 17.77 1 14.095 1C10.15 1 6.9525 4.16 6.9525 8.05875C6.9515 8.89619 7.10139 9.72696 7.395 10.5113M7.395 10.5113C8.08662 10.6456 8.745 10.9149 9.3325 11.3038"
+                        stroke="#4c8c2b"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </button>
+            <AppWeatherForecastCard
+                :lat="userCoords.lat"
+                :long="userCoords.lng"
+                v-model="showWeather"
+            />
+            <div class="h-[83vh] w-[100vw]">
                 <AppMapGo
                     :route="route"
                     :currentInterestPointIndex="currIndex"

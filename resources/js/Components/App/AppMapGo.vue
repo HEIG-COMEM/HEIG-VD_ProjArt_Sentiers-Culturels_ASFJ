@@ -1,9 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, watch, reactive, computed } from "vue";
 import "maplibre-gl/dist/maplibre-gl.css";
-import MapLibreGlDirections, {
-    LoadingIndicatorControl,
-} from "@maplibre/maplibre-gl-directions";
 import mapboxgl from "maplibre-gl";
 
 const props = defineProps({
@@ -20,18 +17,6 @@ const props = defineProps({
 const IP = reactive(props.route.interest_points);
 const currentInterestPoint = computed(() => {
     return IP.at(props.currentInterestPointIndex.value);
-});
-
-watch(props.route, (newValue) => {
-    console.log(newValue);
-});
-
-watch(props.currentInterestPointIndex, (newValue) => {
-    console.log(newValue);
-});
-
-watch(currentInterestPoint, (newValue) => {
-    console.log(newValue);
 });
 
 const route = reactive(props.route);
@@ -141,6 +126,18 @@ onMounted(() => {
                 zoom: 16,
                 essential: true,
             });
+        });
+
+        map.on("click", "interestPoints", (e) => {
+            const feature = e.features[0];
+            const interestPoint = interestpoints.find(
+                (ip) => ip.uuid === feature.properties.uuid,
+            );
+
+            if (interestPoint) {
+                props.currentInterestPointIndex.value =
+                    interestpoints.indexOf(interestPoint);
+            }
         });
     });
 
