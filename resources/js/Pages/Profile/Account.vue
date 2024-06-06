@@ -1,4 +1,5 @@
 <script setup>
+import { back } from "@/utils/helper";
 import { reactive, ref, watch } from "vue";
 import { Head, useForm, Link } from "@inertiajs/vue3";
 import { ArrowLeft, UserCircle2, Setting } from "@iconsans/vue/linear";
@@ -44,10 +45,6 @@ const submit = () => {
             }, 300);
         },
     });
-};
-
-const back = () => {
-    window.location.href = route("profile");
 };
 </script>
 

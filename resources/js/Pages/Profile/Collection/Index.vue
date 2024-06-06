@@ -1,4 +1,5 @@
 <script setup>
+import { back } from "@/utils/helper";
 import { Head } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
@@ -18,10 +19,6 @@ const props = defineProps({
 });
 
 const badges = reactive(props.badges.data);
-
-const back = () => {
-    window.history.back();
-};
 </script>
 
 <template>

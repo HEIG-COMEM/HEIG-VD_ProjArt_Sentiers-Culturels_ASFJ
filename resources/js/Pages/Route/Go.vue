@@ -1,4 +1,5 @@
 <script setup>
+import { back, getImgPath } from "@/utils/helper";
 import { computed, defineProps, onMounted, reactive, ref, watch } from "vue";
 import { Head } from "@inertiajs/vue3";
 
@@ -61,12 +62,8 @@ const distance = computed(() => {
         : route.length + " m";
 });
 
-const getImgPath = (path) => `/storage/pictures/${path}`;
 const getFirstTagsName = (tags, limit) =>
     tags.slice(0, limit).map((tag) => tag.name);
-const back = () => {
-    window.history.back();
-};
 
 // Check if the user is close to the start of the route to allow him to start it
 onMounted(() => {

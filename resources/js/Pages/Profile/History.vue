@@ -1,4 +1,5 @@
 <script setup>
+import { back, getImgPath } from "@/utils/helper";
 import { Head, Link } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
@@ -36,11 +37,6 @@ console.log(groupedHistories.value); // TODO: remove this line
 
 const tagsName = (tags) => tags.map((tag) => tag.name).slice(0, 4);
 
-const url = new URL(window.location.href);
-const getImgSrc = (path) => {
-    return `${url.origin}/storage/pictures/${path}`;
-};
-
 const formattedDate = (date) => {
     return new Date(date).toLocaleDateString("fr-FR", {
         weekday: "long",
@@ -48,10 +44,6 @@ const formattedDate = (date) => {
         month: "long",
         day: "numeric",
     });
-};
-
-const back = () => {
-    window.history.back();
 };
 </script>
 
@@ -95,7 +87,7 @@ const back = () => {
                                 :title="h.route.name"
                                 :tags="tagsName(h.route.tags)"
                                 :img-path="
-                                    getImgSrc(h.route.pictures.at(0).path)
+                                    getImgPath(h.route.pictures.at(0).path)
                                 "
                                 :img-alt="h.route.name"
                                 :href="route('route.show', h.route.uuid)"

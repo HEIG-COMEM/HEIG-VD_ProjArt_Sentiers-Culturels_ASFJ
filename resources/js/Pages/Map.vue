@@ -1,4 +1,5 @@
 <script setup>
+import { getImgPath, getTagsName } from "@/utils/helper";
 import { Head } from "@inertiajs/vue3";
 import { computed, defineProps, onMounted, reactive, ref, watch } from "vue";
 import { ArrowDown2, CrossCircle } from "@iconsans/vue/linear";
@@ -59,9 +60,6 @@ const searchResults = computed(() => {
         point.name.toLowerCase().includes(search.value.toLowerCase()),
     );
 });
-
-const getImgPath = (path) => `/storage/pictures/${path}`;
-const getTagsName = (tags) => tags.map((tag) => tag.name);
 
 onMounted(() => {
     navigator.geolocation.getCurrentPosition((position) => {

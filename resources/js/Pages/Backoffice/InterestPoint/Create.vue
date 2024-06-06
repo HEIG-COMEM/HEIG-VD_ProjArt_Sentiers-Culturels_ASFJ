@@ -1,4 +1,5 @@
 <script setup>
+import { back } from "@/utils/helper";
 import { reactive, ref, watch, computed } from "vue";
 import { Head, useForm } from "@inertiajs/vue3";
 
@@ -114,10 +115,6 @@ const submit = () => {
     }
 
     form.post(route("backoffice.interest-points.store"));
-};
-
-const back = () => {
-    window.history.back();
 };
 </script>
 

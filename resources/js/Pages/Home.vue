@@ -1,4 +1,5 @@
 <script setup>
+import { getImgPath } from "@/utils/helper";
 import { Head, Link } from "@inertiajs/vue3";
 import { defineProps, reactive, ref, computed } from "vue";
 
@@ -31,8 +32,6 @@ const interestpoints = reactive(props.interestpoints.data);
 const routesOrderedRating = reactive(props.routesOrderedRating.data);
 
 const discoverySearch = ref("");
-
-const getImgPath = (path) => `/storage/pictures/${path}`;
 
 const discoverySearchResult = computed(() => {
     return [...routes, ...interestpoints].filter((item) =>
@@ -97,7 +96,7 @@ const discoverySearchResult = computed(() => {
                             <div class="flex flex-col gap-10">
                                 <!-- TOP 3 -->
                                 <div class="flex flex-col gap-4">
-                                    <h2 class="text-base text-xl font-semibold">
+                                    <h2 class="text-xl font-semibold">
                                         Les plus aimés
                                     </h2>
                                     <div
@@ -125,7 +124,7 @@ const discoverySearchResult = computed(() => {
 
                                 <!-- NEARBY -->
                                 <div class="flex flex-col gap-4">
-                                    <h2 class="text-base text-xl font-semibold">
+                                    <h2 class="text-xl font-semibold">
                                         A proximité
                                     </h2>
                                     <AppNearbySquareCard />

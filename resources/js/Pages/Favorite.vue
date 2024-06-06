@@ -1,4 +1,5 @@
 <script setup>
+import { getTagsName, getImgPath } from "@/utils/helper";
 import { Head } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
@@ -16,8 +17,7 @@ const props = defineProps({
 
 const favorites = reactive(props.routes.data);
 
-const tagsName = (tags) => tags.map((tag) => tag.name);
-const getImgPath = (path) => `/storage/pictures/${path}`;
+const getTagsName = (tags) => tags.map((tag) => tag.name);
 </script>
 
 <template>
@@ -33,7 +33,7 @@ const getImgPath = (path) => `/storage/pictures/${path}`;
                     <AppHorizontalCard
                         v-for="favorite in favorites"
                         :title="favorite.name"
-                        :tags="tagsName(favorite.tags)"
+                        :tags="getTagsName(favorite.tags)"
                         :href="route('route.show', favorite.uuid)"
                         :img-path="getImgPath(favorite.pictures.at(0).path)"
                         :img-alt="favorite.name"
