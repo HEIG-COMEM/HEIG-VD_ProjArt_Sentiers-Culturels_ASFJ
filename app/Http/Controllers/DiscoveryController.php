@@ -30,6 +30,13 @@ class DiscoveryController extends Controller
 
         $routes->makeHidden('path');
 
+        $routesOrderedRating = $routes->sortByDesc(function ($route) {
+            return $route->rates->avg('rate');
+        })->take(3);
+        $routesOrderedRating->load('pictures');
+
+        $routesOrderedRating->makeHidden('path');
+
         $interestpoints = InterestPoint::all();
         $interestpoints->load('pictures');
 
@@ -51,7 +58,8 @@ class DiscoveryController extends Controller
             'interestpoints' => InterestPointResource::collection($interestpoints),
             'difficulties' => DifficultyResource::collection($difficulties),
             'tags' => TagResource::collection($tags),
-            'latestRoutes' => RouteResource::collection($latestRoutes)
+            'latestRoutes' => RouteResource::collection($latestRoutes),
+            'routesOrderedRating' => RouteResource::collection($routesOrderedRating)
         ]);
     }
 
@@ -79,6 +87,10 @@ class DiscoveryController extends Controller
                 $routes->forget($route->id);
             }
         }
+
+        $routes->makeHidden('path');
+        $routes = $routes->take(3);
+        $routes->load('pictures');
 
         return RouteResource::collection($routes);
     }

@@ -105,7 +105,7 @@ const back = () => {
                     </div>
                     <AppNoData
                         v-else
-                        title="historique"
+                        title="Historique"
                         text="pour explorer de nouveaux sentiers et retrouver l'historique de vos parcours dans cette section !"
                         :call-to-action="{
                             text: 'la carte',

@@ -42,7 +42,7 @@ const getImgPath = (path) => `/storage/pictures/${path}`;
                 </div>
                 <AppNoData
                     v-else
-                    title="liste de favoris"
+                    title="Liste de favoris"
                     text="pour commencer à ajouter des
                             sentiers à votre collection !"
                     :call-to-action="{
