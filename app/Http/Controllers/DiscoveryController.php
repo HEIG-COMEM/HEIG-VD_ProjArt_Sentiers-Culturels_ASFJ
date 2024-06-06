@@ -39,6 +39,7 @@ class DiscoveryController extends Controller
 
         $interestpoints = InterestPoint::all();
         $interestpoints->load('pictures');
+        $interestpoints->load('tags');
 
         $interestpoints->map(function ($interestpoint) {
             $interestpoint->type = 'interestpoint';

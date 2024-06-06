@@ -8,7 +8,6 @@ use App\Http\Resources\RouteResource;
 use App\Http\Resources\TagResource;
 use App\Models\Difficulty;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Route;
 use App\Models\InterestPoint;
@@ -24,6 +23,7 @@ class CollectionAdminController extends Controller
 
         $interestpoints = InterestPoint::all();
         $interestpoints->load('pictures');
+        $interestpoints->load('tags');
 
         $difficulties = Difficulty::all();
         $tags = Tag::all();
