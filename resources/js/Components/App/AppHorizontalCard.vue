@@ -25,8 +25,7 @@ const props = defineProps({
     },
     tags: {
         type: Array,
-        required: false,
-        default: () => [],
+        required: true,
     },
     href: {
         type: String,
@@ -34,7 +33,8 @@ const props = defineProps({
     },
 });
 
-const trimTags = props.tags.slice(0, 4);
+const MAX_TAGS_TO_DISPLAY = 2;
+const trimTags = props.tags.slice(0, MAX_TAGS_TO_DISPLAY);
 </script>
 
 <template>
@@ -75,6 +75,12 @@ const trimTags = props.tags.slice(0, 4);
                             class="badge badge-primary truncate"
                         >
                             {{ tag }}
+                        </div>
+                        <div
+                            v-if="props.tags.length > MAX_TAGS_TO_DISPLAY"
+                            class="badge badge-primary"
+                        >
+                            ...
                         </div>
                     </div>
                 </div>

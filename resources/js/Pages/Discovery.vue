@@ -80,7 +80,9 @@ const filteredRoutes = computed(() => {
     if (selectedTags.length) {
         selectedTags.forEach((tag) => {
             filter = filter.filter((route) =>
-                route.tags.some((routeTag) => routeTag.id === tag),
+                route.tags.some((routeTag) =>
+                    selectedTags.includes(routeTag.id),
+                ),
             );
         });
     }
@@ -89,11 +91,23 @@ const filteredRoutes = computed(() => {
 });
 
 const filteredInterestPoints = computed(() => {
-    return interestpoints.filter((interestpoint) =>
+    let filter = interestpoints.filter((interestpoint) =>
         interestpoint.name
             .toLowerCase()
             .includes(interestpointSearch.value.toLowerCase()),
     );
+
+    if (selectedTags.length) {
+        selectedTags.forEach((tag) => {
+            filter = filter.filter((route) =>
+                route.tags.some((routeTag) =>
+                    selectedTags.includes(routeTag.id),
+                ),
+            );
+        });
+    }
+
+    return filter;
 });
 
 const handleTagSelection = (tagId) => {
@@ -297,7 +311,7 @@ const clearFilters = () => {
 
                         <div class="flex flex-row gap-2 w-full">
                             <div
-                                class="rounded-lg flex flex-row justify-between gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer flex-grow"
+                                class="rounded-lg flex gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer"
                                 onclick="difficulty_modal.showModal()"
                                 :class="{
                                     'bg-primary': selectedDifficulty,
@@ -310,7 +324,7 @@ const clearFilters = () => {
                                 /></span>
                             </div>
                             <div
-                                class="rounded-lg flex flex-row justify-between gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer flex-grow"
+                                class="rounded-lg flex gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer"
                                 onclick="tags_modal.showModal()"
                                 :class="{
                                     'bg-primary': selectedTags.length,
@@ -375,6 +389,36 @@ const clearFilters = () => {
                             class="w-full"
                             v-model="interestpointSearch"
                         />
+
+                        <div class="flex flex-row gap-2 w-full">
+                            <div
+                                class="rounded-lg flex gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer"
+                                onclick="tags_modal.showModal()"
+                                :class="{
+                                    'bg-primary': selectedTags.length,
+                                    'text-primary-content': selectedTags.length,
+                                }"
+                            >
+                                Tags
+                                {{
+                                    selectedTags.length
+                                        ? `(${selectedTags.length})`
+                                        : ""
+                                }}
+                                <span class="h-4 w-4"
+                                    ><ArrowDown2 class="h-full w-full"
+                                /></span>
+                            </div>
+                            <div
+                                v-show="hasFiltersApplied"
+                                class="rounded-lg bg-base-200 p-2 text-xs cursor-pointer"
+                                @click="clearFilters()"
+                            >
+                                <span class="h-4 w-4"
+                                    ><CrossCircle class="h-full w-full"
+                                /></span>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- INTEREST POINTS LIST -->
@@ -385,6 +429,7 @@ const clearFilters = () => {
                             v-for="interestpoint in filteredInterestPoints"
                             :key="interestpoint.id"
                             :title="interestpoint.name"
+                            :tags="getTagsName(interestpoint.tags)"
                             :img-path="
                                 getImgPath(interestpoint.pictures.at(0).path)
                             "

@@ -1,8 +1,8 @@
 <script setup>
-import { reactive, ref, computed } from "vue";
 import { Head } from "@inertiajs/vue3";
-
+import { reactive, ref, computed } from "vue";
 import BackofficeLayout from "@/Layouts/BackofficeLayout.vue";
+
 import BaseSearchBar from "@/Components/Base/BaseSearchBar.vue";
 import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
 
@@ -61,7 +61,9 @@ const filteredRoutes = computed(() => {
     if (selectedTags.length) {
         selectedTags.forEach((tag) => {
             filter = filter.filter((route) =>
-                route.tags.some((routeTag) => routeTag.id === tag),
+                route.tags.some((routeTag) =>
+                    selectedTags.includes(routeTag.id),
+                ),
             );
         });
     }
@@ -70,11 +72,23 @@ const filteredRoutes = computed(() => {
 });
 
 const filteredInterestPoints = computed(() => {
-    return interestpoints.filter((interestpoint) =>
+    let filter = interestpoints.filter((interestpoint) =>
         interestpoint.name
             .toLowerCase()
             .includes(interestpointSearch.value.toLowerCase()),
     );
+
+    if (selectedTags.length) {
+        selectedTags.forEach((tag) => {
+            filter = filter.filter((route) =>
+                route.tags.some((routeTag) =>
+                    selectedTags.includes(routeTag.id),
+                ),
+            );
+        });
+    }
+
+    return filter;
 });
 
 const handleTagSelection = (tagId) => {
@@ -88,6 +102,7 @@ const handleTagSelection = (tagId) => {
 const hasFiltersApplied = computed(() => {
     if (selectedDifficulty.value || selectedTags.length) return true;
 });
+
 const clearFilters = () => {
     selectedDifficulty.value = null;
     selectedTags.splice(0);
@@ -241,6 +256,7 @@ const clearFilters = () => {
                             v-for="interestpoint in filteredInterestPoints"
                             :key="interestpoint.id"
                             :title="interestpoint.name"
+                            :tags="getTagsName(interestpoint.tags)"
                             :img-path="
                                 getImgPath(interestpoint.pictures.at(0).path)
                             "
