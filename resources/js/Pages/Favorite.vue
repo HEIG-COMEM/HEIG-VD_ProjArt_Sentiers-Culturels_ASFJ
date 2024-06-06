@@ -16,8 +16,6 @@ const props = defineProps({
 });
 
 const favorites = reactive(props.routes.data);
-
-const getTagsName = (tags) => tags.map((tag) => tag.name);
 </script>
 
 <template>
