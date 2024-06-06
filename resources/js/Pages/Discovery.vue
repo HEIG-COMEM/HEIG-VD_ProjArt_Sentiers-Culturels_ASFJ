@@ -1,4 +1,5 @@
 <script setup>
+import { getImgPath, getTagsName } from "@/utils/helper";
 import { Head } from "@inertiajs/vue3";
 import { reactive, ref, computed } from "vue";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
@@ -56,9 +57,6 @@ const interestpointSearch = ref("");
 
 const selectedDifficulty = ref(null);
 const selectedTags = reactive([]);
-
-const getImgPath = (path) => `/storage/pictures/${path}`;
-const getTagsName = (tags) => tags.map((tag) => tag.name);
 
 const discoverySearchResult = computed(() => {
     return [...routes, ...interestpoints].filter((item) =>

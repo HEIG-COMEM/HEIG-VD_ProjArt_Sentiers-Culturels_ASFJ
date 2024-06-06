@@ -1,4 +1,5 @@
 <script setup>
+import { back, getImgPath } from "@/utils/helper";
 import { Head, Link } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
@@ -22,17 +23,6 @@ const props = defineProps({
 
 const badge = reactive(props.badge.data);
 const breadcrumb = reactive(props.breadcrumb.data);
-
-const tagsName = (tags) => tags.map((tag) => tag.name).slice(0, 4);
-
-const url = new URL(window.location.href);
-const getImgSrc = (path) => {
-    return `${url.origin}/storage/pictures/${path}`;
-};
-
-const back = () => {
-    window.history.back();
-};
 </script>
 
 <template>
@@ -135,7 +125,7 @@ const back = () => {
                                             v-if="badge.interest_point"
                                             :title="badge.interest_point.name"
                                             :imgPath="
-                                                getImgSrc(
+                                                getImgPath(
                                                     badge.interest_point.pictures.at(
                                                         0,
                                                     ).path,
@@ -159,7 +149,7 @@ const back = () => {
                                             v-if="badge.route"
                                             :title="badge.route.name"
                                             :imgPath="
-                                                getImgSrc(
+                                                getImgPath(
                                                     badge.route.pictures.at(0)
                                                         .path,
                                                 )

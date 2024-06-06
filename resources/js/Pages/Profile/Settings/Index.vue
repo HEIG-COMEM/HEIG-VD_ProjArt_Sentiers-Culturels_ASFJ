@@ -1,4 +1,5 @@
 <script setup>
+import { back } from "@/utils/helper";
 import { Head, useForm } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
@@ -31,10 +32,6 @@ const logout = () => {
             window.location.href = route("home");
         },
     });
-};
-
-const back = () => {
-    window.history.back();
 };
 </script>
 

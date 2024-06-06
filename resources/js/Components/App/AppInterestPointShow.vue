@@ -1,4 +1,5 @@
 <script setup>
+import { back, getImgPath } from "@/utils/helper";
 import { defineProps, onMounted, reactive, ref } from "vue";
 import { ArrowLeft } from "@iconsans/vue/linear";
 
@@ -37,14 +38,6 @@ onMounted(() => {
 });
 
 const tagsName = (tags) => tags.map((tag) => tag.name).slice(0, 4);
-
-const getImgSrc = (path) => {
-    return `${url.origin}/storage/pictures/${path}`;
-};
-
-const back = () => {
-    window.history.back();
-};
 </script>
 
 <template>
@@ -81,7 +74,7 @@ const back = () => {
                     <img
                         class="w-full h-full object-cover"
                         :src="
-                            getImgSrc(interestPoint.value.pictures.at(0).path)
+                            getImgPath(interestPoint.value.pictures.at(0).path)
                         "
                         :alt="interestPoint.value.pictures.at(0).title"
                     />
@@ -118,7 +111,7 @@ const back = () => {
                                 :title="sentier.name"
                                 :tags="tagsName(sentier.tags)"
                                 :imgPath="
-                                    getImgSrc(sentier.pictures.at(0).path)
+                                    getImgPath(sentier.pictures.at(0).path)
                                 "
                                 :imgAlt="sentier.pictures.at(0).title"
                                 :href="`/route/${sentier.uuid}`"

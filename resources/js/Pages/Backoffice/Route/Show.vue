@@ -1,4 +1,5 @@
 <script setup>
+import { back, getImgPath } from "@/utils/helper";
 import { defineProps, reactive } from "vue";
 import { Head } from "@inertiajs/vue3";
 import { ArrowLeft } from "@iconsans/vue/linear";
@@ -25,14 +26,7 @@ const form = useForm({
 const submit = () => {
     form.delete(route("backoffice.routes.destroy", form.uuid));
 };
-
-const back = () => {
-    window.history.back();
-};
 const tagsName = (tags) => tags.map((tag) => tag.name).slice(0, 4);
-const getImgSrc = (path) => {
-    return `${window.location.origin}/storage/pictures/${path}`;
-};
 </script>
 
 <template>
@@ -57,7 +51,7 @@ const getImgSrc = (path) => {
                 <div class="h-[40vh] w-full fixed -z-10 top-0">
                     <img
                         class="w-full h-full object-cover"
-                        :src="getImgSrc(routeDB.pictures.at(0).path)"
+                        :src="getImgPath(routeDB.pictures.at(0).path)"
                         :alt="routeDB.pictures.at(0).title"
                     />
                 </div>
@@ -115,7 +109,7 @@ const getImgSrc = (path) => {
                                 v-for="interestPoint in routeDB.interest_points"
                                 :title="interestPoint.name"
                                 :imgPath="
-                                    getImgSrc(interestPoint.pictures[0].path)
+                                    getImgPath(interestPoint.pictures[0].path)
                                 "
                                 :imgAlt="interestPoint.pictures.at(0).title"
                                 :href="

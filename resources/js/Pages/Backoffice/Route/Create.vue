@@ -1,4 +1,5 @@
 <script setup>
+import { back, getImgPath } from "@/utils/helper";
 import { reactive, ref, computed, watch } from "vue";
 import { Head, useForm } from "@inertiajs/vue3";
 
@@ -119,10 +120,6 @@ const handleFileUpload = (event, key) => {
     form[key] = event.target.files[0];
     imagePreview.value = URL.createObjectURL(form[key]);
 };
-const url = new URL(window.location.href);
-const getImgSrc = (path) => {
-    return `${url.origin}/storage/pictures/${path}`;
-};
 
 const submit = () => {
     form.hasErrors = false;
@@ -166,10 +163,6 @@ const submit = () => {
     form.post(route("backoffice.routes.store"), {
         // onFinish: () => form.reset(),
     });
-};
-
-const back = () => {
-    window.history.back();
 };
 </script>
 
@@ -465,7 +458,7 @@ const back = () => {
                                 <AppHorizontalCard
                                     :title="interestpoint.name"
                                     :imgPath="
-                                        getImgSrc(
+                                        getImgPath(
                                             interestpoint.pictures.at(0).path,
                                         )
                                     "
@@ -549,7 +542,7 @@ const back = () => {
                                     <AppHorizontalCard
                                         :title="interestpoint.name"
                                         :imgPath="
-                                            getImgSrc(
+                                            getImgPath(
                                                 interestpoint.pictures.at(0)
                                                     .path,
                                             )

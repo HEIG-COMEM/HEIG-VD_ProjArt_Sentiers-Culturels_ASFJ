@@ -1,4 +1,5 @@
 <script setup>
+import { getImgPath, getTagsName } from "@/utils/helper";
 import { Head } from "@inertiajs/vue3";
 import { reactive, ref, computed } from "vue";
 import BackofficeLayout from "@/Layouts/BackofficeLayout.vue";
@@ -43,9 +44,6 @@ const interestpointSearch = ref("");
 
 const selectedDifficulty = ref(null);
 const selectedTags = reactive([]);
-
-const getImgPath = (path) => `/storage/pictures/${path}`;
-const getTagsName = (tags) => tags.map((tag) => tag.name);
 
 const filteredRoutes = computed(() => {
     let filter = routes.filter((route) =>

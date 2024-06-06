@@ -1,4 +1,5 @@
 <script setup>
+import { back } from "@/utils/helper";
 import { Head } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
@@ -11,10 +12,6 @@ import {
 
 import { Link } from "@inertiajs/vue3";
 import AppNoData from "@/Components/App/AppNoData.vue";
-
-const back = () => {
-    window.history.back();
-};
 </script>
 
 <template>

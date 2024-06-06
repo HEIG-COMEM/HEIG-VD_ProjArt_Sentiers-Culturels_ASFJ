@@ -1,4 +1,5 @@
 <script setup>
+import { back, getImgPath, getTagsName } from "@/utils/helper";
 import { Head, Link } from "@inertiajs/vue3";
 import {
     computed,
@@ -48,9 +49,7 @@ const route = ref(props.route.data);
 const auth = ref(props.auth);
 const isAuth = computed(() => auth.value.user !== null);
 
-const getImgPath = (path) => `/storage/pictures/${path}`;
 const bgImgPath = computed(() => getImgPath(route.value.pictures.at(0).path));
-const getTagsName = (tags) => tags.map((tag) => tag.name);
 
 const duration = computed(() => {
     return Math.floor(route.value.duration / 3600) +
@@ -85,10 +84,6 @@ const interestPoints = reactive(route.value.interest_points);
 const isFavorite = ref(route.value.isFavorite);
 const showWeather = ref(false);
 const toggleMenuFirstActive = ref(true);
-
-const back = () => {
-    window.history.back();
-};
 
 const toggleFav = () => {
     const API_ENDPOINT = `/api/favorite/${route.value.uuid}`;

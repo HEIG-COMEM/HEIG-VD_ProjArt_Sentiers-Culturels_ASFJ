@@ -26,6 +26,7 @@ const props = defineProps({
     tags: {
         type: Array,
         required: false,
+        default: () => [],
     },
     href: {
         type: String,

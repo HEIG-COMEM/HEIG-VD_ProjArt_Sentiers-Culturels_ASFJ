@@ -1,12 +1,11 @@
 <script setup>
+import { getImgPath } from "@/utils/helper";
 import { ref, reactive, onMounted } from "vue";
 import AppSquareCard from "@/Components/App/AppSquareCard.vue";
 
 const isLoading = ref(true);
 const error = reactive({ data: [] });
 const nearby = reactive({ data: [] });
-
-const getImgPath = (path) => `/storage/pictures/${path}`;
 
 onMounted(() => {
     navigator.geolocation.getCurrentPosition((position) => {
