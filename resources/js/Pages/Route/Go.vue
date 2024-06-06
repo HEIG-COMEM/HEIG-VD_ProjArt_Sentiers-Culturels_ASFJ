@@ -219,10 +219,10 @@ const setRating = () => {
                 id="toast-target"
             ></div>
             <!-- TOP BTNS -->
-            <div class="absolute z-[1] p-6 top-0 left-0 w-full">
+            <div class="absolute z-[1] p-6 top-0 left-0">
                 <div>
                     <button
-                        class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
+                        class="btn btn-circle btn-outline btn-primary bg-base-100 h-6"
                         @click="back()"
                     >
                         <ArrowLeft class="w-7 h-7" />

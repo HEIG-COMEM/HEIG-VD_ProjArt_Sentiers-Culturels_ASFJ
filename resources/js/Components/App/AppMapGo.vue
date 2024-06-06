@@ -154,15 +154,15 @@ onMounted(() => {
 
     <!-- Screen reader only -->
     <div class="sr-only" aria-live="polite">
-        <div
+        <ol
             v-for="(segment, index) in segments"
             :key="segment.id"
-            :aria-details="`ségment numéro ${index + 1} du parcours`"
+            :aria-details="`Ségment numéro ${index + 1} du parcours`"
         >
-            <p v-for="step in segment.steps">
+            <li v-for="step in segment.steps">
                 {{ step.instruction }}
-            </p>
-        </div>
+            </li>
+        </ol>
     </div>
 </template>
 
