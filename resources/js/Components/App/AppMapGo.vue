@@ -1,23 +1,41 @@
 <script setup>
-import { onMounted, onUnmounted, ref, watch, reactive } from "vue";
+import { onMounted, onUnmounted, ref, watch, reactive, computed } from "vue";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MapLibreGlDirections, {
     LoadingIndicatorControl,
 } from "@maplibre/maplibre-gl-directions";
 import mapboxgl from "maplibre-gl";
 
-const INTEREST_POINT_COLOR = [255, 0, 255];
-
 const props = defineProps({
     route: {
         type: Object,
         required: true,
     },
+    currentInterestPointIndex: {
+        type: Object,
+        required: true,
+    },
+});
+
+const IP = reactive(props.route.interest_points);
+const currentInterestPoint = computed(() => {
+    return IP.at(props.currentInterestPointIndex.value);
+});
+
+watch(props.route, (newValue) => {
+    console.log(newValue);
+});
+
+watch(props.currentInterestPointIndex, (newValue) => {
+    console.log(newValue);
+});
+
+watch(currentInterestPoint, (newValue) => {
+    console.log(newValue);
 });
 
 const route = reactive(props.route);
 const interestpoints = reactive(route.interest_points);
-const interestPointsMarkers = reactive([]);
 
 const mapInstance = ref(null);
 
@@ -56,10 +74,7 @@ onMounted(() => {
         }, 1);
     });
 
-    console.log(interestpoints);
-
     map.on("load", () => {
-        console.log(interestpoints);
         map.addSource("interestPoints", {
             type: "geojson",
             data: {
@@ -118,6 +133,14 @@ onMounted(() => {
                 "icon-size": 0.5,
                 "icon-allow-overlap": true,
             },
+        });
+
+        watch(currentInterestPoint, (newValue) => {
+            map.flyTo({
+                center: [newValue.long, newValue.lat],
+                zoom: 16,
+                essential: true,
+            });
         });
     });
 

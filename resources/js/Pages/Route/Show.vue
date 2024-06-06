@@ -167,22 +167,6 @@ onUnmounted(() => {
                     </div>
                     <div class="flex flex-row gap-2">
                         <button
-                            v-if="isAuth"
-                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
-                            @click="toggleFav()"
-                        >
-                            <component
-                                :is="isFavorite ? StarFull : Star"
-                                class="w-7 h-7"
-                            />
-                        </button>
-                        <button
-                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
-                            @click="download()"
-                        >
-                            <Download class="w-7 h-7" />
-                        </button>
-                        <button
                             class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
                             @click="showWeather = !showWeather"
                         >
@@ -202,6 +186,22 @@ onUnmounted(() => {
                                     stroke-linecap="round"
                                 />
                             </svg>
+                        </button>
+                        <button
+                            v-if="isAuth"
+                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
+                            @click="toggleFav()"
+                        >
+                            <component
+                                :is="isFavorite ? StarFull : Star"
+                                class="w-7 h-7"
+                            />
+                        </button>
+                        <button
+                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
+                            @click="download()"
+                        >
+                            <Download class="w-7 h-7" />
                         </button>
                     </div>
                 </div>

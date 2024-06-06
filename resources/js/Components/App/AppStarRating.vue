@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref } from "vue";
+import { defineProps, ref, watch } from "vue";
 const props = defineProps({
     rating: {
         type: Number,
@@ -12,6 +12,14 @@ const props = defineProps({
 });
 const rating = ref(props.rating);
 const ratingArray = Array.from({ length: 10 }, (_, i) => i + 1);
+const model = defineModel();
+
+const updateRating = (value) => {
+    if (props.isUserInteraction) {
+        rating.value = value;
+        model.value = value;
+    }
+};
 </script>
 
 <template>
@@ -21,6 +29,7 @@ const ratingArray = Array.from({ length: 10 }, (_, i) => i + 1);
             name="rating-10"
             class="rating-hidden"
             :checked="!rating"
+            @change="updateRating(0)"
         />
         <template v-for="i in ratingArray">
             <input
@@ -33,6 +42,7 @@ const ratingArray = Array.from({ length: 10 }, (_, i) => i + 1);
                 }"
                 :disabled="!isUserInteraction"
                 :checked="rating * 2 === i"
+                @change="updateRating(i / 2)"
             />
         </template>
     </div>

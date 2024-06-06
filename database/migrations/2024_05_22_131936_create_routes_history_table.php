@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->timestamp('start_timestamp')->useCurrent();
             $table->timestamp('end_timestamp')->default(null)->nullable();
+            $table->boolean('is_interrupted')->default(false);
             $table->timestamps();
         });
     }
