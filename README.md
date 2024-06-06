@@ -67,13 +67,13 @@ DB_PASSWORD= its password
 
     `php artisan key:generate`
 
-9. Perform migrations and database seeding
-
-    `php artisan migrate:fresh --seed`
-
-10. Create link to storage directory
+9. Create link to storage directory
 
     `php artisan storage:link`
+
+10. Perform migrations and database seeding
+
+    `php artisan migrate:fresh --seed`
 
 11. (Optional) Optimization
     1. `composer install --optimize-autoloader --no-dev`
