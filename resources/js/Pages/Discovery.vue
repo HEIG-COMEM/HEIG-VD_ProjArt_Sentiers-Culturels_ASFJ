@@ -1,14 +1,14 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
-import { reactive, ref, computed, onMounted } from "vue";
+import { reactive, ref, computed } from "vue";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
 import BaseSearchBar from "@/Components/Base/BaseSearchBar.vue";
 import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
 import AppSquareCard from "@/Components/App/AppSquareCard.vue";
+import AppNearbySquareCard from "@/Components/App/AppNearbySquareCard.vue";
 
 import { ArrowDown2, CrossCircle } from "@iconsans/vue/linear";
-import { latest } from "maplibre-gl";
 
 const props = defineProps({
     interestpoints: {
@@ -36,6 +36,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    routesOrderedRating: {
+        type: Object,
+        required: true,
+    },
 });
 
 const routes = reactive(props.routes.data);
@@ -43,6 +47,7 @@ const interestpoints = reactive(props.interestpoints.data);
 const difficulties = reactive(props.difficulties.data);
 const tags = reactive(props.tags.data);
 const latestRoutes = reactive(props.latestRoutes.data);
+const routesOrderedRating = reactive(props.routesOrderedRating.data);
 
 const showRoutes = ref(1);
 const discoverySearch = ref("");
@@ -102,36 +107,11 @@ const handleTagSelection = (tagId) => {
 const hasFiltersApplied = computed(() => {
     if (selectedDifficulty.value || selectedTags.length) return true;
 });
+
 const clearFilters = () => {
     selectedDifficulty.value = null;
     selectedTags.splice(0);
 };
-
-const routesOrderedRating = computed(() => {
-    const routesRates = routes.map((route) => route.rates);
-
-    const routesAverage = routesRates.map((rates) => {
-        const sum = rates.reduce((acc, rate) => acc + rate.rate, 0);
-        return Math.round((sum / rates.length) * 100) / 100;
-    });
-
-    return routesAverage
-        .map((average, index) => ({ average, index }))
-        .sort((a, b) => b.average - a.average)
-        .map((item) => routes[item.index]);
-});
-
-// TODO : nearbyRoutes
-// Using DiscoveryController.php and DB "routes" table
-onMounted(() => {
-    const API_ENDPOINT = `/api/routes/nearby?latitude=46.523419&longitude=6.629712&radius=1000`;
-    const fetchData = async () => {
-        const response = await fetch(API_ENDPOINT);
-        const data = await response.json();
-        // console.log(data);
-    };
-    fetchData();
-});
 </script>
 
 <template>
@@ -200,7 +180,9 @@ onMounted(() => {
                     class="flex flex-col gap-8 justify-center w-full"
                 >
                     <!-- FILTER SECTION -->
-                    <div class="flex flex-col justify-center w-full gap-4">
+                    <div
+                        class="flex flex-col justify-center w-full gap-4 self-center"
+                    >
                         <BaseSearchBar
                             :is-absolute="false"
                             placeholder="Rechercher"
@@ -211,12 +193,14 @@ onMounted(() => {
                     <template v-if="!discoverySearch">
                         <!-- DISCOVERY LIST -->
                         <div
-                            class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6"
+                            class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 items-center"
                         >
                             <div class="flex flex-col gap-10">
                                 <!-- TOP 3 -->
                                 <div class="flex flex-col gap-4">
-                                    <h2 class="text-lg font-semibold">Top 3</h2>
+                                    <h2 class="text-lg font-semibold">
+                                        Les mieux notés
+                                    </h2>
                                     <div
                                         class="flex flex-row gap-4 items-center"
                                     >
@@ -245,33 +229,13 @@ onMounted(() => {
                                     <h2 class="text-lg font-semibold">
                                         A proximité
                                     </h2>
-                                    <div
-                                        class="flex flex-row gap-4 items-center"
-                                    >
-                                        <AppSquareCard
-                                            v-if="routesOrderedRating.length"
-                                            v-for="routeMostLiked in routesOrderedRating"
-                                            :title="routeMostLiked.name"
-                                            :href="`/route/${routeMostLiked.uuid}`"
-                                            :img-path="
-                                                getImgPath(
-                                                    routeMostLiked.pictures.at(
-                                                        0,
-                                                    ).path,
-                                                )
-                                            "
-                                            :img-alt="
-                                                routeMostLiked.pictures.at(0)
-                                                    .title
-                                            "
-                                        />
-                                    </div>
+                                    <AppNearbySquareCard />
                                 </div>
 
                                 <!-- NEW ONES -->
                                 <div class="flex flex-col gap-4">
                                     <h2 class="text-lg font-semibold">
-                                        Nouveautés
+                                        Les plus récents
                                     </h2>
                                     <div
                                         class="flex flex-row gap-4 items-center"
@@ -298,7 +262,7 @@ onMounted(() => {
                     </template>
                     <template v-else>
                         <div
-                            class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 overflow-x-scroll"
+                            class="flex flex-col gap-4 w-full max-h-[71vh] px-3 pb-3 overflow-x-scroll"
                         >
                             <AppHorizontalCard
                                 v-for="item in discoverySearchResult"
