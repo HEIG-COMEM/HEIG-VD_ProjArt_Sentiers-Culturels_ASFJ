@@ -2,27 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\InterestPointResource;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Route;
+use App\Models\InterestPoint;
+use App\Http\Resources\RouteResource;
+use App\Http\Resources\InterestPointResource;
 
 class HomeController extends Controller
 {
     public function home()
     {
         $routes = Route::all();
-        $rates = [];
-        foreach ($routes as $route) {
-            $rates[$route->id] = $route->rates->avg('rate');
-        }
-        arsort($rates);
-        $top3 = array_slice($rates, 0, 3, true);
-        $top3 = array_keys($top3);
-        $top3 = Route::find($top3)->makeHidden('path')->load('pictures');
+        $routes->load('difficulty');
+        $routes->load('pictures');
+        $routes->load('tags');
+        $routes->load('rates');
+
+        $routes->map(function ($route) {
+            $route->type = 'route';
+            return $route;
+        });
+
+        $routes->makeHidden('path');
+
+        $interestpoints = InterestPoint::all();
+        $interestpoints->load('pictures');
+
+        $interestpoints->map(function ($interestpoint) {
+            $interestpoint->type = 'interestpoint';
+            return $interestpoint;
+        });
+
+        $routesOrderedRating = $routes->sortByDesc(function ($route) {
+            return $route->rates->avg('rate');
+        })->take(3);
+        $routesOrderedRating->load('pictures');
+
+        $routesOrderedRating->makeHidden('path');
 
         return Inertia::render('Home', [
-            'top3' => $top3
+            'routes' => RouteResource::collection($routes),
+            'interestpoints' => InterestPointResource::collection($interestpoints),
+            'routesOrderedRating' => RouteResource::collection($routesOrderedRating)
         ]);
     }
 }
