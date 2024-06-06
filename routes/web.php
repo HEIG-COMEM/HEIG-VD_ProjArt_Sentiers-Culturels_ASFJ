@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use function Laravel\Prompts\error;
+
 Route::get('/', function () {
     return redirect()->route('home');
 });
