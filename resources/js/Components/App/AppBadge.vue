@@ -35,7 +35,7 @@ const props = defineProps({
         <div
             class="border border-neutral-200 w-20 h-20 bg-neutral-100 shadow-md rounded-md flex items-center justify-center mb-2"
         >
-            <img :src="'storage/badges/' + icon" alt="" srcset="" />
+            <img :src="'/storage/badges/' + icon" alt="" srcset="" />
         </div>
         <div class="max-w-20">
             <p class="truncate overflow-hidden">{{ badge }}</p>

@@ -33,13 +33,18 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    resume: {
+        type: Boolean,
+        default: false,
+        required: false,
+    },
     auth: {
         type: Object,
         required: true,
     },
 });
 
-const route = ref(props.route);
+const route = ref(props.route.data);
 const auth = ref(props.auth);
 const isAuth = computed(() => auth.value.user !== null);
 
@@ -163,22 +168,6 @@ onUnmounted(() => {
                     </div>
                     <div class="flex flex-row gap-2">
                         <button
-                            v-if="isAuth"
-                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
-                            @click="toggleFav()"
-                        >
-                            <component
-                                :is="isFavorite ? StarFull : Star"
-                                class="w-7 h-7"
-                            />
-                        </button>
-                        <button
-                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
-                            @click="download()"
-                        >
-                            <Download class="w-7 h-7" />
-                        </button>
-                        <button
                             class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
                             @click="showWeather = !showWeather"
                         >
@@ -199,6 +188,22 @@ onUnmounted(() => {
                                 />
                             </svg>
                         </button>
+                        <button
+                            v-if="isAuth"
+                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
+                            @click="toggleFav()"
+                        >
+                            <component
+                                :is="isFavorite ? StarFull : Star"
+                                class="w-7 h-7"
+                            />
+                        </button>
+                        <button
+                            class="btn btn-circle btn-outline btn-primary bg-base-100 border-none h-6"
+                            @click="download()"
+                        >
+                            <Download class="w-7 h-7" />
+                        </button>
                     </div>
                 </div>
             </div>
@@ -206,8 +211,11 @@ onUnmounted(() => {
             <!-- BOTTOM BTNS -->
             <div class="absolute z-[1] p-6 bottom-16 left-0 w-full">
                 <div class="flex flex-col items-center gap-2">
-                    <Link href="#" class="btn btn-primary w-full">
-                        Commencer le sentier
+                    <Link
+                        :href="`/route/go/${route.uuid}`"
+                        class="btn btn-primary w-full"
+                    >
+                        {{ resume ? "Reprendre" : "Commencer" }} le sentier
                     </Link>
                 </div>
             </div>

@@ -227,6 +227,12 @@ class RouteAdminController extends Controller
             $route->interestPoints()->attach($interestPoint, ['order' => $order++]);
         }
 
+        $interestPoints = Route::where('uuid', $id)->firstOrFail()->interestPoints;
+        $route->start_lat = $interestPoints->first()->lat;
+        $route->start_long = $interestPoints->first()->long;
+        $route->end_lat = $interestPoints->last()->lat;
+        $route->end_long = $interestPoints->last()->long;
+
         // Tags
         $route->tags()->detach();
         $route->tags()->attach($request->tags);

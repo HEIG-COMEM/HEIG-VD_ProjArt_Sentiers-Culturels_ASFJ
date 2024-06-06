@@ -8,6 +8,7 @@ use App\Http\Controllers\RouteController;
 use App\Http\Controllers\InterestPointController;
 use App\Http\Controllers\ProfileCollectionController;
 use App\Http\Controllers\ProfilePageController;
+use App\Http\Controllers\BadgeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,6 +25,8 @@ Route::get('/profile', function () {
 })->name('profile');
 
 Route::get('/route/{uuid}', [RouteController::class, 'show'])->name('route.show');
+
+Route::get('/route/go/{uuid}', [RouteController::class, 'go'])->name('route.go');
 
 /* ---------- Profile Section Route ---------- */
 Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
@@ -68,6 +71,12 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/interest-point/{uuid}', [InterestPointController::class, 'show']);
     Route::get('/routes/nearby', [DiscoveryController::class, 'getNearbyRoutes']);
     Route::get('/favorite/{uuid}', [FavoriteController::class, 'toggle']);
+    Route::get('/route/go/{uuid}', [RouteController::class, 'start']);
+    Route::post('/route/go/{uuid}/rate', [RouteController::class, 'rate']);
+    Route::get('/route/go/{uuid}/checkEnd', [RouteController::class, 'checkEnd']);
+    Route::get('/route/go/{uuid}/interrupt', [RouteController::class, 'interrupt']);
+    Route::get('/route/go/{uuid}/finish', [RouteController::class, 'finish']);
+    Route::get('/badge/claim/{uuid}', [BadgeController::class, 'claim']);
 });
 
 

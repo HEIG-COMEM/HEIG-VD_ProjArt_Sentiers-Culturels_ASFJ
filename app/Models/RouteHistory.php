@@ -16,6 +16,7 @@ class RouteHistory extends Model
         'user_id',
         'start_timestamp',
         'end_timestamp',
+        'is_interrupted'
     ];
 
     public function route()
