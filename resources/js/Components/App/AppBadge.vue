@@ -40,8 +40,11 @@ const props = defineProps({
         <div class="max-w-20">
             <p class="truncate overflow-hidden">{{ badge }}</p>
         </div>
-        <div v-if="total" class="text-sm text-base-300">
+        <div v-if="total && count" class="text-sm text-base-300">
             {{ count }} / {{ total }}
+        </div>
+        <div v-else-if="total" class="text-sm text-base-300">
+            {{ total }}
         </div>
     </component>
 </template>

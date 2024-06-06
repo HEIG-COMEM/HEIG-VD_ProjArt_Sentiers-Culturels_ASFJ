@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\ProfilePartialUpdate;
+use App\Http\Resources\AchievementResource;
 use App\Http\Resources\BadgeResource;
 use App\Http\Resources\RouteHistoryResource;
 use Illuminate\Http\Request;
@@ -33,9 +34,14 @@ class ProfilePageController extends Controller
             $badges->each(function ($badge) use ($user) {
                 $badge->is_owned = $user->badges->contains($badge);
             });
+
+            $routeCompletion = AchievementController::getRoutesCompleted($user->id);
+            $distance = AchievementController::getTotalDistance($user->id);
         }
         return Inertia::render('Profile/Index', [
             'collection' => BadgeResource::collection($badges),
+            'routeCompletion' => AchievementResource::make($routeCompletion),
+            'distance' => AchievementResource::make($distance),
         ]);
     }
 

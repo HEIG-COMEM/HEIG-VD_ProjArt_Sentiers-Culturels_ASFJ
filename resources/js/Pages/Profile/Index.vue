@@ -13,9 +13,19 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    routeCompletion: {
+        type: Object,
+        required: true,
+    },
+    distance: {
+        type: Object,
+        required: true,
+    },
 });
 
 const collectionBadges = reactive(props.collection.data);
+const routeCompletion = reactive(props.routeCompletion.data);
+const distance = reactive(props.distance.data);
 </script>
 
 <template>
@@ -62,8 +72,18 @@ const collectionBadges = reactive(props.collection.data);
                         <div
                             class="flex flex-row justify-left gap-4 mt-2 flex-wrap"
                         >
-                            <AppBadge badge="Distance" />
-                            <AppBadge badge="Sentiers parcourus" />
+                            <AppBadge
+                                badge="Distance"
+                                :count="distance.distance"
+                                :total="distance.total"
+                                :icon="`achievements/${distance.reward.toLowerCase()}.svg`"
+                            />
+                            <AppBadge
+                                badge="Sentiers parcourus"
+                                :count="routeCompletion.uniqueRoutesCount"
+                                :total="routeCompletion.totalRoutesCount"
+                                :icon="`achievements/${routeCompletion.reward.toLowerCase()}.svg`"
+                            />
                         </div>
                     </AppBadgeCard>
                     <AppBadgeCard
