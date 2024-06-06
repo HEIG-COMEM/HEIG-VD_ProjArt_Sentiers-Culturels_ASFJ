@@ -45,6 +45,7 @@ const isAuth = computed(() => auth.value.user !== null);
 
 const getImgPath = (path) => `/storage/pictures/${path}`;
 const bgImgPath = computed(() => getImgPath(route.value.pictures.at(0).path));
+const getTagsName = (tags) => tags.map((tag) => tag.name);
 
 const duration = computed(() => {
     return Math.floor(route.value.duration / 3600) +
@@ -456,6 +457,9 @@ onUnmounted(() => {
                                             class="w-full"
                                             :key="index"
                                             :title="interestPoint.name"
+                                            :tags="
+                                                getTagsName(interestPoint.tags)
+                                            "
                                             :description="
                                                 interestPoint.description
                                             "
