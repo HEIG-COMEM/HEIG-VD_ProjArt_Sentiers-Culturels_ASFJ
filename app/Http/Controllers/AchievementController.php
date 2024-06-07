@@ -11,7 +11,7 @@ class AchievementController extends Controller
 {
     public static function getRoutesCompleted(int $user_id)
     {
-        $uniqueRoutesCount = RouteHistory::where('user_id', $user_id)->distinct('route_id')->count();
+        $uniqueRoutesCount = RouteHistory::where([['user_id', $user_id], ['end_timestamp', '<>', null], ['is_interrupted', false]])->distinct('route_id')->count();
         $totalRoutesCount = Route::count();
 
         $percentage = $uniqueRoutesCount / $totalRoutesCount * 100;
@@ -28,7 +28,7 @@ class AchievementController extends Controller
 
     public static function getTotalDistance(int $user_id, string $unit = 'km')
     {
-        $userRoutes = RouteHistory::where('user_id', $user_id)->get();
+        $userRoutes = RouteHistory::where([['user_id', $user_id], ['end_timestamp', '<>', null], ['is_interrupted', false]])->get();
         $routes = $userRoutes->map(function ($route) {
             return Route::find($route->route_id);
         });

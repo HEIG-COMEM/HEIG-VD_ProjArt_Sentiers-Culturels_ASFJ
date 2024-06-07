@@ -11,7 +11,7 @@ import BaseButton from "@/Components/Base/BaseButton.vue";
         <template v-slot:main>
             <div class="p-6 flex flex-col justify-center gap-28">
                 <img
-                    src="/storage/logo.svg"
+                    src="/storage/logo-257x257.svg"
                     alt="logo de sentier culturel vaud"
                     class="w-1/2 mx-auto rounded-xl"
                 />

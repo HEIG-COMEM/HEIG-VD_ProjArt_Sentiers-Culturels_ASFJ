@@ -19,7 +19,16 @@ const props = defineProps({
         type: Number,
         reuiqred: false,
     },
+    isTotalOnly: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
     href: {
+        type: String,
+        required: false,
+    },
+    unit: {
         type: String,
         required: false,
     },
@@ -37,14 +46,14 @@ const props = defineProps({
         >
             <img :src="'/storage/badges/' + icon" alt="" srcset="" />
         </div>
-        <div class="max-w-20">
+        <div class="max-w-45">
             <p class="truncate overflow-hidden">{{ badge }}</p>
         </div>
-        <div v-if="total && count" class="text-sm text-base-300">
-            {{ count }} / {{ total }}
+        <div v-if="isTotalOnly" class="text-sm text-base-300">
+            {{ total }} {{ unit }}
         </div>
-        <div v-else-if="total" class="text-sm text-base-300">
-            {{ total }}
+        <div v-else class="text-sm text-base-300">
+            {{ count }} / {{ total }} {{ unit }}
         </div>
     </component>
 </template>

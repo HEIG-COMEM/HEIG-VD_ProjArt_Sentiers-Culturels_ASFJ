@@ -74,9 +74,10 @@ const distance = reactive(props.distance.data);
                         >
                             <AppBadge
                                 badge="Distance"
-                                :count="distance.distance"
+                                :is-total-only="true"
                                 :total="distance.total"
                                 :icon="`achievements/${distance.reward.toLowerCase()}.svg`"
+                                unit="km"
                             />
                             <AppBadge
                                 badge="Sentiers parcourus"
