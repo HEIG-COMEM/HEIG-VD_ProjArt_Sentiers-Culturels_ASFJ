@@ -48,16 +48,47 @@ class BadgeController extends Controller
 
         $user = User::find(Auth::id());
 
-        if ($user->badges->contains($badge->id)) {
+        if (!BadgeController::unlock($user, $badge)) {
             return response()->json([
                 'message' => 'Badge already claimed',
             ]);
         }
 
-        $user->badges()->attach($badge->id);
-
         return response()->json([
             'message' => 'Badge claimed',
         ]);
+    }
+
+    public static function unlock(User $user, Badge $badge)
+    {
+        if ($user->badges->contains($badge->id)) {
+            return false;
+        }
+
+        $user->badges()->attach($badge->id);
+        $user->refresh();
+
+        BadgeController::recursiveUnlock($user, $badge);
+
+        return true;
+    }
+
+    private static function recursiveUnlock(User $user, Badge $badge)
+    {
+        // check if the badge is a parent badge
+        if ($badge->parent_id) {
+            $parentBadge = Badge::find($badge->parent_id);
+
+            // check if the user has all the child badges
+            $children = $parentBadge->children;
+            $childrenIds = $children->pluck('id')->toArray();
+            $userBadgeIds = $user->badges->pluck('id')->toArray();
+
+            if (count(array_diff($childrenIds, $userBadgeIds)) === 0) {
+                BadgeController::unlock($user, $parentBadge);
+            }
+        }
+
+        return;
     }
 }

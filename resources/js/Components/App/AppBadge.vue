@@ -49,12 +49,14 @@ const props = defineProps({
         <div class="max-w-45">
             <p class="truncate overflow-hidden">{{ badge }}</p>
         </div>
-        <div v-if="isTotalOnly" class="text-sm text-base-300">
-            {{ total }} {{ unit }}
-        </div>
-        <div v-else class="text-sm text-base-300">
-            {{ count }} / {{ total }} {{ unit }}
-        </div>
+        <template v-if="total">
+            <div v-if="isTotalOnly" class="text-sm text-base-300">
+                {{ total }} {{ unit }}
+            </div>
+            <div v-else class="text-sm text-base-300">
+                {{ count }} / {{ total }} {{ unit }}
+            </div>
+        </template>
     </component>
 </template>
 

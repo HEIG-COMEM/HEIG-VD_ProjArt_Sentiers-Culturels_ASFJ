@@ -37,7 +37,7 @@
     @inertiaHead
 </head>
 
-<body class="max-h-dvh font-sans antialiased">
+<body class="max-h-svh font-sans antialiased">
     @inertia
 </body>
 

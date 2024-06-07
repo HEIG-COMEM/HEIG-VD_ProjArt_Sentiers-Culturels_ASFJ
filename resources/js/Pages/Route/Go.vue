@@ -184,7 +184,9 @@ const interupt = () => {
 };
 
 const setRating = () => {
-    if (!rate.value) return;
+    if (!rate.value) {
+        window.location.href = "/map";
+    }
     const API_ENDPOINT = `${window.location.origin}/api/route/go/${route.uuid}/rate`;
     fetch(API_ENDPOINT, {
         method: "POST",

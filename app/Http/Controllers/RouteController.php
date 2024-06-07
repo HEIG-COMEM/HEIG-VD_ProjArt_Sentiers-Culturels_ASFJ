@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Route;
 use App\Models\RouteHistory;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class RouteController extends Controller
@@ -162,8 +163,10 @@ class RouteController extends Controller
                 ->first();
 
             if ($route->badge) {
-                if (!$route->badge->users->contains(Auth::id())) {
-                    $route->badge->users()->attach(Auth::id());
+                $badge = $route->badge;
+                $user = User::find(Auth::id());
+
+                if (BadgeController::unlock($user, $badge)) {
                     $resp['has_won_badge'] = true;
                 }
             }
