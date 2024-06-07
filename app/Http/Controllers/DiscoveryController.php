@@ -64,16 +64,6 @@ class DiscoveryController extends Controller
         ]);
     }
 
-    private function distance($latitude1, $longitude1, $latitude2, $longitude2)
-    {
-        $theta = $longitude1 - $longitude2;
-        $distance = sin(deg2rad($latitude1)) * sin(deg2rad($latitude2)) +  cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * cos(deg2rad($theta));
-        $distance = acos($distance);
-        $distance = rad2deg($distance);
-        $distance = $distance * 60 * 1.1515 * 1.609344;
-        return ($distance);
-    }
-
     public function getNearbyRoutes(RoutesNearbyRequest $request)
     {
         $latitude = $request->latitude;
@@ -81,18 +71,22 @@ class DiscoveryController extends Controller
         $radius = $request->radius;
 
         $routes = Route::all();
+        $routes->makeHidden('path');
+        $routes->load('pictures');
 
+        $routesIn = [];
         foreach ($routes as $route) {
-            $distance = $this->distance($latitude, $longitude, $route->start_lat, $route->start_long);
-            if ($distance > $radius) {
-                $routes->forget($route->id);
+            $distance = GeoLocateController::distance($latitude, $longitude, $route->start_lat, $route->start_long);
+            if ($distance <= $radius) {
+                $route->distance = $distance;
+                $routesIn[] = $route;
             }
         }
 
-        $routes->makeHidden('path');
-        $routes = $routes->take(3);
-        $routes->load('pictures');
+        // Sort the routes by distance
+        $routesIn = collect($routesIn)->sortBy('distance');
+        $routesIn = $routesIn->take(3);
 
-        return RouteResource::collection($routes);
+        return RouteResource::collection($routesIn);
     }
 }
