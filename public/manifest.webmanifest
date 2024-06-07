@@ -2,7 +2,7 @@
     "name": "Sentier Culturel VD",
     "short_name": "SCVD",
     "description": "Découvrez le patrimoine culturel du canton de Vaud",
-    "display": "fullscreen",
+    "display": "standalone",
     "orientation": "portrait",
     "theme_color": "#F6F6F6",
     "start_url": "/home",
