@@ -14,17 +14,6 @@ class SeasonsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // $SAISONS = [
-        //     ['name' => 'Printemps'],
-        //     ['name' => 'Été'],
-        //     ['name' => 'Automne'],
-        //     ['name' => 'Hiver'],
-        // ];
-
-        // foreach ($SAISONS as $saison) {
-        //     Season::create($saison);
-        // }
-
         try {
             $data = JsonHelper::readJson('/dataset.json');
             $seasons = collect($data['seasons'])

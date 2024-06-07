@@ -20,34 +20,6 @@ class RoutesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // $NB_ROUTES = 1;
-        // $MIN_TOUR_POINTS = 2;
-        // $interestPoints = InterestPoint::all();
-        // $difficulty = Difficulty::all();
-
-        // for ($i = 0; $i < $NB_ROUTES; $i++) {
-        //     $NB_TOUR_POINTS = rand($MIN_TOUR_POINTS, count($interestPoints));
-        //     $tourPoints = $interestPoints->random($NB_TOUR_POINTS);
-
-        //     $route = new Route();
-        //     $route->name = 'Route ' . $i;
-        //     $route->description = 'Description de la route ' . $i;
-        //     $route->duration = rand(1, 120);
-        //     $route->length = rand(1, 10);
-
-        //     $route->start_lat = rand(0, 100);
-        //     $route->start_long = rand(0, 100);
-        //     $route->end_lat = rand(0, 100);
-        //     $route->end_long = rand(0, 100);
-
-        //     $route->difficulty()->associate($difficulty->random());
-        //     $route->save();
-
-        //     foreach ($tourPoints as $key => $tourPoint) {
-        //         $route->interestPoints()->attach($tourPoint, ['order' => ($key + 1)]);
-        //     }
-        // }
-
         try {
             $data = JsonHelper::readJson('/dataset.json');
 

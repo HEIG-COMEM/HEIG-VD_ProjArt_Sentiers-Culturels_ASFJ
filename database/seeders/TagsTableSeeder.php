@@ -14,14 +14,6 @@ class TagsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // $TAGS = [
-        //     'Street-art', 'Architecture', 'Historique', 'Nature', 'Monument', 'Bord du lac', 'Forêt', 'Château', 'Patrimoine', 'Point de vue'
-        // ];
-        // $TAGS = array_unique($TAGS);
-        // foreach ($TAGS as $tag) {
-        //     Tag::create(['name' => $tag]);
-        // }
-
         try {
             $data = JsonHelper::readJson('/dataset.json');
 

@@ -14,28 +14,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // $DEFAULT_USERS = [
-        //     [
-        //         'firstname' => 'Admin',
-        //         'lastname' => 'Doe',
-        //         'email' => 'a@gmail.com',
-        //         'email_verified_at' => now(),
-        //         'password' => bcrypt('password'),
-        //         'role_int' => 1,
-        //     ],
-        //     [
-        //         'firstname' => 'User',
-        //         'lastname' => 'Doe',
-        //         'email' => 'u@gmail.com',
-        //         'email_verified_at' => now(),
-        //         'password' => bcrypt('password'),
-        //     ],
-        // ];
-
-        // foreach ($DEFAULT_USERS as $user) {
-        //     User::create($user);
-        // }
-
         try {
             $data = JsonHelper::readJson('/users.json');
 
