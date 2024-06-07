@@ -11,17 +11,20 @@
 
     <!-- PWA -->
     <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
-    <script defer>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-                    // console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, function(err) {
-                    console.log('ServiceWorker registration failed: ', err);
+
+    @if (!config('app.debug'))
+        <script defer>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                        // console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    }, function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
                 });
-            });
-        }
-    </script>
+            }
+        </script>
+    @endif
     @include('pwa-apple')
 
     <!-- Fonts -->
