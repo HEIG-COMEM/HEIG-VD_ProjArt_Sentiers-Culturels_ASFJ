@@ -93,6 +93,21 @@ class RoutesTableSeeder extends Seeder
 
                 $newRoute->seasons()->syncWithoutDetaching(Season::where('name', $route['season'])->first());
 
+                // As description and icon_path are not mandatory, we need to check if they exist
+                $newBadge = Badge::updateOrCreate([
+                    'name' => $route['badge']['name']
+                ], [
+                    'parent_id' => Badge::where('name', $route['badge']['family'])->first()->id ?? null,
+                    'name' => $route['badge']['name'],
+                    'description' => $route['badge']['description'] ?? null,
+                    'route_id' => $newRoute->id
+                ]);
+
+                if (isset($interestPoint['badge']['icon_path'])) {
+                    $newBadge->icon_path = $interestPoint['badge']['icon_path'];
+                    $newBadge->save();
+                }
+
                 $count = 1;
                 foreach ($route['interest_points'] as $interestPoint) {
                     $picture = Picture::updateOrCreate([
@@ -113,15 +128,19 @@ class RoutesTableSeeder extends Seeder
                     ]);
 
                     // As description and icon_path are not mandatory, we need to check if they exist
-                    Badge::updateOrCreate([
+                    $newBadge = Badge::updateOrCreate([
                         'name' => $interestPoint['badge']['name']
                     ], [
                         'parent_id' => Badge::where('name', $interestPoint['badge']['family'])->first()->id ?? null,
                         'name' => $interestPoint['badge']['name'],
                         'description' => $interestPoint['badge']['description'] ?? null,
-                        'icon_path' => $interestPoint['badge']['icon_path'] ?? '',
                         'interest_point_id' => $newInterestPoint->id
                     ]);
+
+                    if (isset($interestPoint['badge']['icon_path'])) {
+                        $newBadge->icon_path = $interestPoint['badge']['icon_path'];
+                        $newBadge->save();
+                    }
 
                     $newInterestPoint->pictures()->syncWithoutDetaching($picture);
                     $newRoute->interestPoints()->syncWithoutDetaching([$newInterestPoint->id => ['order' => $count++]]);
