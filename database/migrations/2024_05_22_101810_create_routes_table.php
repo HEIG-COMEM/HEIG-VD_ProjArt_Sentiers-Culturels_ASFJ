@@ -20,10 +20,10 @@ return new class extends Migration
             $table->integer('duration');
             $table->integer('length');
 
-            $table->string('start_lat');
-            $table->string('start_long');
-            $table->string('end_lat');
-            $table->string('end_long');
+            $table->decimal('start_lat', 8, 6);
+            $table->decimal('start_long', 9, 6);
+            $table->decimal('end_lat', 8, 6);
+            $table->decimal('end_long', 9, 6);
 
             $table->json('path')->nullable();
 
