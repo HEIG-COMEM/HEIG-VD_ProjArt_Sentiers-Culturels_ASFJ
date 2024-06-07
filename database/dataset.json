@@ -73,16 +73,13 @@
             "icon_path": "architecture.svg"
         },
         {
-            "name": "Musée",
-            "icon_path": "musee.svg"
+            "name": "Musée"
         },
         {
-            "name": "Festival",
-            "icon_path": "festival.svg"
+            "name": "Festival"
         },
         {
-            "name": "Monument",
-            "icon_path": "monument.svg"
+            "name": "Monument"
         }
     ],
 

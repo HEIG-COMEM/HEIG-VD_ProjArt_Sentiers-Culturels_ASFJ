@@ -67,8 +67,13 @@ class BadgesTableSeeder extends Seeder
                 'name' => $badge['name']
             ], [
                 'name' => $badge['name'],
-                'icon_path' => $badge['icon_path'],
+                'description' => $badge['description'] ?? null,
             ]);
+
+            if (isset($badge['icon_path'])) {
+                $newBadge->icon_path = $badge['icon_path'];
+                $newBadge->save();
+            }
 
             if (isset($badge['children'])) {
                 foreach ($badge['children'] as $child) {
