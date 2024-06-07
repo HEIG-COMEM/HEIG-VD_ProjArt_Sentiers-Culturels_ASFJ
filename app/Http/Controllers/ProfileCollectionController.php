@@ -18,6 +18,8 @@ class ProfileCollectionController extends Controller
             $badge->children_count = $badge->children->count();
         });
 
+        $badges = $badges->sortByDesc('children_count');
+
         if (Auth::check()) {
             $user = Auth::user();
             // For each badge count how many of its children are owned by the user
