@@ -31,6 +31,8 @@
         }
     ],
 
+    "seasons": ["Printemps", "Été", "Automne", "Hiver", "Toute l'année"],
+
     "badges_family": [
         {
             "name": "Régions",
@@ -93,6 +95,7 @@
                 "name": "Lausanne"
             },
             "difficulty": "Moyen",
+            "season": "Toute l'année",
             "start": {
                 "coordinate": [46.518264, 6.624907]
             },
@@ -161,6 +164,7 @@
                 "name": "Morges"
             },
             "difficulty": "Facile",
+            "season": "Toute l'année",
             "start": {
                 "coordinate": [46.507069710686416, 6.494217329500014]
             },
@@ -229,6 +233,7 @@
                 "name": "Yverdon-les-Bains"
             },
             "difficulty": "Facile",
+            "season": "Toute l'année",
             "start": {
                 "coordinate": [46.778215878233105, 6.641644507148404]
             },

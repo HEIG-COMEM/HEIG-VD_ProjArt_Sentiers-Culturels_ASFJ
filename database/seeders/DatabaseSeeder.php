@@ -15,12 +15,12 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
 
         $this->call(DifficultiesTableSeeder::class);
-        // $this->call(SeasonsTableSeeder::class); // TODO DEL
+        $this->call(SeasonsTableSeeder::class);
         $this->call(BadgesTableSeeder::class);
         $this->call(TagsTableSeeder::class);
+        $this->call(RoutesTableSeeder::class);
 
         // $this->call(InterestPointsTableSeeder::class); // TODO Del
-        $this->call(RoutesTableSeeder::class);
 
         // // CUSOTM ROUTES SEEDERS
         // $this->call(RouteRenardSeeder::class);

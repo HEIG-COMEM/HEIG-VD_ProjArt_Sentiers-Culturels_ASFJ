@@ -10,6 +10,8 @@ use App\Models\Difficulty;
 use App\Models\Picture;
 use App\Helpers\JsonHelper;
 use App\Models\Badge;
+use App\Models\Tag;
+use App\Models\Season;
 
 class RoutesTableSeeder extends Seeder
 {
@@ -80,6 +82,17 @@ class RoutesTableSeeder extends Seeder
 
                 $newRoute->pictures()->syncWithoutDetaching($routePicture);
 
+                $tags = collect($route['tags'])
+                    ->map(function ($tag) {
+                        return Tag::firstOrCreate(['name' => $tag]);
+                    });
+
+                $tags->each(function ($tag) use ($newRoute) {
+                    $newRoute->tags()->syncWithoutDetaching($tag);
+                });
+
+                $newRoute->seasons()->syncWithoutDetaching(Season::where('name', $route['season'])->first());
+
                 $count = 1;
                 foreach ($route['interest_points'] as $interestPoint) {
                     $picture = Picture::updateOrCreate([
@@ -99,23 +112,32 @@ class RoutesTableSeeder extends Seeder
                         'long' => $interestPoint['coordinate'][1],
                     ]);
 
-                    // dd($newInterestPoint);
-
+                    // As description and icon_path are not mandatory, we need to check if they exist
                     Badge::updateOrCreate([
                         'name' => $interestPoint['badge']['name']
                     ], [
-                        'parent_id' => Badge::where('name', $interestPoint['badge']['family'])->first()->id,
+                        'parent_id' => Badge::where('name', $interestPoint['badge']['family'])->first()->id ?? null,
                         'name' => $interestPoint['badge']['name'],
-                        // 'icon_path' => $interestPoint['badge']['icon_path'], // TODO : Fix this :')
-                        isset($interestPoint['badge']['icon_path']) ? 'icon_path' : null => $interestPoint['badge']['icon_path'] ? $interestPoint['badge']['icon_path'] : null,
-                        'interest_point_id' => $interestPoint->id
+                        'description' => $interestPoint['badge']['description'] ?? null,
+                        'icon_path' => $interestPoint['badge']['icon_path'] ?? '',
+                        'interest_point_id' => $newInterestPoint->id
                     ]);
 
-
-
-                    $interestPoint->pictures()->syncWithoutDetaching($picture);
+                    $newInterestPoint->pictures()->syncWithoutDetaching($picture);
                     $newRoute->interestPoints()->syncWithoutDetaching([$newInterestPoint->id => ['order' => $count++]]);
+
+                    // Find tags who matches the array of tag name or create them
+                    $tags = collect($interestPoint['tags'])
+                        ->map(function ($tag) {
+                            return Tag::firstOrCreate(['name' => $tag]);
+                        });
+
+                    $tags->each(function ($tag) use ($newInterestPoint) {
+                        $newInterestPoint->tags()->syncWithoutDetaching($tag);
+                    });
                 }
+
+                $newRoute->createRoutePath();
             }
         } catch (\Exception $e) {
             $this->command->error($e->getMessage());

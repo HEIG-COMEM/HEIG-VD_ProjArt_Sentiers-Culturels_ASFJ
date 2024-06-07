@@ -14,7 +14,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // TODO TO DEL
         // $DEFAULT_USERS = [
         //     [
         //         'firstname' => 'Admin',
@@ -37,28 +36,28 @@ class UsersTableSeeder extends Seeder
         //     User::create($user);
         // }
 
-        // try {
-        //     $data = JsonHelper::readJson('/users.json');
+        try {
+            $data = JsonHelper::readJson('/users.json');
 
-        //     $users = collect($data['users'])
-        //         ->values()
-        //         ->all();
+            $users = collect($data['users'])
+                ->values()
+                ->all();
 
-        //     foreach ($users as $user) {
-        //         User::updateOrCreate([
-        //             'email' => $user['email']
-        //         ], [
-        //             'firstname' => $user['firstname'],
-        //             'lastname' => $user['lastname'],
-        //             'email' => $user['email'],
-        //             'email_verified_at' => now(),
-        //             'password' => bcrypt($user['password']),
-        //             'role_int' => $user['role_int']
-        //         ]);
-        //     }
-        // } catch (\Exception $e) {
-        //     $this->command->error($e->getMessage());
-        // }
+            foreach ($users as $user) {
+                User::updateOrCreate([
+                    'email' => $user['email']
+                ], [
+                    'firstname' => $user['firstname'],
+                    'lastname' => $user['lastname'],
+                    'email' => $user['email'],
+                    'email_verified_at' => now(),
+                    'password' => bcrypt($user['password']),
+                    'role_int' => $user['role_int']
+                ]);
+            }
+        } catch (\Exception $e) {
+            $this->command->error($e->getMessage());
+        }
 
         // User::factory()->count(10)->create();
     }
