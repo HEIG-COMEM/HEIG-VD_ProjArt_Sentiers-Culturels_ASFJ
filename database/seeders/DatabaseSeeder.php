@@ -16,30 +16,30 @@ class DatabaseSeeder extends Seeder
 
         $this->call(DifficultiesTableSeeder::class);
         $this->call(SeasonsTableSeeder::class);
+        $this->call(BadgesTableSeeder::class);
         $this->call(TagsTableSeeder::class);
-
-        $this->call(InterestPointsTableSeeder::class);
         $this->call(RoutesTableSeeder::class);
 
-        // CUSOTM ROUTES SEEDERS
-        $this->call(RouteRenardSeeder::class);
-        $this->call(RouteLausanneVilleNatureSeeder::class);
-        // END CUSTOM ROUTES SEEDERS
+        // $this->call(InterestPointsTableSeeder::class); // TODO Del
 
-        $this->call(RatesTableSeeder::class);
+        // // CUSOTM ROUTES SEEDERS
+        // $this->call(RouteRenardSeeder::class);
+        // $this->call(RouteLausanneVilleNatureSeeder::class);
+        // // END CUSTOM ROUTES SEEDERS
 
-        $this->call(InterestPointTagSeeder::class);
+        // $this->call(RatesTableSeeder::class);
 
-        $this->call(PicturesTableSeeder::class);
-        $this->call(InterestPointPictureTableSeeder::class);
-        $this->call(PictureRouteTableSeeder::class);
+        // $this->call(InterestPointTagSeeder::class);
 
-        $this->call(RoutesHistoryTableSeeder::class);
-        $this->call(RouteSeasonSeeder::class);
-        $this->call(RouteTagSeed::class);
-        $this->call(RouteUserSeeder::class);
+        // $this->call(PicturesTableSeeder::class);
+        // $this->call(InterestPointPictureTableSeeder::class);
+        // $this->call(PictureRouteTableSeeder::class);
 
-        $this->call(BadgesTableSeeder::class);
-        $this->call(BadgeUserTableSeeder::class);
+        // $this->call(RoutesHistoryTableSeeder::class);
+        // $this->call(RouteSeasonSeeder::class);
+        // $this->call(RouteTagSeed::class);
+        // $this->call(RouteUserSeeder::class);
+
+        // $this->call(BadgeUserTableSeeder::class);
     }
 }
