@@ -397,7 +397,7 @@ onUnmounted(() => {
                                                         class="h-7 w-7 text-base-100 self-start"
                                                     />
                                                     <div
-                                                        class="text-base-100 text-base font-semibold flex flex-col gap-2 max-h-24 overflow-scroll flex-grow"
+                                                        class="text-base-100 text-base font-semibold flex flex-col gap-2 max-h-20 flex-wrap overflow-scroll flex-grow"
                                                     >
                                                         <div
                                                             v-for="tag in route.tags"
