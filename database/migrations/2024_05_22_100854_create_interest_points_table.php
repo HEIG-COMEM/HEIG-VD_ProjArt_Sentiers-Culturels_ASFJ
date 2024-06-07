@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->decimal('lat', 8, 6);
             $table->decimal('long', 9, 6);
             $table->timestamps();

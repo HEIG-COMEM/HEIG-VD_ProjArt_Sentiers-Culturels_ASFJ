@@ -38,7 +38,9 @@ const props = defineProps({
                 />
             </div>
 
-            <div class="flex flex-row items-center justify-between w-full">
+            <div
+                class="flex flex-row items-center justify-between w-full overflow-auto"
+            >
                 <p
                     class="truncate overflow-hidden text-base text-black font-semibold"
                 >
