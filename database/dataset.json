@@ -73,13 +73,13 @@
             "icon_path": "architecture.svg"
         },
         {
-            "name": "Musée"
+            "name": "Musées"
         },
         {
             "name": "Festival"
         },
         {
-            "name": "Monument"
+            "name": "Monuments"
         }
     ],
 
@@ -110,7 +110,7 @@
                     "name": "Musée Cantonal des Beaux-Arts (MCBA)",
                     "description": "Le Musée Cantonal des Beaux-Arts est un lieu incontournable pour les amateurs d'art moderne et contemporain. Situé dans un bâtiment historique récemment restauré, il abrite une collection impressionnante d'œuvres d'artistes suisses et internationaux. Les visiteurs peuvent explorer des salles dédiées à différentes époques et mouvements artistiques, ainsi qu'à des thèmes spécifiques tels que l'art abstrait ou l'art numérique.",
                     "badge": {
-                        "family": "Musée",
+                        "family": "Musées",
                         "name": "MCBA"
                     },
                     "coordinate": [46.518264, 6.624907],
@@ -125,7 +125,7 @@
                     "name": "Palais de Rumine",
                     "description": "Le Palais de Rumine, construit entre 1877 et 1884, est un exemple remarquable de l'architecture néo-Renaissance. Il s'étend sur plus de 10 000 mètres carrés et abrite aujourd'hui plusieurs institutions culturelles. Le musée d'histoire naturelle propose des expositions interactives sur la biodiversité et l'évolution des espèces. Le musée d'art et d'histoire présente des collections archéologiques et historiques qui racontent l'histoire de la Suisse et de la région de Lausanne.",
                     "badge": {
-                        "family": "Monument",
+                        "family": "Monuments",
                         "name": "Palais de Rumine"
                     },
                     "coordinate": [46.523582458496094, 6.6334547996521],
@@ -140,7 +140,7 @@
                     "name": "Musée de l'Art Brut",
                     "description": "Le Musée de l'Art Brut, situé dans le quartier de Ouchy, est consacré à l'art brut, un mouvement artistique qui valorise les expressions artistiques spontanées et non conventionnelles. Le musée abrite une collection exceptionnelle d'œuvres d'artistes autodidactes, marginalisés ou issus de cultures traditionnelles, témoignant de la créativité humaine dans ses formes les plus libérées. Les expositions permanentes et temporaires offrent une exploration profonde de l'art brut, de ses racines historiques à son influence contemporaine.",
                     "badge": {
-                        "family": "Musée",
+                        "family": "Musées",
                         "name": "Art Brut"
                     },
                     "coordinate": [46.5273164, 6.6246922],
@@ -194,7 +194,7 @@
                     "name": "Château de Morges",
                     "description": "Le Château de Morges, situé sur une colline dominant la ville, est un vestige important de l'histoire militaire suisse. Construit au XIIe siècle, il a été remanié et agrandi au fil des siècles. Aujourd'hui, il abrite un musée d'armes et d'objets d'artillerie, ainsi que des expositions sur l'histoire de la guerre et de la défense. Les jardins du château offrent également une vue panoramique sur le lac Léman et les Alpes.",
                     "badge": {
-                        "family": "Château",
+                        "family": "Châteaux",
                         "name": "Château de Morges"
                     },
                     "coordinate": [46.50664842380884, 6.496737448703294],
@@ -209,7 +209,7 @@
                     "name": "Musée Alexis Forel",
                     "description": "Le Musée Alexis Forel est un lieu d'hébergement culturel situé dans la maison natale du docteur Alexis Forel, une figure importante de la psychologie et de la neurologie suisses. Le musée est dédié à la promotion de l'histoire de Morges et de son environnement, ainsi qu'à la diffusion des connaissances scientifiques et humanistes.",
                     "badge": {
-                        "family": "Musée",
+                        "family": "Musées",
                         "name": "Musée Alexis Forel"
                     },
                     "coordinate": [46.5092289, 6.498216],
@@ -248,7 +248,7 @@
                     "name": "Château d’Yverdon",
                     "description": "Construit sur une colline dominant la ville, ce château médiéval offre une vue imprenable sur le lac de Neuchâtel et les alentours. Au fil des siècles, le château a été reconstruit plusieurs fois, témoignant de son importance stratégique et de son rôle dans l'histoire régionale.",
                     "badge": {
-                        "family": "Château",
+                        "family": "Châteaux",
                         "name": "Château d’Yverdon"
                     },
                     "coordinate": [46.778215878233105, 6.641644507148404],
@@ -263,7 +263,7 @@
                     "name": "Maison d’ailleurs",
                     "description": "La 'Maison d'Ailleurs' est une institution culturelle unique située à Yverdon-les-Bains, en Suisse. Elle se distingue par son approche innovante de l'histoire des sciences et de la science-fiction. Fondée en 1992 par le professeur Jacques Sadoul, un historien spécialisé dans la science-fiction, la maison est dédiée à l'étude de l'impact de la science-fiction sur la société et à l'exploration de l'intersection entre science et fiction.",
                     "badge": {
-                        "family": "Musée",
+                        "family": "Musées",
                         "name": "Maison d’ailleurs"
                     },
                     "coordinate": [46.77950957991057, 6.641984524675055],
