@@ -1,2 +1,3 @@
 User-agent: *
-Disallow:
+Disallow: /backoffice/
+Disallow: /api/
