@@ -45,7 +45,7 @@ const badges = reactive(props.badges.data);
                     </div>
                 </div>
                 <h1 class="text-2xl font-medium">Collection</h1>
-                <div class="w-full text-sm breadcrumbs">
+                <div class="w-full text-sm breadcrumbs min-h-12">
                     <ul>
                         <li>
                             <BaseLink :href="route('profile')">
@@ -55,15 +55,19 @@ const badges = reactive(props.badges.data);
                         <li>Collection</li>
                     </ul>
                 </div>
-                <AppBadgeHorizontalCard
-                    v-for="badge in badges"
-                    :key="badge.id"
-                    :badge="badge.name"
-                    :count="badge.owned_children_count"
-                    :total="badge.children_count"
-                    :icon="badge.icon_path"
-                    :href="route('profile.collection.show', badge.uuid)"
-                />
+                <div
+                    class="flex flex-col gap-4 max-h-[90svh] px-2 py-4 overflow-y-scroll"
+                >
+                    <AppBadgeHorizontalCard
+                        v-for="badge in badges"
+                        :key="badge.id"
+                        :badge="badge.name"
+                        :count="badge.owned_children_count"
+                        :total="badge.children_count"
+                        :icon="badge.is_owned ? badge.icon_path : 'default.svg'"
+                        :href="route('profile.collection.show', badge.uuid)"
+                    />
+                </div>
             </div>
         </template>
     </MobileAppLayout>

@@ -49,7 +49,7 @@ const breadcrumb = reactive(props.breadcrumb.data);
                     </div>
                 </div>
                 <h1 class="text-2xl font-medium">{{ badge.name }}</h1>
-                <div class="w-full text-sm breadcrumbs">
+                <div class="w-full text-sm breadcrumbs min-h-12">
                     <ul>
                         <li>
                             <BaseLink :href="route('profile')">
@@ -80,16 +80,23 @@ const breadcrumb = reactive(props.breadcrumb.data);
                         </li>
                     </ul>
                 </div>
-                <AppBadgeHorizontalCard
-                    v-if="badge.children.length"
-                    v-for="badge in badge.children"
-                    :key="badge.id"
-                    :badge="badge.name"
-                    :count="badge.owned_children_count"
-                    :total="badge.children_count"
-                    :href="route('profile.collection.show', badge.uuid)"
-                    :icon="badge.is_owned ? badge.icon_path : 'default.svg'"
-                />
+                <template v-if="badge.children.length">
+                    <div
+                        class="flex flex-col gap-4 max-h-[90svh] px-2 py-4 overflow-y-scroll"
+                    >
+                        <AppBadgeHorizontalCard
+                            v-for="badge in badge.children"
+                            :key="badge.id"
+                            :badge="badge.name"
+                            :count="badge.owned_children_count"
+                            :total="badge.children_count"
+                            :href="route('profile.collection.show', badge.uuid)"
+                            :icon="
+                                badge.is_owned ? badge.icon_path : 'default.svg'
+                            "
+                        />
+                    </div>
+                </template>
                 <template v-else>
                     <div class="w-full flex flex-col gap-4 items-center">
                         <div class="card w-full bg-base-100 shadow-xl">
