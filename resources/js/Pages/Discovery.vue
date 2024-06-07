@@ -141,7 +141,9 @@ const clearFilters = () => {
                         }"
                         @click="showRoutes = 1"
                     >
-                        <p class="pl-5 pr-3 font-medium">Découverte</p>
+                        <p class="pl-5 pr-3 font-medium max-w-full truncate">
+                            Découverte
+                        </p>
                         <span
                             class="w-full h-1 rounded-l-full"
                             :class="{
@@ -158,7 +160,9 @@ const clearFilters = () => {
                         }"
                         @click="showRoutes = 2"
                     >
-                        <p class="px-3 font-medium">Sentiers</p>
+                        <p class="px-3 font-medium max-w-full truncate">
+                            Sentiers
+                        </p>
                         <span
                             class="w-full h-1"
                             :class="{
@@ -175,7 +179,9 @@ const clearFilters = () => {
                         }"
                         @click="showRoutes = 3"
                     >
-                        <p class="pl-3 pr-5 font-medium">Points d'intérêt</p>
+                        <p class="pl-3 pr-5 font-medium max-w-full truncate">
+                            Points d'intérêt
+                        </p>
                         <span
                             class="w-full h-1 rounded-r-full"
                             :class="{
@@ -205,7 +211,7 @@ const clearFilters = () => {
                     <template v-if="!discoverySearch">
                         <!-- DISCOVERY LIST -->
                         <div
-                            class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 items-center"
+                            class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 items-center overflow-y-scroll"
                         >
                             <div class="flex flex-col gap-10">
                                 <!-- TOP 3 -->
@@ -274,7 +280,7 @@ const clearFilters = () => {
                     </template>
                     <template v-else>
                         <div
-                            class="flex flex-col gap-4 w-full max-h-[71vh] px-3 pb-3 overflow-x-scroll"
+                            class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 overflow-x-scroll"
                         >
                             <AppHorizontalCard
                                 v-for="item in discoverySearchResult"

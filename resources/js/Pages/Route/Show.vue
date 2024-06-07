@@ -258,7 +258,11 @@ onUnmounted(() => {
                             }"
                             @click="toggleMenuFirstActive = true"
                         >
-                            <p class="pl-6 pr-4 font-medium">Informations</p>
+                            <p
+                                class="pl-6 pr-4 font-medium max-w-full truncate"
+                            >
+                                Informations
+                            </p>
                             <span
                                 class="w-full h-1 rounded-l-full"
                                 :class="{
@@ -275,7 +279,9 @@ onUnmounted(() => {
                             }"
                             @click="toggleMenuFirstActive = false"
                         >
-                            <p class="pl-4 pr-6 font-medium">
+                            <p
+                                class="pl-4 pr-6 font-medium max-w-full truncate"
+                            >
                                 Points d’intérêts
                             </p>
                             <span
@@ -288,10 +294,10 @@ onUnmounted(() => {
                         </div>
                     </div>
                     <div class="flex flex-col w-full h-[80%] items-center">
-                        <div class="max-w-sm h-full mt-52">
+                        <div class="max-w-sm h-full mt-36">
                             <template v-if="toggleMenuFirstActive">
                                 <div
-                                    class="scroll-container w-full h-[70%] overflow-scroll"
+                                    class="scroll-container w-full h-[70svh] overflow-scroll"
                                 >
                                     <!-- ROUTE -->
                                     <div
@@ -322,7 +328,7 @@ onUnmounted(() => {
                                                 {{ route.name }}
                                             </h1>
                                             <p
-                                                class="text-sm font-semibold mt-2 text-center text-base-100 max-h-32 overflow-scroll"
+                                                class="text-sm font-semibold mt-2 text-center text-base-100 max-h-24 overflow-scroll"
                                             >
                                                 {{ route.description }}
                                             </p>
@@ -331,13 +337,13 @@ onUnmounted(() => {
 
                                     <!-- GENERAL INFO -->
                                     <div
-                                        class="flex flex-col justify-center items-center h-full gap-8 p-16"
+                                        class="flex flex-col justify-center items-center h-full gap-8 px-16"
                                     >
                                         <div
                                             class="flex flex-col items-center gap-10"
                                         >
                                             <h1
-                                                class="text-2xl font-bold text-base-100"
+                                                class="text-2xl text-center font-bold text-base-100"
                                             >
                                                 Informations générales
                                             </h1>
@@ -444,14 +450,16 @@ onUnmounted(() => {
                             <!-- INTEREST POINTS -->
                             <template v-else>
                                 <div
-                                    class="flex flex-col items-center p-6 gap-4"
+                                    class="flex flex-col items-center p-6 gap-4 mt-6"
                                 >
-                                    <p class="text-2xl font-bold text-base-100">
+                                    <p
+                                        class="text-2xl font-bold text-base-100 text-center"
+                                    >
                                         {{ interestPoints.length }} Points
                                         d’intérêts
                                     </p>
                                     <div
-                                        class="bg-base-300 w-full flex flex-col gap-2 items-center rounded-xl p-6 bg-opacity-40 h-96 overflow-scroll"
+                                        class="bg-base-300 w-full flex flex-col gap-2 items-center rounded-xl p-6 bg-opacity-40 h-[45svh] overflow-scroll"
                                     >
                                         <AppHorizontalCard
                                             v-for="(
