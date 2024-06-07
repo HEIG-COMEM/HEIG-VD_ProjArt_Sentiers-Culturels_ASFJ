@@ -1,0 +1,293 @@
+{
+    "tags": [
+        "Street-art",
+        "Architecture",
+        "Historique",
+        "Nature",
+        "Monument",
+        "Bord du lac",
+        "Forêt",
+        "Château",
+        "Patrimoine",
+        "Point de vue"
+    ],
+
+    "difficulties": [
+        {
+            "name": "Facile",
+            "level": 1
+        },
+        {
+            "name": "Moyen",
+            "level": 2
+        },
+        {
+            "name": "Difficile",
+            "level": 3
+        },
+        {
+            "name": "Très difficile",
+            "level": 4
+        }
+    ],
+
+    "badges_family": [
+        {
+            "name": "Régions",
+            "icon_path": "regions.svg",
+            "children": [
+                {
+                    "name": "Lavaux",
+                    "icon_path": "lavaux.svg"
+                },
+                {
+                    "name": "Nord-Vaudois",
+                    "icon_path": "nord-vaudois.svg"
+                },
+                {
+                    "name": "La Côte",
+                    "icon_path": "la-cote.svg"
+                },
+                {
+                    "name": "Riviera",
+                    "icon_path": "riviera.svg"
+                },
+                {
+                    "name": "Gros-de-Vaud",
+                    "icon_path": "gros-de-vaud.svg"
+                }
+            ]
+        },
+        {
+            "name": "Villes",
+            "icon_path": "villes.svg"
+        },
+        {
+            "name": "Châteaux",
+            "icon_path": "chateau.svg"
+        },
+        {
+            "name": "Architecture",
+            "icon_path": "architecture.svg"
+        },
+        {
+            "name": "Musée",
+            "icon_path": "musee.svg"
+        },
+        {
+            "name": "Festival",
+            "icon_path": "festival.svg"
+        },
+        {
+            "name": "Monument",
+            "icon_path": "monument.svg"
+        }
+    ],
+
+    "sentiers": [
+        {
+            "name": "Sentier Culturel des musées de Lausanne",
+            "description": "Préparez-vous pour une découverte immersive à travers les musées de Lausanne, une ville vibrante où l'art et l'histoire se rencontrent. Ne manquez pas l'occasion de plonger dans des univers créatifs uniques, où chaque œuvre est une invitation à voyager. Ce parcours vous offre une expérience enrichissante, révélant la richesse culturelle et intellectuelle de Lausanne.",
+            "badge": {
+                "family": "Villes",
+                "name": "Lausanne"
+            },
+            "difficulty": "Moyen",
+            "start": {
+                "coordinate": [46.518264, 6.624907]
+            },
+            "end": {
+                "coordinate": [46.5273164, 6.6246922]
+            },
+            "tags": ["Architecture", "Découverte", "Histoire"],
+            "picture": {
+                "title": "Vue sur Lausanne",
+                "description": "Une vue magnifique sur la ville de Lausanne.",
+                "path": "lausanne.png"
+            },
+            "interest_points": [
+                {
+                    "name": "Musée Cantonal des Beaux-Arts (MCBA)",
+                    "description": "Le Musée Cantonal des Beaux-Arts est un lieu incontournable pour les amateurs d'art moderne et contemporain. Situé dans un bâtiment historique récemment restauré, il abrite une collection impressionnante d'œuvres d'artistes suisses et internationaux. Les visiteurs peuvent explorer des salles dédiées à différentes époques et mouvements artistiques, ainsi qu'à des thèmes spécifiques tels que l'art abstrait ou l'art numérique.",
+                    "badge": {
+                        "family": "Musée",
+                        "name": "MCBA"
+                    },
+                    "coordinate": [46.518264, 6.624907],
+                    "tags": ["Art", "Musée"],
+                    "picture": {
+                        "title": "Musée Cantonal des Beaux-Arts",
+                        "description": "Extérieur du Musée Cantonal des Beaux-Arts.",
+                        "path": "lausanne-mcba.png"
+                    }
+                },
+                {
+                    "name": "Palais de Rumine",
+                    "description": "Le Palais de Rumine, construit entre 1877 et 1884, est un exemple remarquable de l'architecture néo-Renaissance. Il s'étend sur plus de 10 000 mètres carrés et abrite aujourd'hui plusieurs institutions culturelles. Le musée d'histoire naturelle propose des expositions interactives sur la biodiversité et l'évolution des espèces. Le musée d'art et d'histoire présente des collections archéologiques et historiques qui racontent l'histoire de la Suisse et de la région de Lausanne.",
+                    "badge": {
+                        "family": "Monument",
+                        "name": "Palais de Rumine"
+                    },
+                    "coordinate": [46.523582458496094, 6.6334547996521],
+                    "tags": ["Architecture", "Histoire"],
+                    "picture": {
+                        "title": "Palais de Rumine",
+                        "description": "Extérieur du Palais de Rumine.",
+                        "path": "lausanne-palais-rumine.png"
+                    }
+                },
+                {
+                    "name": "Musée de l'Art Brut",
+                    "description": "Le Musée de l'Art Brut, situé dans le quartier de Ouchy, est consacré à l'art brut, un mouvement artistique qui valorise les expressions artistiques spontanées et non conventionnelles. Le musée abrite une collection exceptionnelle d'œuvres d'artistes autodidactes, marginalisés ou issus de cultures traditionnelles, témoignant de la créativité humaine dans ses formes les plus libérées. Les expositions permanentes et temporaires offrent une exploration profonde de l'art brut, de ses racines historiques à son influence contemporaine.",
+                    "badge": {
+                        "family": "Musée",
+                        "name": "Art Brut"
+                    },
+                    "coordinate": [46.5273164, 6.6246922],
+                    "tags": ["Art Brut", "Musée"],
+                    "picture": {
+                        "title": "Musée de l'Art Brut",
+                        "description": "Collection d'art brut.",
+                        "path": "lausanne-musee-art-brut.png"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Sentier Culturel de Morges",
+            "description": "Morges, située près du lac Léman, offre une variété d'activités culturelles, gastronomiques et sportives. Les points d'intérêt incluent le Château de Morges et ses musées, le Musée Alexis Forel, et des festivals comme la Fête de la Tulipe. La région est également connue pour ses vignobles, ses produits locaux et ses paysages pittoresques.",
+            "badge": {
+                "family": "Villes",
+                "name": "Morges"
+            },
+            "difficulty": "Facile",
+            "start": {
+                "coordinate": [46.507069710686416, 6.494217329500014]
+            },
+            "end": {
+                "coordinate": [46.5092289, 6.498216]
+            },
+            "tags": ["Histoire", "Nature", "Architecture", "Bord du lac"],
+            "picture": {
+                "title": "Morges",
+                "description": "Une vue magnifique de Morges.",
+                "path": "morges.png"
+            },
+            "interest_points": [
+                {
+                    "name": "Fête de la Tulipe à Morges",
+                    "description": "La Fête de la Tulipe à Morges est un enchantement printanier qui transforme les jardins du château en un tableau de couleurs avec des milliers de tulipes en fleur. Cet événement familial propose des ateliers d'arts, des stands de jardinage, et des conférences sur la tulipe, accompagné de musique live et de spécialités gastronomiques. Une journée de joie et de découverte autour de la beauté et la vitalité de la tulipe.",
+                    "badge": {
+                        "family": "Festival",
+                        "name": "Fête de la Tulipe"
+                    },
+                    "coordinate": [46.507069710686416, 6.494217329500014],
+                    "tags": ["Festival", "Nature"],
+                    "picture": {
+                        "title": "Fête de la Tulipe",
+                        "description": "Des tulipes en fleurs à Morges.",
+                        "path": "morges-fete-tulipes.png"
+                    }
+                },
+                {
+                    "name": "Château de Morges",
+                    "description": "Le Château de Morges, situé sur une colline dominant la ville, est un vestige important de l'histoire militaire suisse. Construit au XIIe siècle, il a été remanié et agrandi au fil des siècles. Aujourd'hui, il abrite un musée d'armes et d'objets d'artillerie, ainsi que des expositions sur l'histoire de la guerre et de la défense. Les jardins du château offrent également une vue panoramique sur le lac Léman et les Alpes.",
+                    "badge": {
+                        "family": "Château",
+                        "name": "Château de Morges"
+                    },
+                    "coordinate": [46.50664842380884, 6.496737448703294],
+                    "tags": ["Histoire", "Architecture"],
+                    "picture": {
+                        "title": "Château de Morges",
+                        "description": "Extérieur du Château de Morges.",
+                        "path": "morges-chateau.png"
+                    }
+                },
+                {
+                    "name": "Musée Alexis Forel",
+                    "description": "Le Musée Alexis Forel est un lieu d'hébergement culturel situé dans la maison natale du docteur Alexis Forel, une figure importante de la psychologie et de la neurologie suisses. Le musée est dédié à la promotion de l'histoire de Morges et de son environnement, ainsi qu'à la diffusion des connaissances scientifiques et humanistes.",
+                    "badge": {
+                        "family": "Musée",
+                        "name": "Musée Alexis Forel"
+                    },
+                    "coordinate": [46.5092289, 6.498216],
+                    "tags": ["Histoire", "Musée"],
+                    "picture": {
+                        "title": "Musée Alexis Forel",
+                        "description": "Extérieur du Musée Alexis Forel.",
+                        "path": "morges-musee-alexis-forel.png"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Sentier Culturel de Yverdon-les-Bains",
+            "description": "Yverdon-les-Bains, bordant le lac de Neuchâtel, est une ville charmante offrant une belle vue sur les paysages environnants. Son centre-ville dynamique, avec ses boutiques, cafés et restaurants, crée une atmosphère accueillante. La ville combine architecture traditionnelle et moderne, rendant chaque promenade intéressante. De plus, connue pour ses installations de bien-être, Yverdon-les-Bains est un paradis pour ceux qui cherchent détente et relaxation.",
+            "badge": {
+                "family": "Villes",
+                "name": "Yverdon-les-Bains"
+            },
+            "difficulty": "Facile",
+            "start": {
+                "coordinate": [46.778215878233105, 6.641644507148404]
+            },
+            "end": {
+                "coordinate": [46.771845149912096, 6.648054667680053]
+            },
+            "tags": ["Découverte", "Histoire", "Art"],
+            "picture": {
+                "title": "Yverdon-les-Bains",
+                "description": "Vue panoramique de Yverdon-les-Bains.",
+                "path": "yverdon-les-bains.png"
+            },
+            "interest_points": [
+                {
+                    "name": "Château d’Yverdon",
+                    "description": "Construit sur une colline dominant la ville, ce château médiéval offre une vue imprenable sur le lac de Neuchâtel et les alentours. Au fil des siècles, le château a été reconstruit plusieurs fois, témoignant de son importance stratégique et de son rôle dans l'histoire régionale.",
+                    "badge": {
+                        "family": "Château",
+                        "name": "Château d’Yverdon"
+                    },
+                    "coordinate": [46.778215878233105, 6.641644507148404],
+                    "tags": ["Histoire", "Architecture"],
+                    "picture": {
+                        "title": "Château d’Yverdon",
+                        "description": "Vue extérieure du Château d’Yverdon.",
+                        "path": "yverdon-chateau.png"
+                    }
+                },
+                {
+                    "name": "Maison d’ailleurs",
+                    "description": "La 'Maison d'Ailleurs' est une institution culturelle unique située à Yverdon-les-Bains, en Suisse. Elle se distingue par son approche innovante de l'histoire des sciences et de la science-fiction. Fondée en 1992 par le professeur Jacques Sadoul, un historien spécialisé dans la science-fiction, la maison est dédiée à l'étude de l'impact de la science-fiction sur la société et à l'exploration de l'intersection entre science et fiction.",
+                    "badge": {
+                        "family": "Musée",
+                        "name": "Maison d’ailleurs"
+                    },
+                    "coordinate": [46.77950957991057, 6.641984524675055],
+                    "tags": ["Culture", "Science-fiction"],
+                    "picture": {
+                        "title": "Maison d’ailleurs",
+                        "description": "Vue extérieure de la Maison d’ailleurs.",
+                        "path": "yverdon-maison-d-ailleurs.png"
+                    }
+                },
+                {
+                    "name": "Bains thermaux d’Yverdon-les-Bains",
+                    "description": "Après avoir exploré les richesses culturelles de Yverdon-les-Bains, il est temps de vous détendre dans les Bains thermaux d’Yverdon-les-Bains, une véritable oasis de bien-être et de relaxation. Situés dans le cœur de la ville, ces thermes sont reconnus pour leur architecture impressionnante et leurs installations luxueuses, offrant un espace idéal pour se ressourcer après une journée chargée de découvertes.",
+                    "badge": {
+                        "family": "Bien-être",
+                        "name": "Bains thermaux d’Yverdon-les-Bains"
+                    },
+                    "coordinate": [46.771845149912096, 6.648054667680053],
+                    "tags": ["Détente", "Architecture"],
+                    "picture": {
+                        "title": "Bains thermaux d’Yverdon-les-Bains",
+                        "description": "Vue des installations des Bains thermaux.",
+                        "path": "yverdon-bains-thermaux.png"
+                    }
+                }
+            ]
+        }
+    ]
+}
