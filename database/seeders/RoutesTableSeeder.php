@@ -128,7 +128,7 @@ class RoutesTableSeeder extends Seeder
                     });
                 }
 
-                //$newRoute->createRoutePath(); //TODO: Uncomment when moving to production
+                $newRoute->createRoutePath(); //TODO: Uncomment when moving to production
             }
         } catch (\Exception $e) {
             $this->command->error($e->getMessage());
