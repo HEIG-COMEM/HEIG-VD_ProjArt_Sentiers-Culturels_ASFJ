@@ -3,6 +3,8 @@ import { getImgPath } from "@/utils/helper";
 import { Head, Link } from "@inertiajs/vue3";
 import { defineProps, reactive, ref, computed } from "vue";
 
+import { ArrowDown2, ArrowRight2 } from "@iconsans/vue/linear";
+
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
 import BaseLink from "@/Components/Base/BaseLink.vue";
@@ -11,6 +13,7 @@ import AppMapSmall from "@/Components/App/AppMapSmall.vue";
 import AppSquareCard from "@/Components/App/AppSquareCard.vue";
 import AppHorizontalCard from "@/Components/App/AppHorizontalCard.vue";
 import AppNearbySquareCard from "@/Components/App/AppNearbySquareCard.vue";
+import AppTutorial from "@/Components/App/AppTutorial.vue";
 
 const props = defineProps({
     routes: {
@@ -30,6 +33,7 @@ const props = defineProps({
 const routes = reactive(props.routes.data);
 const interestpoints = reactive(props.interestpoints.data);
 const routesOrderedRating = reactive(props.routesOrderedRating.data);
+const isTutorial = ref(false);
 
 const discoverySearch = ref("");
 
@@ -56,7 +60,7 @@ const discoverySearchResult = computed(() => {
                 </div>
                 <template v-if="!discoverySearch">
                     <div
-                        class="w-full px-4 flex flex-col items-center gap-16 overflow-x-scroll"
+                        class="w-full px-6 flex flex-col items-center gap-16 overflow-x-scroll"
                     >
                         <Link :href="route('map')" class="w-full">
                             <div
@@ -83,12 +87,22 @@ const discoverySearchResult = computed(() => {
                                 uniques pour compléter des familles.
                             </p>
                             <div class="flex flex-col items-center">
-                                <BaseLink
-                                    :href="route('settings.tutorial')"
-                                    class="text-base underline text-base-300 mt-2"
-                                    >Comment ça marche ?</BaseLink
+                                <p
+                                    class="mt-4 inline-flex items-center link link-primary"
+                                    @click="isTutorial = !isTutorial"
                                 >
+                                    Comment ça marche
+                                    <span
+                                        ><component
+                                            :is="
+                                                isTutorial
+                                                    ? ArrowDown2
+                                                    : ArrowRight2
+                                            "
+                                    /></span>
+                                </p>
                             </div>
+                            <AppTutorial v-if="isTutorial" />
                         </div>
                         <div
                             class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 items-center"
