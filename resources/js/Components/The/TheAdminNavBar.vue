@@ -2,7 +2,7 @@
 import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
-import { Home1, Notes, Map } from "@iconsans/vue/linear";
+import { Home1, Notes, Map, Logout } from "@iconsans/vue/linear";
 
 const currentRoute = ref(window.location.href);
 
@@ -18,6 +18,10 @@ const routes = {
     map: {
         route: route("backoffice.map"),
         icon: Map,
+    },
+    backToApp: {
+        route: route("home"),
+        icon: Logout,
     },
 };
 
