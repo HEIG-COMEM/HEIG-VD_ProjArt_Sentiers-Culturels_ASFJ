@@ -31,7 +31,7 @@ const active = (route) => {
 </script>
 
 <template>
-    <div class="btm-nav btm-nav-md shadow-top-sm" id="btm-nav">
+    <nav class="btm-nav btm-nav-md shadow-top-sm" id="btm-nav">
         <template v-for="route in routes">
             <Link
                 :href="route.route"
@@ -42,7 +42,7 @@ const active = (route) => {
                 <component :is="route.icon" class="h-7 w-7"></component>
             </Link>
         </template>
-    </div>
+    </nav>
 </template>
 
 <style scoped>
