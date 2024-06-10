@@ -4,8 +4,6 @@ import { Head, Link } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
 import { ArrowLeft, UserCircle2, Setting } from "@iconsans/vue/linear";
-
-import BaseLink from "@/Components/Base/BaseLink.vue";
 </script>
 
 <template>
