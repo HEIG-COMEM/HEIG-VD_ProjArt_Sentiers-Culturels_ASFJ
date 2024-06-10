@@ -101,7 +101,7 @@ onUnmounted(() => {
                     />
                 </svg>
             </div>
-            <div class="py-1 px-5 w-full max-w-lg mx-auto">
+            <div class="py-1 px-5 w-full max-w-lg mx-auto bg-white">
                 <slot name="tab" />
             </div>
         </div>

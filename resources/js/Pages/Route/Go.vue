@@ -80,9 +80,10 @@ onMounted(() => {
                     isCloseToStart.value = true;
                     const toast = document.querySelector("#toast-target");
                     toast.innerHTML = `
-                    <div class="alert alert-success max-w-[90vw] overflow-scroll">
-                    <p>${data.success}</p>
-                </div>
+                        <div role="alert" class="alert alert-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span>${data.success}</span>
+                        </div>
                 `;
                 }
             })
@@ -137,9 +138,10 @@ const claimBadge = (uuid) => {
             } else {
                 const toast = document.querySelector("#toast-target");
                 toast.innerHTML = `
-                    <div class="alert alert-success max-w-[90vw] overflow-scroll">
-                    <p>Badge collecté</p>
-                </div>`;
+                    <div role="alert" class="alert alert-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span>Badge collecté</span>
+                    </div>`;
                 currentInterestPoint.value.badge.isDone = true;
                 setTimeout(() => {
                     toast.innerHTML = "";
@@ -217,8 +219,8 @@ const setRating = () => {
     <MobileAppLayout>
         <template v-slot:main>
             <div
-                class="toast toast-top toast-center z-10"
                 id="toast-target"
+                class="absolute z-10 w-full px-6 top-6"
             ></div>
             <!-- TOP BTNS -->
             <div class="absolute z-[1] p-6 top-0 left-0">
