@@ -39,7 +39,7 @@ const showPassword = ref(false);
     <MobileAppLayout>
         <template v-slot:main>
             <div
-                class="flex flex-col justify-center h-screen items-center gap-6"
+                class="flex flex-col justify-center h-screen items-center gap-6 w-3/4"
             >
                 <div
                     v-if="status"
@@ -49,7 +49,7 @@ const showPassword = ref(false);
                 </div>
                 <form
                     @submit.prevent="submit"
-                    class="flex flex-col justify-center items-center gap-4"
+                    class="flex flex-col justify-center items-center gap-4 w-full"
                 >
                     <label class="form-control w-full max-w-xs">
                         <div class="label">
@@ -57,7 +57,6 @@ const showPassword = ref(false);
                         </div>
                         <input
                             type="email"
-                            placeholder="Adresse e-mail"
                             v-model="form.email"
                             class="input input-bordered w-full max-w-xs"
                             name="email"
@@ -75,7 +74,6 @@ const showPassword = ref(false);
                             <input
                                 :type="showPassword ? 'text' : 'password'"
                                 class="grow border-none shadow-none"
-                                placeholder="Mot de passe"
                                 v-model="form.password"
                                 name="password"
                                 required
@@ -100,7 +98,7 @@ const showPassword = ref(false);
                     </label>
                     <BasePrimaryButton
                         type="submit"
-                        class="btn-wide"
+                        class="w-full max-w-xs"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                     >
