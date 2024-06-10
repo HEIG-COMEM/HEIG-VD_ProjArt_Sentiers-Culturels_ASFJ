@@ -23,7 +23,7 @@ const props = defineProps({
 
 <template>
     <component :is="href ? Link : 'div'" :href="href || ''">
-        <div class="indicator w-24 rounded-2xl aspect-square">
+        <div class="indicator w-48 rounded-2xl aspect-square">
             <div v-if="imgPath" class="indicator">
                 <img
                     class="rounded-2xl aspect-square relative"
@@ -31,11 +31,9 @@ const props = defineProps({
                     :alt="imgAlt"
                 />
                 <div
-                    class="absolute bottom-0 bg-white h-6 w-full rounded-b-xl flex flex-col items-center justify-center"
+                    class="absolute bottom-0 bg-white h-9 w-full rounded-b-xl flex flex-col items-center justify-center"
                 >
-                    <p
-                        class="text-xs text-center p-1 truncate max-h-6 max-w-[90%]"
-                    >
+                    <p class="text-sm text-center truncate max-h-6 max-w-[90%]">
                         {{ title }}
                     </p>
                 </div>

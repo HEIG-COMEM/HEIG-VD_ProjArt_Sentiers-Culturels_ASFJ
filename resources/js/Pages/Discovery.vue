@@ -130,7 +130,7 @@ const clearFilters = () => {
     <Head title="Découverte" />
     <MobileAppLayout>
         <template v-slot:main>
-            <div class="h-full w-full p-6 flex flex-col gap-2">
+            <div class="h-full w-full p-6 flex flex-col gap-2 overflow-hidden">
                 <!-- TOGGLE MENU -->
                 <div class="flex flex-row justify-center w-full">
                     <div
@@ -211,16 +211,16 @@ const clearFilters = () => {
                     <template v-if="!discoverySearch">
                         <!-- DISCOVERY LIST -->
                         <div
-                            class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 items-center overflow-y-scroll"
+                            class="flex flex-col gap-4 w-full max-h-[70vh] items-center overflow-auto"
                         >
-                            <div class="flex flex-col gap-10">
+                            <div class="flex flex-col gap-10 w-full">
                                 <!-- TOP 3 -->
                                 <div class="flex flex-col gap-4">
                                     <h2 class="text-lg font-semibold">
                                         Les mieux notés
                                     </h2>
                                     <div
-                                        class="flex flex-row gap-4 items-center"
+                                        class="flex flex-row gap-4 items-center pb-1 overflow-y-scroll"
                                     >
                                         <AppSquareCard
                                             v-if="routesOrderedRating.length"
@@ -247,7 +247,9 @@ const clearFilters = () => {
                                     <h2 class="text-lg font-semibold">
                                         A proximité
                                     </h2>
-                                    <AppNearbySquareCard />
+                                    <div class="pb-2 overflow-y-scroll">
+                                        <AppNearbySquareCard />
+                                    </div>
                                 </div>
 
                                 <!-- NEW ONES -->
@@ -256,7 +258,7 @@ const clearFilters = () => {
                                         Les plus récents
                                     </h2>
                                     <div
-                                        class="flex flex-row gap-4 items-center"
+                                        class="flex flex-row gap-4 items-center pb-1 overflow-y-scroll"
                                     >
                                         <AppSquareCard
                                             v-if="latestRoutes.length"
