@@ -64,13 +64,6 @@ onMounted(() => {
         });
     });
 
-    // Trop lourd pour le moment (fait ralentire le zoom et le déplacement de la carte)
-    // TODO: à optimiser
-    // map.on("move", updateLocation);
-    // map.on("zoom", updateLocation);
-    // map.on("rotate", updateLocation);
-    // map.on("pitch", updateLocation);
-
     mapInstance.value = map;
 });
 

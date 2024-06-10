@@ -33,8 +33,6 @@ const groupedHistories = computed(() => {
     }, {});
 });
 
-console.log(groupedHistories.value); // TODO: remove this line
-
 const tagsName = (tags) => tags.map((tag) => tag.name).slice(0, 4);
 
 const formattedDate = (date) => {

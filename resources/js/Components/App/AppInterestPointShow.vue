@@ -105,7 +105,6 @@ const tagsName = (tags) => tags.map((tag) => tag.name).slice(0, 4);
                     <div v-if="interestPoint.value.routes.length">
                         <h3 class="text-xl">Sentiers liés</h3>
                         <div class="flex flex-col gap-2">
-                            <!-- TODO: Implement dynamic tags -->
                             <AppHorizontalCard
                                 v-for="sentier in interestPoint.value.routes"
                                 :title="sentier.name"

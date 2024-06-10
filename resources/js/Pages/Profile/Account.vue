@@ -69,7 +69,6 @@ const submit = () => {
                     </div>
                 </div>
                 <h1 class="text-2xl font-medium">Détails</h1>
-                <!-- TODO : edit href path, img-path, img-alt -->
                 <div class="flex flex-col gap-6 mt-6">
                     <div class="flex flex-col gap-4 items-center">
                         <div class="avatar">
@@ -78,6 +77,7 @@ const submit = () => {
                             >
                                 <img
                                     :src="`${PROFILE_PICTURE_API}${user.firstname}+${user.lastname}`"
+                                    :alt="`photo de profile de ${user.firstname} ${user.lastname}`"
                                 />
                             </div>
                         </div>
