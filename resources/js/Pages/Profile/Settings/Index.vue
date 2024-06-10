@@ -95,6 +95,7 @@ const logout = () => {
                             </div>
                         </BaseLink>
                         <BaseLink
+                            v-else
                             href=""
                             class="decoration-transparent text-base-300 cursor-not-allowed hover:text-base-300"
                             aria-disabled="true"

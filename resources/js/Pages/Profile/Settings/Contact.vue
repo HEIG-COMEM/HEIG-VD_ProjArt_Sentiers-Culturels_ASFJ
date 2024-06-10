@@ -1,11 +1,9 @@
 <script setup>
 import { back } from "@/utils/helper";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import MobileAppLayout from "@/Layouts/AppLayout.vue";
 
 import { ArrowLeft, UserCircle2, Setting } from "@iconsans/vue/linear";
-
-import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
@@ -33,9 +31,13 @@ import { Link } from "@inertiajs/vue3";
                 </div>
                 <h1 class="text-2xl font-medium">Contact</h1>
                 <div
-                    class="flex flex-col gap-5 rounded-t-2xl p-6 pb-20 w-full top-[30vh] shadow-top bg-purple-200"
+                    class="absolute bottom-0 left-0 flex flex-col w-full min-h-[85vh] rounded-xl shadow-top-sm bg-primary"
                 >
-                    <div></div>
+                    <div
+                        class="px-6 pt-6 flex flex-col gap-5 text-white text-md font-semibold text-center"
+                    >
+                        Application fictive dans un cadre d’étude à l’HEIG-VD.
+                    </div>
                 </div>
             </div>
         </template>

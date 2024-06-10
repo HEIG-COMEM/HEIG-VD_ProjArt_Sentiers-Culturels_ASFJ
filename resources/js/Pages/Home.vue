@@ -48,7 +48,12 @@ const discoverySearchResult = computed(() => {
     <Head title="Accueil" />
     <MobileAppLayout>
         <template v-slot:main>
-            <div class="h-full w-full flex flex-col gap-2">
+            <div
+                class="absolute top-0 left-0 w-full inline-flex justify-center bg-primary text-primary-content p-2 text-xs rounded-b-lg"
+            >
+                Application fictive dans un cadre d’étude à l’HEIG-VD.
+            </div>
+            <div class="h-full w-full flex flex-col gap-2 mt-6">
                 <!-- FILTER SECTION -->
                 <div class="flex flex-col w-full gap-4 p-6">
                     <BaseSearchBar
