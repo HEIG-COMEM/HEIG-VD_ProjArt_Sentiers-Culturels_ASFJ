@@ -57,6 +57,9 @@
                 {
                     "name": "Gros-de-Vaud",
                     "icon_path": "gros-de-vaud.svg"
+                },
+                {
+                    "name": "Alpes vaudoises"
                 }
             ]
         },
@@ -287,6 +290,189 @@
                         "title": "Bains thermaux d’Yverdon-les-Bains",
                         "description": "Vue des installations des Bains thermaux.",
                         "path": "yverdon-bains-thermaux.png"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Le bord du lac de Neuchâtel",
+            "description": "Le Sentier Culturel de Yverdon-les-Bains est une exploration immersive dans l'histoire, la culture et la beauté naturelle de la région. Conçu pour offrir aux visiteurs une expérience enrichissante, ce sentier mène à travers des sites historiques, des points de vue panoramiques, des espaces verts et des quartiers animés, reflétant la diversité et la richesse de Yverdon-les-Bains.",
+            "badge": {
+                "family": "Nord-Vaudois",
+                "name": "Lac de Neuchâtel"
+            },
+            "difficulty": "Moyen",
+            "season": "Toute l'année",
+            "start": {
+                "coordinate": [46.792688416645525, 6.641848835925383]
+            },
+            "end": {
+                "coordinate": [46.78503436182598, 6.652637047047814]
+            },
+            "tags": ["Découverte", "Histoire", "Bord du lac", "Nature"],
+            "picture": {
+                "title": "Lac de Neuchâtel",
+                "description": "Vue panoramique du lac de Neuchâtel.",
+                "path": "yverdon-les-bains-bord-du-lac-neuchatel.png"
+            },
+            "interest_points": [
+                {
+                    "name": "Point de vue Lac de Neuchâtel",
+                    "description": "Le Point de vue Lac de Neuchâtel offre une vue panoramique exceptionnelle sur le lac de Neuchâtel, le plus grand lac de surface en Suisse. Situé à une altitude modeste, ce point de vue permet de contempler non seulement le calme et la beauté du lac mais aussi les montagnes environnantes, créant une scène naturelle idyllique.",
+                    "badge": {
+                        "family": "Nord-Vaudois",
+                        "name": "Vue du lac de Neuchâtel"
+                    },
+                    "coordinate": [46.792688416645525, 6.641848835925383],
+                    "tags": ["Bord du lac", "Point de vue", "Nature"],
+                    "picture": {
+                        "title": "Point de vue Lac de Neuchâtel",
+                        "description": "Vue panoramique sur le lac de Neuchâtel.",
+                        "path": "yverdon-les-bains-pov-lac-neuchatel.png"
+                    }
+                },
+                {
+                    "name": "Parc des Rives du Lac",
+                    "description": "Le Parc des Rives du Lac est un espace vert idyllique bordant le lac de Neuchâtel. Ce parc offre une multitude d'activités récréatives, allant de la pêche et du canotage à la simple contemplation du paysage.",
+                    "badge": {
+                        "family": "Nord-Vaudois",
+                        "name": "Rives du lac"
+                    },
+                    "coordinate": [46.7861347319032, 6.6421021915839615],
+                    "tags": ["Bord du lac", "Nature"],
+                    "picture": {
+                        "title": "Parc des Rives du Lac",
+                        "description": "Vue du Parc des Rives du Lac.",
+                        "path": "yverdon-les-bains-parc-rives-lac.png"
+                    }
+                },
+                {
+                    "name": "Statue Pestalozzi",
+                    "description": "La Rue Pestalozzi, nommée en hommage au philosophe et éducateur suisse Johann Heinrich Pestalozzi, est une rue animée du centre-ville d'Yverdon-les-Bains. Cette rue est célèbre pour ses nombreux boutiques, cafés et restaurants, offrant aux visiteurs une immersion dans la vie locale. Les bâtiments pittoresques et l'architecture traditionnelle ajoutent à l'atmosphère unique de cette rue, rendant chaque promenade une expérience authentique.",
+                    "badge": {
+                        "family": "Monuments",
+                        "name": "Statue Pestalozzi"
+                    },
+                    "coordinate": [46.77727000100392, 6.640629097388228],
+                    "tags": ["Monument", "Architecture"],
+                    "picture": {
+                        "title": "Statue Pestalozzi",
+                        "description": "Statue de Pestalozzi à Yverdon-les-Bains.",
+                        "path": "yverdon-les-bains-statue-pestalozzi.png"
+                    }
+                },
+                {
+                    "name": "Les Menhirs de Clendy",
+                    "description": "Les Menhirs de Clendy sont un site archéologique fascinant situé sur les hauteurs d'Yverdon-les-Bains. Ces menhirs, datant de l'époque néolithique, sont considérés comme des vestiges préhistoriques importants. Le site offre une vue spectaculaire sur la région, combinant ainsi histoire et nature.",
+                    "badge": {
+                        "family": "Monuments",
+                        "name": "Menhirs de Clendy"
+                    },
+                    "coordinate": [46.780724362782976, 6.656565298237567],
+                    "tags": ["Histoire", "Nature"],
+                    "picture": {
+                        "title": "Les Menhirs de Clendy",
+                        "description": "Les Menhirs de Clendy à Yverdon-les-Bains.",
+                        "path": "yverdon-les-bains-menhirs-clendy.png"
+                    }
+                },
+                {
+                    "name": "Plage d'Yverdon-les-Bains",
+                    "description": "La Plage d'Yverdon-les-Bains est une destination populaire pour les amateurs de sports nautiques et de détente. Située à proximité du lac de Neuchâtel, cette plage offre une variété d'installations, y compris des zones de pique-nique, des équipements de sport nautique et des espaces réservés aux enfants.",
+                    "badge": {
+                        "family": "Nord-Vaudois",
+                        "name": "Plage d'Yverdon-les-Bains"
+                    },
+                    "coordinate": [46.78503436182598, 6.652637047047814],
+                    "tags": ["Bord du lac", "Nature"],
+                    "picture": {
+                        "title": "Plage d'Yverdon-les-Bains",
+                        "description": "Vue de la Plage d'Yverdon-les-Bains.",
+                        "path": "yverdon-les-bains-plage.png"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Les Diablerets",
+            "description": "L'itinéraire commence par la Passerelle d'Aigue Noire, offrant une vue spectaculaire sur les alpages et les montagnes. Ensuite, La Palanche propose une vue panoramique sur la vallée de l'Ormont-Dessert et les Alpes. La descente vers la Cascade du Dar révèle un spectacle d'eau impressionnant, surtout après de fortes pluies. L'itinéraire se termine au Col du Pillon, avec une vue imprenable sur le massif des Diablerets et la vallée, offrant des possibilités d'exploration supplémentaires.",
+            "badge": {
+                "family": "Alpes vaudoises",
+                "name": "Les Diablerets"
+            },
+            "difficulty": "Difficile",
+            "season": "Toute l'année",
+            "start": {
+                "coordinate": [46.34572093155993, 7.162873932238695]
+            },
+            "end": {
+                "coordinate": [46.35362741653309, 7.205604459383692]
+            },
+            "tags": ["Découverte", "Histoire", "Nature"],
+            "picture": {
+                "title": "Les Diablerets",
+                "description": "Vue panoramique sur les Diablerets.",
+                "path": "diablerets.png"
+            },
+            "interest_points": [
+                {
+                    "name": "Passerele d'Aigue Noire",
+                    "description": "Commencez votre aventure par la Passerelle d'Aigue Noire, une structure suspendue qui vous mène au-dessus de la vallée d'Aigue Noire. Cette passerelle offre une vue spectaculaire sur les alpages et les montagnes environnantes, donnant l'impression d'être suspendu au-dessus du vide.",
+                    "badge": {
+                        "family": "Alpes vaudoises",
+                        "name": "Aigue Noire"
+                    },
+                    "coordinate": [46.34572093155993, 7.162873932238695],
+                    "tags": ["Point de vue", "Nature"],
+                    "picture": {
+                        "title": "Passerelle d'Aigue Noire",
+                        "description": "Vue depuis la Passerelle d'Aigue Noire.",
+                        "path": "diablerets-passerelle-aigue-noire.png"
+                    }
+                },
+                {
+                    "name": "La Palanche",
+                    "description": "Après avoir traversé la passerelle, dirigez-vous vers La Palanche, un sommet offrant une vue panoramique sur la vallée de l'Ormont-Dessert et les Alpes. La Palanche est également connue pour ses formations géologiques uniques et sa croix de pierre.",
+                    "badge": {
+                        "family": "Alpes vaudoises",
+                        "name": "La Palanche"
+                    },
+                    "coordinate": [46.3470836502237, 7.179439254952237],
+                    "tags": ["Point de vue", "Nature"],
+                    "picture": {
+                        "title": "La Palanche",
+                        "description": "Vue panoramique depuis La Palanche.",
+                        "path": "diablerets-palanche.png"
+                    }
+                },
+                {
+                    "name": "Cascade du Dar",
+                    "description": "Descendez ensuite vers la Cascade du Dar, un spectacle d'eau qui tombe en cascades le long d'un ruisseau. Cette cascade est particulièrement impressionnante après de fortes pluies, lorsque l'eau est abondante. Vous pouvez marcher le long du ruisseau pour atteindre la cascade, profitant de la fraîcheur et de la beauté naturelle.",
+                    "badge": {
+                        "family": "Alpes vaudoises",
+                        "name": "Cascade du Dar"
+                    },
+                    "coordinate": [46.34678740992573, 7.200725265485697],
+                    "tags": ["Nature"],
+                    "picture": {
+                        "title": "Cascade du Dar",
+                        "description": "Vue de la Cascade du Dar.",
+                        "path": "diablerets-cascade-dar.png"
+                    }
+                },
+                {
+                    "name": "Col du Pillon",
+                    "description": "Terminez votre jour par le Col du Pillon, un col routier qui offre une vue imprenable sur le massif des Diablerets et la vallée de l'Ormont-Dessert. Le col est également le point de départ pour de nombreuses randonnées dans la région, offrant des possibilités d'exploration supplémentaires.",
+                    "badge": {
+                        "family": "Alpes vaudoises",
+                        "name": "Col du Pillon"
+                    },
+                    "coordinate": [46.35362741653309, 7.205604459383692],
+                    "tags": ["Point de vue", "Nature"],
+                    "picture": {
+                        "title": "Col du Pillon",
+                        "description": "Vue du Col du Pillon.",
+                        "path": "diablerets-col-pillon.png"
                     }
                 }
             ]
