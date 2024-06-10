@@ -40,26 +40,27 @@
             "children": [
                 {
                     "name": "Lavaux",
-                    "icon_path": "lavaux.svg"
+                    "icon_path": "region-children.svg"
                 },
                 {
                     "name": "Nord-Vaudois",
-                    "icon_path": "nord-vaudois.svg"
+                    "icon_path": "region-children.svg"
                 },
                 {
                     "name": "La Côte",
-                    "icon_path": "la-cote.svg"
+                    "icon_path": "region-children.svg"
                 },
                 {
                     "name": "Riviera",
-                    "icon_path": "riviera.svg"
+                    "icon_path": "region-children.svg"
                 },
                 {
                     "name": "Gros-de-Vaud",
-                    "icon_path": "gros-de-vaud.svg"
+                    "icon_path": "region-children.svg"
                 },
                 {
-                    "name": "Alpes vaudoises"
+                    "name": "Alpes vaudoises",
+                    "icon_path": "region-children.svg"
                 }
             ]
         },
