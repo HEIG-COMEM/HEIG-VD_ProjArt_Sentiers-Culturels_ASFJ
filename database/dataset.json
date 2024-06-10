@@ -85,7 +85,7 @@
 
     "sentiers": [
         {
-            "name": "Sentier Culturel des musées de Lausanne",
+            "name": "Musées de Lausanne",
             "description": "Préparez-vous pour une découverte immersive à travers les musées de Lausanne, une ville vibrante où l'art et l'histoire se rencontrent. Ne manquez pas l'occasion de plonger dans des univers créatifs uniques, où chaque œuvre est une invitation à voyager. Ce parcours vous offre une expérience enrichissante, révélant la richesse culturelle et intellectuelle de Lausanne.",
             "badge": {
                 "family": "Villes",
@@ -154,7 +154,7 @@
             ]
         },
         {
-            "name": "Sentier Culturel de Morges",
+            "name": "Ville de Morges",
             "description": "Morges, située près du lac Léman, offre une variété d'activités culturelles, gastronomiques et sportives. Les points d'intérêt incluent le Château de Morges et ses musées, le Musée Alexis Forel, et des festivals comme la Fête de la Tulipe. La région est également connue pour ses vignobles, ses produits locaux et ses paysages pittoresques.",
             "badge": {
                 "family": "Villes",
@@ -223,7 +223,7 @@
             ]
         },
         {
-            "name": "Sentier Culturel de Yverdon-les-Bains",
+            "name": "Ville d'Yverdon-les-Bains",
             "description": "Yverdon-les-Bains, bordant le lac de Neuchâtel, est une ville charmante offrant une belle vue sur les paysages environnants. Son centre-ville dynamique, avec ses boutiques, cafés et restaurants, crée une atmosphère accueillante. La ville combine architecture traditionnelle et moderne, rendant chaque promenade intéressante. De plus, connue pour ses installations de bien-être, Yverdon-les-Bains est un paradis pour ceux qui cherchent détente et relaxation.",
             "badge": {
                 "family": "Villes",
