@@ -52,11 +52,13 @@ const isAuth = computed(() => auth.value.user !== null);
 const bgImgPath = computed(() => getImgPath(route.value.pictures.at(0).path));
 
 const duration = computed(() => {
-    return Math.floor(route.value.duration / 3600) +
-        " h " +
-        (route.value.duration % 3600) / 60
-        ? Math.floor((route.value.duration % 3600) / 60) + " min"
-        : "";
+    const duration = route.value.duration;
+    const hours = Math.floor(duration / 3600);
+    const minutes = Math.floor((duration % 3600) / 60);
+
+    return hours > 0
+        ? hours + "h " + (minutes > 0 ? minutes + "min" : "")
+        : minutes + "min";
 });
 
 const distance = computed(() => {
