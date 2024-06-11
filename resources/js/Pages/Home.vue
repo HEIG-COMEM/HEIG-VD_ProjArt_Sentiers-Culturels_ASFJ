@@ -65,7 +65,7 @@ const discoverySearchResult = computed(() => {
                 </div>
                 <template v-if="!discoverySearch">
                     <div
-                        class="w-full px-6 flex flex-col items-center gap-16 overflow-x-scroll"
+                        class="w-full px-6 flex flex-col items-center gap-16 overflow-auto"
                     >
                         <Link :href="route('map')" class="w-full">
                             <div
@@ -110,16 +110,16 @@ const discoverySearchResult = computed(() => {
                             <AppTutorial v-if="isTutorial" />
                         </div>
                         <div
-                            class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 items-center"
+                            class="flex flex-col gap-4 w-full max-h-[70vh] pb-6 items-center"
                         >
-                            <div class="flex flex-col gap-10">
+                            <div class="flex flex-col gap-10 w-full">
                                 <!-- TOP 3 -->
                                 <div class="flex flex-col gap-4">
                                     <h2 class="text-xl font-semibold">
                                         Les plus aimés
                                     </h2>
                                     <div
-                                        class="flex flex-row gap-4 items-center"
+                                        class="flex flex-row gap-4 items-center pb-1 overflow-y-scroll"
                                     >
                                         <AppSquareCard
                                             v-if="routesOrderedRating.length"
@@ -146,7 +146,9 @@ const discoverySearchResult = computed(() => {
                                     <h2 class="text-xl font-semibold">
                                         A proximité
                                     </h2>
-                                    <AppNearbySquareCard />
+                                    <div class="overflow-y-scroll">
+                                        <AppNearbySquareCard />
+                                    </div>
                                 </div>
                             </div>
                         </div>

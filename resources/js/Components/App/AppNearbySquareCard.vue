@@ -27,7 +27,7 @@ onMounted(() => {
         <AppSquareCard
             v-if="isLoading"
             v-for="load in [1, 2, 3]"
-            class="skeleton h-24 w-24"
+            class="skeleton"
             title=""
         />
         <AppSquareCard
