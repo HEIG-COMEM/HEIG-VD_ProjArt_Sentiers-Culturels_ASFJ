@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DifficultiesTableSeeder::class);
         $this->call(SeasonsTableSeeder::class);
         $this->call(BadgesTableSeeder::class);
-        $this->call(TagsTableSeeder::class);
+        // $this->call(TagsTableSeeder::class);
         $this->call(RoutesTableSeeder::class);
     }
 }
