@@ -80,7 +80,7 @@ class RouteController extends Controller
     public function start(RouteStartRequest $request, string $uuid)
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
-        $targetDistance = 100.5; // In km // TODO: Change to 0.5
+        $targetDistance = env('CLOSE_DISTANCE', 0.5);
         $distance = GeoLocateController::distance($request->lat, $request->lng, $route->start_lat, $route->start_long, 'K'); // In km
         if ($distance > $targetDistance) {
             return response()->json(['error' =>
@@ -112,7 +112,7 @@ class RouteController extends Controller
     public function checkEnd(RouteCheckEndRequest $request, string $uuid)
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
-        $targetDistance = 100.5; // In km // TODO: Change to 0.5
+        $targetDistance = env('CLOSE_DISTANCE', 0.5);
         $distance = GeoLocateController::distance($request->lat, $request->lng, $route->end_lat, $route->end_long, 'K'); // In km
         if ($distance > $targetDistance) {
             return response()->json(['error' => 'nok']);
@@ -144,7 +144,7 @@ class RouteController extends Controller
     public function finish(RouteFinishRequest $request, string $uuid)
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
-        $targetDistance = 100.5; // In km //TODO: Change to 0.5
+        $targetDistance = env('CLOSE_DISTANCE', 0.5);
         $distance = GeoLocateController::distance($request->lat, $request->lng, $route->end_lat, $route->end_long, 'K'); // In km
 
         $resp = [

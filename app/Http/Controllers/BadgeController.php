@@ -39,7 +39,7 @@ class BadgeController extends Controller
             );
         }
 
-        $targetDistance = 100.5; // In km // TODO: Change to 0.5
+        $targetDistance = env('CLOSE_DISTANCE', 0.5);
         if ($distance > $targetDistance) {
             return response()->json([
                 'error' => 'Distance too far',
