@@ -6,6 +6,11 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * Class ProfileUpdateRequest
+ * 
+ * This class is a FormRequest class that is used to validate the incoming request to update the user profile.
+ */
 class ProfileUpdateRequest extends FormRequest
 {
     /**
