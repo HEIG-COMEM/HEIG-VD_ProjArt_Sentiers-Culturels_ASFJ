@@ -69,6 +69,7 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
 /* ---------- API Section Route ---------- */
 Route::group(['prefix' => 'api'], function () {
     Route::get('/interest-point/{uuid}', [InterestPointController::class, 'show']);
+    Route::post('/interest-point/{uuid}/claim-badge', [InterestPointController::class, 'claimBadge']);
     Route::get('/routes/nearby', [DiscoveryController::class, 'getNearbyRoutes']);
     Route::get('/favorite/{uuid}', [FavoriteController::class, 'toggle']);
     Route::get('/route/go/{uuid}', [RouteController::class, 'start']);

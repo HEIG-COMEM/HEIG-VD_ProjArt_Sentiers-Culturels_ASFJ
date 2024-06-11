@@ -6,11 +6,15 @@ defineProps({
         type: String,
         required: true,
     },
+    auth: {
+        type: Object,
+        required: true,
+    },
 });
 </script>
 
 <template>
-    <AppInterestPointShow :uuid />
+    <AppInterestPointShow :uuid :user="auth" />
 </template>
 
 <style scoped></style>

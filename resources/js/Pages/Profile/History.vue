@@ -46,7 +46,7 @@ const formattedDate = (date) => {
 </script>
 
 <template>
-    <Head title="History" />
+    <Head title="Historique" />
     <MobileAppLayout>
         <template v-slot:main>
             <div class="h-full w-full p-6 flex flex-col gap-2">
