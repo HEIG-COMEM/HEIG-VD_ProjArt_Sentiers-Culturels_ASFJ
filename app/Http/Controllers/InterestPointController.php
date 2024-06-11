@@ -11,12 +11,19 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
+/**
+ * Class InterestPointController
+ * 
+ * This class is responsible for handling interest point-related operations.
+ */
 class InterestPointController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
         $interestPoints = InterestPoint::paginate(10);
 
@@ -27,8 +34,11 @@ class InterestPointController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @param string $uuid
+     * @return \App\Http\Resources\InterestPointResource
      */
-    public function show(string $uuid)
+    public function show(string $uuid): \App\Http\Resources\InterestPointResource
     {
         $interestPoint = InterestPoint::where('uuid', $uuid)->firstOrFail();
         $interestPoint->load('pictures', 'routes', 'tags', 'badge');
@@ -53,7 +63,14 @@ class InterestPointController extends Controller
         return new InterestPointResource($interestPoint);
     }
 
-    public function claimBadge(BadgeClaimRequest $request, string $uuid)
+    /**
+     * Claim a badge for the specified interest point.
+     *
+     * @param \App\Http\Requests\BadgeClaimRequest $request
+     * @param string $uuid
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function claimBadge(BadgeClaimRequest $request, string $uuid): \Illuminate\Http\JsonResponse
     {
         $interestPoint = InterestPoint::where('uuid', $uuid)->firstOrFail();
         $user = User::find(Auth::id());

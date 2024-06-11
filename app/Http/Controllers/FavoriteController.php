@@ -8,9 +8,19 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
 
+/**
+ * Class FavoriteController
+ *
+ * This class is responsible for handling favorite-related operations.
+ */
 class FavoriteController extends Controller
 {
-    public function index()
+    /**
+     * Display the favorite routes for the authenticated user.
+     *
+     * @return \Inertia\Response
+     */
+    public function index(): \Inertia\Response
     {
         if (auth()->guest()) {
             return redirect()->route('login');
@@ -32,7 +42,13 @@ class FavoriteController extends Controller
         ]);
     }
 
-    public function toggle(string $uuid)
+    /**
+     * Toggle the favorite status of a route for the authenticated user.
+     *
+     * @param  string $uuid
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function toggle(string $uuid): \Illuminate\Http\JsonResponse
     {
         if (auth()->guest()) {
             return response()->json(['message' => 'Unauthorized'], 401);

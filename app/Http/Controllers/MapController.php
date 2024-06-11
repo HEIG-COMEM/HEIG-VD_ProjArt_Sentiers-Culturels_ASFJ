@@ -6,15 +6,22 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\InterestPoint;
 use App\Http\Resources\InterestPointResource;
-use App\Http\Resources\PathResource;
-use App\Http\Resources\RouteResource;
 use App\Http\Resources\TagResource;
-use App\Models\Route;
 use App\Models\Tag;
 
+/**
+ * Class MapController
+ * 
+ * This class is responsible for handling the logic related to the map.
+ */
 class MapController extends Controller
 {
-    public function index()
+    /**
+     * Display the map view with interest points and tags.
+     *
+     * @return \Inertia\Response
+     */
+    public function index(): \Inertia\Response
     {
         $IP = InterestPoint::all();
         $IP->load('pictures');

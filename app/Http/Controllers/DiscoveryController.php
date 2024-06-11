@@ -13,8 +13,18 @@ use Inertia\Inertia;
 use App\Models\Route;
 use App\Models\InterestPoint;
 
+/**
+ * Class DiscoveryController
+ * 
+ * This class is responsible for handling the logic related to discoveries.
+ */
 class DiscoveryController extends Controller
 {
+    /**
+     * Display the discovery page.
+     *
+     * @return \Inertia\Response
+     */
     public function index()
     {
         $routes = Route::all();
@@ -64,7 +74,13 @@ class DiscoveryController extends Controller
         ]);
     }
 
-    public function getNearbyRoutes(RoutesNearbyRequest $request)
+    /**
+     * Get nearby routes based on the given latitude, longitude, and radius.
+     *
+     * @param  \App\Http\Requests\RoutesNearbyRequest  $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function getNearbyRoutes(RoutesNearbyRequest $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
         $latitude = $request->latitude;
         $longitude = $request->longitude;
@@ -83,7 +99,7 @@ class DiscoveryController extends Controller
             }
         }
 
-        // Sort the routes by distance
+        // Sort the routes by distance and take the top 3
         $routesIn = collect($routesIn)->sortBy('distance');
         $routesIn = $routesIn->take(3);
 

@@ -12,9 +12,19 @@ use Inertia\Inertia;
 use App\Models\Route;
 use App\Models\InterestPoint;
 
+/**
+ * Class CollectionAdminController
+ * 
+ * The CollectionAdminController class is responsible for handling requests related to the collection administration.
+ */
 class CollectionAdminController extends Controller
 {
-    public function index()
+    /**
+     * Display the collection administration page.
+     *
+     * @return \Inertia\Response
+     */
+    public function index(): \Inertia\Response
     {
         $routes = Route::all();
         $routes->load('difficulty');
@@ -27,7 +37,6 @@ class CollectionAdminController extends Controller
 
         $difficulties = Difficulty::all();
         $tags = Tag::all();
-
 
         return Inertia::render('Backoffice/Collection', [
             'routes' => RouteResource::collection($routes),

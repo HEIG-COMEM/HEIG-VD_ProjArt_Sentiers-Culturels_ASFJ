@@ -3,14 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BadgeClaimRequest;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Models\Badge;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class BadgeController
+ * 
+ * This class is responsible for handling badge-related operations.
+ */
 class BadgeController extends Controller
 {
-    public function claim(BadgeClaimRequest $request, string $uuid)
+    /**
+     * Claim a badge for the authenticated user.
+     *
+     * @param BadgeClaimRequest $request The request object containing the badge claim data.
+     * @param string $uuid The UUID of the badge to be claimed.
+     * @return JsonResponse The JSON response indicating the result of the badge claim.
+     */
+    public function claim(BadgeClaimRequest $request, string $uuid): JsonResponse
     {
         if (!Auth::check()) {
             return response()->json([
@@ -59,7 +71,14 @@ class BadgeController extends Controller
         ]);
     }
 
-    public static function unlock(User $user, Badge $badge)
+    /**
+     * Unlock a badge for the specified user.
+     *
+     * @param User $user The user for whom to unlock the badge.
+     * @param Badge $badge The badge to be unlocked.
+     * @return bool True if the badge was successfully unlocked, false otherwise.
+     */
+    public static function unlock(User $user, Badge $badge): bool
     {
         if ($user->badges->contains($badge->id)) {
             return false;
@@ -73,7 +92,14 @@ class BadgeController extends Controller
         return true;
     }
 
-    private static function recursiveUnlock(User $user, Badge $badge)
+    /**
+     * Recursively unlock parent badges if all child badges are unlocked.
+     *
+     * @param User $user The user for whom to unlock the badges.
+     * @param Badge $badge The badge to be checked for unlocking its parent badges.
+     * @return void
+     */
+    private static function recursiveUnlock(User $user, Badge $badge): void
     {
         // check if the badge is a parent badge
         if ($badge->parent_id) {

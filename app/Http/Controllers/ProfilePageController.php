@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfilePageController extends Controller
 {
+    /**
+     * Display the profile page.
+     *
+     * @return \Inertia\Response
+     */
     public function index()
     {
         $badges = Badge::whereNull('parent_id')->take(6)->get();
@@ -22,12 +27,11 @@ class ProfilePageController extends Controller
             $badge->children_count = $badge->children->count();
         });
 
-        // Sort badges by the number of children they have
         $badges = $badges->sortByDesc('children_count');
 
         if (Auth::check()) {
             $user = Auth::user();
-            // For each badge count how many of its children are owned by the user
+
             $badges->each(function ($badge) use ($user) {
                 $badge->owned_children_count = $badge->children->filter(function ($child) use ($user) {
                     return $user->badges->contains($child);
@@ -42,6 +46,7 @@ class ProfilePageController extends Controller
             $distance = AchievementController::getTotalDistance($user->id);
             $IPCompletion = AchievementController::getTotalIPBadgesOwned($user->id);
         }
+
         return Inertia::render('Profile/Index', [
             'collection' => BadgeResource::collection($badges),
             'routeCompletion' => AchievementResource::make($routeCompletion),
@@ -50,6 +55,11 @@ class ProfilePageController extends Controller
         ]);
     }
 
+    /**
+     * Display the user's route history.
+     *
+     * @return \Inertia\Response|\Illuminate\Http\RedirectResponse
+     */
     public function history()
     {
         if (!Auth::check()) {
@@ -57,6 +67,7 @@ class ProfilePageController extends Controller
         }
 
         $userHistory = RouteHistory::where('user_id', Auth::id())->whereNotNull('end_timestamp')->orderBy('start_timestamp', 'desc')->get();
+
         $userHistory->load('route');
         $userHistory->load(['route.pictures', 'route.tags']);
 
@@ -65,6 +76,12 @@ class ProfilePageController extends Controller
         ]);
     }
 
+    /**
+     * Update the user's profile.
+     *
+     * @param  \App\Http\Requests\Auth\ProfilePartialUpdate  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(ProfilePartialUpdate $request)
     {
         try {
