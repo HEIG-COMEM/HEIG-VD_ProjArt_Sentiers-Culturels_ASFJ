@@ -15,6 +15,8 @@ use App\Models\Route;
 use App\Models\Tag;
 use App\Models\Badge;
 use App\Http\Resources\BadgeResource;
+use App\Http\Resources\SeasonResource;
+use App\Models\Season;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
@@ -61,6 +63,7 @@ class RouteAdminController extends Controller
             'difficulties' => DifficultyResource::collection(Difficulty::all()),
             'interestpoints' => InterestPointResource::collection($inerestpoints),
             'badges' => BadgeResource::collection($availableBadge),
+            'seasons' => SeasonResource::collection(Season::all()),
         ]);
     }
 
@@ -119,6 +122,9 @@ class RouteAdminController extends Controller
             return back()->withErrors(['error' => 'Error while creating the route']);
         }
 
+        // Attach seasons
+        $route->seasons()->attach($request->seasons);
+
         return redirect()->route('backoffice.routes.show', $route->uuid);
     }
 
@@ -129,13 +135,7 @@ class RouteAdminController extends Controller
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
 
-        $route->load('pictures');
-        $route->load('tags');
-        $route->load('seasons');
-        $route->load('difficulty');
-        $route->load('badge');
-        $route->load('interestPoints');
-        $route->interestPoints->load('pictures');
+        $route->load('pictures', 'tags', 'seasons', 'difficulty', 'badge', 'interestPoints.pictures');
 
         return Inertia::render('Backoffice/Route/Show', [
             'routeDB' => RouteResource::make($route),
@@ -151,12 +151,7 @@ class RouteAdminController extends Controller
         $inerestpoints = InterestPoint::all();
         $inerestpoints->load('pictures');
 
-        $route->load('pictures');
-        $route->load('tags');
-        $route->load('seasons');
-        $route->load('difficulty');
-        $route->load('interestPoints');
-        $route->interestPoints->load('pictures');
+        $route->load('pictures', 'tags', 'seasons', 'difficulty', 'interestPoints.pictures');
 
         $route->load('badge');
 
@@ -179,6 +174,7 @@ class RouteAdminController extends Controller
             'badges' => BadgeResource::collection($availableBadge),
             'difficulties' => DifficultyResource::collection(Difficulty::all()),
             'interestpoints' => InterestPointResource::collection($inerestpoints),
+            'seasons' => SeasonResource::collection(Season::all()),
         ]);
     }
 
@@ -236,6 +232,10 @@ class RouteAdminController extends Controller
         // Tags
         $route->tags()->detach();
         $route->tags()->attach($request->tags);
+
+        // Seasons
+        $route->seasons()->detach();
+        $route->seasons()->attach($request->seasons);
 
         $route->save();
         $route->createRoutePath(); // Recalculate the route path

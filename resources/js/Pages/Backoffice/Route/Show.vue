@@ -70,15 +70,31 @@ const tagsName = (tags) => tags.map((tag) => tag.name).slice(0, 4);
                     </div>
                     <div>
                         <span
-                            v-for="(tags, index) in routeDB.tags"
+                            v-for="(tag, index) in routeDB.tags"
                             class="text-sm text-base-300"
-                            >{{ tags.name
+                            >{{ tag.name
                             }}<template v-if="index !== routeDB.tags.length - 1"
                                 >,
                             </template>
                         </span>
                         <h1 class="text-2xl font-semibold mb-4">
-                            {{ routeDB.name }}
+                            {{ routeDB.name }} -
+                            <span
+                                v-if="routeDB.seasons.length === 4"
+                                class="text-sm font-normal text-base-300"
+                            >
+                                Toute l'année
+                            </span>
+                            <span
+                                v-else
+                                v-for="(season, index) in routeDB.seasons"
+                                class="text-sm font-normal text-base-300"
+                                >{{ season.name
+                                }}<template
+                                    v-if="index !== routeDB.seasons.length - 1"
+                                    >,
+                                </template>
+                            </span>
                         </h1>
                         <p>
                             {{ routeDB.description }}

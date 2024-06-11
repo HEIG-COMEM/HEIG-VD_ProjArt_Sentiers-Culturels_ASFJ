@@ -40,6 +40,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    seasons: {
+        type: Object,
+        required: true,
+    },
 });
 
 const form = useForm({
@@ -50,17 +54,41 @@ const form = useForm({
     image: "",
     badge_uuid: "",
     interestpoints: [],
+    seasons: [],
 });
 
 const tags = reactive(props.tags.data);
 const difficulties = reactive(props.difficulties.data);
 const interestpoints = reactive(props.interestpoints.data);
 const badges = reactive(props.badges.data);
+const seasons = reactive(props.seasons.data);
+const seasonsAdded = reactive([]);
 const interestpointsAdded = reactive([]);
 const tagsAdded = reactive([]);
 const showForm = ref(true);
 const step = ref(1);
 const maxStep = 4;
+
+const filteredSeasons = computed(() => {
+    return seasons.filter(
+        (season) =>
+            !seasonsAdded.some((seasonAdded) => seasonAdded.id === season.id),
+    );
+});
+
+watch(seasonsAdded, () => {
+    form.seasons = seasonsAdded.map((season) => {
+        return season.id;
+    });
+});
+
+const handleSeasonClick = (season) => {
+    if (seasonsAdded.includes(season)) {
+        seasonsAdded.splice(seasonsAdded.indexOf(season), 1);
+    } else {
+        seasonsAdded.push(season);
+    }
+};
 
 const interestpointsSearch = ref("");
 const filteredInterestpoints = computed(() => {
@@ -121,6 +149,50 @@ const handleFileUpload = (event, key) => {
     imagePreview.value = URL.createObjectURL(form[key]);
 };
 
+const changeStep = (newStep) => {
+    if (newStep < 1 || newStep > maxStep) return;
+    if (newStep < step.value) return (step.value = newStep);
+    if (!isCurrentStepValid.value) return;
+    step.value = newStep;
+};
+
+const isStep1Valid = computed(() => {
+    return (
+        form.title &&
+        form.tags.length &&
+        form.seasons.length &&
+        form.difficulty_id &&
+        form.description
+    );
+});
+
+const isStep2Valid = computed(() => {
+    return form.image;
+});
+
+const isStep3Valid = computed(() => {
+    return true; // Badge is optional
+});
+
+const isStep4Valid = computed(() => {
+    return form.interestpoints.length >= 2;
+});
+
+const isCurrentStepValid = computed(() => {
+    switch (step.value) {
+        case 1:
+            return isStep1Valid.value;
+        case 2:
+            return isStep2Valid.value;
+        case 3:
+            return isStep3Valid.value; // Badge is optional
+        case 4:
+            return isStep4Valid.value;
+        default:
+            return false;
+    }
+});
+
 const submit = () => {
     form.hasErrors = false;
     form.errors = {};
@@ -132,6 +204,11 @@ const submit = () => {
 
     if (!form.tags.length) {
         form.errors.tags = "Au moins un tag est obligatoire";
+        form.hasErrors = true;
+    }
+
+    if (!form.seasons.length) {
+        form.errors.seasons = "Au moins une saison est obligatoire";
         form.hasErrors = true;
     }
 
@@ -218,7 +295,7 @@ const submit = () => {
                         <ul class="steps w-full">
                             <li
                                 class="step text-sm text-base-300"
-                                @click="step = 1"
+                                @click="changeStep(1)"
                                 :class="{
                                     'step-primary': step >= 1,
                                     'text-primary': step >= 1,
@@ -228,7 +305,7 @@ const submit = () => {
                             </li>
                             <li
                                 class="step text-sm text-base-300"
-                                @click="step = 2"
+                                @click="changeStep(2)"
                                 :class="{
                                     'step-primary': step >= 2,
                                     'text-primary': step >= 2,
@@ -238,7 +315,7 @@ const submit = () => {
                             </li>
                             <li
                                 class="step text-sm text-base-300"
-                                @click="step = 3"
+                                @click="changeStep(3)"
                                 :class="{
                                     'step-primary': step >= 3,
                                     'text-primary': step >= 3,
@@ -248,7 +325,7 @@ const submit = () => {
                             </li>
                             <li
                                 class="step text-sm text-base-300"
-                                @click="step = 4"
+                                @click="changeStep(4)"
                                 :class="{
                                     'step-primary': step >= 4,
                                     'text-primary': step >= 4,
@@ -279,6 +356,41 @@ const submit = () => {
                                 name="title"
                             />
                             <BaseInputError :message="form.errors.title" />
+                        </label>
+                        <label class="form-control w-full">
+                            <div
+                                class="flex flex-row gap-2 text-primary items-center"
+                                onclick="showSeasonsPicker.showModal()"
+                            >
+                                <div class="label">
+                                    <span class="label-text"
+                                        >Saison
+                                        <span class="text-xs text-gray-500">
+                                            (au moins une)
+                                        </span></span
+                                    >
+                                </div>
+                                <span class="content-center h-6 w-6"
+                                    ><PlusCircle class="h-full w-full"
+                                /></span>
+                            </div>
+                            <div class="w-full flex flex-wrap gap-4">
+                                <template
+                                    v-for="season in seasonsAdded"
+                                    :key="season.id"
+                                >
+                                    <div
+                                        class="badge badge-primary badge-outline gap-2 cursor-pointer"
+                                        @click="handleSeasonClick(season)"
+                                    >
+                                        <span class="h-6 w-6">
+                                            <Cross class="h-full w-full" />
+                                        </span>
+                                        <span>{{ season.name }}</span>
+                                    </div>
+                                </template>
+                            </div>
+                            <BaseInputError :message="form.errors.seasons" />
                         </label>
                         <label class="form-control w-full">
                             <div
@@ -488,7 +600,9 @@ const submit = () => {
                                 @click="step < maxStep ? step++ : submit()"
                                 class="w-1/2"
                                 :class="{ 'opacity-25': form.processing }"
-                                :disabled="form.processing"
+                                :disabled="
+                                    form.processing || !isCurrentStepValid
+                                "
                             >
                                 {{ step === maxStep ? "Créer" : "Suivant" }}
                             </BasePrimaryButton>
@@ -557,6 +671,40 @@ const submit = () => {
                                     />
                                 </div>
                             </template>
+                        </div>
+                        <div class="modal-action">
+                            <form method="dialog">
+                                <button class="btn btn-primary">Valider</button>
+                            </form>
+                        </div>
+                    </div>
+                </dialog>
+
+                <!-- SEASONS PICKER -->
+                <dialog id="showSeasonsPicker" class="modal">
+                    <div class="modal-box">
+                        <h3 class="font-bold text-lg">
+                            Choisir une ou plusieurs saisons
+                        </h3>
+                        <div
+                            class="py-4 px-1 flex flex-col gap-2 max-h-[60vh] overflow-x-scroll"
+                        >
+                            <div class="w-full flex flex-wrap gap-4">
+                                <template
+                                    v-for="season in filteredSeasons"
+                                    :key="season.id"
+                                >
+                                    <div
+                                        class="badge badge-primary badge-outline gap-2 cursor-pointer"
+                                        @click="handleSeasonClick(season)"
+                                    >
+                                        <span class="h-6 w-6">
+                                            <Plus class="h-full w-full" />
+                                        </span>
+                                        <span>{{ season.name }}</span>
+                                    </div>
+                                </template>
+                            </div>
                         </div>
                         <div class="modal-action">
                             <form method="dialog">
