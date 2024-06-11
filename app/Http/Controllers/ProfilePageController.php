@@ -54,7 +54,7 @@ class ProfilePageController extends Controller
             return redirect()->route('login');
         }
 
-        $userHistory = RouteHistory::where('user_id', Auth::id())->orderBy('start_timestamp', 'desc')->get();
+        $userHistory = RouteHistory::where('user_id', Auth::id())->whereNotNull('end_timestamp')->orderBy('start_timestamp', 'desc')->get();
         $userHistory->load('route');
         $userHistory->load(['route.pictures', 'route.tags']);
 
