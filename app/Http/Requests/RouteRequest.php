@@ -25,6 +25,8 @@ class RouteRequest extends FormRequest
             "title" => "required|string",
             "tags" => "required|array|min:1",
             "tags.*" => "required|integer",
+            "seasons" => "required|array|min:1",
+            "seasons.*" => "required|integer",
             "difficulty_id" => "required|integer",
             "description" => "required|string",
             "interestpoints" => "required|array|min:2",

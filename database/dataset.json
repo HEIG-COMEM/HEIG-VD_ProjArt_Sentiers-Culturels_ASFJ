@@ -31,7 +31,7 @@
         }
     ],
 
-    "seasons": ["Printemps", "Été", "Automne", "Hiver", "Toute l'année"],
+    "seasons": ["Printemps", "Été", "Automne", "Hiver"],
 
     "badges_family": [
         {
@@ -96,7 +96,7 @@
                 "name": "Lausanne"
             },
             "difficulty": "Moyen",
-            "season": "Toute l'année",
+            "season": "Été",
             "start": {
                 "coordinate": [46.518264, 6.624907]
             },
@@ -165,7 +165,7 @@
                 "name": "Morges"
             },
             "difficulty": "Facile",
-            "season": "Toute l'année",
+            "season": "Été",
             "start": {
                 "coordinate": [46.507069710686416, 6.494217329500014]
             },
@@ -234,7 +234,7 @@
                 "name": "Yverdon-les-Bains"
             },
             "difficulty": "Facile",
-            "season": "Toute l'année",
+            "season": "Été",
             "start": {
                 "coordinate": [46.778215878233105, 6.641644507148404]
             },
@@ -303,7 +303,7 @@
                 "name": "Lac de Neuchâtel"
             },
             "difficulty": "Moyen",
-            "season": "Toute l'année",
+            "season": "Été",
             "start": {
                 "coordinate": [46.792688416645525, 6.641848835925383]
             },
@@ -402,7 +402,7 @@
                 "name": "Les Diablerets"
             },
             "difficulty": "Difficile",
-            "season": "Toute l'année",
+            "season": "Été",
             "start": {
                 "coordinate": [46.34572093155993, 7.162873932238695]
             },

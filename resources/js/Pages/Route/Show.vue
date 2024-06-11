@@ -356,19 +356,28 @@ onUnmounted(() => {
                                                 class="flex flex-col w-full gap-4"
                                             >
                                                 <div
+                                                    v-if="
+                                                        route.seasons.length > 0
+                                                    "
                                                     class="flex flex-row items-center gap-4"
                                                 >
                                                     <Information
-                                                        v-if="
-                                                            route.seasons
-                                                                .length > 0
-                                                        "
                                                         class="h-7 w-7 text-base-100"
                                                     />
                                                     <p
                                                         class="text-base-100 text-base font-semibold"
                                                     >
                                                         <span
+                                                            v-if="
+                                                                route.seasons
+                                                                    .length ===
+                                                                4
+                                                            "
+                                                        >
+                                                            Toute l'année
+                                                        </span>
+                                                        <span
+                                                            v-else
                                                             v-for="(
                                                                 season, index
                                                             ) in route.seasons"
