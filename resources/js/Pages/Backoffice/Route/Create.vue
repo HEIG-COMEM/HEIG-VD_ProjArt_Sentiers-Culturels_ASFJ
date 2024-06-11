@@ -149,6 +149,50 @@ const handleFileUpload = (event, key) => {
     imagePreview.value = URL.createObjectURL(form[key]);
 };
 
+const changeStep = (newStep) => {
+    if (newStep < 1 || newStep > maxStep) return;
+    if (newStep < step.value) return (step.value = newStep);
+    if (!isCurrentStepValid.value) return;
+    step.value = newStep;
+};
+
+const isStep1Valid = computed(() => {
+    return (
+        form.title &&
+        form.tags.length &&
+        form.seasons.length &&
+        form.difficulty_id &&
+        form.description
+    );
+});
+
+const isStep2Valid = computed(() => {
+    return form.image;
+});
+
+const isStep3Valid = computed(() => {
+    return true; // Badge is optional
+});
+
+const isStep4Valid = computed(() => {
+    return form.interestpoints.length >= 2;
+});
+
+const isCurrentStepValid = computed(() => {
+    switch (step.value) {
+        case 1:
+            return isStep1Valid.value;
+        case 2:
+            return isStep2Valid.value;
+        case 3:
+            return isStep3Valid.value; // Badge is optional
+        case 4:
+            return isStep4Valid.value;
+        default:
+            return false;
+    }
+});
+
 const submit = () => {
     form.hasErrors = false;
     form.errors = {};
@@ -251,7 +295,7 @@ const submit = () => {
                         <ul class="steps w-full">
                             <li
                                 class="step text-sm text-base-300"
-                                @click="step = 1"
+                                @click="changeStep(1)"
                                 :class="{
                                     'step-primary': step >= 1,
                                     'text-primary': step >= 1,
@@ -261,7 +305,7 @@ const submit = () => {
                             </li>
                             <li
                                 class="step text-sm text-base-300"
-                                @click="step = 2"
+                                @click="changeStep(2)"
                                 :class="{
                                     'step-primary': step >= 2,
                                     'text-primary': step >= 2,
@@ -271,7 +315,7 @@ const submit = () => {
                             </li>
                             <li
                                 class="step text-sm text-base-300"
-                                @click="step = 3"
+                                @click="changeStep(3)"
                                 :class="{
                                     'step-primary': step >= 3,
                                     'text-primary': step >= 3,
@@ -281,7 +325,7 @@ const submit = () => {
                             </li>
                             <li
                                 class="step text-sm text-base-300"
-                                @click="step = 4"
+                                @click="changeStep(4)"
                                 :class="{
                                     'step-primary': step >= 4,
                                     'text-primary': step >= 4,
@@ -556,7 +600,9 @@ const submit = () => {
                                 @click="step < maxStep ? step++ : submit()"
                                 class="w-1/2"
                                 :class="{ 'opacity-25': form.processing }"
-                                :disabled="form.processing"
+                                :disabled="
+                                    form.processing || !isCurrentStepValid
+                                "
                             >
                                 {{ step === maxStep ? "Créer" : "Suivant" }}
                             </BasePrimaryButton>
