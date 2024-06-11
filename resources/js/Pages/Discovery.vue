@@ -130,7 +130,7 @@ const clearFilters = () => {
     <Head title="Découverte" />
     <MobileAppLayout>
         <template v-slot:main>
-            <div class="h-full w-full p-6 flex flex-col gap-2 overflow-hidden">
+            <div class="h-full w-full p-6 flex flex-col gap-8 overflow-hidden">
                 <!-- TOGGLE MENU -->
                 <div class="flex flex-row justify-center w-full">
                     <div
