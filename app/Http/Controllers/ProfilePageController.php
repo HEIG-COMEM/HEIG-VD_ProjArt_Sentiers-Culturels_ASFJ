@@ -40,11 +40,13 @@ class ProfilePageController extends Controller
 
             $routeCompletion = AchievementController::getRoutesCompleted($user->id);
             $distance = AchievementController::getTotalDistance($user->id);
+            $IPCompletion = AchievementController::getTotalIPBadgesOwned($user->id);
         }
         return Inertia::render('Profile/Index', [
             'collection' => BadgeResource::collection($badges),
             'routeCompletion' => AchievementResource::make($routeCompletion),
             'distance' => AchievementResource::make($distance),
+            'IPCompletion' => AchievementResource::make($IPCompletion),
         ]);
     }
 

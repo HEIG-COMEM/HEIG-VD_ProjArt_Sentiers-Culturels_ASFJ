@@ -21,10 +21,15 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    IPCompletion: {
+        type: Object,
+        required: true,
+    },
 });
 
 const collectionBadges = reactive(props.collection.data);
 const routeCompletion = reactive(props.routeCompletion.data);
+const IPCompletion = reactive(props.IPCompletion.data);
 const distance = reactive(props.distance.data);
 </script>
 
@@ -51,7 +56,7 @@ const distance = reactive(props.distance.data);
                         }"
                     >
                         <div
-                            class="flex flex-row justify-center min-[342px]:justify-start gap-4 mt-2 flex-wrap"
+                            class="flex flex-row justify-between sm:justify-start gap-4 mt-2 flex-wrap"
                         >
                             <AppBadge
                                 v-for="badge in collectionBadges"
@@ -72,7 +77,7 @@ const distance = reactive(props.distance.data);
                     </AppBadgeCard>
                     <AppBadgeCard title="Exploits">
                         <div
-                            class="flex flex-row justify-center min-[342px]:justify-start gap-4 mt-2 flex-wrap"
+                            class="flex flex-row justify-between sm:justify-start gap-4 mt-2 flex-wrap"
                         >
                             <AppBadge
                                 badge="Distance"
@@ -86,6 +91,12 @@ const distance = reactive(props.distance.data);
                                 :count="routeCompletion.uniqueRoutesCount"
                                 :total="routeCompletion.totalRoutesCount"
                                 :icon="`achievements/${routeCompletion.reward.toLowerCase()}.svg`"
+                            />
+                            <AppBadge
+                                badge="PI visités"
+                                :count="IPCompletion.visitedIPCount"
+                                :total="IPCompletion.totalIPCount"
+                                :icon="`achievements/${IPCompletion.reward.toLowerCase()}.svg`"
                             />
                         </div>
                     </AppBadgeCard>

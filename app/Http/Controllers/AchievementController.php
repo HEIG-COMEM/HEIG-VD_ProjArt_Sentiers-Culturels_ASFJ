@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AchievementEnum;
+use App\Models\Badge;
 use App\Models\RouteHistory;
 use App\Models\Route;
 use App\Models\User;
@@ -46,6 +47,25 @@ class AchievementController extends Controller
         return [
             'total' => $totalM,
             'totalPossible' => $totalPossibleM,
+            'reward' => $reward,
+        ];
+    }
+
+    public static function getTotalIPBadgesOwned(int $user_id)
+    {
+        $user = User::find($user_id);
+        $badges = $user->badges;
+        $badges = $badges->filter(function ($badge) {
+            return $badge->interest_point_id !== null;
+        });
+
+        $totalIPWithBadge = Badge::whereNotNull('interest_point_id')->count();
+
+        $reward = AchievementEnum::getReward($badges->count() / $totalIPWithBadge * 100)->toString();
+
+        return [
+            'visitedIPCount' => $badges->count(),
+            'totalIPCount' => $totalIPWithBadge,
             'reward' => $reward,
         ];
     }
