@@ -174,6 +174,7 @@ class RouteAdminController extends Controller
             'badges' => BadgeResource::collection($availableBadge),
             'difficulties' => DifficultyResource::collection(Difficulty::all()),
             'interestpoints' => InterestPointResource::collection($inerestpoints),
+            'seasons' => SeasonResource::collection(Season::all()),
         ]);
     }
 
@@ -231,6 +232,10 @@ class RouteAdminController extends Controller
         // Tags
         $route->tags()->detach();
         $route->tags()->attach($request->tags);
+
+        // Seasons
+        $route->seasons()->detach();
+        $route->seasons()->attach($request->seasons);
 
         $route->save();
         $route->createRoutePath(); // Recalculate the route path

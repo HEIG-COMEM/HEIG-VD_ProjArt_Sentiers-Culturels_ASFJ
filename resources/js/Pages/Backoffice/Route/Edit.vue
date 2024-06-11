@@ -45,6 +45,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    seasons: {
+        type: Object,
+        required: true,
+    },
 });
 
 const route = reactive(props.route.data);
@@ -52,6 +56,8 @@ const tags = reactive(props.tags.data);
 const difficulties = reactive(props.difficulties.data);
 const interestpoints = reactive(props.interestpoints.data);
 const badges = reactive(props.badges.data);
+const seasons = reactive(props.seasons.data);
+const seasonsAdded = reactive(route.seasons);
 const interestpointsAdded = reactive(route.interest_points);
 const tagsAdded = reactive(route.tags);
 const showForm = ref(true);
@@ -66,7 +72,34 @@ const form = useForm({
     image: "",
     badge_uuid: route.badge?.uuid,
     interestpoints: [],
+    seasons: [],
 });
+
+const filteredSeasons = computed(() => {
+    return seasons.filter(
+        (season) =>
+            !seasonsAdded.some((seasonAdded) => seasonAdded.id === season.id),
+    );
+});
+
+watch(seasonsAdded, () => {
+    form.seasons = seasonsAdded.map((season) => {
+        return season.id;
+    });
+});
+
+// Execute on first load
+form.seasons = seasonsAdded.map((season) => {
+    return season.id;
+});
+
+const handleSeasonClick = (season) => {
+    if (seasonsAdded.includes(season)) {
+        seasonsAdded.splice(seasonsAdded.indexOf(season), 1);
+    } else {
+        seasonsAdded.push(season);
+    }
+};
 
 const interestpointsSearch = ref("");
 const remainingInterestpoints = computed(() => {
@@ -176,6 +209,11 @@ const submit = () => {
 
     if (!form.tags.length) {
         form.errors.tags = "Au moins un tag est obligatoire";
+        form.hasErrors = true;
+    }
+
+    if (!form.seasons.length) {
+        form.errors.seasons = "Au moins une saison est obligatoire";
         form.hasErrors = true;
     }
 
@@ -322,6 +360,41 @@ const submit = () => {
                                 name="title"
                             />
                             <BaseInputError :message="form.errors.title" />
+                        </label>
+                        <label class="form-control w-full">
+                            <div
+                                class="flex flex-row gap-2 text-primary items-center"
+                                onclick="showSeasonsPicker.showModal()"
+                            >
+                                <div class="label">
+                                    <span class="label-text"
+                                        >Saison
+                                        <span class="text-xs text-gray-500">
+                                            (au moins une)
+                                        </span></span
+                                    >
+                                </div>
+                                <span class="content-center h-6 w-6"
+                                    ><PlusCircle class="h-full w-full"
+                                /></span>
+                            </div>
+                            <div class="w-full flex flex-wrap gap-4">
+                                <template
+                                    v-for="season in seasonsAdded"
+                                    :key="season.id"
+                                >
+                                    <div
+                                        class="badge badge-primary badge-outline gap-2 cursor-pointer"
+                                        @click="handleSeasonClick(season)"
+                                    >
+                                        <span class="h-6 w-6">
+                                            <Cross class="h-full w-full" />
+                                        </span>
+                                        <span>{{ season.name }}</span>
+                                    </div>
+                                </template>
+                            </div>
+                            <BaseInputError :message="form.errors.seasons" />
                         </label>
                         <label class="form-control w-full">
                             <div
@@ -616,6 +689,40 @@ const submit = () => {
                                     />
                                 </div>
                             </template>
+                        </div>
+                        <div class="modal-action">
+                            <form method="dialog">
+                                <button class="btn btn-primary">Valider</button>
+                            </form>
+                        </div>
+                    </div>
+                </dialog>
+
+                <!-- SEASONS PICKER -->
+                <dialog id="showSeasonsPicker" class="modal">
+                    <div class="modal-box">
+                        <h3 class="font-bold text-lg">
+                            Choisir une ou plusieurs saisons
+                        </h3>
+                        <div
+                            class="py-4 px-1 flex flex-col gap-2 max-h-[60vh] overflow-x-scroll"
+                        >
+                            <div class="w-full flex flex-wrap gap-4">
+                                <template
+                                    v-for="season in filteredSeasons"
+                                    :key="season.id"
+                                >
+                                    <div
+                                        class="badge badge-primary badge-outline gap-2 cursor-pointer"
+                                        @click="handleSeasonClick(season)"
+                                    >
+                                        <span class="h-6 w-6">
+                                            <Plus class="h-full w-full" />
+                                        </span>
+                                        <span>{{ season.name }}</span>
+                                    </div>
+                                </template>
+                            </div>
                         </div>
                         <div class="modal-action">
                             <form method="dialog">

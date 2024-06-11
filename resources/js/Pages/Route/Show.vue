@@ -21,7 +21,7 @@ import {
     MenuHamburger3,
     Tag,
     Tick2,
-    Information,
+    InformationSquare,
 } from "@iconsans/vue/linear";
 import { Star as StarFull } from "@iconsans/vue/bold";
 
@@ -316,7 +316,7 @@ onUnmounted(() => {
                                                             : 'default.svg',
                                                     )
                                                 "
-                                                class="h-10 w-10 rounded-full absolute -top-4 -right-4 p-1 bg-primary-content border border-primary"
+                                                class="h-10 w-10 rounded-full absolute -top-4 -right-4 p-1 bg-primary-content"
                                             />
                                             <img
                                                 :src="bgImgPath"
@@ -361,7 +361,7 @@ onUnmounted(() => {
                                                     "
                                                     class="flex flex-row items-center gap-4"
                                                 >
-                                                    <Information
+                                                    <InformationSquare
                                                         class="h-7 w-7 text-base-100"
                                                     />
                                                     <p
