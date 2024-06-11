@@ -14,6 +14,11 @@ const props = defineProps({
         required: false,
         default: false,
     },
+    autoFlyToUserLocation: {
+        type: Boolean,
+        required: false,
+        default: true,
+    },
 });
 
 const mapInstance = ref(null);
@@ -47,11 +52,13 @@ onMounted(() => {
     map.addControl(geolocateControl, "bottom-right");
     map.addControl(navigationControl, "bottom-right");
 
-    map.on("load", function () {
-        setTimeout(() => {
-            geolocateControl.trigger();
-        }, 200);
-    });
+    if (props.autoFlyToUserLocation) {
+        map.on("load", function () {
+            setTimeout(() => {
+                geolocateControl.trigger();
+            }, 200);
+        });
+    }
 
     map.on("load", () => {
         map.addSource("interestPoints", {
