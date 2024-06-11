@@ -107,7 +107,6 @@ const breadcrumb = reactive(props.breadcrumb.data);
                                             ? `/storage/badges/${badge.icon_path}`
                                             : '/storage/badges/default.svg'
                                     "
-                                    alt="Shoes"
                                     class="rounded-xl"
                                 />
                             </figure>
