@@ -26,14 +26,10 @@ class RouteController extends Controller
 
         $route->makeHidden('path');
 
-        $route->load('pictures');
-        $route->load('tags');
-        $route->load('seasons');
-        $route->load('difficulty');
-        $route->load('interestPoints');
-        $route->load('rates');
+        $route->load('pictures', 'tags', 'seasons', 'difficulty', 'interestPoints', 'rates', 'badge');
 
         $resume = false;
+        $route->badge->isDone = false;
 
         if (auth()->check()) {
             $routeHistory = RouteHistory::where('user_id', auth()->id())
@@ -44,6 +40,11 @@ class RouteController extends Controller
             $route->isFavorite = $route->users->contains(auth()->id());
 
             $resume = $routeHistory->whereNull('end_timestamp')->count() > 0;
+
+            if ($route->badge) {
+                $user = User::find(auth()->id());
+                $route->badge->isDone = $user->badges->contains($route->badge->id);
+            }
         }
 
         $route->interestPoints->load('pictures');

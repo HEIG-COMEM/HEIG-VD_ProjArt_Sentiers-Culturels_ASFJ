@@ -1,5 +1,5 @@
 <script setup>
-import { back, getImgPath, getTagsName } from "@/utils/helper";
+import { back, getImgPath, getTagsName, getBadgePath } from "@/utils/helper";
 import { Head, Link } from "@inertiajs/vue3";
 import {
     computed,
@@ -21,6 +21,7 @@ import {
     MenuHamburger3,
     Tag,
     Tick2,
+    Information,
 } from "@iconsans/vue/linear";
 import { Star as StarFull } from "@iconsans/vue/bold";
 
@@ -306,14 +307,16 @@ onUnmounted(() => {
                                         class="flex flex-col justify-center items-center h-full gap-8 p-16"
                                     >
                                         <div class="w-36 h-36 relative">
-                                            <Tick2
-                                                class="h-7 w-7 bg-base-100 rounded-full absolute -top-2 -right-2"
-                                                :class="{
-                                                    'text-primary':
-                                                        route.isDone,
-                                                    'text-base-200':
-                                                        !route.isDone,
-                                                }"
+                                            <img
+                                                :src="
+                                                    getBadgePath(
+                                                        route.badge.isDone
+                                                            ? route.badge
+                                                                  .icon_path
+                                                            : 'default.svg',
+                                                    )
+                                                "
+                                                class="h-10 w-10 rounded-full absolute -top-4 -right-4 p-1 bg-primary-content border border-primary"
                                             />
                                             <img
                                                 :src="bgImgPath"
@@ -352,6 +355,36 @@ onUnmounted(() => {
                                             <div
                                                 class="flex flex-col w-full gap-4"
                                             >
+                                                <div
+                                                    class="flex flex-row items-center gap-4"
+                                                >
+                                                    <Information
+                                                        v-if="
+                                                            route.seasons
+                                                                .length > 0
+                                                        "
+                                                        class="h-7 w-7 text-base-100"
+                                                    />
+                                                    <p
+                                                        class="text-base-100 text-base font-semibold"
+                                                    >
+                                                        <span
+                                                            v-for="(
+                                                                season, index
+                                                            ) in route.seasons"
+                                                        >
+                                                            {{ season.name
+                                                            }}{{
+                                                                index !==
+                                                                route.seasons
+                                                                    .length -
+                                                                    1
+                                                                    ? ", "
+                                                                    : ""
+                                                            }}
+                                                        </span>
+                                                    </p>
+                                                </div>
                                                 <div
                                                     class="flex flex-row items-center gap-4"
                                                 >
