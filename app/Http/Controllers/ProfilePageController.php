@@ -12,6 +12,11 @@ use App\Models\Badge;
 use App\Models\RouteHistory;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class ProfilePageController
+ * 
+ * This class is responsible for handling the user's profile page.
+ */
 class ProfilePageController extends Controller
 {
     /**
@@ -19,7 +24,7 @@ class ProfilePageController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
         $badges = Badge::whereNull('parent_id')->take(6)->get();
 
@@ -60,7 +65,7 @@ class ProfilePageController extends Controller
      *
      * @return \Inertia\Response|\Illuminate\Http\RedirectResponse
      */
-    public function history()
+    public function history(): \Inertia\Response|\Illuminate\Http\RedirectResponse
     {
         if (!Auth::check()) {
             return redirect()->route('login');
@@ -82,7 +87,7 @@ class ProfilePageController extends Controller
      * @param  \App\Http\Requests\Auth\ProfilePartialUpdate  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProfilePartialUpdate $request)
+    public function update(ProfilePartialUpdate $request): \Illuminate\Http\RedirectResponse
     {
         try {
             $request->user()->update($request->all());

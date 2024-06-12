@@ -21,6 +21,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
+/**
+ * Class RouteAdminController
+ * 
+ * This class is responsible for handling the routes in the backoffice.
+ */
 class RouteAdminController extends Controller
 {
     /**

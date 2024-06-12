@@ -14,9 +14,20 @@ use App\Models\RouteHistory;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class RouteController
+ * 
+ * This class is responsible for handling the routes.
+ */
 class RouteController extends Controller
 {
-    public function show($uuid)
+    /**
+     * Display the specified route.
+     *
+     * @param string $uuid The UUID of the route.
+     * @return \Inertia\Response
+     */
+    public function show($uuid): \Inertia\Response
     {
         if (!is_string($uuid) || !preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', $uuid)) {
             abort(404);
@@ -56,7 +67,13 @@ class RouteController extends Controller
         ]);
     }
 
-    public function go(string $uuid)
+    /**
+     * Display the specified route for navigation.
+     *
+     * @param string $uuid The UUID of the route.
+     * @return \Inertia\Response
+     */
+    public function go(string $uuid): \Inertia\Response
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
         $route->load('interestPoints');
@@ -77,39 +94,64 @@ class RouteController extends Controller
         ]);
     }
 
-    public function start(RouteStartRequest $request, string $uuid)
+    /**
+     * Start the specified route.
+     * 
+     * If the user is not close enough to the start point, an error will be returned.
+     * If the user is authenticated, the route history will be created.
+     * If an route history already exists, the route will be resumed without checking the distance.
+     *
+     * @param \App\Http\Requests\RouteStartRequest $request The start request.
+     * @param string $uuid The UUID of the route.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function start(RouteStartRequest $request, string $uuid): \Illuminate\Http\JsonResponse
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
         $targetDistance = env('CLOSE_DISTANCE', 0.5);
         $distance = GeoLocateController::distance($request->lat, $request->lng, $route->start_lat, $route->start_long, 'K'); // In km
-        if ($distance > $targetDistance) {
-            return response()->json(['error' =>
-            'Vous êtes trop loin du point de départ, veuillez vous en approcher pour commencer le sentier', 'distance' => $distance, 'target' => $targetDistance], 200);
-        }
+
+        if ($distance > $targetDistance) $isDistanceOk = false;
 
         if (Auth::check()) {
-            // check if user has already started the route
+            // Check if user has already started the route
             $routeHistory = RouteHistory::where('user_id', Auth::id())
                 ->where('route_id', $route->id)
                 ->whereNull('end_timestamp')
                 ->first();
 
             if ($routeHistory) {
+                // Early return if the route has already been started
+                // Not checking the distance because the user might already be on the route
                 return response()->json(['success' => 'Le sentier a déjà été commencé, vous pouvez le reprendre'], 200);
             }
 
-            // create new route history
-            $routeHistory = new RouteHistory();
-            $routeHistory->user_id = Auth::id();
-            $routeHistory->route_id = $route->id;
-            $routeHistory->start_timestamp = now();
-            $routeHistory->save();
+            if ($isDistanceOk) {
+                // Create new route history
+                $routeHistory = new RouteHistory();
+                $routeHistory->user_id = Auth::id();
+                $routeHistory->route_id = $route->id;
+                $routeHistory->start_timestamp = now();
+                $routeHistory->save();
+            }
+        }
+
+        if (!$isDistanceOk) {
+            return response()->json(['error' =>
+            'Vous êtes trop loin du point de départ, veuillez vous en approcher pour commencer le sentier', 'distance' => $distance, 'target' => $targetDistance], 200);
         }
 
         return response()->json(['success' => 'Le sentier a été commencé'], 200);
     }
 
-    public function checkEnd(RouteCheckEndRequest $request, string $uuid)
+    /**
+     * Check if the specified route has ended.
+     *
+     * @param \App\Http\Requests\RouteCheckEndRequest $request The check end request.
+     * @param string $uuid The UUID of the route.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function checkEnd(RouteCheckEndRequest $request, string $uuid): \Illuminate\Http\JsonResponse
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
         $targetDistance = env('CLOSE_DISTANCE', 0.5);
@@ -121,7 +163,13 @@ class RouteController extends Controller
         }
     }
 
-    public function interrupt(string $uuid)
+    /**
+     * Interrupt the specified route.
+     *
+     * @param string $uuid The UUID of the route.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function interrupt(string $uuid): \Illuminate\Http\JsonResponse
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
 
@@ -141,7 +189,14 @@ class RouteController extends Controller
         return response()->json(['success' => 'Le sentier a été interrompu'], 200);
     }
 
-    public function finish(RouteFinishRequest $request, string $uuid)
+    /**
+     * Finish the specified route.
+     *
+     * @param \App\Http\Requests\RouteFinishRequest $request The finish request.
+     * @param string $uuid The UUID of the route.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function finish(RouteFinishRequest $request, string $uuid): \Illuminate\Http\JsonResponse
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
         $targetDistance = env('CLOSE_DISTANCE', 0.5);
@@ -183,7 +238,14 @@ class RouteController extends Controller
         return response()->json($resp, 200);
     }
 
-    public function rate(Request $request, string $uuid)
+    /**
+     * Rate the specified route.
+     *
+     * @param \Illuminate\Http\Request $request The rate request.
+     * @param string $uuid The UUID of the route.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function rate(Request $request, string $uuid): \Illuminate\Http\JsonResponse
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
 
