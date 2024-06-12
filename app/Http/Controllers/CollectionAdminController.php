@@ -20,6 +20,16 @@ use App\Models\InterestPoint;
 class CollectionAdminController extends Controller
 {
     /**
+     * Protected by the admin middleware
+     */
+    public static function middleware(): array
+    {
+        return [
+            'admin'
+        ];
+    }
+
+    /**
      * Display the collection administration page.
      *
      * @return \Inertia\Response
@@ -27,13 +37,10 @@ class CollectionAdminController extends Controller
     public function index(): \Inertia\Response
     {
         $routes = Route::all();
-        $routes->load('difficulty');
-        $routes->load('pictures');
-        $routes->load('tags');
+        $routes->load('difficulty', 'pictures', 'tags');
 
         $interestpoints = InterestPoint::all();
-        $interestpoints->load('pictures');
-        $interestpoints->load('tags');
+        $interestpoints->load('pictures', 'tags');
 
         $difficulties = Difficulty::all();
         $tags = Tag::all();
