@@ -374,10 +374,10 @@ const setRating = () => {
                         <AlertCircle class="text-error h-16 w-16" />
                     </div>
                     <div class="flex flex-col text-center gap-2">
-                        <div class="font-bold text-lg">Es-tu sûre ?</div>
+                        <div class="font-bold text-lg">Es-tu sûr ?</div>
                         <div>
                             Si tu quittes ce sentier, tu perdras ta progression
-                            ainsi que tout les badges et statistiques liés à ce
+                            ainsi que tous les badges et statistiques liés à ce
                             sentier.
                         </div>
                     </div>
