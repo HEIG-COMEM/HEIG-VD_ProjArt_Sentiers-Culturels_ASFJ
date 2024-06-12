@@ -51,7 +51,7 @@ class FavoriteController extends Controller
     public function toggle(string $uuid): \Illuminate\Http\JsonResponse
     {
         if (auth()->guest()) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Vous devez être connecté pour ajouter une route en favori'], 401);
         }
 
         $user = User::find(auth()->id());
@@ -63,6 +63,6 @@ class FavoriteController extends Controller
             $user->routes()->attach($route);
         }
 
-        return response()->json(['message' => 'Success']);
+        return response()->json(['message' => 'Route ajoutée en favori']);
     }
 }

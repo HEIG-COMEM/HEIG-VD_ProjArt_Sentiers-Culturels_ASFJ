@@ -209,7 +209,7 @@ class InterestPointAdminController extends Controller
 
             foreach ($resp as $r) {
                 if (isset($r['error'])) {
-                    return back()->withErrors(['error' => 'Error while creating the route']);
+                    return back()->withErrors(['error' => 'Une erreur est survenue lors de la mise à jour des routes. Veuillez vérifier les points de départ et d\'arrivée.']);
                 }
             }
         }

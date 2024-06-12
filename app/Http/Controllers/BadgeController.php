@@ -26,7 +26,7 @@ class BadgeController extends Controller
     {
         if (!Auth::check()) {
             return response()->json([
-                'error' => 'Unauthorized',
+                'error' => 'Vous devez être connecté pour débloquer un badge',
             ], 401);
         }
 
@@ -54,7 +54,7 @@ class BadgeController extends Controller
         $targetDistance = env('CLOSE_DISTANCE', 0.5);
         if ($distance > $targetDistance) {
             return response()->json([
-                'error' => 'Distance too far',
+                'error' => 'Vous êtes trop loin pour débloquer ce badge',
             ]);
         }
 
@@ -62,12 +62,12 @@ class BadgeController extends Controller
 
         if (!BadgeController::unlock($user, $badge)) {
             return response()->json([
-                'message' => 'Badge already claimed',
+                'message' => 'Badge déjà débloqué',
             ]);
         }
 
         return response()->json([
-            'message' => 'Badge claimed',
+            'message' => 'Badge débloqué avec succès',
         ]);
     }
 

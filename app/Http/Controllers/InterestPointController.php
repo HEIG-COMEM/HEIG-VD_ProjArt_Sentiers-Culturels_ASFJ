@@ -77,19 +77,19 @@ class InterestPointController extends Controller
 
         if (!$user) {
             return response()->json([
-                'message' => 'User not found',
+                'message' => 'Vous devez être connecté pour débloquer un badge',
             ], 404);
         }
 
         if (!$interestPoint->badge) {
             return response()->json([
-                'message' => 'This interest point does not have a badge',
+                'message' => 'Badge non trouvé pour ce point d\'intérêt',
             ], 404);
         }
 
         if ($user->badges->contains($interestPoint->badge->id)) {
             return response()->json([
-                'message' => 'User already has this badge',
+                'message' => 'Badge déjà débloqué',
             ], 400);
         }
 
@@ -103,7 +103,7 @@ class InterestPointController extends Controller
         $user->badges()->attach($interestPoint->badge->id);
 
         return response()->json([
-            'message' => 'Badge claimed',
+            'message' => 'Badge débloqué avec succès',
         ]);
     }
 }
