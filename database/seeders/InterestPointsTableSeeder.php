@@ -9,10 +9,21 @@ use App\Models\Badge;
 use App\Models\Picture;
 use App\Helpers\JsonHelper;
 
+/**
+ * Class InterestPointsTableSeeder
+ * 
+ * This class is responsible for seeding the interest_points table in the database.
+ */
 class InterestPointsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * 
+     * This method is responsible for seeding the interest_points table in the database.
+     * It reads a JSON file containing interest point data, creates or updates the interest points in the database,
+     * and establishes relationships between interest points, pictures, and badges.
+     * 
+     * @return void
      */
     public function run(): void
     {

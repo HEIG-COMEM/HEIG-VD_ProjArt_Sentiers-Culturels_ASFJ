@@ -7,10 +7,20 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Helpers\JsonHelper;
 
+/**
+ * Class UsersTableSeeder
+ * 
+ * This class is responsible for seeding the users table in the database.
+ */
 class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * 
+     * This method is responsible for seeding the users table in the database.
+     * It reads a JSON file containing user data and creates or updates the users in the database.
+     * 
+     * @return void
      */
     public function run(): void
     {

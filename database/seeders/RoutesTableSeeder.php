@@ -13,10 +13,21 @@ use App\Models\Badge;
 use App\Models\Tag;
 use App\Models\Season;
 
+/**
+ * Class RoutesTableSeeder
+ * 
+ * This class is responsible for seeding the routes table in the database.
+ */
 class RoutesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * 
+     * This method is responsible for seeding the routes table in the database.
+     * It reads a JSON file containing route data, creates or updates the routes in the database,
+     * and establishes relationships between routes, pictures, badges, interest points, tags, and seasons.
+     * 
+     * @return void
      */
     public function run(): void
     {
