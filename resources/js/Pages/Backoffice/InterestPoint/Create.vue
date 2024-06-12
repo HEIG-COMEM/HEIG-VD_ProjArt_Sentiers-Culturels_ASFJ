@@ -268,11 +268,11 @@ const submit = () => {
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
-                                <span class="label-text">Déscription</span>
+                                <span class="label-text">Description</span>
                             </div>
                             <textarea
                                 class="textarea textarea-bordered"
-                                placeholder="Déscription"
+                                placeholder="Description"
                                 v-model="form.description"
                             ></textarea>
                             <BaseInputError
