@@ -111,7 +111,7 @@ const clearFilters = () => {
     <Head title="Backoffice" />
     <BackofficeLayout>
         <template v-slot:main>
-            <div class="flex flex-col gap-8 p-6 h-full w-full max-w-sm">
+            <div class="flex flex-col gap-8 p-6 h-full w-full">
                 <!-- TOGGLE MENU -->
                 <div class="flex flex-row justify-center w-full">
                     <div
@@ -166,7 +166,7 @@ const clearFilters = () => {
 
                         <div class="flex flex-row gap-2 w-full">
                             <div
-                                class="rounded-lg flex flex-row justify-between gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer flex-grow"
+                                class="rounded-lg flex gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer"
                                 onclick="difficulty_modal.showModal()"
                                 :class="{
                                     'bg-primary': selectedDifficulty,
@@ -179,7 +179,7 @@ const clearFilters = () => {
                                 /></span>
                             </div>
                             <div
-                                class="rounded-lg flex flex-row justify-between gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer flex-grow"
+                                class="rounded-lg flex gap-2 items-center bg-base-200 p-2 text-xs cursor-pointer"
                                 onclick="tags_modal.showModal()"
                                 :class="{
                                     'bg-primary': selectedTags.length,
