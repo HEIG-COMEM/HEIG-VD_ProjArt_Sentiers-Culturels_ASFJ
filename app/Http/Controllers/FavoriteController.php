@@ -17,10 +17,8 @@ class FavoriteController extends Controller
 {
     /**
      * Display the favorite routes for the authenticated user.
-     *
-     * @return \Inertia\Response
      */
-    public function index(): \Inertia\Response
+    public function index()
     {
         if (auth()->guest()) {
             return redirect()->route('login');
