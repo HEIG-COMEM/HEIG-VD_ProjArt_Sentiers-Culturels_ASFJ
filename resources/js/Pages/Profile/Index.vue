@@ -56,7 +56,7 @@ const distance = reactive(props.distance.data);
                         }"
                     >
                         <div
-                            class="flex flex-row justify-between sm:justify-start gap-4 mt-2 flex-wrap"
+                            class="flex flex-row justify-around sm:justify-start gap-4 mt-2 flex-wrap"
                         >
                             <AppBadge
                                 v-for="badge in collectionBadges"
@@ -77,7 +77,7 @@ const distance = reactive(props.distance.data);
                     </AppBadgeCard>
                     <AppBadgeCard title="Exploits">
                         <div
-                            class="flex flex-row justify-between sm:justify-start gap-4 mt-2 flex-wrap"
+                            class="flex flex-row justify-around sm:justify-start gap-4 mt-2 flex-wrap"
                         >
                             <AppBadge
                                 badge="Distance"
@@ -93,7 +93,7 @@ const distance = reactive(props.distance.data);
                                 :icon="`achievements/${routeCompletion.reward.toLowerCase()}.svg`"
                             />
                             <AppBadge
-                                badge="PI visités"
+                                badge="Points d'intérêt"
                                 :count="IPCompletion.visitedIPCount"
                                 :total="IPCompletion.totalIPCount"
                                 :icon="`achievements/${IPCompletion.reward.toLowerCase()}.svg`"
