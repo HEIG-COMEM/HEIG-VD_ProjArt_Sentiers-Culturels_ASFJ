@@ -130,7 +130,9 @@ const clearFilters = () => {
     <Head title="Découverte" />
     <MobileAppLayout>
         <template v-slot:main>
-            <div class="h-full w-full p-6 flex flex-col gap-8 overflow-hidden">
+            <div
+                class="h-full w-full px-6 pt-6 flex flex-col gap-8 overflow-hidden"
+            >
                 <!-- TOGGLE MENU -->
                 <div class="flex flex-row justify-center w-full">
                     <div
@@ -195,7 +197,7 @@ const clearFilters = () => {
                 <!-- DISCOVERY -->
                 <div
                     v-show="showRoutes === 1"
-                    class="flex flex-col gap-8 justify-center w-full"
+                    class="flex flex-col gap-8 w-full h-full pb-6"
                 >
                     <!-- FILTER SECTION -->
                     <div
@@ -211,7 +213,7 @@ const clearFilters = () => {
                     <template v-if="!discoverySearch">
                         <!-- DISCOVERY LIST -->
                         <div
-                            class="flex flex-col gap-4 w-full max-h-[70vh] items-center overflow-auto"
+                            class="flex flex-col gap-4 w-full max-h-full mb-8 pb-6 items-center overflow-auto"
                         >
                             <div class="flex flex-col gap-10 w-full">
                                 <!-- TOP 3 -->
@@ -282,7 +284,7 @@ const clearFilters = () => {
                     </template>
                     <template v-else>
                         <div
-                            class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 overflow-x-scroll"
+                            class="flex flex-col gap-4 w-full max-h-full px-3 mb-8 pb-6 overflow-x-scroll"
                         >
                             <AppHorizontalCard
                                 v-for="item in discoverySearchResult"
@@ -297,6 +299,12 @@ const clearFilters = () => {
                                         : `/interest-point/${item.uuid}`
                                 "
                             />
+                            <p
+                                v-if="discoverySearchResult.length === 0"
+                                class="text-center text-base-200"
+                            >
+                                Aucun résultat
+                            </p>
                         </div>
                     </template>
                 </div>
@@ -304,7 +312,7 @@ const clearFilters = () => {
                 <!-- ROUTES -->
                 <div
                     v-show="showRoutes === 2"
-                    class="flex flex-col gap-8 justify-center w-full"
+                    class="flex flex-col gap-8 w-full h-full max-h-full overflow-auto"
                 >
                     <!-- FILTER SECTION -->
                     <div class="flex flex-col justify-center w-full gap-4">
@@ -361,7 +369,7 @@ const clearFilters = () => {
 
                     <!-- ROUTES LIST -->
                     <div
-                        class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 overflow-x-scroll"
+                        class="flex flex-col gap-4 w-full max-h-full pb-6 px-3 overflow-x-scroll"
                     >
                         <AppHorizontalCard
                             v-for="route in filteredRoutes"
@@ -385,7 +393,7 @@ const clearFilters = () => {
                 <!-- INTEREST POINTS -->
                 <div
                     v-show="showRoutes === 3"
-                    class="flex flex-col gap-8 justify-center w-full"
+                    class="flex flex-col gap-8 w-full h-full max-h-full overflow-auto"
                 >
                     <!-- FILTER SECTION -->
                     <div class="flex flex-col justify-center w-full gap-4">
@@ -429,7 +437,7 @@ const clearFilters = () => {
 
                     <!-- INTEREST POINTS LIST -->
                     <div
-                        class="flex flex-col gap-4 w-full max-h-[70vh] px-3 pb-6 overflow-x-scroll"
+                        class="flex flex-col gap-4 w-full max-h-full pb-6 px-3 overflow-x-scroll"
                     >
                         <AppHorizontalCard
                             v-for="interestpoint in filteredInterestPoints"
@@ -443,6 +451,12 @@ const clearFilters = () => {
                             :display-is-done="false"
                             :href="`/interest-point/${interestpoint.uuid}`"
                         />
+                        <p
+                            v-if="filteredInterestPoints.length === 0"
+                            class="text-center text-base-200"
+                        >
+                            Aucun résultat
+                        </p>
                     </div>
                 </div>
             </div>
