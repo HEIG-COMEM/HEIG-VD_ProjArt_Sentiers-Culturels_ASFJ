@@ -44,10 +44,6 @@ const isCloseToFinish = ref(false);
 const finishResponse = reactive({});
 const rate = ref(0);
 
-watch(rate, (newValue) => {
-    console.log(newValue);
-});
-
 const duration = computed(() => {
     return Math.floor(route.duration / 3600) +
         " h " +
@@ -67,43 +63,51 @@ const getFirstTagsName = (tags, limit) =>
 
 // Check if the user is close to the start of the route to allow him to start it
 onMounted(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-        const API_ENDPOINT = `${window.location.origin}/api/route/go/${route.uuid}?lat=${lat}&lng=${lng}`;
-        fetch(API_ENDPOINT)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.error) {
-                    throw new Error(data.error);
-                } else {
-                    isCloseToStart.value = true;
-                    const toast = document.querySelector("#toast-target");
-                    toast.innerHTML = `
+    const options = {
+        enableHighAccuracy: true,
+        maximumAge: Infinity,
+    };
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const API_ENDPOINT = `${window.location.origin}/api/route/go/${route.uuid}?lat=${lat}&lng=${lng}`;
+            fetch(API_ENDPOINT)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.error) {
+                        throw new Error(data.error);
+                    } else {
+                        isCloseToStart.value = true;
+                        const toast = document.querySelector("#toast-target");
+                        toast.innerHTML = `
                         <div role="alert" class="alert alert-success">
                             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                             <span>${data.success}</span>
                         </div>
                 `;
-                }
-            })
-            .catch((error) => {
-                error.log(error);
-            })
-            .finally(() => {
-                setTimeout(() => {
-                    const toast = document.querySelector("#toast-target");
-                    toast.innerHTML = "";
-                }, 5000);
-            });
-    });
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        const toast = document.querySelector("#toast-target");
+                        toast.innerHTML = "";
+                    }, 5000);
+                });
+        },
+        null,
+        options,
+    );
 });
 
 // Check if the user is close enough to the end of the route to allow him to finish it
 onMounted(() => {
     const options = {
         enableHighAccuracy: true,
-        timeout: 5000,
         maximumAge: 0,
     };
     setTimeout(() => {
@@ -149,13 +153,20 @@ const claimBadge = (uuid) => {
             }
         })
         .catch((error) => {
-            console.log(error);
+            const toast = document.querySelector("#toast-target");
+            toast.innerHTML = `
+                <div role="alert" class="alert alert-error">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span>${error.message}</span>
+                        </div>`;
+            setTimeout(() => {
+                toast.innerHTML = "";
+            }, 2000);
         });
 };
 
 const finish = () => {
     const API_ENDPOINT = `${window.location.origin}/api/route/go/${route.uuid}/finish?lat=${userCoords.lat}&lng=${userCoords.lng}`;
-    console.log(API_ENDPOINT);
     fetch(API_ENDPOINT)
         .then((response) => response.json())
         .then((data) => {
@@ -165,7 +176,7 @@ const finish = () => {
             }
         })
         .catch((error) => {
-            console.log(error);
+            console.error(error);
         });
 };
 
@@ -181,7 +192,7 @@ const interupt = () => {
             }
         })
         .catch((error) => {
-            console.log(error);
+            console.error(error);
         });
 };
 
@@ -209,7 +220,7 @@ const setRating = () => {
             }
         })
         .catch((error) => {
-            console.log(error);
+            console.error(error);
         });
 };
 </script>
