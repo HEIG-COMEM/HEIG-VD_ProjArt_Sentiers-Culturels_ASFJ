@@ -35,8 +35,7 @@ onMounted(() => {
         const directions = new MapLibreGlDirections(map, {
             unit: "metric",
         });
-
-        directions.interactive = true;
+        directions.interactive = false;
 
         map.addControl(new LoadingIndicatorControl(directions));
 
