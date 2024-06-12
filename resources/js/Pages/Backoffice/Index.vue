@@ -10,11 +10,11 @@ import BaseLink from "@/Components/Base/BaseLink.vue";
     <Head title="Backoffice" />
     <BackofficeLayout>
         <template v-slot:main>
-            <div class="p-6 flex flex-col justify-center gap-28">
+            <div class="p-6 flex flex-col justify-center gap-14 pb-24">
                 <img
                     src="/storage/logo-257x257.svg"
                     alt="logo de sentier culturel vaud"
-                    class="w-1/2 mx-auto rounded-xl"
+                    class="w-1/3 mx-auto rounded-xl"
                 />
                 <div class="bg-white p-8 rounded-2xl">
                     <h1 class="text-3xl font-bold text-center">
