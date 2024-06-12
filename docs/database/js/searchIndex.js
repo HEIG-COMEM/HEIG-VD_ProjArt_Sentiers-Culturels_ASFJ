@@ -81,16 +81,6 @@ Search.appendIndex(
             "summary": "Run\u0020the\u0020database\u0020seeds.",
             "url": "classes/Database-Seeders-SeasonsTableSeeder.html#method_run"
         },                {
-            "fqsen": "\\Database\\Seeders\\TagsTableSeeder",
-            "name": "TagsTableSeeder",
-            "summary": "Class\u0020TagsTableSeeder",
-            "url": "classes/Database-Seeders-TagsTableSeeder.html"
-        },                {
-            "fqsen": "\\Database\\Seeders\\TagsTableSeeder\u003A\u003Arun\u0028\u0029",
-            "name": "run",
-            "summary": "Run\u0020the\u0020database\u0020seeds.",
-            "url": "classes/Database-Seeders-TagsTableSeeder.html#method_run"
-        },                {
             "fqsen": "\\Database\\Seeders\\UsersTableSeeder",
             "name": "UsersTableSeeder",
             "summary": "Class\u0020UsersTableSeeder",

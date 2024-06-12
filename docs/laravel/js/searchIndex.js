@@ -211,6 +211,11 @@ Search.appendIndex(
             "summary": "Class\u0020CollectionAdminController",
             "url": "classes/App-Http-Controllers-CollectionAdminController.html"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\CollectionAdminController\u003A\u003Amiddleware\u0028\u0029",
+            "name": "middleware",
+            "summary": "Protected\u0020by\u0020the\u0020admin\u0020middleware",
+            "url": "classes/App-Http-Controllers-CollectionAdminController.html#method_middleware"
+        },                {
             "fqsen": "\\App\\Http\\Controllers\\CollectionAdminController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
             "summary": "Display\u0020the\u0020collection\u0020administration\u0020page.",
@@ -398,7 +403,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\ProfilePageController",
             "name": "ProfilePageController",
-            "summary": "",
+            "summary": "Class\u0020ProfilePageController",
             "url": "classes/App-Http-Controllers-ProfilePageController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\ProfilePageController\u003A\u003Aindex\u0028\u0029",
@@ -418,7 +423,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\RouteAdminController",
             "name": "RouteAdminController",
-            "summary": "",
+            "summary": "Class\u0020RouteAdminController",
             "url": "classes/App-Http-Controllers-RouteAdminController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\RouteAdminController\u003A\u003Amiddleware\u0028\u0029",
@@ -463,42 +468,42 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\RouteController",
             "name": "RouteController",
-            "summary": "",
+            "summary": "Class\u0020RouteController",
             "url": "classes/App-Http-Controllers-RouteController.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\RouteController\u003A\u003Ashow\u0028\u0029",
             "name": "show",
-            "summary": "",
+            "summary": "Display\u0020the\u0020specified\u0020route.",
             "url": "classes/App-Http-Controllers-RouteController.html#method_show"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\RouteController\u003A\u003Ago\u0028\u0029",
             "name": "go",
-            "summary": "",
+            "summary": "Display\u0020the\u0020specified\u0020route\u0020for\u0020navigation.",
             "url": "classes/App-Http-Controllers-RouteController.html#method_go"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\RouteController\u003A\u003Astart\u0028\u0029",
             "name": "start",
-            "summary": "",
+            "summary": "Start\u0020the\u0020specified\u0020route.",
             "url": "classes/App-Http-Controllers-RouteController.html#method_start"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\RouteController\u003A\u003AcheckEnd\u0028\u0029",
             "name": "checkEnd",
-            "summary": "",
+            "summary": "Check\u0020if\u0020the\u0020specified\u0020route\u0020has\u0020ended.",
             "url": "classes/App-Http-Controllers-RouteController.html#method_checkEnd"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\RouteController\u003A\u003Ainterrupt\u0028\u0029",
             "name": "interrupt",
-            "summary": "",
+            "summary": "Interrupt\u0020the\u0020specified\u0020route.",
             "url": "classes/App-Http-Controllers-RouteController.html#method_interrupt"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\RouteController\u003A\u003Afinish\u0028\u0029",
             "name": "finish",
-            "summary": "",
+            "summary": "Finish\u0020the\u0020specified\u0020route.",
             "url": "classes/App-Http-Controllers-RouteController.html#method_finish"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\RouteController\u003A\u003Arate\u0028\u0029",
             "name": "rate",
-            "summary": "",
+            "summary": "Rate\u0020the\u0020specified\u0020route.",
             "url": "classes/App-Http-Controllers-RouteController.html#method_rate"
         },                {
             "fqsen": "\\App\\Http\\Middleware\\Admin",
