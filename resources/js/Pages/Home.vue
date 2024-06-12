@@ -65,7 +65,7 @@ const discoverySearchResult = computed(() => {
                 </div>
                 <template v-if="!discoverySearch">
                     <div
-                        class="w-full px-6 flex flex-col items-center gap-16 overflow-auto"
+                        class="w-full px-6 pb-6 flex flex-col items-center gap-16 overflow-auto"
                     >
                         <Link :href="route('map')" class="w-full">
                             <div
@@ -159,7 +159,7 @@ const discoverySearchResult = computed(() => {
                         class="px-4 flex flex-col items-center overflow-x-scroll"
                     >
                         <div
-                            class="flex flex-col gap-4 w-full max-h-[75vh] px-3 pb-3 overflow-x-scroll"
+                            class="flex flex-col gap-4 w-full h-full max-h-full px-3 pb-12 overflow-x-scroll"
                         >
                             <AppHorizontalCard
                                 v-for="item in discoverySearchResult"
@@ -174,6 +174,12 @@ const discoverySearchResult = computed(() => {
                                         : `/interest-point/${item.uuid}`
                                 "
                             />
+                            <p
+                                v-if="discoverySearchResult.length === 0"
+                                class="text-center text-base-200"
+                            >
+                                Aucun résultat
+                            </p>
                         </div>
                     </div>
                 </template>
