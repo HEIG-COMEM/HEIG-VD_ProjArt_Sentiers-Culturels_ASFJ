@@ -24,6 +24,10 @@ Route::get('/home', function () {
     return Inertia::render('Backoffice/Index');
 })->name('backoffice');
 
+Route::get('/tutorial', function () {
+    return Inertia::render('Backoffice/Tutorial');
+})->name('backoffice.tutorial');
+
 Route::resource('interest-points', InterestPointAdminController::class)->names([
     'index' => 'backoffice.interest-points',
     'create' => 'backoffice.interest-points.create',

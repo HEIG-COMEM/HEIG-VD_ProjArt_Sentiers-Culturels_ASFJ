@@ -3,6 +3,7 @@ import { Head } from "@inertiajs/vue3";
 
 import BackofficeLayout from "@/Layouts/BackofficeLayout.vue";
 import BaseButton from "@/Components/Base/BaseButton.vue";
+import BaseLink from "@/Components/Base/BaseLink.vue";
 </script>
 
 <template>
@@ -41,6 +42,14 @@ import BaseButton from "@/Components/Base/BaseButton.vue";
                             class="w-full"
                             content="Créer un parcours"
                         />
+                    </div>
+                    <div class="w-full flex justify-center mt-8">
+                        <BaseLink
+                            :href="route('backoffice.tutorial')"
+                            class="text-center mt-4"
+                        >
+                            Comment ça marche ?
+                        </BaseLink>
                     </div>
                 </div>
             </div>
