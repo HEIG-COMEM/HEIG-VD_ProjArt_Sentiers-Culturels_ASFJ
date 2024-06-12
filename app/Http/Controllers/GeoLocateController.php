@@ -11,7 +11,17 @@ use Illuminate\Http\Request;
  */
 class GeoLocateController extends Controller
 {
-    public static function distance($lat1, $lon1, $lat2, $lon2, $unit = "K")
+    /**
+     * Calculate the distance between two sets of coordinates.
+     *
+     * @param float $lat1 The latitude of the first coordinate.
+     * @param float $lon1 The longitude of the first coordinate.
+     * @param float $lat2 The latitude of the second coordinate.
+     * @param float $lon2 The longitude of the second coordinate.
+     * @param string $unit The unit of measurement for the distance (default is "K" for kilometers).
+     * @return float The calculated distance between the two coordinates.
+     */
+    public static function distance($lat1, $lon1, $lat2, $lon2, $unit = "K"): float
     {
         if (($lat1 == $lat2) && ($lon1 == $lon2)) {
             return 0;

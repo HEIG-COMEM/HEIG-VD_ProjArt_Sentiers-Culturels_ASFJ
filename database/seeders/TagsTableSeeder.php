@@ -7,10 +7,20 @@ use Illuminate\Database\Seeder;
 use App\Models\Tag;
 use App\Helpers\JsonHelper;
 
+/**
+ * Class TagsTableSeeder
+ * 
+ * This class is responsible for seeding the tags table in the database.
+ */
 class TagsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * 
+     * This method is responsible for seeding the tags table in the database.
+     * It reads a JSON file containing tag data and creates or updates the tags in the database.
+     * 
+     * @return void
      */
     public function run(): void
     {

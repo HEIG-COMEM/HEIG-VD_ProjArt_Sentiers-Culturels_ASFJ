@@ -9,6 +9,11 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+/**
+ * Class MapAdminController
+ * 
+ * This class represents the controller for the MapAdmin functionality.
+ */
 class MapAdminController extends Controller
 {
     /**
@@ -23,8 +28,10 @@ class MapAdminController extends Controller
 
     /**
      * Display the map for the admin
+     * 
+     * @return \Inertia\Response
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
         $interestPoints = InterestPoint::all();
         $interestPoints->load('tags', 'pictures');

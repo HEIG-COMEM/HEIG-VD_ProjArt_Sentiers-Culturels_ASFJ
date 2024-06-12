@@ -4,6 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class RouteUpdateRequest
+ * 
+ * This class is a FormRequest class that is used to validate the incoming request to update a route.
+ */
 class RouteUpdateRequest extends FormRequest
 {
     /**

@@ -8,6 +8,27 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Class User
+ * 
+ * This class represents a user of the application.
+ * 
+ * @property int $id
+ * @property string $firstname
+ * @property string $lastname
+ * @property string $email
+ * @property string $password
+ * @property int $role_int
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * 
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Route[] $routes
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Rate[] $rates
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Badge[] $badges
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\RouteHistory[] $routesHistory
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;

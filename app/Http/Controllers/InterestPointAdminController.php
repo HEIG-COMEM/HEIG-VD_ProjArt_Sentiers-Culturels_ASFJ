@@ -14,6 +14,11 @@ use App\Models\InterestPoint;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+/**
+ * Class InterestPointAdminController
+ * 
+ * This class represents the controller for managing interest points in the admin panel.
+ */
 class InterestPointAdminController extends Controller
 {
     /**
@@ -28,16 +33,20 @@ class InterestPointAdminController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function index()
+    public function index(): \Illuminate\Http\RedirectResponse
     {
         return redirect()->route('backoffice.collection');
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return \Inertia\Response
      */
-    public function create()
+    public function create(): \Inertia\Response
     {
         $availableBadge = Badge::whereNull('interest_point_id')
             ->whereNull('route_id')
@@ -56,8 +65,11 @@ class InterestPointAdminController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\InterestPointRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(InterestPointRequest $request)
+    public function store(InterestPointRequest $request): \Illuminate\Http\RedirectResponse
     {
         $interestPoint = new InterestPoint();
 
@@ -93,8 +105,11 @@ class InterestPointAdminController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @param  string  $uuid
+     * @return \Inertia\Response
      */
-    public function show(string $uuid)
+    public function show(string $uuid): \Inertia\Response
     {
         $ip = InterestPoint::where('uuid', $uuid)->firstOrFail();
         $ip->load('pictures');
@@ -110,8 +125,11 @@ class InterestPointAdminController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param  string  $uuid
+     * @return \Inertia\Response
      */
-    public function edit(string $uuid)
+    public function edit(string $uuid): \Inertia\Response
     {
         $ip = InterestPoint::where('uuid', $uuid)->firstOrFail();
         $ip->load('pictures');
@@ -139,8 +157,12 @@ class InterestPointAdminController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\InterestPointUpdateRequest  $request
+     * @param  string  $uuid
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(InterestPointUpdateRequest $request, string $uuid)
+    public function update(InterestPointUpdateRequest $request, string $uuid): \Illuminate\Http\RedirectResponse
     {
         $ip = InterestPoint::where('uuid', $uuid)->firstOrFail();
 
@@ -197,8 +219,11 @@ class InterestPointAdminController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  string  $uuid
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(string $uuid)
+    public function destroy(string $uuid): \Illuminate\Http\RedirectResponse
     {
         $ip = InterestPoint::where('uuid', $uuid)->firstOrFail();
         $ip->delete();

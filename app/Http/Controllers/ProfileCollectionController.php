@@ -8,9 +8,19 @@ use Inertia\Inertia;
 use App\Models\Badge;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class ProfileCollectionController
+ * 
+ * This class is responsible for handling the user's badge collection.
+ */
 class ProfileCollectionController extends Controller
 {
-    public function index()
+    /**
+     * Display the collection of badges for the user's profile.
+     *
+     * @return \Inertia\Response
+     */
+    public function index(): \Inertia\Response
     {
         $badges = Badge::whereNull('parent_id')->get();
 
@@ -22,7 +32,6 @@ class ProfileCollectionController extends Controller
 
         if (Auth::check()) {
             $user = Auth::user();
-            // For each badge count how many of its children are owned by the user
             $badges->each(function ($badge) use ($user) {
                 $badge->owned_children_count = $badge->children->filter(function ($child) use ($user) {
                     return $user->badges->contains($child);
@@ -39,7 +48,13 @@ class ProfileCollectionController extends Controller
         ]);
     }
 
-    public function show(string $uuid)
+    /**
+     * Display the details of a specific badge in the user's collection.
+     *
+     * @param  string  $uuid
+     * @return \Inertia\Response
+     */
+    public function show(string $uuid): \Inertia\Response
     {
         $badge = Badge::where('uuid', $uuid)->firstOrFail();
 

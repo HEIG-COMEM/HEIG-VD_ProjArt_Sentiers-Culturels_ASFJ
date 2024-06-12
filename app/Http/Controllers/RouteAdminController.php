@@ -35,16 +35,20 @@ class RouteAdminController extends Controller
 
     /**
      * Display a listing of the resource.
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function index()
+    public function index(): \Illuminate\Http\RedirectResponse
     {
         return redirect()->route('backoffice.collection');
     }
 
     /**
      * Show the form for creating a new resource.
+     * 
+     * @return \Inertia\Response
      */
-    public function create()
+    public function create(): \Inertia\Response
     {
         $inerestpoints = InterestPoint::all();
         $inerestpoints->load('pictures');
@@ -69,8 +73,11 @@ class RouteAdminController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @param  \App\Http\Requests\RouteRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(RouteRequest $request)
+    public function store(RouteRequest $request): \Illuminate\Http\RedirectResponse
     {
         $route = new Route();
         $route->name = $request->title;
@@ -129,9 +136,12 @@ class RouteAdminController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for editing the specified resource.
+     * 
+     * @param  string  $uuid
+     * @return \Inertia\Response
      */
-    public function show(string $uuid)
+    public function show(string $uuid): \Inertia\Response
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
 
@@ -145,7 +155,7 @@ class RouteAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $uuid)
+    public function edit(string $uuid): \Inertia\Response
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
         $inerestpoints = InterestPoint::all();
@@ -180,8 +190,12 @@ class RouteAdminController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @param  \App\Http\Requests\RouteUpdateRequest  $request
+     * @param  string  $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(RouteUpdateRequest $request, string $id)
+    public function update(RouteUpdateRequest $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $route = Route::where('uuid', $id)->firstOrFail();
         $route->name = $request->title;
@@ -245,8 +259,11 @@ class RouteAdminController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param  string  $uuid
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(string $uuid)
+    public function destroy(string $uuid): \Illuminate\Http\RedirectResponse
     {
         $route = Route::where('uuid', $uuid)->firstOrFail();
         $route->delete();

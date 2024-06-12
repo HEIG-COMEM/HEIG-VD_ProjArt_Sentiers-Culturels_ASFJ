@@ -7,14 +7,32 @@ use Illuminate\Database\Seeder;
 use App\Models\Badge;
 use App\Helpers\JsonHelper;
 
+/**
+ * Class BadgesTableSeeder
+ * 
+ * This class is responsible for seeding the badges table in the database.
+ */
 class BadgesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * This method is responsible for seeding the badges table in the database.
+     * It reads a JSON file containing badge data, creates or updates the badges in the database,
+     * and establishes parent-child relationships between badges if specified in the JSON data.
+     * 
+     * @return void
      */
     public function run(): void
     {
-        function createOrUpdateBadge($badge, $parent = null)
+        /**
+         * Create or update a badge and its children recursively.
+         *
+         * @param array $badge The badge data.
+         * @param Badge|null $parent The parent badge.
+         * @return void
+         */
+        function createOrUpdateBadge($badge, $parent = null): void
         {
             $newBadge = Badge::updateOrCreate([
                 'name' => $badge['name']

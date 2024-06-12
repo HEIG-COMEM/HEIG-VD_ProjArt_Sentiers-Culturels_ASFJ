@@ -4,6 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class RouteCheckEndRequest
+ * 
+ * This class is a FormRequest class that is used to validate the incoming request to check the end of a route.
+ */
 class RouteCheckEndRequest extends FormRequest
 {
     /**

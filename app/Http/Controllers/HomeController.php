@@ -8,9 +8,19 @@ use App\Models\InterestPoint;
 use App\Http\Resources\RouteResource;
 use App\Http\Resources\InterestPointResource;
 
+/**
+ * Class HomeController
+ *
+ * This class is responsible for handling requests related to the home page.
+ */
 class HomeController extends Controller
 {
-    public function home()
+    /**
+     * Display the home page.
+     *
+     * @return \Inertia\Response
+     */
+    public function home(): \Inertia\Response
     {
         $routes = Route::all();
         $routes->load('difficulty');
