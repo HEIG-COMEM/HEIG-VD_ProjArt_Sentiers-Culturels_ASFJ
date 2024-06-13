@@ -40,7 +40,10 @@ class RouteController extends Controller
         $route->load('pictures', 'tags', 'seasons', 'difficulty', 'interestPoints', 'rates', 'badge');
 
         $resume = false;
-        $route->badge->isDone = false;
+        if ($route->badge) {
+            $route->badge->makeHidden('users');
+            $route->badge->isDone = false;
+        }
 
         if (auth()->check()) {
             $routeHistory = RouteHistory::where('user_id', auth()->id())

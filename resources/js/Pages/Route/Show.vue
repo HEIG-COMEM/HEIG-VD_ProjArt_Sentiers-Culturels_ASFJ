@@ -310,7 +310,7 @@ onUnmounted(() => {
                                             <img
                                                 :src="
                                                     getBadgePath(
-                                                        route.badge.isDone
+                                                        route.badge?.isDone
                                                             ? route.badge
                                                                   .icon_path
                                                             : 'default.svg',

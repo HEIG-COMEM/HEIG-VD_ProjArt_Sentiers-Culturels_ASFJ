@@ -58,8 +58,7 @@ class RouteAdminController extends Controller
         $inerestpoints = InterestPoint::all();
         $inerestpoints->load('pictures');
 
-        $availableBadge = Badge::whereNull('interest_point_id')
-            ->whereNull('route_id')
+        $availableBadge = Badge::whereNull(['interest_point_id', 'route_id'])
             ->get();
 
         // remove if the badge has children
