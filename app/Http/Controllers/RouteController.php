@@ -114,6 +114,7 @@ class RouteController extends Controller
         $targetDistance = env('CLOSE_DISTANCE', 0.5);
         $distance = GeoLocateController::distance($request->lat, $request->lng, $route->start_lat, $route->start_long, 'K'); // In km
 
+        $isDistanceOk = true;
         if ($distance > $targetDistance) $isDistanceOk = false;
 
         if (Auth::check()) {

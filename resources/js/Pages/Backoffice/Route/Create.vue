@@ -492,7 +492,7 @@ const submit = () => {
                     </div>
                     <div
                         v-show="step === 3"
-                        class="flex flex-col gap-4 items-center w-full"
+                        class="flex flex-col gap-4 items-center w-full h-[55vh] overflow-hidden"
                     >
                         <label class="form-control w-full" for="badge">
                             <div class="label flex flex-row justify-between">
@@ -511,7 +511,7 @@ const submit = () => {
                             </div>
                         </label>
                         <div
-                            class="flex flex-col gap-2 w-full max-h-[80%] px-2 pb-20 overflow-x-scroll"
+                            class="flex flex-col gap-2 w-full h-[90%] px-2 pb-16 overflow-y-scroll"
                         >
                             <template v-for="badge in badges" :key="badge.uuid">
                                 <div
