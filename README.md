@@ -1,4 +1,23 @@
-# Install
+# Introduction
+
+### Fictional project developed during a course at HEIG-VD.
+
+The project involves creating a mobile-first web application centred on the cultural itineraries of the canton of Vaud, highlighting various points of interest along the way.
+
+# Documentation
+
+The code documentation, generated with PHP Documentor, can be found in the `/docs` directory at the root of the project.
+
+## Configuration
+
+Please note that this app **requires** the OpenRoute Service API key
+In addition, you can configure the minimum distance radius in the `.env` file for proximity with points of interest and routes.
+
+# Local Deployment Procedure
+
+To deploy this project in your local environment, follow the steps below:
+
+## Install
 
 Create a folder for your project and move to it
 
@@ -44,7 +63,9 @@ Then in two separate terminals:
 `php artisan serve`
 `npm run dev`
 
-# Deploy
+# Server Deployment Procedure
+
+To deploy this project on a server, follow the steps below:
 
 1. connect to the server using SSH
 2. go to the site directory by executing the command `cd path-to-site`.
