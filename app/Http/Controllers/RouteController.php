@@ -114,8 +114,8 @@ class RouteController extends Controller
         $targetDistance = env('CLOSE_DISTANCE', 0.5);
         $distance = GeoLocateController::distance($request->lat, $request->lng, $route->start_lat, $route->start_long, 'K'); // In km
 
-        // if ($distance > $targetDistance) $isDistanceOk = false;
         $isDistanceOk = true;
+        if ($distance > $targetDistance) $isDistanceOk = false;
 
         if (Auth::check()) {
             // Check if user has already started the route
@@ -160,8 +160,7 @@ class RouteController extends Controller
         $route = Route::where('uuid', $uuid)->firstOrFail();
         $targetDistance = env('CLOSE_DISTANCE', 0.5);
         $distance = GeoLocateController::distance($request->lat, $request->lng, $route->end_lat, $route->end_long, 'K'); // In km
-        // if ($distance > $targetDistance) {
-        if (false) {
+        if ($distance > $targetDistance) {
             return response()->json(['error' => 'nok']);
         } else {
             return response()->json(['success' => 'ok']);
@@ -212,8 +211,7 @@ class RouteController extends Controller
             'has_won_badge' => false,
         ];
 
-        // if ($distance > $targetDistance) {
-        if (false) {
+        if ($distance > $targetDistance) {
             return response()->json(['error' =>
             'Vous êtes trop loin du point d\'arrivée, veuillez vous en approcher pour terminer le sentier', 'distance' => $distance, 'target' => $targetDistance], 200);
         }
